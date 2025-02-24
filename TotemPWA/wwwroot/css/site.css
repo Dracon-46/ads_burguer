@@ -20,3 +20,10 @@ body{
   justify-content: center;
 
 }
+
+.botao{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

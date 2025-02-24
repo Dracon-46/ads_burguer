@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/TotemPWA/css/site.6njxrjy182.css">
+    <StaticWebAssetEndpoint Include="_content/TotemPWA/css/site.32zaf6f9n8.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"6njxrjy182"},{"Name":"integrity","Value":"sha256-smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo="},{"Name":"label","Value":"_content/TotemPWA/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"124"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Feb 2025 19:00:41 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"32zaf6f9n8"},{"Name":"integrity","Value":"sha256-Bbm\u002B5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0="},{"Name":"label","Value":"_content/TotemPWA/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"404"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Bbm\u002B5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Feb 2025 20:01:27 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/TotemPWA/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"124"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Feb 2025 19:00:41 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Bbm\u002B5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"404"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Bbm\u002B5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Feb 2025 20:01:27 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/TotemPWA/css/style.5ipweew5fc.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</AssetFile>

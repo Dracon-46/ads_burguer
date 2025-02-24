@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "i0lrKkg6w30wdXh7FFHPx+4qlhlJ3x0ZBSRQr3HScdU=",
+  "Hash": "2O8GhU5qicMY8MCY4XryRw1otzmx8HygCeH21RPi9+w=",
   "Source": "TotemPWA",
   "BasePath": "_content/TotemPWA",
   "Mode": "Default",
@@ -185,12 +185,12 @@
       "OriginalItemSpec": "C:\\FATEC\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-6njxrjy182.gz",
+      "Identity": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-32zaf6f9n8.gz",
       "SourceId": "TotemPWA",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/TotemPWA",
-      "RelativePath": "css/site#[.{fingerprint=6njxrjy182}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=32zaf6f9n8}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -199,8 +199,8 @@
       "RelatedAsset": "C:\\FATEC\\ads_burguer\\TotemPWA\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "l0z0po42ca",
-      "Integrity": "RYr9eccsTjRyYma6j3MXGn44s3dFNNs4GDz/j3GbIrI=",
+      "Fingerprint": "sdm5upfah0",
+      "Integrity": "cK2PFghqJH7PAdOm99O36YiLFIh3VSzDCzenD8Wu7Fs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\FATEC\\ads_burguer\\TotemPWA\\wwwroot\\css\\site.css"
@@ -1354,8 +1354,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6njxrjy182",
-      "Integrity": "smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo=",
+      "Fingerprint": "32zaf6f9n8",
+      "Integrity": "Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -2686,13 +2686,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.6njxrjy182.css",
-      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-6njxrjy182.gz",
+      "Route": "css/site.32zaf6f9n8.css",
+      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-32zaf6f9n8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.008474576271"
+          "Quality": "0.005208333333"
         }
       ],
       "ResponseHeaders": [
@@ -2702,15 +2702,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "117"
+          "Value": "191"
         },
         {
           "Name": "ETag",
-          "Value": "\"RYr9eccsTjRyYma6j3MXGn44s3dFNNs4GDz/j3GbIrI=\""
+          "Value": "\"cK2PFghqJH7PAdOm99O36YiLFIh3VSzDCzenD8Wu7Fs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 19:00:41 GMT"
+          "Value": "Mon, 24 Feb 2025 20:01:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2730,13 +2730,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo=\""
+          "Value": "W/\"Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "6njxrjy182"
+          "Value": "32zaf6f9n8"
         },
         {
           "Name": "label",
@@ -2744,12 +2744,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo="
+          "Value": "sha256-Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0="
         }
       ]
     },
     {
-      "Route": "css/site.6njxrjy182.css",
+      "Route": "css/site.32zaf6f9n8.css",
       "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2759,7 +2759,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "124"
+          "Value": "404"
         },
         {
           "Name": "Content-Type",
@@ -2767,11 +2767,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo=\""
+          "Value": "\"Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 19:00:41 GMT"
+          "Value": "Mon, 24 Feb 2025 20:01:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2781,7 +2781,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "6njxrjy182"
+          "Value": "32zaf6f9n8"
         },
         {
           "Name": "label",
@@ -2789,13 +2789,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo="
+          "Value": "sha256-Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0="
         }
       ]
     },
     {
-      "Route": "css/site.6njxrjy182.css.gz",
-      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-6njxrjy182.gz",
+      "Route": "css/site.32zaf6f9n8.css.gz",
+      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-32zaf6f9n8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2804,7 +2804,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "117"
+          "Value": "191"
         },
         {
           "Name": "Content-Type",
@@ -2812,11 +2812,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"RYr9eccsTjRyYma6j3MXGn44s3dFNNs4GDz/j3GbIrI=\""
+          "Value": "\"cK2PFghqJH7PAdOm99O36YiLFIh3VSzDCzenD8Wu7Fs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 19:00:41 GMT"
+          "Value": "Mon, 24 Feb 2025 20:01:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2834,7 +2834,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "6njxrjy182"
+          "Value": "32zaf6f9n8"
         },
         {
           "Name": "label",
@@ -2842,18 +2842,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-RYr9eccsTjRyYma6j3MXGn44s3dFNNs4GDz/j3GbIrI="
+          "Value": "sha256-cK2PFghqJH7PAdOm99O36YiLFIh3VSzDCzenD8Wu7Fs="
         }
       ]
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-6njxrjy182.gz",
+      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-32zaf6f9n8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.008474576271"
+          "Quality": "0.005208333333"
         }
       ],
       "ResponseHeaders": [
@@ -2863,15 +2863,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "117"
+          "Value": "191"
         },
         {
           "Name": "ETag",
-          "Value": "\"RYr9eccsTjRyYma6j3MXGn44s3dFNNs4GDz/j3GbIrI=\""
+          "Value": "\"cK2PFghqJH7PAdOm99O36YiLFIh3VSzDCzenD8Wu7Fs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 19:00:41 GMT"
+          "Value": "Mon, 24 Feb 2025 20:01:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2891,13 +2891,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo=\""
+          "Value": "W/\"Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo="
+          "Value": "sha256-Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0="
         }
       ]
     },
@@ -2912,7 +2912,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "124"
+          "Value": "404"
         },
         {
           "Name": "Content-Type",
@@ -2920,11 +2920,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo=\""
+          "Value": "\"Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 19:00:41 GMT"
+          "Value": "Mon, 24 Feb 2025 20:01:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2934,13 +2934,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-smjk9lVtQQ1ziWJuzk5GJJNixtAVxovKcbzrKYVVZNo="
+          "Value": "sha256-Bbm+5qGNu9KTloWWhKLUzKGMJWrrmw7jfodudKg9aX0="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-6njxrjy182.gz",
+      "AssetFile": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\5x7mdqe4nv-32zaf6f9n8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2949,7 +2949,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "117"
+          "Value": "191"
         },
         {
           "Name": "Content-Type",
@@ -2957,11 +2957,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"RYr9eccsTjRyYma6j3MXGn44s3dFNNs4GDz/j3GbIrI=\""
+          "Value": "\"cK2PFghqJH7PAdOm99O36YiLFIh3VSzDCzenD8Wu7Fs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 19:00:41 GMT"
+          "Value": "Mon, 24 Feb 2025 20:01:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2979,7 +2979,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-RYr9eccsTjRyYma6j3MXGn44s3dFNNs4GDz/j3GbIrI="
+          "Value": "sha256-cK2PFghqJH7PAdOm99O36YiLFIh3VSzDCzenD8Wu7Fs="
         }
       ]
     },

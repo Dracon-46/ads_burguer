@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Organiza as divs em colunas */
+    gap: 20px; /* Espaçamento entre as divs */
+    width: 100%;
+    max-width: 800px; /* Ajuste a largura conforme necessário */
+    margin: 0 auto; /* Centraliza o container */
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto; /* Garante que a imagem mantenha as proporções */
+  }
+  
+  .text-container p {
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .button-container {
+    text-align: center;
+  }
+  
+  .button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button-container button:hover {
+    background-color: #45a049;
+  }
+  
