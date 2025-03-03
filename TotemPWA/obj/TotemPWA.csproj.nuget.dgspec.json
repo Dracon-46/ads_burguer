@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\FATEC\\ads_burguer\\TotemPWA\\TotemPWA.csproj": {}
+    "C:\\Conteudo\\ads_burguer\\TotemPWA\\TotemPWA.csproj": {}
   },
   "projects": {
-    "C:\\FATEC\\ads_burguer\\TotemPWA\\TotemPWA.csproj": {
+    "C:\\Conteudo\\ads_burguer\\TotemPWA\\TotemPWA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FATEC\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
+        "projectUniqueName": "C:\\Conteudo\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
         "projectName": "TotemPWA",
-        "projectPath": "C:\\FATEC\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
-        "packagesPath": "C:\\Users\\220329\\.nuget\\packages\\",
-        "outputPath": "C:\\FATEC\\ads_burguer\\TotemPWA\\obj\\",
+        "projectPath": "C:\\Conteudo\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
+        "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+        "outputPath": "C:\\Conteudo\\ads_burguer\\TotemPWA\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\220329\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,7 +40,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -68,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
