@@ -1,16 +1,7 @@
-body {
-    margin: 0;
-    background-color: #e3e3e3;
-    font-family: 'Poppins', sans-serif;
-}
-:root{
-    --primary-color: #990000;
-    --secondary-color: #426B1F;
-    --tertiary-color: #FF6501;
-    --text-color: #3f3f3f;
-    --bg-color:#FFFFFF;
+body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; }
 
-}
+:root{ --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --text-color: #3f3f3f; --bg-color:#FFFFFF; }
+
 .container {
     background-color: var(--bg-color);
     width: 55%;
@@ -31,17 +22,23 @@ body {
   
 }
 
+/* ----------------------------- MODIFICADO ----------------------------- */
 .left {
     background-color: var(--bg-color);
     width: 20%;
-    height: 65%;
+    height: 64%;
     border-radius: 0px 25px 25px 0px;
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.4); /* Adiciona a sombra */
     float: left;
     position: relative;
-
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     
 }
+/* ----------------------------- MODIFICADO ----------------------------- */
+
 
 /* listagem de produtos de acordo com a aba selecionada */
 .right {
@@ -197,28 +194,44 @@ a {
 
 /*CARRINHO*/
 
-.carrinho {
-    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); /* Sombra na parte superior */
+/* ---------------------------------------- SUGESTÃO DE MODIFICAÇÃO ---------------------------------------- */
+.carrinho { box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-around; width: 100%;  height: 15%;  } 
+.carrinho div:nth-child(1) {height: 100%; display: flex; justify-content: center; align-items: left; flex-direction: column; font-weight: bold;}
+.carrinho div:nth-child(2) {height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+.carrinho div:nth-child(3) {height: 100%; display: flex; justify-content: center; align-items: center; }
+
+.btn-car{ background-color:var(--primary-color); color: white; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 30px; padding: 5px 30px; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; }
+.btn-car:hover { background-color:#bc3939; }
+.view{ font-weight: bold; color: var(--primary-color);}
+.btn-pro{ background-color: var(--tertiary-color); color: white; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 16px; padding: 12px 40px; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; width: 150px; display: block;}
+.btn-pro:hover { background-color: #f58941; }
+/* ---------------------------------------- SUGESTÃO DE MODIFICAÇÃO ---------------------------------------- */
+
+/* .carrinho {
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); Sombra na parte superior
     position: fixed;
     bottom: 0px;
     left: 0;
     width: 100%;
     height: 13%;
-}
-.car-left{
+} */
+
+ /* .car-left{
     position: relative;
     margin-top: 7%;
     margin-left:5%;
     font-weight: bold;
     width: 169px;
-}
-.car-center{
+} */
+
+/* .car-center{
     position: relative;
     margin-left: 43%;
     margin-top: -9%;
     width: 150px;
-}
-.btn-car{
+}  */
+
+/* .btn-car{
     background-color:var(--primary-color);
     color: white;
     font-family: 'Poppins', sans-serif; 
@@ -231,15 +244,14 @@ a {
     transition: 0.3s;
     margin-left: 10%;
     margin-top: 3px;
-}
-.btn-car:hover {
-    background-color:#bc3939; 
-}
-.view{
+} */
+
+/* .view{ 
     font-weight: bold;
     color: var(--primary-color);
-}
-.btn-pro{
+ } */
+
+/* .btn-pro{
     background-color: var(--tertiary-color);
     color: white;
     font-family: 'Poppins', sans-serif; 
@@ -254,7 +266,4 @@ a {
     display: block;
     margin-left: 74%;
     margin-top: -7%;
-}
-.btn-pro:hover {
-    background-color: #f58941; 
-}
+} */
