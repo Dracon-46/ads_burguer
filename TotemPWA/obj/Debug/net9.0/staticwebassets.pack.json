@@ -9,12 +9,28 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Conteudo\\ads_burguer\\TotemPWA\\wwwroot\\css\\telaproduto.css",
+      "PackagePath": "staticwebassets\\css\\telaproduto.css"
+    },
+    {
       "Id": "C:\\Conteudo\\ads_burguer\\TotemPWA\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Conteudo\\ads_burguer\\TotemPWA\\wwwroot\\imgs\\comida.png",
+      "PackagePath": "staticwebassets\\imgs\\comida.png"
+    },
+    {
+      "Id": "C:\\Conteudo\\ads_burguer\\TotemPWA\\wwwroot\\imgs\\lanche.jpeg",
+      "PackagePath": "staticwebassets\\imgs\\lanche.jpeg"
+    },
+    {
       "Id": "C:\\Conteudo\\ads_burguer\\TotemPWA\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Conteudo\\ads_burguer\\TotemPWA\\wwwroot\\js\\telaproduto.js",
+      "PackagePath": "staticwebassets\\js\\telaproduto.js"
     },
     {
       "Id": "C:\\Conteudo\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\LICENSE",

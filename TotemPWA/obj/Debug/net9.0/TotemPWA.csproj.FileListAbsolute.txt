@@ -96,3 +96,5 @@ C:\Conteudo\ads_burguer\TotemPWA\obj\Debug\net9.0\refint\TotemPWA.dll
 C:\Conteudo\ads_burguer\TotemPWA\obj\Debug\net9.0\TotemPWA.pdb
 C:\Conteudo\ads_burguer\TotemPWA\obj\Debug\net9.0\TotemPWA.genruntimeconfig.cache
 C:\Conteudo\ads_burguer\TotemPWA\obj\Debug\net9.0\ref\TotemPWA.dll
+C:\Conteudo\ads_burguer\TotemPWA\obj\Debug\net9.0\compressed\lzwbrsfv8f-xfpphx2iid.gz
+C:\Conteudo\ads_burguer\TotemPWA\obj\Debug\net9.0\compressed\s59c9wfjid-9wfz4os9hy.gz
