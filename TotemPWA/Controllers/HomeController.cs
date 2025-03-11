@@ -22,6 +22,7 @@ public class HomeController : Controller
     {
         return View();
     }
+    
      public IActionResult TelaProduto()
     {
         return View();

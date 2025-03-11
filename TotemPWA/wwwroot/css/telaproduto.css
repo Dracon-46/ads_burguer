@@ -22,7 +22,7 @@ body {
 }
 
 .banner {
-    background-image: url('/imgs/lanche.jpeg');
+    background-image: url('/images/lanche.jpeg');
     width: 100%;
     height: 20%;
     background-size: cover; /* Ajusta a imagem à largura e altura da div */
