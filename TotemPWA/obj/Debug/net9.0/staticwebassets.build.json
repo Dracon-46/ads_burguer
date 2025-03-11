@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "p8ZdOE+gGKzX5/U+IFar7Sve3TTgJaplfrEUYgigH60=",
+  "Hash": "4UxCrcepFZIaCnG/fgTS+O/F0PJBw3nlN6VwG4yYbAU=",
   "Source": "TotemPWA",
   "BasePath": "_content/TotemPWA",
   "Mode": "Default",
@@ -773,12 +773,12 @@
       "OriginalItemSpec": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-3n6dlwrlu5.gz",
+      "Identity": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-66544l7az6.gz",
       "SourceId": "TotemPWA",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/TotemPWA",
-      "RelativePath": "css/telaproduto#[.{fingerprint=3n6dlwrlu5}]?.css.gz",
+      "RelativePath": "css/telaproduto#[.{fingerprint=66544l7az6}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -787,8 +787,8 @@
       "RelatedAsset": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telaproduto.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "7m82k7iokk",
-      "Integrity": "H8h1c/1dFPpuBlwYg96k+DbdW7DNh7Cxf05DbDrzgIo=",
+      "Fingerprint": "2as0b9n50c",
+      "Integrity": "1hHEiJ6eWVPKPd19rYpuXzcmcsAGMrc6nBR3uYm90zg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telaproduto.css"
@@ -1067,12 +1067,12 @@
       "OriginalItemSpec": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-sl7eg45qxy.gz",
+      "Identity": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-nn0rmsg9bx.gz",
       "SourceId": "TotemPWA",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/TotemPWA",
-      "RelativePath": "css/telainicial#[.{fingerprint=sl7eg45qxy}]?.css.gz",
+      "RelativePath": "css/telainicial#[.{fingerprint=nn0rmsg9bx}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1081,8 +1081,8 @@
       "RelatedAsset": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telainicial.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "k3rw97p8p2",
-      "Integrity": "MAZko/zy2hMrP6YzmMCgKzlJhsHQ+e6xe3es2lq/u50=",
+      "Fingerprint": "n8gzroucu1",
+      "Integrity": "93d9i8kHs1pE5QwJsQ9v3MaLVNbot7FuJvMQcu4DN4M=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telainicial.css"
@@ -1501,8 +1501,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "sl7eg45qxy",
-      "Integrity": "AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc=",
+      "Fingerprint": "nn0rmsg9bx",
+      "Integrity": "7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\telainicial.css"
@@ -1522,8 +1522,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3n6dlwrlu5",
-      "Integrity": "Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw=",
+      "Fingerprint": "66544l7az6",
+      "Integrity": "0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\telaproduto.css"
@@ -3279,12 +3279,12 @@
     },
     {
       "Route": "css/telainicial.css",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-sl7eg45qxy.gz",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-nn0rmsg9bx.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001168224299"
+          "Quality": "0.001213592233"
         }
       ],
       "ResponseHeaders": [
@@ -3294,15 +3294,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "855"
+          "Value": "823"
         },
         {
           "Name": "ETag",
-          "Value": "\"MAZko/zy2hMrP6YzmMCgKzlJhsHQ+e6xe3es2lq/u50=\""
+          "Value": "\"93d9i8kHs1pE5QwJsQ9v3MaLVNbot7FuJvMQcu4DN4M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 12:20:08 GMT"
+          "Value": "Tue, 11 Mar 2025 13:02:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3322,13 +3322,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc=\""
+          "Value": "W/\"7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc="
+          "Value": "sha256-7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0="
         }
       ]
     },
@@ -3343,7 +3343,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2344"
+          "Value": "2228"
         },
         {
           "Name": "Content-Type",
@@ -3351,11 +3351,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc=\""
+          "Value": "\"7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 12:20:08 GMT"
+          "Value": "Tue, 11 Mar 2025 13:02:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3365,13 +3365,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc="
+          "Value": "sha256-7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0="
         }
       ]
     },
     {
       "Route": "css/telainicial.css.gz",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-sl7eg45qxy.gz",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-nn0rmsg9bx.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3380,7 +3380,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "855"
+          "Value": "823"
         },
         {
           "Name": "Content-Type",
@@ -3388,11 +3388,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"MAZko/zy2hMrP6YzmMCgKzlJhsHQ+e6xe3es2lq/u50=\""
+          "Value": "\"93d9i8kHs1pE5QwJsQ9v3MaLVNbot7FuJvMQcu4DN4M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 12:20:08 GMT"
+          "Value": "Tue, 11 Mar 2025 13:02:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3410,18 +3410,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-MAZko/zy2hMrP6YzmMCgKzlJhsHQ+e6xe3es2lq/u50="
+          "Value": "sha256-93d9i8kHs1pE5QwJsQ9v3MaLVNbot7FuJvMQcu4DN4M="
         }
       ]
     },
     {
-      "Route": "css/telainicial.sl7eg45qxy.css",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-sl7eg45qxy.gz",
+      "Route": "css/telainicial.nn0rmsg9bx.css",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-nn0rmsg9bx.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001168224299"
+          "Quality": "0.001213592233"
         }
       ],
       "ResponseHeaders": [
@@ -3431,15 +3431,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "855"
+          "Value": "823"
         },
         {
           "Name": "ETag",
-          "Value": "\"MAZko/zy2hMrP6YzmMCgKzlJhsHQ+e6xe3es2lq/u50=\""
+          "Value": "\"93d9i8kHs1pE5QwJsQ9v3MaLVNbot7FuJvMQcu4DN4M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 12:20:08 GMT"
+          "Value": "Tue, 11 Mar 2025 13:02:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3459,13 +3459,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc=\""
+          "Value": "W/\"7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "sl7eg45qxy"
+          "Value": "nn0rmsg9bx"
         },
         {
           "Name": "label",
@@ -3473,12 +3473,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc="
+          "Value": "sha256-7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0="
         }
       ]
     },
     {
-      "Route": "css/telainicial.sl7eg45qxy.css",
+      "Route": "css/telainicial.nn0rmsg9bx.css",
       "AssetFile": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telainicial.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3488,7 +3488,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2344"
+          "Value": "2228"
         },
         {
           "Name": "Content-Type",
@@ -3496,11 +3496,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc=\""
+          "Value": "\"7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 12:20:08 GMT"
+          "Value": "Tue, 11 Mar 2025 13:02:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3510,7 +3510,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "sl7eg45qxy"
+          "Value": "nn0rmsg9bx"
         },
         {
           "Name": "label",
@@ -3518,13 +3518,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-AHLqblt0GFXh3LFgZ/3eqqbxHFrLFrFl0BNtsQknaLc="
+          "Value": "sha256-7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0="
         }
       ]
     },
     {
-      "Route": "css/telainicial.sl7eg45qxy.css.gz",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-sl7eg45qxy.gz",
+      "Route": "css/telainicial.nn0rmsg9bx.css.gz",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\tn3k3o4gfx-nn0rmsg9bx.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3533,7 +3533,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "855"
+          "Value": "823"
         },
         {
           "Name": "Content-Type",
@@ -3541,11 +3541,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"MAZko/zy2hMrP6YzmMCgKzlJhsHQ+e6xe3es2lq/u50=\""
+          "Value": "\"93d9i8kHs1pE5QwJsQ9v3MaLVNbot7FuJvMQcu4DN4M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 12:20:08 GMT"
+          "Value": "Tue, 11 Mar 2025 13:02:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3563,7 +3563,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "sl7eg45qxy"
+          "Value": "nn0rmsg9bx"
         },
         {
           "Name": "label",
@@ -3571,18 +3571,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-MAZko/zy2hMrP6YzmMCgKzlJhsHQ+e6xe3es2lq/u50="
+          "Value": "sha256-93d9i8kHs1pE5QwJsQ9v3MaLVNbot7FuJvMQcu4DN4M="
         }
       ]
     },
     {
-      "Route": "css/telaproduto.3n6dlwrlu5.css",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-3n6dlwrlu5.gz",
+      "Route": "css/telaproduto.66544l7az6.css",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-66544l7az6.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000662251656"
+          "Quality": "0.000561482313"
         }
       ],
       "ResponseHeaders": [
@@ -3592,15 +3592,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1509"
+          "Value": "1780"
         },
         {
           "Name": "ETag",
-          "Value": "\"H8h1c/1dFPpuBlwYg96k+DbdW7DNh7Cxf05DbDrzgIo=\""
+          "Value": "\"1hHEiJ6eWVPKPd19rYpuXzcmcsAGMrc6nBR3uYm90zg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 11:55:26 GMT"
+          "Value": "Tue, 11 Mar 2025 13:10:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3620,13 +3620,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw=\""
+          "Value": "W/\"0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3n6dlwrlu5"
+          "Value": "66544l7az6"
         },
         {
           "Name": "label",
@@ -3634,12 +3634,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw="
+          "Value": "sha256-0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao="
         }
       ]
     },
     {
-      "Route": "css/telaproduto.3n6dlwrlu5.css",
+      "Route": "css/telaproduto.66544l7az6.css",
       "AssetFile": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telaproduto.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3649,7 +3649,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5243"
+          "Value": "6787"
         },
         {
           "Name": "Content-Type",
@@ -3657,11 +3657,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw=\""
+          "Value": "\"0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 11:55:26 GMT"
+          "Value": "Tue, 11 Mar 2025 13:10:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3671,7 +3671,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3n6dlwrlu5"
+          "Value": "66544l7az6"
         },
         {
           "Name": "label",
@@ -3679,13 +3679,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw="
+          "Value": "sha256-0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao="
         }
       ]
     },
     {
-      "Route": "css/telaproduto.3n6dlwrlu5.css.gz",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-3n6dlwrlu5.gz",
+      "Route": "css/telaproduto.66544l7az6.css.gz",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-66544l7az6.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3694,7 +3694,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1509"
+          "Value": "1780"
         },
         {
           "Name": "Content-Type",
@@ -3702,11 +3702,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"H8h1c/1dFPpuBlwYg96k+DbdW7DNh7Cxf05DbDrzgIo=\""
+          "Value": "\"1hHEiJ6eWVPKPd19rYpuXzcmcsAGMrc6nBR3uYm90zg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 11:55:26 GMT"
+          "Value": "Tue, 11 Mar 2025 13:10:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3724,7 +3724,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3n6dlwrlu5"
+          "Value": "66544l7az6"
         },
         {
           "Name": "label",
@@ -3732,18 +3732,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-H8h1c/1dFPpuBlwYg96k+DbdW7DNh7Cxf05DbDrzgIo="
+          "Value": "sha256-1hHEiJ6eWVPKPd19rYpuXzcmcsAGMrc6nBR3uYm90zg="
         }
       ]
     },
     {
       "Route": "css/telaproduto.css",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-3n6dlwrlu5.gz",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-66544l7az6.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000662251656"
+          "Quality": "0.000561482313"
         }
       ],
       "ResponseHeaders": [
@@ -3753,15 +3753,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1509"
+          "Value": "1780"
         },
         {
           "Name": "ETag",
-          "Value": "\"H8h1c/1dFPpuBlwYg96k+DbdW7DNh7Cxf05DbDrzgIo=\""
+          "Value": "\"1hHEiJ6eWVPKPd19rYpuXzcmcsAGMrc6nBR3uYm90zg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 11:55:26 GMT"
+          "Value": "Tue, 11 Mar 2025 13:10:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3781,13 +3781,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw=\""
+          "Value": "W/\"0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw="
+          "Value": "sha256-0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao="
         }
       ]
     },
@@ -3802,7 +3802,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5243"
+          "Value": "6787"
         },
         {
           "Name": "Content-Type",
@@ -3810,11 +3810,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw=\""
+          "Value": "\"0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 11:55:26 GMT"
+          "Value": "Tue, 11 Mar 2025 13:10:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3824,13 +3824,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Ifiz5052dYaHRuJs/hvMXP9k98686njFUW654JWHffw="
+          "Value": "sha256-0iQEs1B+w8D1/INFWp7FA0geKTlYrtE2LQsM+Q8R/Ao="
         }
       ]
     },
     {
       "Route": "css/telaproduto.css.gz",
-      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-3n6dlwrlu5.gz",
+      "AssetFile": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-66544l7az6.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3839,7 +3839,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1509"
+          "Value": "1780"
         },
         {
           "Name": "Content-Type",
@@ -3847,11 +3847,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"H8h1c/1dFPpuBlwYg96k+DbdW7DNh7Cxf05DbDrzgIo=\""
+          "Value": "\"1hHEiJ6eWVPKPd19rYpuXzcmcsAGMrc6nBR3uYm90zg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 11 Mar 2025 11:55:26 GMT"
+          "Value": "Tue, 11 Mar 2025 13:10:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3869,7 +3869,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-H8h1c/1dFPpuBlwYg96k+DbdW7DNh7Cxf05DbDrzgIo="
+          "Value": "sha256-1hHEiJ6eWVPKPd19rYpuXzcmcsAGMrc6nBR3uYm90zg="
         }
       ]
     },
