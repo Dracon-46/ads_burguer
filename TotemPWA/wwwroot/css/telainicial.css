@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    background-color: #e3e3e3;
+}
+:root{
+    --primary-color: #6a5079;
+    --secondary-color: #f2f2f2;
+    --tertiary-color: #3f3f3f;
+    --bg-color:#FFFFFF;
+
+}
+.container {
+    background-image: url('/images/hamburguer.png');
+    background-repeat: no-repeat;
+    background-position: 60px 450px; /* Ajusta a posição da imagem */
+    background-size: 280px;
+    background-color: var(--bg-color);
+    width: 55%;
+    height: 1200px; /* Ajusta a altura máxima do container para 80% da altura da tela */
+    position: relative; /* Tornar o elemento posicionado em relação ao c   top: 100%; /* Coloca no meio verticalmente */
+    left: 50%; /* Coloca no meio horizontalmente */
+    transform: translate(-50%); /* Move o elemento de volta para o centro */
+}
+
+.banner { width: 100%; background-size: cover; background-position: top center; background-repeat: no-repeat;}
+.banner div:nth-child(1){ background-image: url('/images/logo.png'); background-position: center;  background-repeat: no-repeat; background-size: 600px; height: 250px; background-color: #9B0000; }
+.banner div:nth-child(2){ height: 60px; background-color: #FF6501; }
+.banner div:nth-child(3){ height: 50px; background-color: #C1D443; }
+
+.hamburguer{
+    position: relative;
+    height: 600px;
+    top: 100px;
+    background-image: url('/images/burger.png');
+    background-size: 560px;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+.batata{
+    position: relative;
+    top: -350px;
+    background-image: url('/images/batatas.png');
+    background-size: 350px;
+    background-repeat: no-repeat;
+    background-position: right;
+    height: 500px;
+}
+
+.btnStart {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-inicial{
+    background-color: #ff6700;
+    color: white;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 12px 40px; 
+    border: none; 
+    border-radius: 30px;
+    cursor: pointer; 
+    transition: 0.3s;
+    width: auto;
+    margin: 0 auto; 
+    margin-top: 150px; /* Abaixa o botão 50px */
+}
+.btn-inicial:hover {
+    background-color: #e55c00; 
+}

@@ -1,0 +1,269 @@
+body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; }
+
+:root{ --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --text-color: #3f3f3f; --bg-color:#FFFFFF; }
+
+.container {
+    background-color: var(--bg-color);
+    width: 55%;
+    height: 1200px; 
+    position: relative; 
+    left: 50%; /* Coloca no meio horizontalmente */
+    transform: translate(-50%); /* Move o elemento de volta para o centro */
+    box-shadow: 0 4px 8px rgba(60, 60, 60, 0.4); /* Adiciona a sombra */
+}
+
+.banner {
+    background-image: url('/images/lanche.jpeg');
+    width: 100%;
+    height: 20%;
+    background-size: cover; /* Ajusta a imagem à largura e altura da div */
+    background-position: top center;
+    background-repeat: no-repeat;
+  
+}
+
+/* ----------------------------- MODIFICADO ----------------------------- */
+.left {
+    background-color: var(--bg-color);
+    width: 20%;
+    height: 64%;
+    border-radius: 0px 25px 25px 0px;
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.4); /* Adiciona a sombra */
+    float: left;
+    position: relative;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+/* ----------------------------- MODIFICADO ----------------------------- */
+
+
+/* listagem de produtos de acordo com a aba selecionada */
+.right {
+    box-sizing: border-box;
+    float: right;
+    width: 75%;
+    max-height: 700px; /* Limita a altura da seção e permite o scroll */
+    margin-top: 20px;
+    display: flex;
+    overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
+    flex-wrap: wrap; /* Permite que os itens se quebrem em várias linhas */
+    gap: 2px; /* Espaço entre as colunas */
+}
+
+
+
+
+/* produtos */
+.right .produto button{
+   width: 100%;
+   height: 100%;
+   padding: 15px;
+   border-radius: 20px;
+   border: none;
+   cursor: pointer;
+   background-color: transparent;
+}
+
+
+.right .produto{
+    background-color: var(--bg-color);
+    width: 30%;
+    display: inline-block;
+    border-radius: 20px;
+    height: 250px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.258); 
+    margin-top: 15px;
+    margin: 5px;
+}
+
+
+
+.right .produto .nome{
+    display: block;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.right .produto .valor{
+  font-size: 12px;
+  color: var(--tertiary-color) ; 
+  font-weight: 600;   
+}
+.right .produto .promocao{
+    font-size: 9px;
+    text-decoration: line-through;
+    color: var(--secondary-color);
+  }
+.right .produto p{
+    font-size: 9px;
+    max-width: 100%; 
+    color: #8F8F8F;
+    height: 50px;
+}
+
+.right .produto img {
+    width: 100px;         
+    height: 110px;        
+    border-radius: 20px; 
+    display: block;    
+    margin: 0 auto;      
+}
+
+
+/* Fazendo os botões :( */
+
+.left .selection {
+    height: 14% ;
+    margin: 10px;
+    text-align: center;
+}
+
+.left .selection button {
+    height: 100%;
+    width: 75%;
+    text-align: center;
+    color: var(--text-color);
+    border-radius: 20px;
+    border: none;
+    border: 1.5px solid #c3c3c3;
+    background-color: transparent;
+   
+  
+    
+}
+
+.selection button:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color); 
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.selection span {
+    text-align: center;
+    display: block;
+    margin-top: 5px;
+    font-weight: 650;
+   color: var(--text-color);
+}
+
+.selection i{
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+    color: var(--text-color); 
+}
+
+.selection i.active {
+    color: var(--primary-color);
+}
+.selection i.active:hover {
+  color: var(--bg-color);
+
+}
+
+.selection span.active {
+    color: var(--primary-color);
+}
+.selection span.active:hover {
+  color: var(--bg-color);
+
+}
+.selection  button:hover span,
+.selection button:hover i {
+    color: var(--bg-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.rodape {
+    background-color: #426B1F;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 13%;
+}
+
+
+/*CARRINHO*/
+
+/* ---------------------------------------- SUGESTÃO DE MODIFICAÇÃO ---------------------------------------- */
+.carrinho { box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-around; width: 100%;  height: 15%;  } 
+.carrinho div:nth-child(1) {height: 100%; display: flex; justify-content: center; align-items: left; flex-direction: column; font-weight: bold;}
+.carrinho div:nth-child(2) {height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+.carrinho div:nth-child(3) {height: 100%; display: flex; justify-content: center; align-items: center; }
+
+.btn-car{ background-color:var(--primary-color); color: white; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 30px; padding: 5px 30px; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; }
+.btn-car:hover { background-color:#bc3939; }
+.view{ font-weight: bold; color: var(--primary-color);}
+.btn-pro{ background-color: var(--tertiary-color); color: white; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 16px; padding: 12px 40px; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; width: 150px; display: block;}
+.btn-pro:hover { background-color: #f58941; }
+/* ---------------------------------------- SUGESTÃO DE MODIFICAÇÃO ---------------------------------------- */
+
+/* .carrinho {
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); Sombra na parte superior
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 13%;
+} */
+
+ /* .car-left{
+    position: relative;
+    margin-top: 7%;
+    margin-left:5%;
+    font-weight: bold;
+    width: 169px;
+} */
+
+/* .car-center{
+    position: relative;
+    margin-left: 43%;
+    margin-top: -9%;
+    width: 150px;
+}  */
+
+/* .btn-car{
+    background-color:var(--primary-color);
+    color: white;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: bold;
+    font-size: 30px;
+    padding: 5px 30px; 
+    border: none; 
+    border-radius: 30px;
+    cursor: pointer; 
+    transition: 0.3s;
+    margin-left: 10%;
+    margin-top: 3px;
+} */
+
+/* .view{ 
+    font-weight: bold;
+    color: var(--primary-color);
+ } */
+
+/* .btn-pro{
+    background-color: var(--tertiary-color);
+    color: white;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 40px; 
+    border: none; 
+    border-radius: 30px;
+    cursor: pointer; 
+    transition: 0.3s;
+    width: 20%;
+    display: block;
+    margin-left: 74%;
+    margin-top: -7%;
+} */
