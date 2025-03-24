@@ -31,9 +31,9 @@ Como: Cliente
 Eu quero: uma tela para Aplicação de cupons ns
 Para: quero poder colocar cupons para aplicar descontos em compras que eu fizer no totem.
 Critérios de aceitação:
-Apresentar opção de inserir cpf ou continuar como anônimo (sem login)
-Campos e textos visíveis
-Acessíveis para todos os tipos de usuários
+Botão de inserção de cupom visível e acessível
+Validação de cupom inexistente 
+Subtrair o valor final com o desconto do cupom
 
 UserStory 05 - RF05
 Como: Cliente
@@ -55,8 +55,8 @@ Para: Deixar o pedido no meu gosto
 
 Critérios de aceitação:
 Adicionar, subtrair e remover ingredientes
-Texto e imagens visíveis 
-
+A interface deve exibir os ingredientes escolhidos de forma clara.
+Deve haver um limite máximo de adições para evitar exageros.
 
 User Story 07 - RF07
  Como: Cliente
@@ -67,6 +67,8 @@ Deve ser possível adicionar produtos ao carrinho com um botão específico.
 O carrinho deve exibir a quantidade e descrição dos produtos adicionados.
 O sistema deve atualizar o valor total conforme novos itens forem adicionados.
 
+
+
 User Story 08 - RF08
  Como: Cliente
  Eu quero: Revisar meu pedido
@@ -75,7 +77,6 @@ Critérios de aceitação:
 Deve haver uma tela ou modal para exibir um resumo do pedido.
 O resumo deve conter nome, quantidade e preço dos itens.
 Deve existir a opção de voltar e editar os itens antes da finalização.
-
 User Story 09 - RF09
  Como: Cliente
  Eu quero: Remover itens do carrinho
@@ -165,7 +166,6 @@ Como: Cliente
 Eu quero: que o progresso do processamento do pedido esteja visível em tempo real
 Para: que eu possa estar ciente sobre cada etapa do pedido
 Critérios de aceitação:
-O cliente deve conseguir visualizar cada etapa do pedido, como: "Pedido recebido", "Em preparo", "Saiu para entrega", etc.
 O progresso do pedido deve ser exibido de forma clara e intuitiva na interface do usuário.
 O sistema deve garantir que as atualizações sejam feitas com base no status real do pedido.
 
@@ -397,12 +397,11 @@ O administrador deve conseguir exportar os relatórios para diferentes formatos 
 
 User Story 019 - RNF019
 Como: Usuário do sistema (todos)
-Eu quero: que minha sessão expire e retorne para a tela inicial após um minutos
+Eu quero: que minha sessão expire e retorne para a tela inicial após um minuto
 Para: garantir que outras pessoas possam utilizar o sistema e aumentar a segurança dos dados
 Critérios de Aceitação:
 A sessão deve expirar automaticamente após um minuto de inatividade.
 O sistema deve redirecionar o usuário para a tela inicial após a expiração
-
 
 
 
