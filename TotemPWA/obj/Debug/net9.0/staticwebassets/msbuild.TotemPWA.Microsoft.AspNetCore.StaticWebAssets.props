@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>hyx7mzcnza</Fingerprint>
-      <Integrity>V5Z66LY/ZQCCZ5l0P0C9SWhVltX2AORuaJhIDCpYaKM=</Integrity>
+      <Fingerprint>zghh1bjohi</Fingerprint>
+      <Integrity>s0/Iv9UwZ/EmGy7as6ao9qtAqDlCDpcOUGQm5A5ZSyk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\telacarrinho.css'))</OriginalItemSpec>
