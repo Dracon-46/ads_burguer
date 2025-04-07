@@ -1,0 +1,149 @@
+body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; }
+
+:root{ --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --text-color: #3f3f3f; --bg-color:#FFFFFF; --bg-color2: #F1F1F1;}
+
+.container {
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100vh; 
+    position: relative;     
+    left: 50%; /* Coloca no meio horizontalmente */
+    transform: translate(-50%); /* Move o elemento de volta para o centro */
+    box-shadow: 0 4px 8px rgba(60, 60, 60, 0.4); /* Adiciona a sombra */
+    overflow: hidden;
+}
+h1 {
+    text-align: center;
+    padding: 5%;
+}
+
+#ingredientes-lista {
+    max-height: 70%;
+    overflow-y: scroll;
+    padding-right: 10px; 
+}
+
+#ingredientes-lista::-webkit-scrollbar {
+    width: 8px;
+}
+
+#ingredientes-lista::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+#ingredientes-lista::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.ingrediente {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.ingrediente img {
+    width: 20%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.info {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.controles {
+    display: flex;
+    align-items: center;
+    margin-right: 5%;   
+}
+
+.controles button {
+    background-color: var(--tertiary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.controles button:hover {
+    background-color: #f58941;
+}
+
+.controles span {
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+
+.carrinho {
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    position: fixed;  /* Mantém o carrinho sempre visível */
+    bottom: 0;  /* Alinha na parte inferior da tela */
+    left: 0;    
+    width: 100%;
+    height: 15%;
+    background: var(--bg-color);
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000; /* Garante que fique acima do conteúdo */
+}
+
+.carrinho div:nth-child(1) {
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: left; 
+    flex-direction: column; 
+    font-weight: bold;
+}
+.carrinho div:nth-child(2) {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+} 
+.carrinho div:nth-child(3) {
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.botoes button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cancelar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+}
+
+.confirmar {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+}
+
+

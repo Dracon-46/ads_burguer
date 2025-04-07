@@ -27,6 +27,14 @@ public class HomeController : Controller
     {
         return View();
     }
+         public IActionResult TelaEditarPed()
+    {
+        return View();
+    }
+         public IActionResult TelaPersoCombo()
+    {
+        return View();
+    }
 
     public IActionResult TelaCarrinho()
     {
