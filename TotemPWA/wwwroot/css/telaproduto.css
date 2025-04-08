@@ -4,9 +4,9 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
 
 .container {
     background-color: var(--bg-color);
-    width: 55%;
-    height: 1200px; 
-    position: relative; 
+    width: 100%;
+    height: 100vh; 
+    position: fixed; 
     left: 50%; /* Coloca no meio horizontalmente */
     transform: translate(-50%); /* Move o elemento de volta para o centro */
     box-shadow: 0 4px 8px rgba(60, 60, 60, 0.4); /* Adiciona a sombra */
@@ -24,13 +24,12 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
 
 /* ----------------------------- MODIFICADO ----------------------------- */
 .left {
-    background-color: var(--bg-color);
     width: 20%;
-    height: 64%;
+    height: 70%;
     border-radius: 0px 25px 25px 0px;
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.4); /* Adiciona a sombra */
     float: left;
-    position: relative;
+    position: absolute;
     margin-bottom: 2%;
     display: flex;
     flex-direction: column;
@@ -45,7 +44,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
     float: right;
     width: 75%;
-    max-height: 700px; /* Limita a altura da seção e permite o scroll */
+    height: 70vh; /* Limita a altura da seção e permite o scroll */
     margin-top: 20px;
     display: flex;
     overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
@@ -151,7 +150,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
 }
 
 .selection i{
-    font-size: 35px;
+    font-size: 28px;
     width: 100%;
     text-align: center;
     color: var(--text-color); 
@@ -192,10 +191,10 @@ a {
 }
 
 
-/*CARRINHO*/
+/*CARRINHO/
 
 /* ---------------------------------------- SUGESTÃO DE MODIFICAÇÃO ---------------------------------------- */
-.carrinho { box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-around; width: 100%;  height: 15%;  } 
+.carrinho { box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-around; width: 100%;  height: 7%;  } 
 .carrinho div:nth-child(1) {height: 100%; display: flex; justify-content: center; align-items: left; flex-direction: column; font-weight: bold;}
 .carrinho div:nth-child(2) {height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; }
 .carrinho div:nth-child(3) {height: 100%; display: flex; justify-content: center; align-items: center; }
