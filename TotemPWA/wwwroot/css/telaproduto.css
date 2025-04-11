@@ -5,7 +5,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
 .container {
     background-color: var(--bg-color);
     width: 100%;
-    height: 100vh; 
+    height: 100%; 
     position: fixed; 
     left: 50%; /* Coloca no meio horizontalmente */
     transform: translate(-50%); /* Move o elemento de volta para o centro */
@@ -13,9 +13,9 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
 }
 
 .banner {
-    background-image: url('/images/lanche.jpeg');
+    background-image: url('/images/lanches.png');
     width: 100%;
-    height: 20%;
+    height: 25%;
     background-size: cover; /* Ajusta a imagem à largura e altura da div */
     background-position: top center;
     background-repeat: no-repeat;
@@ -25,7 +25,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
 /* ----------------------------- MODIFICADO ----------------------------- */
 .left {
     width: 20%;
-    height: 70%;
+    height: 60vh;
     border-radius: 0px 25px 25px 0px;
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.4); /* Adiciona a sombra */
     float: left;
@@ -34,6 +34,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     
 }
 /* ----------------------------- MODIFICADO ----------------------------- */
@@ -44,7 +45,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
     float: right;
     width: 75%;
-    height: 70vh; /* Limita a altura da seção e permite o scroll */
+    height: 60vh; /* Limita a altura da seção e permite o scroll */
     margin-top: 20px;
     display: flex;
     overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
@@ -181,20 +182,46 @@ a {
 }
 
 
-.rodape {
-    background-color: #426B1F;
+
+/* Footer */
+.summary{
     position: fixed;
     bottom: 0px;
-    left: 0;
     width: 100%;
-    height: 13%;
+    background: var(--bg-color);
+    padding: 2vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
+
+
+.cancel-button, .confirm-button {
+    padding: 1.5vh;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2vw;
+}
+
+.cancel-button {
+    background: var(--primary-color);
+    color: white;
+}
+
+.confirm-button {
+    background: var(--tertiary-color);
+    color: white;
+}
+
+
 
 
 /*CARRINHO/
 
 /* ---------------------------------------- SUGESTÃO DE MODIFICAÇÃO ---------------------------------------- */
-.carrinho { box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-around; width: 100%;  height: 7%;  } 
+.carrinho { box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-around; width: 100%;  height: 20%;  } 
 .carrinho div:nth-child(1) {height: 100%; display: flex; justify-content: center; align-items: left; flex-direction: column; font-weight: bold;}
 .carrinho div:nth-child(2) {height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; }
 .carrinho div:nth-child(3) {height: 100%; display: flex; justify-content: center; align-items: center; }

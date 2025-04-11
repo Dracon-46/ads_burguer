@@ -32,245 +32,252 @@
 
 <body>
     <div class="container">
-        <div class="banner"></div>
-        <div class="left">
-            <div class="selection">
-                <button class="link-button" onclick="mostrarEsconder('secaoPromocao'); trocarCor(this);">
-                  <div class="icon"> 
-                    <i class="material-icons">local_offer</i> 
-                </div> 
-                    <span id="promocao">Promoções</span>
-                </button>
+            <div class="banner">
             </div>
-            <div class="selection">
-                <button class="link-button" onclick="mostrarEsconder('secaoCombo');trocarCor(this);">
-                    <i class="material-icons">fastfood</i>
+            <div class="content">
+            <div class="left">
+                <div class="selection">
+                    <button class="link-button" onclick="mostrarEsconder('secaoPromocao'); trocarCor(this);">
+                    <div class="icon"> 
+                        <i class="material-icons">local_offer</i> 
+                    </div> 
+                        <span id="promocao">Promoções</span>
+                    </button>
+                </div>
+                <div class="selection">
+                    <button class="link-button" onclick="mostrarEsconder('secaoCombo');trocarCor(this);">
+                        <i class="material-icons">fastfood</i>
 
-                    <span id="combo">Combo</span>
-                </button>
+                        <span id="combo">Combo</span>
+                    </button>
+                </div>
+                <div class="selection">
+                    <button class="link-button" onclick="mostrarEsconder('secaoLanches'); trocarCor(this);">
+                        <i class="fa-solid fa-burger"></i>
+                        <span id="lanches">Lanches</span>
+                    </button>
+                </div>
+                <div class="selection">
+                    <button class="link-button" onclick="mostrarEsconder('secaoBebidas'); trocarCor(this);">
+                        <i class="material-icons">wine_bar</i>
+                        <span id="">Bebidas</span>
+                    </button>
+                </div>
+                <div class="selection">
+                    <button class="link-button" onclick="mostrarEsconder('secaoSobremesa'); trocarCor(this);">
+                        <i class="material-icons">icecream</i>
+                        <span id="">Sobremesas</span>
+                    </button>
+                </div>
+                <div class="selection">
+                    <button class="link-button" onclick="mostrarEsconder('secaoUnitarios'); trocarCor(this);">
+                    <i class="material-icons">soup_kitchen</i>
+                        <span id="">Unitários</span>
+                    </button>
+                </div>
             </div>
-            <div class="selection">
-                <button class="link-button" onclick="mostrarEsconder('secaoLanches'); trocarCor(this);">
-                    <i class="fa-solid fa-burger"></i>
-                    <span id="lanches">Lanches</span>
-                </button>
-            </div>
-            <div class="selection">
-                <button class="link-button" onclick="mostrarEsconder('secaoBebidas'); trocarCor(this);">
-                    <i class="material-icons">wine_bar</i>
-                    <span id="">Bebidas</span>
-                </button>
-            </div>
-            <div class="selection">
-                <button class="link-button" onclick="mostrarEsconder('secaoSobremesa'); trocarCor(this);">
-                    <i class="material-icons">icecream</i>
-                    <span id="">Sobremesas</span>
-                </button>
-            </div>
-             <div class="selection">
-                <button class="link-button" onclick="mostrarEsconder('secaoUnitarios'); trocarCor(this);">
-                <i class="material-icons">soup_kitchen</i>
-                    <span id="">Unitários</span>
-                </button>
-            </div>
-        </div>
-        <!--Promoção-->
-        <section id="secaoPromocao">
-            <div class="right">
-                <div class="produto">
-                    <button>
-                        <div class="box">
+            <!--Promoção-->
+            <section id="secaoPromocao">
+                <div class="right">
+                    <div class="produto">
+                        <button>
+                            <div class="box">
+                                <img src="/images/comida.png" alt=" Comida">
+                                <span class="nome">DevOps Burger</span>
+                                <span class="valor">R$ 24,90</span>
+                                <span class="promocao">R$ 23,00</span>
+                                <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.aaaaaaaaaa</p>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
                             <img src="/images/comida.png" alt=" Comida">
                             <span class="nome">DevOps Burger</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.aaaaaaaaaa</p>
-                        </div>
-                    </button>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
                 </div>
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome">DevOps Burger</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-            </div>
-        </section>
-        <!---->
-        <section id="secaoCombo">
-            <div class="right">
+            </section>
+            <!---->
+            <section id="secaoCombo">
+                <div class="right">
 
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome">Combo</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome">Combo</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome">Combo</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Carne 100% bovina, queijo derretido, alface, tomate e molho especial em um
+                                pão macio.</p>
+                        </button>
+                    </div>
                 </div>
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome">Combo</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Carne 100% bovina, queijo derretido, alface, tomate e molho especial em um
-                            pão macio.</p>
-                    </button>
-                </div>
-            </div>
-        </section>
-        <section id="secaoLanches">
-            <div class="right">
+            </section>
+            <section id="secaoLanches">
+                <div class="right">
 
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome">Dogao</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome">Dogao</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome">Combo</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Carne 100% bovina, queijo derretido, alface, tomate e molho especial em um
+                                pão macio.</p>
+                        </button>
+                    </div>
                 </div>
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome">Combo</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Carne 100% bovina, queijo derretido, alface, tomate e molho especial em um
-                            pão macio.</p>
-                    </button>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="secaoBebidas">
-            <div class="right">
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome">COCA COLA stick</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
+            <section id="secaoBebidas">
+                <div class="right">
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome">COCA COLA stick</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="secaoSobremesa">
-            <div class="right">
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome">Sorvetao</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
+            <section id="secaoSobremesa">
+                <div class="right">
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome">Sorvetao</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        
-        <section id="secaoUnitarios">
-            <div class="right">
-                <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
+            
+            <section id="secaoUnitarios">
+                <div class="right">
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
+                    <div class="produto">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
                 </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-                 <div class="produto">
-                    <button>
-                        <img src="/images/comida.png" alt=" Comida">
-                        <span class="nome"> uNIuNI</span>
-                        <span class="valor">R$ 24,90</span>
-                        <span class="promocao">R$ 23,00</span>
-                        <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                    </button>
-                </div>
-            </div>
-        </section>
+      
+            </section>
+        </div>
 
-        <div class="carrinho">
+
+
+            
+        <div class="summary">
             <div class="car-left">
                 <span class="total-itens">Total de itens: 0</span>
                 <span class="total-pedidos">Total do Pedido:  <span style="color: #426b1f;">R$ 0</span></span>
             </div>                
             <div class="car-center">
-                <span class="view">VER CARRINHO</span>
+                
                 <a href="@Url.Action("TelaCarrinho", "Home")" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
             <div class="car-right">
