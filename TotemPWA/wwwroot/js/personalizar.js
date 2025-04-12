@@ -344,13 +344,16 @@ class PersonalizarPedido {
 
     criarProdutoFinal() {
         return {
-            ...this.produtoBase,
+            name: this.produtoBase.nome,
+            price: this.total,
+            image: this.produtoBase.imagem,
+            quantity: 1,
             ingredientes: [...this.ingredientesAdicionais.filter(ing => ing.quantidade > 0)],
-            preco: this.total,
             descricao: this.gerarDescricaoPedido(),
             personalizado: this.ingredientesAdicionais.some(ing => ing.quantidade > 0)
         };
     }
+    
 
     gerarDescricaoPedido() {
         let descricao = this.produtoBase.nome;

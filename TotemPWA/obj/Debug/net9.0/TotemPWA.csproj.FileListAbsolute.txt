@@ -101,6 +101,6 @@ C:\ads_burguer\totempwa\obj\Debug\net9.0\ref\TotemPWA.dll
 C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\ycnre2ctdn-lto6yuraxa.gz
 C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\b5ddmu2fr3-9jolbkz51m.gz
 C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\lzwbrsfv8f-dzjd3ie5er.gz
-C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\0721lxsq7d-gy6ohs1y4i.gz
-C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\aciu92rnct-9ue91uwci4.gz
 C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\s59c9wfjid-bk37en3u04.gz
+C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\aciu92rnct-7si5afe1mf.gz
+C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\0721lxsq7d-os4i6vzzkr.gz

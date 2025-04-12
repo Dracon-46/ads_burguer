@@ -372,8 +372,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>gy6ohs1y4i</Fingerprint>
-      <Integrity>OGp+phCKMUIuTZYaXe6qv99wcwJ4kecQuJueEjBE7gY=</Integrity>
+      <Fingerprint>os4i6vzzkr</Fingerprint>
+      <Integrity>OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\personalizar.js'))</OriginalItemSpec>
@@ -408,8 +408,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>9ue91uwci4</Fingerprint>
-      <Integrity>YYwu6ypiNhA6N43iBjvGDmc6ypoEF98jvV4cTiJtLXI=</Integrity>
+      <Fingerprint>7si5afe1mf</Fingerprint>
+      <Integrity>V/R2pk8FUrwcfuadYVKClnErULLOaK71Q5ZXeJZZLV8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\telacarrinho.js'))</OriginalItemSpec>
