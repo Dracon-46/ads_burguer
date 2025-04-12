@@ -195,11 +195,12 @@ class FastFoodCart {
     }
 
     removeOverlay() {
-        if (this.overlay) {
-            this.overlay.classList.remove('active');
+        const overlay = this.overlay || document.querySelector('.modal-overlay');
+        if (overlay) {
+            overlay.classList.remove('active');
             setTimeout(() => {
-                if (this.overlay && document.body.contains(this.overlay)) {
-                    document.body.removeChild(this.overlay);
+                if (overlay && document.body.contains(overlay)) {
+                    document.body.removeChild(overlay);
                     this.overlay = null;
                 }
             }, 300);
