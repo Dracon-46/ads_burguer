@@ -239,6 +239,11 @@ class PersonalizarPedido {
     }
 
     ajustarQuantidade(nome, preco, novaQuantidade, elementoQuantidade) {
+        if (novaQuantidade > 10) {
+            this.mostrarFeedback(`Você só pode adicionar até 10 unidades de ${nome}.`, 'error');
+            return;
+        }
+    
         novaQuantidade = Math.max(0, novaQuantidade);
         elementoQuantidade.textContent = novaQuantidade;
         this.atualizarIngrediente(nome, preco, novaQuantidade);
@@ -309,38 +314,41 @@ class PersonalizarPedido {
         }
     }
 
-    confirmarPedido() {
-        const produtoFinal = this.criarProdutoFinal();
-        
-        if (window.fastFoodCart) {
-            try {
-                const confirmButton = this.modal.querySelector('.confirmar-personalizacao');
-                const originalText = confirmButton.innerHTML;
-                confirmButton.disabled = true;
-                confirmButton.innerHTML = '<span class="spinner"></span> Adicionando...';
-                
-                // Garante que o produto tenha a propriedade quantity
-                produtoFinal.quantity = 1;
-                
-                window.fastFoodCart.addToCart(produtoFinal);
-                window.fastFoodCart.updateCart();
-                
-                this.mostrarFeedbackPedidoAdicionado(produtoFinal.nome);
-                this.fecharModal();
-            } catch (error) {
-                console.error('Erro ao adicionar ao carrinho:', error);
-                this.mostrarFeedback('Erro ao adicionar ao carrinho', 'error');
-            } finally {
-                const confirmButton = this.modal.querySelector('.confirmar-personalizacao');
-                if (confirmButton) {
-                    confirmButton.disabled = false;
-                    confirmButton.innerHTML = originalText;
-                }
+// No método confirmarPedido da classe PersonalizarPedido
+confirmarPedido() {
+    const produtoFinal = this.criarProdutoFinal();
+    
+    if (window.fastFoodCart) {
+        try {
+            const confirmButton = this.modal.querySelector('.confirmar-personalizacao');
+            const originalText = confirmButton.innerHTML;
+            confirmButton.disabled = true;
+            confirmButton.innerHTML = '<span class="spinner"></span> Adicionando...';
+            
+            // Garante que o produto tenha todas as propriedades necessárias
+            const produtoParaCarrinho = {
+                name: produtoFinal.name || this.produtoBase.nome,
+                price: produtoFinal.price,
+                image: produtoFinal.image || this.produtoBase.imagem,
+                quantity: produtoFinal.quantity || 1,
+                descricao: produtoFinal.descricao || this.produtoBase.nome
+            };
+            
+            window.fastFoodCart.addToCart(produtoParaCarrinho);
+            window.fastFoodCart.showAddedToCartFeedback(produtoParaCarrinho.name);
+            this.fecharModal();
+        } catch (error) {
+            console.error('Erro ao adicionar ao carrinho:', error);
+            this.mostrarFeedback('Erro ao adicionar ao carrinho', 'error');
+        } finally {
+            const confirmButton = this.modal.querySelector('.confirmar-personalizacao');
+            if (confirmButton) {
+                confirmButton.disabled = false;
+                confirmButton.innerHTML = originalText;
             }
-        } else {
-            this.mostrarFeedback('Erro: Carrinho não disponível', 'error');
         }
     }
+}
 
     criarProdutoFinal() {
         return {

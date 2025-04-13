@@ -103,4 +103,4 @@ C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\b5ddmu2fr3-9jolbkz51m.gz
 C:\ads_burguer\totemPWA\obj\Debug\net9.0\compressed\aciu92rnct-jq94ysrfov.gz
 C:\ads_burguer\totemPWA\obj\Debug\net9.0\compressed\0721lxsq7d-a117f8k565.gz
 C:\ads_burguer\totemPWA\obj\Debug\net9.0\compressed\s59c9wfjid-sxplse4fze.gz
-C:\ads_burguer\totemPWA\obj\Debug\net9.0\compressed\lzwbrsfv8f-az06ieeefj.gz
+C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\lzwbrsfv8f-dn5qr8pz07.gz

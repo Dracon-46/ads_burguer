@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>az06ieeefj</Fingerprint>
-      <Integrity>dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs=</Integrity>
+      <Fingerprint>dn5qr8pz07</Fingerprint>
+      <Integrity>GQpDgQwQ5Dp6IDIsWBiOknfp/pKdhYlb0WB2MbwpJYU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\telaproduto.css'))</OriginalItemSpec>

@@ -99,6 +99,7 @@ class FastFoodCart {
             });
         });
     }
+    
 
     createAriaLiveRegion() {
         const ariaLive = document.createElement('div');
@@ -324,7 +325,9 @@ class FastFoodCart {
 
     showAddedToCartFeedback(productName) {
         // Remove feedback existente
+        const nome = productName || 'Produto'; 
         const existingFeedback = document.querySelector('.cart-feedback');
+       
         if (existingFeedback) existingFeedback.remove();
 
         const feedback = document.createElement('div');
@@ -358,10 +361,10 @@ class FastFoodCart {
         );
         
         if (!confirm) return;
-        
+        const submitButton = this.cartModal.querySelector('.confirm-button');
+        const originalText = submitButton.textContent;
         try {
-            const submitButton = this.cartModal.querySelector('.confirm-button');
-            const originalText = submitButton.textContent;
+            
             submitButton.disabled = true;
             submitButton.innerHTML = '<span class="spinner"></span> Processando...';
             
