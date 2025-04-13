@@ -30,3 +30,28 @@ function trocarCor(button) {
     
 
 }
+function trocaCorFiltro(button) {
+    // Remove a classe 'active' de todos os botões
+    let buttons = document.querySelectorAll('.filtro button');
+    buttons.forEach(function(button) {
+        button.classList.remove('active');
+    });
+
+    // Adiciona a classe 'active' no botão clicado
+    button.classList.add('active');
+}
+
+function filtrarLanches(categoria) {
+    // Seleciona todos os lanches
+    let produtos = document.querySelectorAll('.produto');
+    
+    // Exibe ou oculta os lanches com base na categoria
+    produtos.forEach(function(produto) {
+        // Verifica se o produto tem a classe correspondente à categoria
+        if (produto.classList.contains(categoria)) {
+            produto.style.display = 'block'; // Exibe o produto
+        } else {
+            produto.style.display = 'none'; // Oculta o produto
+        }
+    });
+}
