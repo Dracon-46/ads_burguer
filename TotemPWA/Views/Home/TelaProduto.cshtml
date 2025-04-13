@@ -80,29 +80,40 @@
             <section id="secaoPromocao">
                 <div class="right">
                     <div class="filtro">
-                        <button onclick="trocaCorFiltro(this); ">Desconto 10%</button>
-                        <button onclick="trocaCorFiltro(this)">Desconto 20%</button>
-                        <button onclick="trocaCorFiltro(this)">Promoção Especial</button>
-                        <button onclick="trocaCorFiltro(this)">Combo Promocional</button>
-                        <button onclick="trocaCorFiltro(this)">Ofertas da Semana</button>
+                    <button onclick="filtrarLanches('desconto10', this)">Desconto 10%</button>
+                    <button onclick="filtrarLanches('desconto20', this)">Desconto 20%</button>
+                    <button onclick="filtrarLanches('promocao-especial', this)">Promoção Especial</button>
+                    <button onclick="filtrarLanches('combo-promocional', this)">Combo Promocional</button>
+                    <button onclick="filtrarLanches('ofertas-semana', this)">Ofertas da Semana</button>
+
                     </div>
-                    <div class="produto">
+                     <div class="produto desconto10">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome">Sorvetao</span>
+                            <img src="/images/combo1.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
                             <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
                         </button>
                     </div>
-                      <div class="produto">
+                        <div class="produto desconto10">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome">Sorvetao</span>
+                            <img src="/images/lanche2.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
                             <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
                         </button>
+                    </div>
+                     <div class="produto desconto20">
+                        <button>
+                            <img src="/images/lanche3.png" alt=" Comida">
+                            <span class="nome"> uNIuNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        </button>
+                    </div>
                     </div>
                 </div>
             </section>
@@ -110,23 +121,27 @@
             <section id="secaoCombo">
                 <div class="right">
                     <div class="filtro">
-                        <button onclick="trocaCorFiltro(this)">Hambúrguer + Batata</button>
-                        <button onclick="trocaCorFiltro(this)">Cheese + Fritas</button>
-                        <button onclick="trocaCorFiltro(this)">X-Burguer + Refrigerante</button>
-                        <button onclick="trocaCorFiltro(this)">Combo Duplo</button>
+                   <button onclick="filtrarLanches('combo-completo', this)">Combo Completo</button>
+                    <button onclick="filtrarLanches('hamburguer-batata', this)">Hambúrguer + Batata</button>
+                    <button onclick="filtrarLanches('cheese-fritas', this)">Cheese + Fritas</button>
+                    <button onclick="filtrarLanches('xburguer-refrigerante', this)">X-Burguer + Refrigerante</button>
+                    <button onclick="filtrarLanches('combo-duplo', this)">Combo Duplo</button>
+
                     </div>
-                    <div class="produto">
+                    <div class="produto combo-completo">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
+                            <img src="/images/combo1.png" alt=" Comida">
                             <span class="nome"> uNIuNI</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
                             <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
                         </button>
                     </div>
-                    <div class="produto">
+
+                
+                    <div class="produto xburguer-refrigerante">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
+                            <img src="/images/combo2.png" alt=" Comida">
                             <span class="nome"> uNIuNI</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
@@ -138,76 +153,80 @@
             <section id="secaoLanches">
                 <div class="right">
                     <div class="filtro">
-                     <button onclick="filtrarLanches('frango')">Frango</button>
-                        <button onclick="trocaCorFiltro(this); filtrarLanches('carne')">Carne</button>
-                        <button onclick="trocaCorFiltro(this)">Porco</button>
-                        <button onclick="trocaCorFiltro(this)">Vegetariano</button>
-                        <button onclick="trocaCorFiltro(this)">Vegano</button>
-                        <button onclick="trocaCorFiltro(this)">Light</button>
-                        <button onclick="trocaCorFiltro(this)">Fit</button>
-                        <button onclick="trocaCorFiltro(this)">Low Carb</button>
+                        <button onclick="filtrarLanches('frango', this)">Frango</button>
+                        <button onclick="filtrarLanches('carne', this)">Carne</button>
+                        <button onclick="filtrarLanches('vegetariano', this)">Vegetariano</button>
+                        <button onclick="filtrarLanches('bacon', this)">Bacon</button>
+                        <button onclick="filtrarLanches('vegano', this)">Vegano</button>
+                        <button onclick="filtrarLanches('light', this)">Light</button>
+                        <button onclick="filtrarLanches('fit', this)">Fit</button>
+                        <button onclick="filtrarLanches('lowcarb', this)">Low Carb</button>
+                        <button onclick="filtrarLanches('integral', this)">Integral</button>
+                        <button onclick="filtrarLanches('semgluten', this)">Sem glúten</button>
+                        <button onclick="filtrarLanches('semlactose', this)">Sem lactose</button>
+
                     </div>
-                 <div class="produto lanche-frango">
-                        <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome"> uNIuNI</span>
-                            <span class="valor">R$ 24,90</span>
-                            <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                        </button>
-                    </div>
-                    <div class="produto">
-                        <button>
-                            <img src="/images/lanche2.png" alt=" Comida">
-                            <span class="nome"> uNIuNI</span>
-                            <span class="valor">R$ 24,90</span>
-                            <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                        </button>
-                    </div>
-                     <div class="produto">
-                        <button>
-                            <img src="/images/lanche3.png" alt=" Comida">
-                            <span class="nome"> uNIuNI</span>
-                            <span class="valor">R$ 24,90</span>
-                            <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                        </button>
-                    </div>
-                     <div class="produto">
-                        <button>
-                            <img src="/images/lanche4.png" alt=" Comida">
-                            <span class="nome"> uNIuNI</span>
-                            <span class="valor">R$ 24,90</span>
-                            <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                        </button>
-                    </div>
-                     <div class="produto">
-                        <button>
-                            <img src="/images/lanche5.png" alt=" Comida">
-                            <span class="nome"> uNIuNI</span>
-                            <span class="valor">R$ 24,90</span>
-                            <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-                        </button>
-                    </div>
-                    <div class="produto lanche-frango">
+                 <div class="produto carne">
                         <button>
                             <img src="/images/lanche6.png" alt=" Comida">
-                            <span class="nome"> uNIuNI</span>
+                            <span class="nome">Byte Burguer</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
                             <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
                         </button>
                     </div>
-                         <div class="produto">
+                    <div class="produto  carne">
                         <button>
-                            <img src="/images/lanche7.png" alt=" Comida">
-                            <span class="nome"> uNIuNI</span>
+                            <img src="/images/lanche2.png" alt=" Comida">
+                            <span class="nome">Click Duplo</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                            <p class="descricao">Pão brioche, hambúrguer artesanal, cheddar, alface americana, molho especial de alho e bacon crocante.</p>
+                        </button>
+                    </div>
+                     <div class="produto frango">
+                        <button>
+                            <img src="/images/lanche3.png" alt=" Comida">
+                            <span class="nome"> Neural CheeseI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Hambúrguer vegetal, queijo vegano, tomate, rúcula e maionese de mostarda e ervas.</p>
+                        </button>
+                    </div>
+                     <div class="produto frango">
+                        <button>
+                            <img src="/images/lanche4.png" alt=" Comida">
+                            <span class="nome"> Overclock Burguer</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Hambúrguer 180g, queijo cheddar e muçarela, picles, cebola crispy e molho barbecue picante.</p>
+                        </button>
+                    </div>
+                     <div class="produto bacon carne">
+                        <button>
+                            <img src="/images/lanche5.png" alt=" Comida">
+                            <span class="nome"> Firewall FlameNI</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Hambúrguer de frango apimentado, queijo pepperjack, alface, tomate e molho de pimenta sriracha.</p>
+                        </button>
+                    </div>
+                    <div class="produto frango">
+                        <button>
+                            <img src="/images/lanche8.png" alt=" Comida">
+                            <span class="nome"> Cache Melt</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Blend de carnes premium, cheddar derretido, bacon em cubos, molho de queijo e pão de alho na chapa.</p>
+                        </button>
+                    </div>
+                         <div class="produto bacon">
+                        <button>
+                            <img src="/images/comida.png" alt=" Comida">
+                            <span class="nome"> X Console </span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao"> Hambúrguer de grão-de-bico, queijo minas, alface, cenoura ralada e maionese vegana de ervas.</p>
                         </button>
                     </div>
                 </div>
@@ -216,22 +235,43 @@
             <section id="secaoBebidas">
                 <div class="right">
                     <div class="filtro">
-                        <!-- Categoria Bebidas -->
-                        <button onclick="trocaCorFiltro(this)" data-category="bebida">Refrigerante</button>
-                        <button onclick="trocaCorFiltro(this)" data-category="bebida">Suco Natural</button>
-                        <button onclick="trocaCorFiltro(this)" data-category="bebida">Água</button>
-                        <button onclick="trocaCorFiltro(this)" data-category="bebida">Alcoolica</button>
-                        <button onclick="trocaCorFiltro(this)" data-category="bebida">Vinho</button>
-                        <button onclick="trocaCorFiltro(this)">Refrigerante Diet</button>
+                        <button onclick="filtrarLanches('refrigerante', this)">Refrigerante</button>
+                        <button onclick="filtrarLanches('suco', this)">Suco</button>
+                        <button onclick="filtrarLanches('agua', this)">Água</button>
+                        <button onclick="filtrarLanches('alcoolica', this)">Alcoólica</button>
+                        <button onclick="filtrarLanches('vinho', this)">Vinho</button>
+                        <button onclick="filtrarLanches('refrigerante-diet', this)">Refrigerante 0</button>
                     </div>
-                    <div class="produto">
+                    <div class="produto refrigerante">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome">COCA COLA stick</span>
+                            <img src="/images/bebida1.png" alt=" Comida">
+                            <span class="nome">Coca Cola</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                            <p class="descricao">Clássica e sempre gelada, com seu sabor inconfundível e borbulhas que fazem qualquer combo ficar completo.</p>
                         </button>
+                    </div>
+                        <div class="produto suco">
+                        <button>
+                            <img src="/images/bebida2.png" alt=" Comida">
+                            <span class="nome">Suco de Laranja Del Valle</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Refrescante, leve e cítrico, com o gosto suave da laranja espremida. Combina bem com qualquer lanche.
+Servido gelado.</p>
+                        </button>
+                        
+                    </div>
+                        <div class="produto suco">
+                        <button>
+                            <img src="/images/bebida3.png" alt=" Comida">
+                            <span class="nome">Suco de Uva Del Valle</span>
+                            <span class="valor">R$ 24,90</span>
+                            <span class="promocao">R$ 23,00</span>
+                            <p class="descricao">Suco 100% uva, encorpado e adocicado naturalmente. Refresca com intensidade e sabor marcante da fruta.
+Servido gelado.</p>
+                        </button>
+                        
                     </div>
                 </div>
             </section>
@@ -239,30 +279,32 @@
             <section id="secaoSobremesa">
                 <div class="right">
                     <div class="filtro">
-                            <button onclick="trocaCorFiltro(this)">Chocolate</button>
-                            <button onclick="trocaCorFiltro(this)">Baunilha</button>
-                            <button onclick="trocaCorFiltro(this)">Morango</button>
-                            <button onclick="trocaCorFiltro(this)">Creme</button>
-                            <button onclick="trocaCorFiltro(this)">Leite Condensado</button>
+                       <button onclick="filtrarLanches('chocolate', this)">Chocolate</button>
+                        <button onclick="filtrarLanches('baunilha', this)">Baunilha</button>
+                        <button onclick="filtrarLanches('morango', this)">Morango</button>
+                        <button onclick="filtrarLanches('creme', this)">Creme</button>
+                        <button onclick="filtrarLanches('leite-condensado', this)">Leite Condensado</button>
                     </div>
-                    <div class="produto">
+                    <div class="produto chocolate">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome">Sorvetao</span>
+                            <img src="/images/sobremesa1.png" alt="Sorvete ChocoMix">
+                            <span class="nome">ChocoMix</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                            <p class="descricao">Dupla camada de sorvete de chocolate com calda cremosa e raspas crocantes.</p>
                         </button>
                     </div>
-                      <div class="produto">
+
+                    <div class="produto chocolate">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome">Sorvetao</span>
+                            <img src="/images/sobremesa2.png" alt="Sorvete DarkBite">
+                            <span class="nome">DarkBite</span>
                             <span class="valor">R$ 24,90</span>
                             <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                            <p class="descricao">Sorvete intenso de chocolate meio amargo com cobertura de brigadeiro e pedaços de brownie.</p>
                         </button>
                     </div>
+
                 </div>
             </section>
 
@@ -270,31 +312,38 @@
             <section id="secaoUnitarios">
                 <div class="right">
                     <div class="filtro">
-                        <button onclick="trocaCorFiltro(this)">Ketchup</button>
-                        <button onclick="trocaCorFiltro(this)">Maionese</button>
-                        <button onclick="trocaCorFiltro(this)">Mostarda</button>
-                        <button onclick="trocaCorFiltro(this)">Barbecue</button>
-                        <button onclick="trocaCorFiltro(this)">Pimenta</button>
-                        <button onclick="trocaCorFiltro(this)">Molho de Alho</button>
-                        <button onclick="trocaCorFiltro(this)">Molho Picante</button>
-                        <button onclick="trocaCorFiltro(this)">Molho Agridoce</button>
+                        <button onclick="filtrarLanches('ketchup', this)">Ketchup</button>
+                        <button onclick="filtrarLanches('maionese', this)">Maionese</button>
+                        <button onclick="filtrarLanches('mostarda', this)">Mostarda</button>
+                        <button onclick="filtrarLanches('barbecue', this)">Barbecue</button>
+                        <button onclick="filtrarLanches('nuggets', this)">Nuggets</button>
+                        <button onclick="filtrarLanches('batata-frita', this)">Batata frita</button>
                     </div>
-                    <div class="produto">
+                    <div class="produto mostarda">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome">Sorvetao</span>
-                            <span class="valor">R$ 24,90</span>
-                            <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                            <img src="/images/unitario2.png" alt=" Comida">
+                            <span class="nome">Mostarda</span>
+                            <span class="valor">R$ 11,90</span>
+                            <span class="promocao">R$ 12,00</span>
+                            <p class="descricao">Sabor marcante com toque levemente ácido, perfeita para realçar hambúrgueres e petiscos.</p>
                         </button>
                     </div>
-                      <div class="produto">
+                      <div class="produto nuggets">
                         <button>
-                            <img src="/images/comida.png" alt=" Comida">
-                            <span class="nome">Sorvetao</span>
-                            <span class="valor">R$ 24,90</span>
-                            <span class="promocao">R$ 23,00</span>
-                            <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                            <img src="/images/unitario1.png" alt=" Comida">
+                            <span class="nome">Nuggets</span>
+                            <span class="valor">R$ 11,90</span>
+                            <span class="promocao">R$ 12,00</span>
+                            <p class="descricao">Crosta crocante por fora e frango macio por dentro — o snack perfeito pra qualquer hora.</p>
+                        </button>
+                    </div>
+                     <div class="produto ketchup">
+                        <button>
+                            <img src="/images/unitario3.png" alt=" Comida">
+                            <span class="nome">Ketchup</span>
+                            <span class="valor">R$ 11,90</span>
+                            <span class="promocao">R$ 12,00</span>
+                            <p class="descricao">Clássico e adocicado, combina com tudo: de batatas fritas a hambúrgueres suculentos.</p>
                         </button>
                     </div>
                 </div>

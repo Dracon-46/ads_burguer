@@ -1,57 +1,78 @@
+let categoriaAtiva = '';  // Rastreamento da categoria ativa
+let botaoAtivo = null;    // Rastreamento do botão ativo
+
 function mostrarEsconder(id) {
+    // Esconde todas as seções
     let sections = document.querySelectorAll('section');
-    for (let i = 0; i < sections.length; i++) {
-        sections[i].style.display = 'none';
-    }
+    sections.forEach(function(section) {
+        section.style.display = 'none';
+    });
+
+    // Mostra a seção desejada
     document.getElementById(id).style.display = 'block';
+
+    // Remove o filtro ativo
+    removerFiltro();
 }
 
 function trocarCor(button) {
-    
-        let icons = document.querySelectorAll('.selection i');
-        let spans = document.querySelectorAll('.selection span');
-        icons.forEach(function(icon) {
-            icon.style.backgroundColor = '';
-            icon.style.color = '';
-            icon.classList.remove('active');
-        });
-        
-        spans.forEach(function(span) {
-            span.style.backgroundColor = '';
-            span.style.color = '';
-            span.classList.remove('active');
-           
-        });
+    let icons = document.querySelectorAll('.selection i');
+    let spans = document.querySelectorAll('.selection span');
 
-        let icon = button.querySelector('i');
-        let span = button.querySelector('span');
-        span.classList.add('active');
-        icon.classList.add('active');
-    
-
-}
-function trocaCorFiltro(button) {
-    // Remove a classe 'active' de todos os botões
-    let buttons = document.querySelectorAll('.filtro button');
-    buttons.forEach(function(button) {
-        button.classList.remove('active');
+    // Remove cor e classe de todos
+    icons.forEach(icon => {
+        icon.style.backgroundColor = '';
+        icon.style.color = '';
+        icon.classList.remove('active');
     });
 
-    // Adiciona a classe 'active' no botão clicado
-    button.classList.add('active');
+    spans.forEach(span => {
+        span.style.backgroundColor = '';
+        span.style.color = '';
+        span.classList.remove('active');
+    });
+
+    // Aplica cor apenas no botão clicado
+    let icon = button.querySelector('i');
+    let span = button.querySelector('span');
+    if (icon) icon.classList.add('active');
+    if (span) span.classList.add('active');
+
+    // Remove o filtro ativo também
+    removerFiltro();
 }
 
-function filtrarLanches(categoria) {
-    // Seleciona todos os lanches
+function filtrarLanches(categoria, button) {
     let produtos = document.querySelectorAll('.produto');
-    
-    // Exibe ou oculta os lanches com base na categoria
-    produtos.forEach(function(produto) {
-        // Verifica se o produto tem a classe correspondente à categoria
-        if (produto.classList.contains(categoria)) {
-            produto.style.display = 'block'; // Exibe o produto
-        } else {
-            produto.style.display = 'none'; // Oculta o produto
-        }
-    });
+
+    if (categoriaAtiva === categoria) {
+        // Já está ativo, então remove
+        produtos.forEach(produto => produto.style.display = 'inline-block');
+        categoriaAtiva = '';
+        if (botaoAtivo) botaoAtivo.classList.remove('active');
+        botaoAtivo = null;
+    } else {
+        // Aplica novo filtro
+        produtos.forEach(produto => {
+            if (produto.classList.contains(categoria)) {
+                produto.style.display = 'inline-block';
+            } else {
+                produto.style.display = 'none';
+            }
+        });
+        if (botaoAtivo) botaoAtivo.classList.remove('active');
+        button.classList.add('active');
+        botaoAtivo = button;
+        categoriaAtiva = categoria;
+    }
+}
+
+function removerFiltro() {
+    let produtos = document.querySelectorAll('.produto');
+    produtos.forEach(produto => produto.style.display = 'inline-block');
+    if (botaoAtivo) {
+        botaoAtivo.classList.remove('active');
+        botaoAtivo = null;
+    }
+    categoriaAtiva = '';
 }
