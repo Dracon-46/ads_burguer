@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TI+D1tUzurp8MuKRZoa52dkEtaEwk8s+F3/bO/YdyFc=",
+  "Hash": "kN8vl9ZvqFydP1kdQD/WyoO1dL0bYQDCLoRg8HznFLY=",
   "Source": "TotemPWA",
   "BasePath": "_content/TotemPWA",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-os4i6vzzkr.gz",
+      "Identity": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-a117f8k565.gz",
       "SourceId": "TotemPWA",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/TotemPWA",
-      "RelativePath": "js/personalizar#[.{fingerprint=os4i6vzzkr}]?.js.gz",
+      "RelativePath": "js/personalizar#[.{fingerprint=a117f8k565}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -31,8 +31,8 @@
       "RelatedAsset": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\personalizar.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "05rcpfotn0",
-      "Integrity": "ZCmXpooynFMVoEENF9GgqxXbqv07OyhCeUE6TQZxOdw=",
+      "Fingerprint": "va8p91u6qn",
+      "Integrity": "uVytKaJopBDLH5CiHuItiuXP5yfVryyPcP5M6on4mCI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\personalizar.js"
@@ -857,12 +857,12 @@
       "OriginalItemSpec": "C:\\ads_burguer\\totemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-im8jldjjij.gz",
+      "Identity": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-az06ieeefj.gz",
       "SourceId": "TotemPWA",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/TotemPWA",
-      "RelativePath": "css/telaproduto#[.{fingerprint=im8jldjjij}]?.css.gz",
+      "RelativePath": "css/telaproduto#[.{fingerprint=az06ieeefj}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -871,8 +871,8 @@
       "RelatedAsset": "C:\\ads_burguer\\totemPWA\\wwwroot\\css\\telaproduto.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "si00npvpvl",
-      "Integrity": "XFKeZak9LdDgaRK0cDO7m86/JvLtwG66qcRccESJ0U8=",
+      "Fingerprint": "up3p01c770",
+      "Integrity": "7vyzfNyXhYv+wrUIYFsMZvDWt8nkVC52eIgO1MAa1OE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ads_burguer\\totemPWA\\wwwroot\\css\\telaproduto.css"
@@ -1088,12 +1088,12 @@
       "OriginalItemSpec": "C:\\ads_burguer\\totemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-f237dkvcog.gz",
+      "Identity": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-sxplse4fze.gz",
       "SourceId": "TotemPWA",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/TotemPWA",
-      "RelativePath": "js/telaproduto#[.{fingerprint=f237dkvcog}]?.js.gz",
+      "RelativePath": "js/telaproduto#[.{fingerprint=sxplse4fze}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1102,8 +1102,8 @@
       "RelatedAsset": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\telaproduto.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "gvd7yj1439",
-      "Integrity": "/N+18KF7B7MPJncQWm9u1a/l3Abz5Vj40PlPNg8X35M=",
+      "Fingerprint": "ofw1j67wd6",
+      "Integrity": "jGqRuP1V7XiToeHSeVkCahnN4TsMTkVo2h6+SUhRT40=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\telaproduto.js"
@@ -1690,8 +1690,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "im8jldjjij",
-      "Integrity": "ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI=",
+      "Fingerprint": "az06ieeefj",
+      "Integrity": "dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\telaproduto.css"
@@ -2404,8 +2404,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "os4i6vzzkr",
-      "Integrity": "OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E=",
+      "Fingerprint": "a117f8k565",
+      "Integrity": "AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\personalizar.js"
@@ -2467,8 +2467,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "f237dkvcog",
-      "Integrity": "uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE=",
+      "Fingerprint": "sxplse4fze",
+      "Integrity": "kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\telaproduto.js"
@@ -5226,13 +5226,13 @@
       ]
     },
     {
-      "Route": "css/telaproduto.css",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-im8jldjjij.gz",
+      "Route": "css/telaproduto.az06ieeefj.css",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-az06ieeefj.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000388651380"
+          "Quality": "0.000521104742"
         }
       ],
       "ResponseHeaders": [
@@ -5242,19 +5242,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2572"
+          "Value": "1918"
         },
         {
           "Name": "ETag",
-          "Value": "\"XFKeZak9LdDgaRK0cDO7m86/JvLtwG66qcRccESJ0U8=\""
+          "Value": "\"7vyzfNyXhYv+wrUIYFsMZvDWt8nkVC52eIgO1MAa1OE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:23:48 GMT"
+          "Value": "Sun, 13 Apr 2025 21:24:09 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -5270,18 +5270,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI=\""
+          "Value": "W/\"dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "az06ieeefj"
+        },
+        {
+          "Name": "label",
+          "Value": "css/telaproduto.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI="
+          "Value": "sha256-dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs="
         }
       ]
     },
     {
-      "Route": "css/telaproduto.css",
+      "Route": "css/telaproduto.az06ieeefj.css",
       "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\css\\telaproduto.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5291,7 +5299,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10233"
+          "Value": "8640"
         },
         {
           "Name": "Content-Type",
@@ -5299,121 +5307,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI=\""
+          "Value": "\"dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:23:48 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI="
-        }
-      ]
-    },
-    {
-      "Route": "css/telaproduto.css.gz",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-im8jldjjij.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2572"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XFKeZak9LdDgaRK0cDO7m86/JvLtwG66qcRccESJ0U8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:23:48 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-XFKeZak9LdDgaRK0cDO7m86/JvLtwG66qcRccESJ0U8="
-        }
-      ]
-    },
-    {
-      "Route": "css/telaproduto.im8jldjjij.css",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-im8jldjjij.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000388651380"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2572"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XFKeZak9LdDgaRK0cDO7m86/JvLtwG66qcRccESJ0U8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:23:48 GMT"
+          "Value": "Sun, 13 Apr 2025 21:24:09 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "im8jldjjij"
+          "Value": "az06ieeefj"
         },
         {
           "Name": "label",
@@ -5421,13 +5329,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI="
+          "Value": "sha256-dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs="
         }
       ]
     },
     {
-      "Route": "css/telaproduto.im8jldjjij.css",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\css\\telaproduto.css",
+      "Route": "css/telaproduto.az06ieeefj.css.gz",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-az06ieeefj.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5436,7 +5344,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10233"
+          "Value": "1918"
         },
         {
           "Name": "Content-Type",
@@ -5444,56 +5352,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI=\""
+          "Value": "\"7vyzfNyXhYv+wrUIYFsMZvDWt8nkVC52eIgO1MAa1OE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:23:48 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "im8jldjjij"
-        },
-        {
-          "Name": "label",
-          "Value": "css/telaproduto.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI="
-        }
-      ]
-    },
-    {
-      "Route": "css/telaproduto.im8jldjjij.css.gz",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-im8jldjjij.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2572"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XFKeZak9LdDgaRK0cDO7m86/JvLtwG66qcRccESJ0U8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:23:48 GMT"
+          "Value": "Sun, 13 Apr 2025 21:24:09 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5511,7 +5374,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "im8jldjjij"
+          "Value": "az06ieeefj"
         },
         {
           "Name": "label",
@@ -5519,7 +5382,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-XFKeZak9LdDgaRK0cDO7m86/JvLtwG66qcRccESJ0U8="
+          "Value": "sha256-7vyzfNyXhYv+wrUIYFsMZvDWt8nkVC52eIgO1MAa1OE="
+        }
+      ]
+    },
+    {
+      "Route": "css/telaproduto.css",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-az06ieeefj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000521104742"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1918"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7vyzfNyXhYv+wrUIYFsMZvDWt8nkVC52eIgO1MAa1OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 21:24:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs="
+        }
+      ]
+    },
+    {
+      "Route": "css/telaproduto.css",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\css\\telaproduto.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8640"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 21:24:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs="
+        }
+      ]
+    },
+    {
+      "Route": "css/telaproduto.css.gz",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\lzwbrsfv8f-az06ieeefj.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1918"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7vyzfNyXhYv+wrUIYFsMZvDWt8nkVC52eIgO1MAa1OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 21:24:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7vyzfNyXhYv+wrUIYFsMZvDWt8nkVC52eIgO1MAa1OE="
         }
       ]
     },
@@ -8446,13 +8446,13 @@
       ]
     },
     {
-      "Route": "js/personalizar.js",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-os4i6vzzkr.gz",
+      "Route": "js/personalizar.a117f8k565.js",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-a117f8k565.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000212404418"
+          "Quality": "0.000212494688"
         }
       ],
       "ResponseHeaders": [
@@ -8462,19 +8462,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4707"
+          "Value": "4705"
         },
         {
           "Name": "ETag",
-          "Value": "\"ZCmXpooynFMVoEENF9GgqxXbqv07OyhCeUE6TQZxOdw=\""
+          "Value": "\"uVytKaJopBDLH5CiHuItiuXP5yfVryyPcP5M6on4mCI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:15:58 GMT"
+          "Value": "Sun, 13 Apr 2025 20:42:56 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -8490,18 +8490,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E=\""
+          "Value": "W/\"AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "a117f8k565"
+        },
+        {
+          "Name": "label",
+          "Value": "js/personalizar.js"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E="
+          "Value": "sha256-AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko="
         }
       ]
     },
     {
-      "Route": "js/personalizar.js",
+      "Route": "js/personalizar.a117f8k565.js",
       "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\personalizar.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8511,7 +8519,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "22285"
+          "Value": "22281"
         },
         {
           "Name": "Content-Type",
@@ -8519,121 +8527,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E=\""
+          "Value": "\"AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:15:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E="
-        }
-      ]
-    },
-    {
-      "Route": "js/personalizar.js.gz",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-os4i6vzzkr.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4707"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZCmXpooynFMVoEENF9GgqxXbqv07OyhCeUE6TQZxOdw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:15:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZCmXpooynFMVoEENF9GgqxXbqv07OyhCeUE6TQZxOdw="
-        }
-      ]
-    },
-    {
-      "Route": "js/personalizar.os4i6vzzkr.js",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-os4i6vzzkr.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000212404418"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4707"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZCmXpooynFMVoEENF9GgqxXbqv07OyhCeUE6TQZxOdw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:15:58 GMT"
+          "Value": "Sun, 13 Apr 2025 20:42:56 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "os4i6vzzkr"
+          "Value": "a117f8k565"
         },
         {
           "Name": "label",
@@ -8641,13 +8549,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E="
+          "Value": "sha256-AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko="
         }
       ]
     },
     {
-      "Route": "js/personalizar.os4i6vzzkr.js",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\personalizar.js",
+      "Route": "js/personalizar.a117f8k565.js.gz",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-a117f8k565.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8656,7 +8564,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "22285"
+          "Value": "4705"
         },
         {
           "Name": "Content-Type",
@@ -8664,56 +8572,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E=\""
+          "Value": "\"uVytKaJopBDLH5CiHuItiuXP5yfVryyPcP5M6on4mCI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:15:58 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "os4i6vzzkr"
-        },
-        {
-          "Name": "label",
-          "Value": "js/personalizar.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E="
-        }
-      ]
-    },
-    {
-      "Route": "js/personalizar.os4i6vzzkr.js.gz",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-os4i6vzzkr.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4707"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZCmXpooynFMVoEENF9GgqxXbqv07OyhCeUE6TQZxOdw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:15:58 GMT"
+          "Value": "Sun, 13 Apr 2025 20:42:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8731,7 +8594,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "os4i6vzzkr"
+          "Value": "a117f8k565"
         },
         {
           "Name": "label",
@@ -8739,7 +8602,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ZCmXpooynFMVoEENF9GgqxXbqv07OyhCeUE6TQZxOdw="
+          "Value": "sha256-uVytKaJopBDLH5CiHuItiuXP5yfVryyPcP5M6on4mCI="
+        }
+      ]
+    },
+    {
+      "Route": "js/personalizar.js",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-a117f8k565.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000212494688"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4705"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uVytKaJopBDLH5CiHuItiuXP5yfVryyPcP5M6on4mCI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 20:42:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko="
+        }
+      ]
+    },
+    {
+      "Route": "js/personalizar.js",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\personalizar.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22281"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 20:42:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko="
+        }
+      ]
+    },
+    {
+      "Route": "js/personalizar.js.gz",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\0721lxsq7d-a117f8k565.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4705"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uVytKaJopBDLH5CiHuItiuXP5yfVryyPcP5M6on4mCI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 20:42:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-uVytKaJopBDLH5CiHuItiuXP5yfVryyPcP5M6on4mCI="
         }
       ]
     },
@@ -9340,13 +9340,13 @@
       ]
     },
     {
-      "Route": "js/telaproduto.f237dkvcog.js",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-f237dkvcog.gz",
+      "Route": "js/telaproduto.js",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-sxplse4fze.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000660938533"
+          "Quality": "0.000530785563"
         }
       ],
       "ResponseHeaders": [
@@ -9356,19 +9356,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1512"
+          "Value": "1883"
         },
         {
           "Name": "ETag",
-          "Value": "\"/N+18KF7B7MPJncQWm9u1a/l3Abz5Vj40PlPNg8X35M=\""
+          "Value": "\"jGqRuP1V7XiToeHSeVkCahnN4TsMTkVo2h6+SUhRT40=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:22:39 GMT"
+          "Value": "Sun, 13 Apr 2025 20:42:32 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -9384,26 +9384,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE=\""
+          "Value": "W/\"kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "f237dkvcog"
-        },
-        {
-          "Name": "label",
-          "Value": "js/telaproduto.js"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE="
+          "Value": "sha256-kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo="
         }
       ]
     },
     {
-      "Route": "js/telaproduto.f237dkvcog.js",
+      "Route": "js/telaproduto.js",
       "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\telaproduto.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -9413,7 +9405,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5151"
+          "Value": "6673"
         },
         {
           "Name": "Content-Type",
@@ -9421,11 +9413,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE=\""
+          "Value": "\"kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:22:39 GMT"
+          "Value": "Sun, 13 Apr 2025 20:42:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo="
+        }
+      ]
+    },
+    {
+      "Route": "js/telaproduto.js.gz",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-sxplse4fze.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1883"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jGqRuP1V7XiToeHSeVkCahnN4TsMTkVo2h6+SUhRT40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 20:42:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jGqRuP1V7XiToeHSeVkCahnN4TsMTkVo2h6+SUhRT40="
+        }
+      ]
+    },
+    {
+      "Route": "js/telaproduto.sxplse4fze.js",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-sxplse4fze.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000530785563"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1883"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jGqRuP1V7XiToeHSeVkCahnN4TsMTkVo2h6+SUhRT40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 20:42:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sxplse4fze"
+        },
+        {
+          "Name": "label",
+          "Value": "js/telaproduto.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo="
+        }
+      ]
+    },
+    {
+      "Route": "js/telaproduto.sxplse4fze.js",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\telaproduto.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6673"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 13 Apr 2025 20:42:32 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9435,7 +9572,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "f237dkvcog"
+          "Value": "sxplse4fze"
         },
         {
           "Name": "label",
@@ -9443,13 +9580,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE="
+          "Value": "sha256-kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo="
         }
       ]
     },
     {
-      "Route": "js/telaproduto.f237dkvcog.js.gz",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-f237dkvcog.gz",
+      "Route": "js/telaproduto.sxplse4fze.js.gz",
+      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-sxplse4fze.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -9458,7 +9595,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1512"
+          "Value": "1883"
         },
         {
           "Name": "Content-Type",
@@ -9466,11 +9603,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/N+18KF7B7MPJncQWm9u1a/l3Abz5Vj40PlPNg8X35M=\""
+          "Value": "\"jGqRuP1V7XiToeHSeVkCahnN4TsMTkVo2h6+SUhRT40=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:22:39 GMT"
+          "Value": "Sun, 13 Apr 2025 20:42:32 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9488,7 +9625,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "f237dkvcog"
+          "Value": "sxplse4fze"
         },
         {
           "Name": "label",
@@ -9496,144 +9633,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/N+18KF7B7MPJncQWm9u1a/l3Abz5Vj40PlPNg8X35M="
-        }
-      ]
-    },
-    {
-      "Route": "js/telaproduto.js",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-f237dkvcog.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000660938533"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1512"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"/N+18KF7B7MPJncQWm9u1a/l3Abz5Vj40PlPNg8X35M=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:22:39 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE="
-        }
-      ]
-    },
-    {
-      "Route": "js/telaproduto.js",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\wwwroot\\js\\telaproduto.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5151"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:22:39 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE="
-        }
-      ]
-    },
-    {
-      "Route": "js/telaproduto.js.gz",
-      "AssetFile": "C:\\ads_burguer\\totemPWA\\obj\\Debug\\net9.0\\compressed\\s59c9wfjid-f237dkvcog.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1512"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"/N+18KF7B7MPJncQWm9u1a/l3Abz5Vj40PlPNg8X35M=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 13 Apr 2025 20:22:39 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-/N+18KF7B7MPJncQWm9u1a/l3Abz5Vj40PlPNg8X35M="
+          "Value": "sha256-jGqRuP1V7XiToeHSeVkCahnN4TsMTkVo2h6+SUhRT40="
         }
       ]
     },

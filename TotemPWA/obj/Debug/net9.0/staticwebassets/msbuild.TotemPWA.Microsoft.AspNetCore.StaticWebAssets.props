@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>im8jldjjij</Fingerprint>
-      <Integrity>ltSizBflgBeIygYJzHTPvx5lKu+PqG5wfdhr/TUjvaI=</Integrity>
+      <Fingerprint>az06ieeefj</Fingerprint>
+      <Integrity>dvRroq97cUAOonMT6cY+cZ7BXcg4Fjuco3OoTWNZTBs=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\telaproduto.css'))</OriginalItemSpec>
@@ -714,8 +714,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>os4i6vzzkr</Fingerprint>
-      <Integrity>OIXNFkKXpUSVfmS1Kp1Nf+xKZrd+VVOJiJYrnwg9h/E=</Integrity>
+      <Fingerprint>a117f8k565</Fingerprint>
+      <Integrity>AvCGS4ho7FvIqJCkNcy8ovqJ+7OMd4SA426m1pQMcko=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\personalizar.js'))</OriginalItemSpec>
@@ -768,8 +768,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>f237dkvcog</Fingerprint>
-      <Integrity>uQfD/c3Wq1yAMO0E40OhBGssGriI42THJ/Qq1tAQKzE=</Integrity>
+      <Fingerprint>sxplse4fze</Fingerprint>
+      <Integrity>kArP14UUNRlMlOpyfJG1zeR9zcKu91TuPiHFWRgOPbo=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\telaproduto.js'))</OriginalItemSpec>
