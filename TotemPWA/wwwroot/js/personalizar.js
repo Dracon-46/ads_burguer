@@ -434,7 +434,7 @@ class PersonalizarPedido {
 }
 
 // Função para ser chamada da tela de produtos
-function mostrarTelaPersonalizacao(produto) {
+function mostrarPersonalizacao(produto) {
     // Salva o elemento com foco atual
     const lastFocusedElement = document.activeElement;
     
