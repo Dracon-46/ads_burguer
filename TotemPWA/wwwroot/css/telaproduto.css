@@ -241,54 +241,122 @@ a {
 .view{ font-weight: bold; color: var(--primary-color);}
 .btn-pro{ background-color: var(--tertiary-color); color: white; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 16px; padding: 12px 40px; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; width: 150px; display: block;}
 .btn-pro:hover { background-color: #f58941; }
-/* ---------------------------------------- SUGESTÃO DE MODIFICAÇÃO ---------------------------------------- */
 
-/* .carrinho {
-    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); Sombra na parte superior
+/* Estilos para o modal de personalização */
+.personalizacao-modal {
     position: fixed;
-    bottom: 0px;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 13%;
-} */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
- /* .car-left{
-    position: relative;
-    margin-top: 7%;
-    margin-left:5%;
-    font-weight: bold;
-    width: 169px;
-} */
+.personalizacao-content {
+    background-color: white;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
-/* .car-center{
-    position: relative;
-    margin-left: 43%;
-    margin-top: -9%;
-    width: 150px;
-}  */
-
-/* .btn-car{
-    background-color:var(--primary-color);
+.personalizacao-header {
+    padding: 15px 20px;
+    background-color: var(--secondary-color);
     color: white;
-    font-family: 'Poppins', sans-serif; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.personalizacao-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.close-personalizacao {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.personalizacao-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.produto-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.produto-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.produto-info h3 {
+    margin: 0 0 5px 0;
+    color: var(--text-color);
+}
+
+.preco-base {
     font-weight: bold;
-    font-size: 30px;
-    padding: 5px 30px; 
-    border: none; 
+    color: var(--secondary-color);
+    margin: 0;
+}
+
+.personalizacao-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.resumo {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.total-personalizado {
+    font-weight: bold;
+    color: var(--secondary-color);
+    font-size: 1.2em;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancelar-personalizacao, .confirmar-personalizacao {
+    padding: 12px 25px;
+    border: none;
     border-radius: 30px;
-    cursor: pointer; 
-    transition: 0.3s;
-    margin-left: 10%;
-    margin-top: 3px;
-} */
-
-/* .view{ 
     font-weight: bold;
-    color: var(--primary-color);
- } */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-/* .btn-pro{
-    background-color: var(--tertiary-color);
+.cancelar-personalizacao {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.confirmar-personalizacao {
+    background-color: var(--secondary-color);
     color: white;
     font-family: 'Poppins', sans-serif; 
     font-weight: bold;
@@ -370,4 +438,10 @@ a {
     color:#FFFFFF;
     background-color: var(--primary-color);
     transition: 0.3s;
+}
+}
+
+.cancelar-personalizacao:hover, .confirmar-personalizacao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
