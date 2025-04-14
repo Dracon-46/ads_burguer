@@ -37,6 +37,26 @@
       "PackagePath": "staticwebassets\\images\\Lanche-chicken.png"
     },
     {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa1-artesanal.png",
+      "PackagePath": "staticwebassets\\images\\Sobremesa1-artesanal.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa2-Browine.png",
+      "PackagePath": "staticwebassets\\images\\Sobremesa2-Browine.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa3-Milkshake.png",
+      "PackagePath": "staticwebassets\\images\\Sobremesa3-Milkshake.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa4-torta.png",
+      "PackagePath": "staticwebassets\\images\\Sobremesa4-torta.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa5-pudim.png",
+      "PackagePath": "staticwebassets\\images\\Sobremesa5-pudim.png"
+    },
+    {
       "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\agua.jpeg",
       "PackagePath": "staticwebassets\\images\\agua.jpeg"
     },
@@ -69,8 +89,12 @@
       "PackagePath": "staticwebassets\\images\\bebida3.png"
     },
     {
-      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\bebida4.png",
-      "PackagePath": "staticwebassets\\images\\bebida4.png"
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\bebida4-guarana.png",
+      "PackagePath": "staticwebassets\\images\\bebida4-guarana.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\bebida5-guaranazero.png",
+      "PackagePath": "staticwebassets\\images\\bebida5-guaranazero.png"
     },
     {
       "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\burger.png",
@@ -137,6 +161,38 @@
       "PackagePath": "staticwebassets\\images\\lanche11-Crispy.png"
     },
     {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche12-Byte.png",
+      "PackagePath": "staticwebassets\\images\\lanche12-Byte.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche13-Click.png",
+      "PackagePath": "staticwebassets\\images\\lanche13-Click.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche14-viggie.png",
+      "PackagePath": "staticwebassets\\images\\lanche14-viggie.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche15-CheeseI.png",
+      "PackagePath": "staticwebassets\\images\\lanche15-CheeseI.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche16-Overclock.png",
+      "PackagePath": "staticwebassets\\images\\lanche16-Overclock.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche17-Firewall.png",
+      "PackagePath": "staticwebassets\\images\\lanche17-Firewall.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche18-Console.png",
+      "PackagePath": "staticwebassets\\images\\lanche18-Console.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche19-Green.png",
+      "PackagePath": "staticwebassets\\images\\lanche19-Green.png"
+    },
+    {
       "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\lanche2.png",
       "PackagePath": "staticwebassets\\images\\lanche2.png"
     },
@@ -185,16 +241,16 @@
       "PackagePath": "staticwebassets\\images\\maionese_especial.png"
     },
     {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\molho-Barbecue.png",
+      "PackagePath": "staticwebassets\\images\\molho-Barbecue.png"
+    },
+    {
+      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\molho-especial.png",
+      "PackagePath": "staticwebassets\\images\\molho-especial.png"
+    },
+    {
       "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\queijo.png",
       "PackagePath": "staticwebassets\\images\\queijo.png"
-    },
-    {
-      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\sobremesa1.png",
-      "PackagePath": "staticwebassets\\images\\sobremesa1.png"
-    },
-    {
-      "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\sobremesa2.png",
-      "PackagePath": "staticwebassets\\images\\sobremesa2.png"
     },
     {
       "Id": "C:\\ads_burguer\\totempwa\\wwwroot\\images\\sundae.png",

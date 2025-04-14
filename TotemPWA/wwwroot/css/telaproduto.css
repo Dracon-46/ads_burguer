@@ -105,7 +105,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
 }
 
 .right .produto img {
-    width: 100px;         
+    width: auto;         
     height: 110px;        
     border-radius: 20px; 
     display: block;    
