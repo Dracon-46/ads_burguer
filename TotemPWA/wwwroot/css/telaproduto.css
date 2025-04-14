@@ -1,143 +1,146 @@
-/* Estilos Globais */
-body {
-    margin: 0;
-    background-color: #e3e3e3;
-    font-family: 'Poppins', sans-serif;
-}
+body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; }
 
-:root {
-    --primary-color: #990000;
-    --secondary-color: #426B1F;
-    --tertiary-color: #FF6501;
-    --text-color: #3f3f3f;
-    --bg-color: #FFFFFF;
-}
+:root{ --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --text-color: #3f3f3f; --bg-color:#FFFFFF; }
 
-/* Container */
 .container {
     background-color: var(--bg-color);
-    width: 80vw;
-    height: 100vh; /* Altura do container com base no viewport */
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    box-shadow: 0 4px 8px rgba(60, 60, 60, 0.4);
+    width: 100%;
+    height: 100%; 
+    position: fixed; 
+    left: 50%; /* Coloca no meio horizontalmente */
+    transform: translate(-50%); /* Move o elemento de volta para o centro */
+    box-shadow: 0 4px 8px rgba(60, 60, 60, 0.4); /* Adiciona a sombra */
 }
 
-/* Banner */
 .banner {
     background-image: url('/images/lanche.jpeg');
     width: 100%;
-    height: 20%; /* Feature 1: 20%; Feature 2: 25% - escolhemos 20% */
-    background-size: cover;
+    height: 25%;
+    background-size: cover; /* Ajusta a imagem à largura e altura da div */
     background-position: top center;
     background-repeat: no-repeat;
+  
 }
 
-/* Menu Lateral (Left) */
+/* ----------------------------- MODIFICADO ----------------------------- */
 .left {
-    padding: 10px;
-    background-color: var(--bg-color);
-    width: 13vw;
-    height: 65vh;
+    width: 20%;
+    height: 63vh;
     border-radius: 0px 25px 25px 0px;
-    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.4); /* Adiciona a sombra */
     float: left;
-    position: relative;
-    margin-bottom: 10px;
+    position: absolute;
+    margin-bottom: 2%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
 
-/* Listagem de Produtos (Right) */
+    
+}
+/* ----------------------------- MODIFICADO ----------------------------- */
+
+
+/* listagem de produtos de acordo com a aba selecionada */
 .right {
-    margin-left: 15vw;
     box-sizing: border-box;
-    /* float: right; */
-    width: 65vw;
-    height: 65vh; 
+    float: right;
+    width: 75%;
+    height: 65vh; /* Limita a altura da seção e permite o scroll */
     margin-top: 20px;
-    display: flex;
-    overflow-y: auto;
-    flex-wrap: wrap;
-    gap: 4px;
+    overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
+    flex-wrap: wrap; /* Permite que os itens se quebrem em várias linhas */
+    gap: 4px; /* Espaço entre as colunas */
 }
 
-/* Produtos */
-.right .produto {
+
+
+
+/* produtos */
+.right .produto button{
+   width: 100%;
+   height: 100%;
+   padding: 15px;
+   border-radius: 20px;
+   border: none;
+   cursor: pointer;
+   background-color: transparent;
+
+}
+
+
+.right .produto{
     background-color: var(--bg-color);
     width: 30%;
     display: inline-block;
     border-radius: 20px;
     height: 250px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.258);
-    margin: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.258); 
+    margin-right: 6px;
+    margin-top: 10px;
 }
 
-.right .produto button {
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-}
 
-.right .produto .nome {
+
+.right .produto .nome{
     display: block;
     font-weight: 600;
     color: var(--text-color);
 }
 
-.right .produto .valor {
-    font-size: 12px;
-    color: var(--tertiary-color);
-    font-weight: 600;
+.right .produto .valor{
+  font-size: 12px;
+  color: var(--tertiary-color) ; 
+  font-weight: 600;   
 }
-
-.right .produto .promocao {
+.right .produto .promocao{
     font-size: 9px;
     text-decoration: line-through;
     color: var(--secondary-color);
-}
-
-.right .produto p {
+  }
+.right .produto p{
     font-size: 9px;
-    max-width: 100%;
+    max-width: 100%; 
     color: #8F8F8F;
     height: 50px;
 }
 
 .right .produto img {
-    width: auto;
-    height: 110px;
-    border-radius: 20px;
-    display: block;
-    margin: 0 auto;
+    width: 100px;         
+    height: 110px;        
+    border-radius: 20px; 
+    display: block;    
+    margin: 0 auto;     
+    margin-bottom: 2px; 
+ 
 }
 
-/* Botões do Menu (Selection) */
+
+/* Fazendo os botões :( */
+
 .left .selection {
-    height: 14%;
-    margin: 10px;
+    height: 14% ;
+    margin-top: 8px;
     text-align: center;
 }
 
 .left .selection button {
-    height: 100%;
     width: 75%;
+    height: 100%;
+    padding: 0.75rem 1.5rem;
     text-align: center;
     color: var(--text-color);
     border-radius: 20px;
     border: 1.5px solid #c3c3c3;
     background-color: transparent;
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
+
+
 
 .selection button:hover {
     background-color: var(--primary-color);
-    color: var(--bg-color);
+    color: var(--bg-color); 
     cursor: pointer;
     transition: 0.3s;
 }
@@ -147,31 +150,41 @@ body {
     display: block;
     margin-top: 5px;
     font-weight: 650;
-    color: var(--text-color);
+   color: var(--text-color);
 }
 
-.selection i {
-    font-size: 35px;
+.selection span {
+    text-align: center;
+    display: block;
+    font-weight: 650;
+   color: var(--text-color);
+   font-size: 1vh;
+}
+
+
+.selection i{
+    font-size:3.5vh;
     width: 100%;
     text-align: center;
-    color: var(--text-color);
+    color: var(--text-color); 
 }
 
 .selection i.active {
     color: var(--primary-color);
 }
 .selection i.active:hover {
-    color: var(--bg-color);
+  color: var(--bg-color);
+
 }
 
 .selection span.active {
     color: var(--primary-color);
 }
 .selection span.active:hover {
-    color: var(--bg-color);
-}
+  color: var(--bg-color);
 
-.selection button:hover span,
+}
+.selection  button:hover span,
 .selection button:hover i {
     color: var(--bg-color);
 }
@@ -179,6 +192,42 @@ body {
 a {
     text-decoration: none;
 }
+
+
+
+/* Footer */
+.summary{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background: var(--bg-color);
+    padding: 2vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.cancel-button, .confirm-button {
+    padding: 1.5vh;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2vw;
+}
+
+.cancel-button {
+    background: var(--primary-color);
+    color: white;
+}
+
+.confirm-button {
+    background: var(--tertiary-color);
+    color: white;
+}
+
+
 
 /* Footer / Carrinho */
 .carrinho {
@@ -381,66 +430,70 @@ a {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Filtros (Feature 2) */
+/* Filtro */
 .filtro {
     width: 90%;
     height: 13%;
     overflow-x: auto;
     white-space: nowrap;
+    border: 1px solid #ccc;
     display: flex;
     align-items: center;
+    overflow-y: hidden;
     border: none;
-}
-
-.filtro button {
+  }
+  
+  .filtro button {
     background-color: transparent;
     border: none;
     border-radius: 10px;
     box-shadow: 2px 3px 5px rgba(51, 51, 51, 0.3);
     height: 4.5vh;
     margin: 0 5px;
-    flex-grow: 1;
-    min-width: 175px;
+    flex-grow: 1;  /* faz todos os botões crescerem igualmente */
+    min-width: 175px;  /* largura mínima para garantir que não encolham demais */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Poppins', sans-serif;
+    font-family: poppins;
     cursor: pointer;
     font-weight: 500;
     color: #2c2c2c;
     padding: 5px;
-}
+  }
+
+ 
 
 .filtro button.ativo {
     background-color: #4caf50;
     color: white;
-}
-
+  }
+  
+  /* Chrome, Edge, Safari */
 .filtro::-webkit-scrollbar {
-    height: 8px;
+  height: 8px;             /* altura da barra horizontal */
 }
 
 .filtro::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent; /* fundo da trilha */
 }
 
 .filtro::-webkit-scrollbar-thumb {
-    background-color: #aaa;
-    border-radius: 10px;
+  background-color: #aaa;  /* cor da barrinha */
+  border-radius: 10px;
 }
 
 .filtro::-webkit-scrollbar-thumb:hover {
-    background-color: #888;
+  background-color: #888;  /* cor no hover */
 }
 
 .filtro button.active {
-    color: #FFFFFF;
+    color:#FFFFFF;
     background-color: var(--primary-color);
     transition: 0.3s;
 }
-
-.filtro button.active:hover {
-    color: #FFFFFF;
+.filtro button.active:hover{
+    color:#FFFFFF;
     background-color: var(--primary-color);
     transition: 0.3s;
 }

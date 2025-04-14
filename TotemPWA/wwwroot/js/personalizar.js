@@ -121,7 +121,7 @@ class PersonalizarPedido {
             { nome: "Queijo", preco: 3.00, imagem: "/images/queijo.png" },
             { nome: "Bacon", preco: 5.00, imagem: "/images/bacon.png" },
             { nome: "Cebola", preco: 2.00, imagem: "/images/cebola.png" },
-            { nome: "Molho Especial", preco: 4.00, imagem: "/images/molho.png" }
+            { nome: "Molho Especial", preco: 4.00, imagem: "/images/maionese_especial.png" }
         ];
     }
 
