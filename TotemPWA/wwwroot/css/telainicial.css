@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    display: flex;
+    align-items: center;
     background-color: #e3e3e3;
 }
 :root{
@@ -12,14 +14,11 @@ body {
 .container {
     background-image: url('/images/hamburguer.png');
     background-repeat: no-repeat;
-    background-position: 60px 450px; /* Ajusta a posição da imagem */
-    background-size: 280px;
+    background-position: 10vw 40vh; /* Ajusta a posição da imagem */
+    background-size: 30%;
     background-color: var(--bg-color);
-    width: 55%;
-    height: 1200px; /* Ajusta a altura máxima do container para 80% da altura da tela */
-    position: relative; /* Tornar o elemento posicionado em relação ao c   top: 100%; /* Coloca no meio verticalmente */
-    left: 50%; /* Coloca no meio horizontalmente */
-    transform: translate(-50%); /* Move o elemento de volta para o centro */
+    width: 100vw;
+    height: 100vh; /* Ajusta a altura máxima do container para 80% da altura da tela */
 }
 
 .banner { width: 100%; background-size: cover; background-position: top center; background-repeat: no-repeat;}
@@ -69,4 +68,42 @@ body {
 }
 .btn-inicial:hover {
     background-color: #e55c00; 
+}
+
+
+/* Responsividade */
+@media (max-width: 1020px) {
+    .container {
+        width: 100%;
+        min-height: 100vh;
+    }
+    .hamburguer {
+        top: 30px;
+        background-size: 60%;
+    }
+    .batata {
+        top: -150px;
+        height: 250px;
+    }
+    .btn-inicial {
+        margin-top: 15%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        min-height: 100vh;
+    }
+    .banner div:nth-child(1) {
+        height: 150px;
+        background-size: 60%;
+    }
+    .hamburguer {
+        top: 90px;
+        background-size: 60%;
+    }
+    .btn-inicial {
+        margin-top: 10%;
+    }
 }
