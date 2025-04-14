@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>nn0rmsg9bx</Fingerprint>
-      <Integrity>7b0eFkKyAxTEnqlZuhsOx1qVL7mlStcxICcMppoT0x0=</Integrity>
+      <Fingerprint>45xkvx5zac</Fingerprint>
+      <Integrity>yJcQTS2qWeES7av68CxpcuXZjkJpVyiy8CwalySwkXA=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\telainicial.css'))</OriginalItemSpec>
@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>fqenu4uc5a</Fingerprint>
-      <Integrity>V/iXRYoTE9lIrs0DHtUHDbJtHb6IV8Pce+4ufb01YrE=</Integrity>
+      <Fingerprint>dz17c8kfx8</Fingerprint>
+      <Integrity>N07OXLLHyIG9EXLxAsKp+Nyem5MK1HliQTtS/b3QIPY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\telaproduto.css'))</OriginalItemSpec>
