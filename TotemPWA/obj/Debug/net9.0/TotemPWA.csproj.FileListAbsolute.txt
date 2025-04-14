@@ -100,10 +100,7 @@ C:\ads_burguer\totempwa\obj\Debug\net9.0\TotemPWA.genruntimeconfig.cache
 C:\ads_burguer\totempwa\obj\Debug\net9.0\ref\TotemPWA.dll
 C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\ycnre2ctdn-lto6yuraxa.gz
 C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\b5ddmu2fr3-9jolbkz51m.gz
-C:\ads_burguer\totemPWA\obj\Debug\net9.0\compressed\aciu92rnct-jq94ysrfov.gz
-C:\ads_burguer\totemPWA\obj\Debug\net9.0\compressed\0721lxsq7d-a117f8k565.gz
 C:\ads_burguer\totemPWA\obj\Debug\net9.0\compressed\s59c9wfjid-sxplse4fze.gz
-C:\ads_burguer\totempwa\obj\Debug\net9.0\compressed\lzwbrsfv8f-dn5qr8pz07.gz
 C:\Conteudo\ads_burguer\totempwa\bin\Debug\net9.0\appsettings.Development.json
 C:\Conteudo\ads_burguer\totempwa\bin\Debug\net9.0\appsettings.json
 C:\Conteudo\ads_burguer\totempwa\bin\Debug\net9.0\TotemPWA.staticwebassets.runtime.json
@@ -210,3 +207,6 @@ C:\Conteudo\ads_burguer\totempwa\obj\Debug\net9.0\TotemPWA.pdb
 C:\Conteudo\ads_burguer\totempwa\obj\Debug\net9.0\TotemPWA.genruntimeconfig.cache
 C:\Conteudo\ads_burguer\totempwa\obj\Debug\net9.0\ref\TotemPWA.dll
 C:\Conteudo\ads_burguer\totempwa\obj\Debug\net9.0\compressed\0721lxsq7d-16wsk64lky.gz
+C:\ads_burguer\Totempwa\obj\Debug\net9.0\compressed\lzwbrsfv8f-fqenu4uc5a.gz
+C:\ads_burguer\Totempwa\obj\Debug\net9.0\compressed\0721lxsq7d-16wsk64lky.gz
+C:\ads_burguer\Totempwa\obj\Debug\net9.0\compressed\aciu92rnct-qbw6tp756p.gz
