@@ -305,6 +305,30 @@
     opacity: 0.5;
 }
 
+.dialog-cancel{
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.dialog-confirm{
+    background-color: var(--tertiary-color);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 /* Responsividade Aprimorada */
 @media (max-width: 768px) {
     .cart-modal {
