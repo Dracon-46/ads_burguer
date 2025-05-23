@@ -1,39 +1,62 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="stylesheet" href="/css/selecionarpagamento.css">
-        <title>ADS Burguer</title>
-    </head>
-
-    <body>
-        <div class="container">
-          <div class="header-container">
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADS Burguer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/selecionarpagamento.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
             <span class="titulo">Formas de Pagamento</span>
             <span class="subtitulo">Como deseja pagar?</span>
-          </div>
-        <div class="selecao-pagamento">
-            <button class="btn-pagamento" id="cartao">
-                <i class="fas fa-credit-card"></i>
-                <p class="tp-pagamento">Cartão</p>
-                <p>Crédito, débito ou refeição</p>
-            </button>
-            <button class="btn-pagamento" id="cartaoDigital">
-            </button>
-             <button class="btn-pagamento" id="cartaoDigital">
-                <span class="tp-pagamento">Pix</span>
-                <i class="fas fa-credit-card"></i>
-            </button>
-             <button class="btn-pagamento" id="cartaoDigital">
-                <span id="tp-pagamento">Dinheiro</span>
-                <p>Termine o pagamento no caixa</p>
-                <i class="fas fa-credit-card"></i>
-            </button>
         </div>
+<div class="selecao-pagamento">
+  <button class="btn-pagamento" id="cartao">
+    <div>
+      <p class="tp-pagamento">Cartão</p>
+      <p class="subinfo">Crédito, débito ou refeição</p>
+    </div>
+    <i class="fas fa-credit-card"></i>
+  </button>
 
+  <button class="btn-pagamento" id="cartaoDigital">
+    <div>
+      <p class="tp-pagamento">Cartão Digital</p>
+      <p class="subinfo">Apple Pay e Google Pay</p>
+    </div>
+    <i class="fas fa-wallet"></i>
+  </button>
+
+  <button class="btn-pagamento selected" id="pix">
+    <div>
+      <p class="tp-pagamento">Pix</p>
+    </div>
+    <i class="fas fa-qrcode"></i>
+  </button>
+
+  <button class="btn-pagamento" id="dinheiro">
+    <div>
+      <p class="tp-pagamento">Dinheiro</p>
+      <p class="subinfo">Termine o pagamento no caixa</p>
+    </div>
+    <i class="fas fa-dollar-sign"></i>
+  </button>
+</div>
+
+    <!-- Carrinho fixo -->
+    <div class="resumo-pedido">
+        <div class="totais">
+            <p>Total de itens: 0</p>
+            <p>Total do pedido: R$ 0</p>
         </div>
-    </body>
+        <div class="botoes">
+            <button class="cancelar">Cancelar pedido</button>
+            <button class="adicionar">Adicionar no carrinho</button>
+        </div>
+    </div>
+</body>
 </html>

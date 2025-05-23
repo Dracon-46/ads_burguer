@@ -1,66 +1,151 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: poppins;
-}
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-:root{
-    --cor-primaria: #880202;
-    --cor-secundaria: #f2f2f2;
-    --cor-terciaria: #ffffff;
-    --cor-quaternaria: #000000;
-    --cor-quinta: #f7f7f7;
-}
-.container{
-    height: 100vh;
-}
+    :root {
+      --cor-primaria: #880202;
+      --cor-secundaria: #f2f2f2;
+      --cor-terciaria: #ffffff;
+      --cor-quaternaria: #000000;
+      --cor-quinta: #f7f7f7;
+    }
 
-.header-container{
-    padding: 20px;
-    padding-left: 10%;
-}
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-.titulo{
-    display: block;
-    font-weight: 700;
-    font-size: 3em;
-    margin-top: 10%;
+    .container {
+      flex-grow: 1;
+      padding-bottom: 100px; /* espaço para o carrinho fixo */
+    }
 
-}
+    .header-container {
+      padding: 20px;
+      padding-left: 10%;
+    }
 
-.subtitulo{
-    display: block;
-    font-weight: 400;
-    font-size: 1.9em;
-}
-.selecao-pagamento {
-  display: flex;
-  flex-direction: column;   /* organiza os elementos em coluna */
-  align-items: center;      /* centraliza horizontalmente */
-  gap: 1rem;                /* espaço entre os botões (opcional) */
-  padding: 1rem;            /* opcional: espaço interno */
-  height: 60%;
-}
+    .titulo {
+      display: block;
+      font-weight: 700;
+      font-size: 3em;
+      margin-top: 10%;
+    }
 
+    .subtitulo {
+      display: block;
+      font-weight: 400;
+      font-size: 1.9em;
+    }
 
+    .selecao-pagamento {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
 
-.selecao-pagamento button {
-    background-color: var(--cor-quinta);
-    color: rgb(23, 23, 23);
-    border: none;
-    box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.2);
-    width: 50%;
-    height: 50%;
-   border-radius: 20px;
-}
+    .btn-pagamento {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 90%;
+      max-width: 400px;
+      background-color: var(--cor-terciaria);
+      padding: 20px 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 2px solid transparent;
+      transition: border 0.3s ease;
+      cursor: pointer;
+    }
 
-.selecao-pagamento button:hover {
-    border: 4px solid var(--cor-primaria);
-    cursor: pointer;
-}
+    .btn-pagamento.selected {
+      border: 3px solid var(--cor-primaria); /* borda vermelha */
+    }
 
-.tp-pagamento{
-    font-weight: 700;
-    background-color: var(--cor-primaria);
-}
+    .btn-pagamento i {
+      font-size: 28px;
+      color: var(--cor-quaternaria);
+      margin-left: 10px;
+    }
+
+    .btn-pagamento p {
+      margin: 2px 0;
+      text-align: left;
+    }
+
+    .tp-pagamento {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--cor-quaternaria);
+    }
+
+    .subinfo {
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* Carrinho fixo */
+    .resumo-pedido {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f4f4f4;
+      border-top: 1px solid #ccc;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .totais p {
+      margin: 4px 0;
+      font-size: 16px;
+    }
+
+    .botoes {
+      display: flex;
+      gap: 10px;
+    }
+
+    button.cancelar {
+      background-color: #8b0000;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button.adicionar {
+      background-color: #c4db33;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .titulo {
+        font-size: 2em;
+      }
+
+      .subtitulo {
+        font-size: 1.3em;
+      }
+
+      .selecao-pagamento button {
+        width: 80%;
+      }
+    }
