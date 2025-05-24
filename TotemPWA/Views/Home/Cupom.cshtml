@@ -50,8 +50,8 @@
         <p>Total do pedido: <strong>R$ 0</strong></p>
     </div>
     <div class="botoes">
-        <button class="cancelar">Cancelar pedido</button>
-        <button class="adicionar">Adicionar no carrinho</button>
+        <a href="@Url.Action("TelaProduto", "Home")" ><button class="cancelar">Voltar</button></a></button>
+        <a href="@Url.Action("SelecionarPagamento", "Home")" ><button class="adicionar">Confirmar Pedido</button></a>
     </div>
     </div>
 
@@ -90,10 +90,13 @@
 
         if (valor === "") {
             abrirModal("modalVazio");
+            campo.style.borderColor = "";
         } else if (cuponsValidos.includes(valor)) {
             abrirModal("modalValido");
+             campo.style.borderColor = "green"; // borda verde para válido
         } else {
             abrirModal("modalInvalido");
+            campo.style.borderColor = "red";
         }
         }
 
