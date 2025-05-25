@@ -22,10 +22,14 @@ public class HomeController : Controller
     {
         return View();
     }
-
-    [HttpGet("Menu/{categoryId:int?}/{subcategoryId:int?}")]
+     public IActionResult TelaProduto()
+    {
+        return View();
+    }
+    
+    [HttpGet("teste/{categoryId:int?}/{subcategoryId:int?}")]
     // [HttpGet]
-    public async Task<IActionResult> Menu(int? categoryId, int? subcategoryId)
+    public async Task<IActionResult> teste(int? categoryId, int? subcategoryId)
     {
         var rootCategoriesRaw = await _context.Categories
             .Where(c => c.ParentCategoryId == null)
@@ -79,14 +83,16 @@ public class HomeController : Controller
         ViewBag.Products = products;
 
         // return View();
-        return Ok(new {
-            rootCategories,
-            subcategories,
-        //     products
-        });
-    }
-    
+        // return Ok(new
+        // {
+        //     rootCategories,
+        //     subcategories,
+        //     //     products
+        // });
 
+        return View();
+
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
