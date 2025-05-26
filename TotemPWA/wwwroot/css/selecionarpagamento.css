@@ -63,6 +63,7 @@
       border: 2px solid transparent;
       transition: border 0.3s ease;
       cursor: pointer;
+      height: 20%;
     }
 
     .btn-pagamento:hover {
