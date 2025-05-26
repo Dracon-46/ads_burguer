@@ -1,6 +1,6 @@
 body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; }
 
-:root{ --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --text-color: #3f3f3f; --bg-color:#FFFFFF; }
+:root{ --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --forty-color: #C1D343; --text-color: #3f3f3f; --bg-color:#FFFFFF; }
 
 .container {
     background-color: var(--bg-color);
@@ -287,7 +287,7 @@ a {
 }
 
 .btn-pro {
-    background-color: var(--tertiary-color);
+    background-color: var(--forty-color);
     color: white;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
@@ -297,13 +297,29 @@ a {
     border-radius: 30px;
     cursor: pointer;
     transition: 0.3s;
-    width: 150px;
+    margin-left: 10px;
+    width: 60px;
     display: block;
 }
 
 .btn-pro:hover {
-    background-color: #f58941;
+    background-color: #d0dd78;
 }
+.btn-cancel{
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 124px;
+    display: block;
+}   
 
 /* Modal de Personalização */
 .personalizacao-modal {
