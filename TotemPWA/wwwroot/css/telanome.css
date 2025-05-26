@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+:root {
+    --primary-color: #990000;
+    --btn-sim-color: #C1D443;
+}
+.container{
+    text-align: center;
+}
+h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 250px;
+    margin-bottom: 100px;
+    color: black;
+}
+input {
+    box-shadow: 0 0 15px rgba(170, 160, 160, 0.8);
+    border-radius: 20px; 
+    height: 60px; 
+    width: 600px;
+    font-size: 30px;
+    text-align: center;
+    padding: 0 15px; 
+    border: 1px solid #ffffff;
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+}
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+input::placeholder {
+    font-weight: bold;
+    color: var(--primary-color)
+}
+.btn-fim{
+    background-color: var(--btn-sim-color);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 250px;
+    margin-top: 90px;
+    text-decoration: none; 
+}
+.simple-keyboard {
+    display: none;
+    margin: 20px auto;
+    max-width: 700px;
+    background-color: #222222;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow-lg);
+}
+
+.hg-button {
+    background-color: #333333;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.3s ease;
+}
+
+.hg-button:hover {
+    background-color: #444444;
+}
+
+.hg-button:active {
+    background-color: #555555;
+}
+
+.hg-button.hg-functionBtn {
+    background-color: var(--primary-color);
+}
+
+.hg-button.hg-functionBtn:hover {
+    background-color: #b30000;
+}
+
