@@ -1,0 +1,409 @@
+UserStory 01 - RF01
+Como: Cliente
+Eu quero: Uma tela inicial 
+Para: Iniciar um pedido, que me indique que não há pedidos feitos.
+Critérios de aceitação:
+O botão “Iniciar pedido”, deve ser visível e acessível
+Apresentar logo da empresa
+Ícones e textos acessíveis para todas as pessoas
+
+UserStory 02 - RF02
+Como: Cliente
+Eu quero: Uma tela de escolha de tipo de pedido
+Para: Eu quero uma tela em que eu possa escolher se irei consumir meus produtos escolhidos no local ou levar eles para casa.
+Critérios de aceitação:
+Botões visíveis
+Acessíveis para todos os tipo de usuários
+
+UserStory 03 - RF03
+Como: Cliente
+Eu quero: uma tela de login e identificação
+Para: Que eu possa logar com meu perfil do clube usando meu cpf e caso não tenha clube, me identificar inserindo um nome para a chamada do pedido.
+Critérios de aceitação:
+Validação de login (Anônimo/Clube)
+Caso anônimo, apresentar campo para inserção de nome
+Botões visíveis
+Acessíveis para todos os tipos de usuários
+
+
+UserStory 04 - RF04
+Como: Cliente
+Eu quero: uma tela para Aplicação de cupons ns
+Para: quero poder colocar cupons para aplicar descontos em compras que eu fizer no totem.
+Critérios de aceitação:
+Botão de inserção de cupom visível e acessível
+Validação de cupom inexistente 
+Subtrair o valor final com o desconto do cupom
+
+UserStory 05 - RF05
+Como: Cliente
+Eu quero: uma tela para visualizar os produtos 
+Para: que eu possa navegar entre os produtos ver suas descrições, imagens ilustrativas e preços
+Critérios de aceitação:
+Apresentar menu de categorias de produtos
+Apresentar um segundo menu de subcategorias 
+Aplicação de overview (Responsividade)
+Área de rolagem para produtos
+Ícones e imagens com tamanha agradável e visível
+Apresentar descrição do produto e título
+
+
+UserStory 06 - RF06
+Como: Cliente
+Eu quero: Personalizar os ingredientes do meu pedido 
+Para: Deixar o pedido no meu gosto 
+
+Critérios de aceitação:
+Adicionar, subtrair e remover ingredientes
+A interface deve exibir os ingredientes escolhidos de forma clara.
+Deve haver um limite máximo de adições para evitar exageros.
+
+User Story 07 - RF07
+ Como: Cliente
+ Eu quero: Adicionar itens ao carrinho
+ Para: Poder selecionar os produtos desejados antes de finalizar a compra.
+Critérios de aceitação:
+Deve ser possível adicionar produtos ao carrinho com um botão específico.
+O carrinho deve exibir a quantidade e descrição dos produtos adicionados.
+O sistema deve atualizar o valor total conforme novos itens forem adicionados.
+
+
+
+User Story 08 - RF08
+ Como: Cliente
+ Eu quero: Revisar meu pedido
+ Para: Garantir que todos os itens estão corretos antes de finalizar a compra.
+Critérios de aceitação:
+Deve haver uma tela ou modal para exibir um resumo do pedido.
+O resumo deve conter nome, quantidade e preço dos itens.
+Deve existir a opção de voltar e editar os itens antes da finalização.
+User Story 09 - RF09
+ Como: Cliente
+ Eu quero: Remover itens do carrinho
+ Para: Corrigir erros na seleção de produtos.
+Critérios de aceitação:
+Deve ser possível remover itens individualmente do carrinho.
+O valor total deve ser atualizado após a remoção.
+Deve haver um botão ou ícone claro para remover itens.
+
+User Story 10 - RF10
+ Como: Cliente
+ Eu quero: Cancelar o carrinho
+ Para: Desistir da compra antes da finalização.
+Critérios de aceitação
+Deve haver um botão para cancelar o pedido inteiro.
+O sistema deve pedir confirmação antes de cancelar.
+Após o cancelamento, o carrinho deve ser esvaziado.
+
+User Story 11 - RF11
+ Como: Cliente
+ Eu quero: Efetivar meu pedido
+ Para: Que a cozinha receba minha solicitação.
+Critérios de aceitação:
+O sistema deve confirmar a efetivação antes de enviar o pedido.
+Após a efetivação, o cliente deve receber um número de pedido.
+O pedido deve ser enviado à cozinha imediatamente.
+
+User Story 12 - RF12
+ Como: Cliente
+ Eu quero: Emitir uma nota fiscal
+ Para: Ter um comprovante da compra.
+Critérios de aceitação:
+Deve haver opção para inserir CPF na nota fiscal.
+A nota deve ser gerada automaticamente após o pagamento.
+O cliente pode optar por não informar CPF.
+
+User Story 13 - RF13
+ Como: Cliente
+ Eu quero: Ter múltiplas opções de pagamento
+ Para: Escolher a forma mais conveniente.
+
+
+Critérios de aceitação:
+O sistema deve aceitar Dinheiro, Pix, Carteira Digital e Cartão.
+O cliente deve escolher a forma de pagamento antes de finalizar.
+Pagamentos digitais devem ser processados automaticamente.
+
+User Story 14 - RF14
+ Como: Cliente
+ Eu quero: Identificar meu pedido
+ Para: Saber quando ele estiver pronto para retirada.
+Critérios de aceitação:
+O sistema deve exibir um número ou nome para cada pedido.
+O número do pedido deve ser mostrado na tela de confirmação.
+O cliente deve receber uma notificação quando estiver pronto
+
+User Story 15 - RF15
+ Como: Cliente com daltonismo
+ Eu quero: Ativar um modo daltônico
+ Para: Facilitar a visualização do site.
+Critérios de aceitação:
+Deve haver uma opção para ativar o modo daltônico.
+As cores e contrastes devem ser ajustados automaticamente.
+O site deve manter a acessibilidade em todas as telas.
+
+User Story 16 - RF16
+ Como: Cliente
+ Eu quero: Navegar por categorias de produtos
+ Para: Encontrar facilmente os itens que desejo comprar.
+Critérios de aceitação:
+O sistema deve permitir a navegação entre categorias como lanches, combos e sobremesas.
+Cada categoria deve conter apenas os itens correspondentes.
+O cliente pode trocar de categoria sem perder os itens do carrinho.
+
+User Story 017 - RF017
+Como: Cliente
+Eu quero: filtros no menu que permita buscar produtos por categoria 
+Para: que eu possa buscar o item pelo menu de maneira mais intuitiva
+Critérios de aceitação:
+O menu deve exibir categorias e subcategorias de produtos disponíveis.
+O cliente deve conseguir filtrar produtos por categoria ao navegar no menu.
+O sistema deve exibir os produtos filtrados corretamente sem necessidade de recarregar a página.
+
+
+User Story 018 - RF018
+Como: Cliente
+Eu quero: que o progresso do processamento do pedido esteja visível em tempo real
+Para: que eu possa estar ciente sobre cada etapa do pedido
+Critérios de aceitação:
+O progresso do pedido deve ser exibido de forma clara e intuitiva na interface do usuário.
+O sistema deve garantir que as atualizações sejam feitas com base no status real do pedido.
+
+
+User Story 019 - RF019
+Como: Cliente
+Eu quero: notificação da entrega do pedido  
+Para: que eu esteja ciente quando a entrega do pedido for realizada
+
+Critérios de aceitação:
+O cliente deve receber uma notificação quando a entrega do pedido for realizada por via telão
+A notificação no telão deve ser clara e visível para os clientes.
+O sistema deve garantir que a notificação seja exibida imediatamente após a confirmação da entrega.
+A notificação deve conter informações como nome do cliente
+
+User Story 020 - RF020
+Como: Funcionário
+Eu quero: cadastrar categorias e subcategorias dos produtos
+Para: que eu possa organizar os produtos
+Critérios de aceitação
+O funcionário deve conseguir cadastrar novas categorias e subcategorias através do painel administrativo. 
+O sistema deve validar a criação de categorias para evitar duplicatas.
+As categorias e subcategorias cadastradas devem ser refletidas imediatamente no menu de produtos. 
+O funcionário deve ter permissão adequada para gerenciar categorias e subcategorias.
+
+UserStory 021 - RF21
+Como: Administrador
+Eu quero: Uma tela que define o limite de ingredientes personalizados
+Para: Definir uma quantidade máxima de itens personalizados para serem adicionados no pedido
+Critérios de Aceitação:
+O sistema deve permitir que o administrador configure um limite máximo de ingredientes personalizados por pedido.
+A tela deve exibir a quantidade atual permitida e possibilitar alterações conforme necessário. 
+O limite deve ser aplicado automaticamente ao realizar um pedido, impedindo a seleção de ingredientes além do permitido.
+O sistema deve alertar o usuário caso tente adicionar ingredientes acima do limite definido.
+
+UserStory 022 - RF22
+Como: Administrador
+Eu quero: Uma tela de gerenciamento do cardápio (Adicionar, Editar e Excluir).
+Para: melhor organização e cadastro de novos produtos.
+Critérios de Aceitação:
+O sistema deve permitir que o administrador adicione novos produtos.
+Deve ser possível editar produtos existentes.
+O administrador deve conseguir excluir produtos do cardápio.
+As alterações devem ser imediatamente refletidas no cardápio visível para os clientes.
+
+UserStory 023 - RF23
+Como: Administrador
+Eu quero: Uma tela com relatórios de vendas e comportamentos dos clientes.
+Para: Análise das vendas e feedback em relação ao comportamento dos clientes.
+Critérios de Aceitação:
+O sistema deve exibir relatórios detalhados sobre vendas diárias, semanais e mensais.
+Deve ser possível visualizar padrões de compra dos clientes, incluindo itens mais pedidos e horários de pico.
+A tela deve permitir filtrar dados por período, categoria de produto e tipo de cliente.
+Os relatórios devem estar disponíveis para exportação em formatos como PDF.
+
+UserStory 024 - RF24
+Como: Cliente
+Eu quero: Uma tela que realiza o acúmulo de pontos a partir do login (CPF).
+Para: que a partir dos pontos acumulados o cliente possa adquirir descontos.
+Critérios de Aceitação:
+O sistema deve permitir que o cliente faça login usando o CPF para acumular pontos.
+A tela deve exibir o saldo de pontos atual.
+Os pontos devem ser acumulados automaticamente com base no valor gasto nas compras.
+
+
+
+REQUISITOS NÃO FUNCIONAIS
+
+UserStory 01 - RNF01
+Como:  Usuário do sistema (todos)
+Eu quero: que os menus sejam exibidos em menos de 4 segundos.
+Para: garantir uma rápida navegação.
+Critérios de Aceitação:
+Os menus devem ser exibidos em menos de 4 segundos após a solicitação.
+Caso o tempo ultrapasse 4 segundos, deve ser exibida uma mensagem de carregamento.
+O tempo de resposta deve ser testado regularmente.
+
+UserStory 02 - RNF02
+Como:  Usuário do sistema (todos)
+Eu quero: que as interfaces sejam intuitivas e de fácil compreensão.
+Para: garantir acessibilidade e facilidade na realização do pedido.
+Critérios de Aceitação:
+As interfaces devem seguir princípios de usabilidade.
+Elementos e botões devem ter rótulos claros.
+
+UserStory 03 - RNF03
+Como: Cliente
+Eu quero: segurança na hora do pagamento.
+Para: garantir a proteção dos dados dos clientes contra fraudes, visando a confiabilidade.
+Critérios de Aceitação:
+O sistema deve utilizar métodos seguros de pagamento, como criptografia de dados.
+Informações sensíveis, como cartão de crédito, não devem ser armazenadas sem autorização.
+
+UserStory 04 - RNF04
+Como:  Usuário do sistema (todos)
+Eu quero: que o sistema garanta a privacidade e proteção dos meus dados
+Para: que minhas informações pessoais estejam seguras e em conformidade com a LGPD.
+Critérios de Aceitação:
+Os dados do usuário devem ser armazenados e processados de forma segura, conforme a LGPD.
+O sistema deve permitir que o usuário acesse, edite e exclua seus dados.
+Deve haver um termo de consentimento antes da coleta de dados.
+
+UserStory 05 - RNF05
+Como:  Usuário do sistema (todos)
+Eu quero: que o sistema realize atualizações sem a interrupção dos serviços.
+Para: que eu possa utilizá-lo sem quedas ou perda de desempenho.
+Critérios de Aceitação:
+O sistema deve permitir atualizações sem tempo de inatividade perceptível.
+Atualizações devem ser testadas para garantir estabilidade.
+
+
+
+UserStory 06 - RNF06
+Como:  Usuário do sistema (todos)
+Eu quero: que o sistema funcione sem travamentos e congelamentos.
+Para: que minha experiência seja fluida e sem interrupções.
+Critérios de Aceitação:
+O sistema deve utilizar otimizações de desempenho para evitar travamentos.
+
+UserStory 07 - RNF07
+Como:  Usuário do sistema (todos)
+Eu quero: que o sistema sejam responsivos 
+Para: que possa executar em diversos tamanhos de totens, e ser acessado de forma prática e eficiente.
+Critérios de Aceitação:
+O sistema deve ser responsivo, adaptando-se a diferentes resoluções de tela.
+Os elementos da interface devem ajustar-se automaticamente em totens e outros dispositivos.
+Deve haver testes para garantir compatibilidade com diferentes navegadores e sistemas operacionais.
+UserStory 08 - RNF08
+Como:  Usuário do sistema (todos)
+Eu quero: que o sistema suporte um aumento no número de usuários e dados
+Para: garantir que ele continue funcionando sem perda de desempenho.
+
+
+
+Critérios de Aceitação:
+O sistema deve suportar um aumento no número de usuários e dados sem perda de desempenho.
+
+
+UserStory 09 - RNF09
+Como:  Usuário do sistema (todos).
+Eu quero: que o sistema esteja sempre acessível.
+Para: que possa ser utilizá-lo a qualquer momento, sem interrupções.
+
+Critérios de Aceitação:
+Em caso de manutenção, deve haver um modo degradado ou aviso prévio.
+Deve existir infraestrutura redundante para evitar quedas inesperadas.
+
+
+UserStory 010 - RNF010
+Como: Usuário do sistema (todos).
+Eu quero: que o sistema tenha medidas contra ataques cibernéticos.
+Para: garantir a integridade e segurança dos dados do usuário.
+Critérios de Aceitação:
+O sistema deve possuir proteção contra SQL Injection, XSS e outras vulnerabilidades.
+Todas as entradas do usuário devem ser validadas.
+Deve haver mecanismos de monitoramento para detectar e bloquear atividades suspeitas.
+
+
+
+UserStory 011 - RNF011
+Como: Usuário do sistema (todos).
+Eu quero: que meus dados sejam frequentemente salvos e sincronizados.
+Para: evitar perdas em caso de falhas ou trocas de dispositivo.
+Critérios de Aceitação:
+O sistema deve realizar backups automáticos.
+Os dados devem ser sincronizados com o servidor em tempo real sempre que possível.
+
+
+UserStory 012 - RNF012
+Como: Usuário do sistema (todos)
+Eu quero: que o sistema tenha sons e animações para me fornecer feedback.
+Para: melhorar minha experiência e tornar as interações mais intuitivas.
+Critérios de Aceitação:
+O usuário deve ter a opção de ativar ou desativar os efeitos sonoros e visuais.
+As animações não devem comprometer a performance do sistema.
+
+User Story 013 - RNF013
+Como: Cliente
+Eu quero: que meus dados sejam protegidos
+Para: garantir que não terei exposição das minhas informações e que elas não sejam utilizadas de maneira maliciosa
+Critérios de Aceitação:
+O sistema deve armazenar os dados do cliente de forma segura, utilizando criptografia.
+O sistema deve seguir as normas de proteção de dados (LGPD, GDPR, etc.).
+
+
+User Story 014 - RNF014
+
+Como: Usuário do sistema (todos)
+Eu quero: que a interface siga boas práticas de usabilidade
+Para: que eu possa navegar de maneira intuitiva e com praticidade
+Critérios de Aceitação:
+A interface deve seguir princípios de UX e boas práticas de design.
+Deve haver um padrão visual consistente em todas as telas.
+
+User Story 015 - RNF015
+Como: Usuário do sistema (todos)
+Eu quero: o suporte para um grande volume de processamento
+Para: garantir uma boa eficiência das transações do sistema
+Critérios de Aceitação:
+As transações devem ser processadas em um tempo aceitável, sem travamentos.
+O tempo de resposta do sistema deve ser otimizado para garantir fluidez.
+
+User Story 016 - RNF016
+Como: Usuário do sistema (todos)
+Eu quero: poder utilizar sem acesso a internet, com sincronização posterior das informações
+Para:  que eu possa realizar as ações sem impedimentos
+Critérios de Aceitação:
+O sistema deve permitir que certas funcionalidades sejam acessadas offline.
+Os dados devem ser armazenados localmente e sincronizados quando a internet estiver disponível.
+A sincronização deve ser automática.
+
+
+User Story 017 - RNF017
+Como: Usuário do sistema (todos)
+Eu quero: um carregamento veloz da interface
+Para:  que eu possa utilizar o sistema de maneira fluída
+Critérios de Aceitação:
+O tempo de carregamento das telas não deve ultrapassar um limite aceitável.
+Deve haver cache para reduzir o tempo de carregamento de recursos frequentes.
+
+User Story 018 - RNF018
+Como: Administrador 
+Eu quero: acessar relatórios com coletas de dados 
+Para:  que eu possa ter um panorama da experiência do usuário
+Critérios de Aceitação:
+O sistema deve gerar relatórios detalhados sobre o uso da plataforma.
+O administrador deve conseguir exportar os relatórios para diferentes formatos (PDF, Excel).
+
+
+User Story 019 - RNF019
+Como: Usuário do sistema (todos)
+Eu quero: que minha sessão expire e retorne para a tela inicial após um minuto
+Para: garantir que outras pessoas possam utilizar o sistema e aumentar a segurança dos dados
+Critérios de Aceitação:
+A sessão deve expirar automaticamente após um minuto de inatividade.
+O sistema deve redirecionar o usuário para a tela inicial após a expiração
+
+
+
+
+

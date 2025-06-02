@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+:root {
+    --primary-color: #990000;
+    --secondary-color: #426B1F;
+    --tertiary-color: #FF6501;
+    --text-color: #3f3f3f;
+    --bg-color: #FFFFFF;
+    --bg-color2: #F1F1F1;
+    --hover-color: #f58941;
+    --btn-sim-color: #C1D443;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 8px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 15px 50px;
+}
+.img {
+  width: 800px;
+  height: 400px;
+  background-image: url('../images/lanche_cpf.png');
+  background-size: cover;   
+  background-position: center; 
+  background-repeat: no-repeat; 
+  margin-bottom: 100px;
+}
+.container{
+    text-align: center;
+}
+.text{
+    margin-bottom: 80px;
+}
+h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+    color: var(--text-color);
+}
+input{
+    width: 350px;       
+    height: 60px;       
+    border: 2px solid #969696;
+    border-radius: 20px; 
+    padding: 0 10px; 
+    font-size: 16px;
+    outline: none;    
+    margin-bottom: 100px;
+}
+.cont{
+    background-color: var(--btn-sim-color);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 160px;
+    text-decoration: none; 
+}
+.voltar{
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 160px;
+    text-decoration: none; 
+}
+.btns {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px; 
+}
+.simple-keyboard {
+  max-width: 600px;
+  margin: 20px auto;
+  display: none; 
+}
+
+
+
+
+
