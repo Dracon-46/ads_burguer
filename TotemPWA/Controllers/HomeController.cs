@@ -27,7 +27,26 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    public IActionResult TelaCPF()
+    {
+        return View();
+    }
+        public IActionResult TelaNome()
+    {
+        return View();
+    }
+     public IActionResult SelecionarPedido()
+    {
+        return View();
+    }
+    public IActionResult SelecionarPagamento()
+    {
+        return View();
+    }
+      public IActionResult Cupom()
+    {
+        return View();
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
