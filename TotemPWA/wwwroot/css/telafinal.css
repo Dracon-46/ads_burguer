@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  
+  :root {
+    --bg-color: #fff;
+  }
+  
+  body {
+    background-color: #1a1a1a;
+  }
+  
+  .container {
+    background-repeat: no-repeat;
+    background-position: 10vw 40vh;
+    background-size: 30%;
+    background-color: var(--bg-color);
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .banner {
+    width: 100%;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
+  
+  /* Faixa 1: fundo vermelho + logo */
+  .banner div:nth-child(1) {
+    background-image: url('/images/logo.png'); /* Substitua com o caminho correto da sua logo */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 600px;
+    height: 250px;
+    background-color: #9B0000;
+  }
+  
+  /* Faixa 2: laranja */
+  .banner div:nth-child(2) {
+    height: 60px;
+    background-color: #FF6501;
+  }
+  
+  /* Faixa 3: verde */
+  .banner div:nth-child(3) {
+    height: 50px;
+    background-color: #C1D443;
+  }
+  
+  .content {
+    height: calc(100vh - 360px); /* altura da tela menos o banner */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .content h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .content p {
+    font-size: 1em;
+    color: #333;
+    line-height: 1.5;
+    font-weight: 800;
+  }
+  
+  @media screen and (max-width: 800px) {
+    .banner div:nth-child(1) {
+      background-size: 80%;
+    }
+  }
+  
