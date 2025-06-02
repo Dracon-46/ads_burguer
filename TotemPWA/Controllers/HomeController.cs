@@ -22,14 +22,54 @@ public class HomeController : Controller
     {
         return View();
     }
-     public IActionResult TelaProduto()
+    //  public IActionResult TelaProduto()
+    // {
+    //     return View();
+    // }
+
+    public IActionResult TelaCPF()
+    {
+        return View();
+    }
+        public IActionResult TelaNome()
+    {
+        return View();
+    }
+     public IActionResult SelecionarPedido()
+    {
+        return View();
+    }
+    public IActionResult SelecionarPagamento()
+    {
+        return View();
+    }
+      public IActionResult Cupom()
+    {
+        return View();
+    }
+         public IActionResult TelaFinal()
     {
         return View();
     }
 
-    [HttpGet("teste/{categoryId:int?}/{subcategoryId:int?}")]
+    public IActionResult PersonalizarCombo()
+    {
+        return View();
+    }
+    public IActionResult TelaPersoCombo()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    [HttpGet("TelaProduto/{categoryId:int?}/{subcategoryId:int?}")]
     // [HttpGet]
-    public async Task<IActionResult> teste(int? categoryId, int? subcategoryId)
+    public async Task<IActionResult> TelaProduto(int? categoryId, int? subcategoryId)
     {
         var rootCategoriesRaw = await _context.Categories
             .Where(c => c.ParentCategoryId == null)
@@ -90,44 +130,5 @@ public class HomeController : Controller
         // });
 
         return View();
-
-    public IActionResult TelaCPF()
-    {
-        return View();
-    }
-        public IActionResult TelaNome()
-    {
-        return View();
-    }
-     public IActionResult SelecionarPedido()
-    {
-        return View();
-    }
-    public IActionResult SelecionarPagamento()
-    {
-        return View();
-    }
-      public IActionResult Cupom()
-    {
-        return View();
-    }
-         public IActionResult TelaFinal()
-    {
-        return View();
-    }
-
-    public IActionResult PersonalizarCombo()
-    {
-        return View();
-    }
-    public IActionResult TelaPersoCombo()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

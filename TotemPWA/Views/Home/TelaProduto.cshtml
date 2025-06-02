@@ -29,473 +29,95 @@
       <!-- Menu Lateral -->
       <div class="left">
         <div class="selection">
-          <button class="link-button" onclick="mostrarEsconder('secaoPromocao'); trocarCor(this);">
-            <div class="icon">
-              <i class="material-icons">local_offer</i>
-            </div>
-            <span id="promocao">Promoções</span>
-          </button>
-        </div>
-        <div class="selection">
-          <button class="link-button" onclick="mostrarEsconder('secaoCombo'); trocarCor(this);">
-            <i class="material-icons">fastfood</i>
-            <span id="combo">Combo</span>
-          </button>
-        </div>
-        <div class="selection">
-          <button class="link-button" onclick="mostrarEsconder('secaoLanches'); trocarCor(this);">
-            <i class="fa-solid fa-burger"></i>
-            <span id="lanches">Lanches</span>
-          </button>
-        </div>
-        <div class="selection">
-          <button class="link-button" onclick="mostrarEsconder('secaoBebidas'); trocarCor(this);">
-            <i class="material-icons">wine_bar</i>
-            <span>Bebidas</span>
-          </button>
-        </div>
-        <div class="selection">
-          <button class="link-button" onclick="mostrarEsconder('secaoSobremesa'); trocarCor(this);">
-            <i class="material-icons">icecream</i>
-            <span>Sobremesas</span>
-          </button>
-        </div>
-        <div class="selection">
-          <button class="link-button" onclick="mostrarEsconder('secaoUnitarios'); trocarCor(this);">
-            <i class="material-icons">soup_kitchen</i>
-            <span>Unitários</span>
-          </button>
+          @foreach (var category in ViewBag.Categories)
+          {
+              string activeClass = category.active ? "active" : "";
+              <button class="link-button @activeClass" onclick="location.href='/teste/@category.id'">
+                  <div class="icon">
+                      <img src="@category.icon" />
+                  </div>
+                  <span>@category.name</span>
+              </button>
+          }
         </div>
       </div>
 
-      <!-- Seção Promoções -->
-      <section id="secaoPromocao">
-        <div class="right">
-          <div class="filtro">
-            <button onclick="filtrarLanches('desconto10', this)">Desconto 10%</button>
-            <button onclick="filtrarLanches('desconto20', this)">Desconto 20%</button>
-            <button onclick="filtrarLanches('promocao-especial', this)">Promoção Especial</button>
-            <button onclick="filtrarLanches('combo-promocional', this)">Combo Promocional</button>
-            <button onclick="filtrarLanches('ofertas-semana', this)">Ofertas da Semana</button>
-          </div>
-          <div class="produto desconto10">
-            <button class="btn-produto" data-nome="DevOps Burger Promo" data-preco="23.00" data-imagem="/images/comida.png">
-              <img src="/images/comida.png" alt="DevOps Burger Promo">
-              <span class="nome">DevOps Burger Promo</span>
-              <span class="valor">R$ 24,90</span>
-              <span class="promocao">R$ 33,00</span>
-              <p class="descricao">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-            </button>
-          </div>
-          <div class="produto desconto10">
-            <button class="btn-produto" data-nome="Combo Promocional" data-preco="35.90" data-imagem="/images/combo1-chickenduplo.png">
-              <img src="/images/combo1-chickenduplo.png" alt="Combo Promocional">
-              <span class="nome">Combo Chicken duplo</span>
-              <span class="valor">R$ 39,90</span>
-              <span class="promocao">R$ 45,90</span>
-              <p class="descricao">Lanche de frango empanado duplo, com batata media e refrigerante ou suco.</p>
-            </button>
-          </div>
-          <div class="produto desconto20">
-            <button class="btn-produto" data-nome="Produto X" data-preco="34.90" data-imagem="/images/sundae.png">
-              <img src="/images/sundae.png" alt="Produto X">
-              <span class="nome">Sundae de chocolate</span>
-              <span class="valor">R$ 10,90</span>
-              <span class="promocao">R$ 13,90</span>
-              <p class="descricao">Sorvete sabor baunilha, com cobertura de chocolate e farofa crocante de amendoim.</p>
-            </button>
-          </div>
-          <div class="produto promocao-especial">
-            <button class="btn-produto" data-nome="Super Stack Burger" data-preco="29.90" data-imagem="/images/lanche10-Stack.png">
-              <img src="/images/lanche10-Stack.png" alt="Super Stack Burger">
-              <span class="nome">Super Stack Burger</span>
-              <span class="valor">R$ 34,90</span>
-              <span class="promocao">R$ 49,90</span>
-              <p class="descricao">Três hambúrgueres, queijo, bacon e molho especial.</p>
-            </button>
-          </div>
-          <div class="produto ofertas-semana">
-            <button class="btn-produto" data-nome="Frango Crispy" data-preco="21.90" data-imagem="/images/lanche11-Crispy.png">
-              <img src="/images/lanche11-Crispy.png" alt="Frango Crispy">
-              <span class="nome">Frango Crispy</span>
-              <span class="valor">R$ 24,90</span>
-              <span class="promocao">R$ 31,90</span>
-              <p class="descricao">Filé de frango empanado, alface, tomate e maionese.</p>
-            </button>
-          </div>
+      <!-- Seção Principal -->
+      <div class="right">
+        <div class="filtro">
+          @foreach (var subcategory in ViewBag.SubCategories)
+          {
+              string activeClass = subcategory.active ? "active" : "";
+              <button class="@activeClass" onclick="location.href='/teste/@ViewBag.Category/@subcategory.id'">
+                  @subcategory.name
+              </button>
+          }
         </div>
-      </section>
 
-      <!-- Seção Combo -->
-      <section id="secaoCombo">
-        <div class="right">
-          <div class="filtro">
-            <button onclick="filtrarLanches('combo-completo', this)">Combo Completo</button>
-            <button onclick="filtrarLanches('hamburguer-batata', this)">Hambúrguer + Batata</button>
-            <button onclick="filtrarLanches('cheese-fritas', this)">Cheese + Fritas</button>
-            <button onclick="filtrarLanches('xburguer-refrigerante', this)">X-Burguer + Refrigerante</button>
-            <button onclick="filtrarLanches('combo-duplo', this)">Combo Duplo</button>
-          </div>
-          <div class="produto combo-completo">
-            <button class="btn-produto" data-nome="Combo Família" data-preco="59.90" data-imagem="/images/combo2.png">
-              <img src="/images/combo2.png" alt="Combo Família">
-              <span class="nome">Combo Família</span>
-              <span class="valor">R$ 59,90</span>
-              <p class="descricao">2 hambúrgueres, 2 batatas grandes e 2 refrigerantes.</p>
-            </button>
-          </div>
-          <div class="produto xburguer-refrigerante">
-            <button class="btn-produto" data-nome="Combo Executivo" data-preco="29.90" data-imagem="/images/combo8-Executivo.png">
-              <img src="/images/combo8-Executivo.png" alt="Combo Executivo">
-              <span class="nome">Combo Executivo</span>
-              <span class="valor">R$ 29,90</span>
-              <p class="descricao">Hambúrguer, batata pequena e refrigerante.</p>
-            </button>
-          </div>
-          <div class="produto combo-duplo">
-            <button class="btn-produto" data-nome="Combo Duplo" data-preco="45.90" data-imagem="/images/combo6-Duplo.png">
-              <img src="/images/combo6-Duplo.png"alt="Combo Duplo">
-              <span class="nome">Combo Duplo</span>
-              <span class="valor">R$ 45,90</span>
-              <p class="descricao">2 hambúrgueres, batata média e 2 refrigerantes.</p>
-            </button>
-          </div>
-          <div class="produto hamburguer-batata">
-            <button class="btn-produto" data-nome="Combo Clássico" data-preco="32.90" data-imagem="/images/combo7-Classico.png">
-              <img src="/images/combo7-Classico.png" alt="Combo Clássico">
-              <span class="nome">Combo Clássico</span>
-              <span class="valor">R$ 32,90</span>
-              <p class="descricao">Hambúrguer artesanal com batata frita crocante.</p>
-            </button>
-          </div>
+        <div class="produto-lista">
+          @foreach (var product in ViewBag.Products)
+          {
+              <div class="produto">
+                  <button class="btn-produto" data-nome="@product.name" data-preco="@product.price" data-imagem="https://fakeimg.pl/60x60/?retina=1&text=%F0%9F%8D%95">
+                      <img src="https://fakeimg.pl/60x60/?retina=1&text=%F0%9F%8D%95" alt="@product.name">
+                      <span class="nome">@product.name</span>
+                      <span class="valor">@product.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
+                      <p class="descricao">Descrição do produto</p>
+                  </button>
+              </div>
+          }
         </div>
-      </section>
-
-      <!-- Seção Lanches -->
-      <section id="secaoLanches">
-        <div class="right">
-          <div class="filtro">
-            <button onclick="filtrarLanches('frango', this)">Frango</button>
-            <button onclick="filtrarLanches('carne', this)">Carne</button>
-            <button onclick="filtrarLanches('vegetariano', this)">Vegetariano</button>
-            <button onclick="filtrarLanches('bacon', this)">Bacon</button>
-            <button onclick="filtrarLanches('vegano', this)">Vegano</button>
-            <button onclick="filtrarLanches('light', this)">Light</button>
-            <button onclick="filtrarLanches('fit', this)">Fit</button>
-            <button onclick="filtrarLanches('lowcarb', this)">Low Carb</button>
-            <button onclick="filtrarLanches('integral', this)">Integral</button>
-            <button onclick="filtrarLanches('semgluten', this)">Sem glúten</button>
-            <button onclick="filtrarLanches('semlactose', this)">Sem lactose</button>
-          </div>
-          <div class="produto carne">
-             <button class="btn-produto" data-nome="Byte Burguer" data-preco="24.90" data-imagem="/images/lanche12-Byte.png">
-              <img src="/images/lanche12-Byte.png" alt="Byte Burguer">
-              <span class="nome">Byte Burguer</span>
-              <span class="valor">R$ 11,90</span>
-              <p class="descricao">Sabor marcante com toque levemente ácido, perfeito para realçar hambúrgueres e petiscos.</p>
-            </button>
-          </div>
-          <div class="produto carne">
-              <button class="btn-produto" data-nome="Byte Burguer" data-preco="24.90" data-imagem="/images/lanche13-Click.png">
-              <img src="/images/lanche13-Click.png" alt="Click Duplo">
-              <span class="nome">Click Duplo</span>
-              <span class="valor">R$ 11,90</span>
-              <p class="descricao">Pão brioche, hambúrguer artesanal, cheddar, alface americana e molho especial.</p>
-            </button>
-          </div>
-          <div class="produto frango">
-            <button class="btn-produto" data-nome="Neural CheeseI" data-preco="24.90" data-imagem="/images/lanche15-CheeseI.png">
-              <img src="/images/lanche15-CheeseI.png" alt="Neural CheeseI">
-              <span class="nome">Neural CheeseI</span>
-              <span class="valor">R$ 24,90</span>
-              <p class="descricao">Hambúrguer vegetal, queijo vegano, tomate, rúcula e maionese de ervas.</p>
-            </button>
-          </div>
-          <div class="produto frango">
-            <button class="btn-produto" data-nome="Overclock Burguer" data-preco="24.90" data-imagem="/images/lanche16-Overclock.png">
-              <img src="/images/lanche16-Overclock.png" alt="Overclock Burguer">
-              <span class="nome">Overclock Burguer</span>
-              <span class="valor">R$ 24,90</span>
-              <p class="descricao">Hambúrguer 180g, queijo cheddar e muçarela, picles.</p>
-            </button>
-          </div>
-          <div class="produto bacon carne">
-            <button class="btn-produto" data-nome="Firewall FlameNI" data-preco="24.90" data-imagem="/images/lanche17-Firewall.png">
-              <img src="/images/lanche17-Firewall.png" alt="Firewall FlameNI">
-              <span class="nome">Firewall FlameNI</span>
-              <span class="valor">R$ 24,90</span>
-              <p class="descricao">Hambúrguer de frango apimentado, queijo pepperjack, alface, tomate e molho de pimenta sriracha.</p>
-            </button>
-          </div>
-          <div class="produto frango">
-            <button class="btn-produto" data-nome="Cache Melt" data-preco="24.90" data-imagem="/images/lanche9-melt.png">
-              <img src="/images/lanche9-melt.png" alt="Cache Melt">
-              <span class="nome">Cache Melt</span>
-              <span class="valor">R$ 24,90</span>
-              <p class="descricao">Blend de carnes premium, cheddar derretido, bacon em cubos, molho de queijo e pão de alho na chapa.</p>
-            </button>
-          </div>
-          <div class="produto bacon">
-            <button class="btn-produto" data-nome="X Console" data-preco="24.90" data-imagem="/images/lanche18-Console.png">
-              <img src="/images/lanche18-Console.png" alt="X Console">
-              <span class="nome">X Console</span>
-              <span class="valor">R$ 24,90</span>
-              <p class="descricao">Hambúrguer de grão-de-bico, queijo minas, alface, cenoura ralada e maionese vegana de ervas.</p>
-            </button>
-          </div>
-          <div class="produto vegetariano">
-            <button class="btn-produto" data-nome="Veggie Delight" data-preco="22.90" data-imagem="/images/lanche14-viggie.png">
-              <img src="/images/lanche14-viggie.png" alt="Veggie Delight">
-              <span class="nome">Veggie Delight</span>
-              <span class="valor">R$ 22,90</span>
-              <p class="descricao">Hambúrguer de grão-de-bico, queijo minas, alface, cenoura ralada e maionese vegana de ervas.</p>
-            </button>
-          </div>
-          <div class="produto vegano">
-            <button class="btn-produto" data-nome="Green Power" data-preco="23.90" data-imagem="/images/lanche19-Green.png">
-              <img src="/images/lanche19-Green.png" alt="Green Power">
-              <span class="nome">Green Power</span>
-              <span class="valor">R$ 23,90</span>
-              <p class="descricao">Hambúrguer de lentilha, queijo vegano, rúcula, tomate seco e maionese de castanha.</p>
-            </button>
-          </div>
-
-
-        </div>
-      </section>
-
-      <!-- Seção Bebidas -->
-      <section id="secaoBebidas">
-        <div class="right">
-          <div class="filtro">
-            <button onclick="filtrarLanches('refrigerante', this)">Refrigerante</button>
-            <button onclick="filtrarLanches('suco', this)">Suco</button>
-            <button onclick="filtrarLanches('agua', this)">Água</button>
-            <button onclick="filtrarLanches('alcoolica', this)">Alcoólica</button>
-            <button onclick="filtrarLanches('refrigerante-diet', this)">Refrigerante 0</button>
-          </div>
-          <div class="produto refrigerante">
-            <button class="btn-produto" data-nome="Coca Cola" data-preco="8.90" data-imagem="/images/refri.png">
-              <img src="/images/bebida1.png" alt="Coca Cola">
-              <span class="nome">Refrigerante 500ml</span>
-              <span class="valor">R$ 8,90</span>
-              <p class="descricao">Copo de refrigerante 500ml.</p>
-            </button>
-          </div>
-          <div class="produto suco">
-            <button class="btn-produto" data-nome="Suco Natural" data-preco="10.90" data-imagem="/images/suco.png">
-              <img src="/images/bebida2.png" alt="Suco Natural">
-              <span class="nome">Suco Natural 500ml</span>
-              <span class="valor">R$ 10,90</span>
-              <p class="descricao">Suco natural feito na hora.</p>
-            </button>
-          </div>
-          <div class="produto refrigerante">
-            <button class="btn-produto" data-nome="Guaraná Antarctica" data-preco="7.90" data-imagem="/images/bebida4-guarana.png">
-              <img src="/images/bebida4-guarana.png" alt="Guaraná Antarctica">
-              <span class="nome">Guaraná Antarctica 350ml</span>
-              <span class="valor">R$ 7,90</span>
-              <p class="descricao">Lata de guaraná Antarctica 350ml.</p>
-            </button>
-          </div>
-          <div class="produto agua">
-            <button class="btn-produto" data-nome="Água Mineral" data-preco="4.50" data-imagem="/images/agua.png">
-              <img src="/images/agua.jpeg" alt="Água Mineral">
-              <span class="nome">Água Mineral 500ml</span>
-              <span class="valor">R$ 4,50</span>
-              <p class="descricao">Água mineral sem gás.</p>
-            </button>
-          </div>
-          <div class="produto alcoolica">
-            <button class="btn-produto" data-nome="Heineken" data-preco="12.90" data-imagem="/images/cerveja.png">
-              <img src="/images/heineken.png" alt="Heineken">
-              <span class="nome">Heineken 600ml</span>
-              <span class="valor">R$ 12,90</span>
-              <p class="descricao">Garrafa de cerveja Heineken 600ml.</p>
-            </button>
-          </div>
-          <div class="produto refrigerante-diet">
-            <button class="btn-produto" data-nome="Coca Zero" data-preco="8.90" data-imagem="/images/coca-zero.png">
-              <img src="/images/coca-cola0.png" alt="Coca Zero">
-              <span class="nome">Coca-Cola Zero 350ml</span>
-              <span class="valor">R$ 8,90</span>
-              <p class="descricao">Lata de Coca-Cola Zero 350ml.</p>
-            </button>
-          </div>
-          <div class="produto refrigerante-diet">
-            <button class="btn-produto" data-nome="Guarana Zero" data-preco="8.90" data-imagem="/images/bebida5-guaranazero.png">
-              <img src="/images/coca-cola0.png" alt="Guarana Zero">
-              <span class="nome">Guaraná Zero 350ml</span>
-              <span class="valor">R$ 8,90</span>
-              <p class="descricao">Lata de Guaraná Zero 350ml.</p>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Seção Sobremesa -->
-      <section id="secaoSobremesa">
-        <div class="right">
-          <div class="filtro">
-            <button onclick="filtrarLanches('chocolate', this)">Chocolate</button>
-            <button onclick="filtrarLanches('baunilha', this)">Baunilha</button>
-            <button onclick="filtrarLanches('morango', this)">Morango</button>
-            <button onclick="filtrarLanches('creme', this)">Creme</button>
-            <button onclick="filtrarLanches('leite-condensado', this)">Leite Condensado</button>
-          </div>
-          <div class="produto chocolate">
-            <button class="btn-produto" data-nome="Sorvete Artesanal" data-preco="12.90" data-imagem="/images/sobremesa1-artesanal.png">
-              <img src="/images/Sobremesa1-artesanal.png" alt="Sorvete Artesanal">
-              <span class="nome">Sorvete Artesanal</span>
-              <span class="valor">R$ 12,90</span>
-              <p class="descricao">Sorvete de creme com calda de chocolate.</p>
-            </button>
-          </div>
-          <div class="produto chocolate">
-            <button class="btn-produto" data-nome="Brownie com Sorvete" data-preco="14.90" data-imagem="/images/Sobremesa2-Browine.png">
-              <img src="/images/Sobremesa2-Browine.png" alt="Brownie com Sorvete">
-              <span class="nome">Brownie com Sorvete</span>
-              <span class="valor">R$ 14,90</span>
-              <p class="descricao">Brownie quente com sorvete de baunilha.</p>
-            </button>
-          </div>
-          <div class="produto baunilha">
-            <button class="btn-produto" data-nome="Milkshake Baunilha" data-preco="15.90" data-imagem="/images/Sobremesa3-Milkshake.png">
-              <img src="/images/Sobremesa3-Milkshake.png" alt="Milkshake Baunilha">
-              <span class="nome">Milkshake Baunilha</span>
-              <span class="valor">R$ 15,90</span>
-              <p class="descricao">Milkshake cremoso de baunilha com calda de caramelo.</p>
-            </button>
-          </div>
-          <div class="produto morango">
-            <button class="btn-produto" data-nome="Torta de Morango" data-preco="13.90" data-imagem="/images/Sobremesa4-torta.png">
-              <img src="/images/Sobremesa4-torta.png" alt="Torta de Morango">
-              <span class="nome">Torta de Morango</span>
-              <span class="valor">R$ 13,90</span>
-              <p class="descricao">Torta de morango com massa amanteigada e creme branco.</p>
-            </button>
-          </div>
-          <div class="produto leite-condensado">
-            <button class="btn-produto" data-nome="Pudim" data-preco="11.90" data-imagem="/images/Sobremesa5-pudim.png">
-              <img src="/images/Sobremesa5-pudim.png" alt="Pudim">
-              <span class="nome">Pudim</span>
-              <span class="valor">R$ 11,90</span>
-              <p class="descricao">Pudim tradicional de leite condensado com calda de caramelo.</p>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Seção Unitários com subfiltro (adicionado da Feature 2) -->
-      <section id="secaoUnitarios">
-        <div class="right">
-          <div class="filtro">
-            <button onclick="filtrarLanches('ketchup', this)">Ketchup</button>
-            <button onclick="filtrarLanches('maionese', this)">Maionese</button>
-            <button onclick="filtrarLanches('mostarda', this)">Mostarda</button>
-            <button onclick="filtrarLanches('barbecue', this)">Barbecue</button>
-            <button onclick="filtrarLanches('nuggets', this)">Nuggets</button>
-            <button onclick="filtrarLanches('batata-frita', this)">Batata frita</button>
-          </div>
-          <div class="produto mostarda">
-            <button class="btn-produto" data-nome="Mostarda" data-preco="11.90" data-imagem="/images/unitario2.png">
-              <img src="/images/unitario2.png" alt="Mostarda">
-              <span class="nome">Mostarda</span>
-              <span class="valor">R$ 11,90</span>
-              <p class="descricao">Sabor marcante com toque levemente ácido, perfeito para realçar hambúrgueres e petiscos.</p>
-            </button>
-          </div>
-          <div class="produto nuggets">
-            <button class="btn-produto" data-nome="Nuggets" data-preco="11.90" data-imagem="/images/unitario1.png">
-              <img src="/images/unitario1.png" alt="Nuggets">
-              <span class="nome">Nuggets</span>
-              <span class="valor">R$ 11,90</span>
-              <p class="descricao">Crosta crocante por fora e frango macio por dentro – o snack perfeito pra qualquer hora.</p>
-            </button>
-          </div>
-          <div class="produto ketchup">
-            <button class="btn-produto" data-nome="Ketchup" data-preco="11.90" data-imagem="/images/unitario3.png">
-              <img src="/images/unitario3.png" alt="Ketchup">
-              <span class="nome">Ketchup</span>
-              <span class="valor">R$ 11,90</span>
-              <p class="descricao">Clássico e adocicado, combina com tudo: de batatas fritas a hambúrgueres suculentos.</p>
-            </button>
-          </div>
-          <div class="produto batata-frita">
-            <button class="btn-produto" data-nome="Batata Frita" data-preco="12.90" data-imagem="/images/batata-frita.png">
-              <img src="/images/batata-frita.png" alt="Batata Frita">
-              <span class="nome">Batata Frita</span>
-              <span class="valor">R$ 12,90</span>
-              <p class="descricao">Batata frita crocante por fora e macia por dentro, temperada com sal e ervas finas.</p>
-            </button>
-          </div>
-          <div class="produto barbecue">
-            <button class="btn-produto" data-nome="Molho Barbecue" data-preco="5.90" data-imagem="/images/molho-Barbecue.png">
-              <img src="/images/molho-Barbecue.png" alt="Molho Barbecue">
-              <span class="nome">Molho Barbecue</span>
-              <span class="valor">R$ 5,90</span>
-              <p class="descricao">Molho barbecue defumado com toque adocicado, perfeito para carnes e petiscos.</p>
-            </button>
-          </div>
-          <div class="produto maionese">
-            <button class="btn-produto" data-nome="Maionese Especial" data-preco="6.90" data-imagem="/images/molho-especial.png">
-              <img src="/images/molho-especial.png" alt="Maionese Especial">
-              <span class="nome">Maionese Especial</span>
-              <span class="valor">R$ 6,90</span>
-              <p class="descricao">Maionese cremosa com toque de alho e ervas, ideal para acompanhar batatas e lanches.</p>
-            </button>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
 
-    <!-- Rodapé / Carrinho -->
-    <div class="carrinho">
-      <div class="car-left">
-        <span class="total-itens">Total de itens: <span id="footer-total-items">0</span></span>
-        <span class="total-pedidos">Total do Pedido: <span id="footer-total-price" style="color: #426b1f;">R$ 0,00</span></span>
-      </div>
-      <div class="car-center">
-        <span class="view">VER CARRINHO</span>
-        <a href="#" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
-      </div>
-      <div class="car-right">
-<<<<<<< HEAD
-<<<<<<< HEAD
-       <a href="/" class="btn-cancel">Voltar ao Início</a>
-        <button class="btn-pro">Próximo</button>
-=======
-        <a href="@Url.Action("Cupom", "Home")"><button class="btn-pro">Próximo</button></a>
->>>>>>> origin/feature/feat_tela_pagamento
-=======
-       <a href="/" class="btn-cancel">Voltar ao Início</a>
-       <a href="TelaCPF" class="btn-pro">Próximo</a>
-        <a href="@Url.Action("Cupom", "Home")"><button class="btn-pro">Próximo</button></a>
->>>>>>> origin/feat_telas_Nome_CPF
-      </div>
+<!-- Rodapé / Carrinho -->
+<div class="carrinho">
+  <div class="car-left">
+    <span class="total-itens">Total de itens: 
+      <span id="footer-total-items">0</span>
+    </span>
+    <span class="total-pedidos">Total do Pedido: 
+      <span id="footer-total-price" style="color: #426b1f;">R$ 0,00</span>
+    </span>
+  </div>
+  
+  <div class="car-center">
+    <span class="view">VER CARRINHO</span>
+    <a href="#" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
+  </div>
+  
+  <div class="car-right">
+    <a href="/" class="btn-cancel">Voltar ao Início</a>
+    <!-- Opção 1 -->
+    <a href="@Url.Action('Cupom', 'Home')" class="btn-pro">Próximo</a>
+    <!-- Opção 2 -->
+    <!-- <a href="TelaCPF" class="btn-pro">Próximo</a> -->
+  </div>
+</div>
+
+<!-- Modal do Carrinho -->
+<div id="cart-modal" class="cart-modal">
+  <div class="cart-content">
+    <div class="cart-header">
+      <h2>Seu Carrinho</h2>
+      <span class="close-cart">&times;</span>
+    </div>
+    
+    <div class="cart-items">
+      <!-- Itens serão adicionados dinamicamente aqui -->
+    </div>
+    
+    <div class="cart-summary">
+      <p>Total de itens: <span id="modal-total-items">0</span></p>
+      <p>Total do pedido: <span id="modal-total-price">R$ 0,00</span></p>
+    </div>
+    
+    <div class="cart-actions">
+      <button class="cancel-button">Fechar</button>
+      <button class="confirm-button">Confirmar Pedido</button>
     </div>
   </div>
-
-  <!-- Modal do Carrinho -->
-  <div id="cart-modal" class="cart-modal">
-    <div class="cart-content">
-      <div class="cart-header">
-        <h2>Seu Carrinho</h2>
-        <span class="close-cart">&times;</span>
-      </div>
-      <div class="cart-items">
-        <!-- Itens serão adicionados dinamicamente aqui -->
-      </div>
-      <div class="cart-summary">
-        <p>Total de itens: <span id="modal-total-items">0</span></p>
-        <p>Total do pedido: <span id="modal-total-price">R$ 0,00</span></p>
-      </div>
-      <div class="cart-actions">
-        <button class="cancel-button">Fechar</button>
-        <button class="confirm-button">Confirmar Pedido</button>
-      </div>
-    </div>
-  </div>
+</div>
 
   <!-- Scripts -->
   <script src="/js/telacarrinho.js"></script>
