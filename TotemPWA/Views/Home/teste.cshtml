@@ -32,7 +32,7 @@
           @foreach (var category in ViewBag.Categories)
           {
               string activeClass = category.active ? "active" : "";
-              <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.id'">
+              <button class="link-button @activeClass" onclick="location.href='/teste/@category.id'">
                   <div class="icon">
                       <img src="@category.icon" />
                   </div>
@@ -48,7 +48,7 @@
           @foreach (var subcategory in ViewBag.SubCategories)
           {
               string activeClass = subcategory.active ? "active" : "";
-              <button class="@activeClass" onclick="location.href='/TelaProduto/@ViewBag.Category/@subcategory.id'">
+              <button class="@activeClass" onclick="location.href='/teste/@ViewBag.Category/@subcategory.id'">
                   @subcategory.name
               </button>
           }
@@ -70,55 +70,43 @@
       </div>
     </div>
 
-<!-- Rodapé / Carrinho -->
-<div class="carrinho">
-  <div class="car-left">
-    <span class="total-itens">Total de itens: 
-      <span id="footer-total-items">0</span>
-    </span>
-    <span class="total-pedidos">Total do Pedido: 
-      <span id="footer-total-price" style="color: #426b1f;">R$ 0,00</span>
-    </span>
+    <!-- Rodapé / Carrinho -->
+    <div class="carrinho">
+      <div class="car-left">
+        <span class="total-itens">Total de itens: <span id="footer-total-items">0</span></span>
+        <span class="total-pedidos">Total do Pedido: <span id="footer-total-price" style="color: #426b1f;">R$ 0,00</span></span>
+      </div>
+      <div class="car-center">
+        <span class="view">VER CARRINHO</span>
+        <a href="#" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+      <div class="car-right">
+       <a href="/" class="btn-cancel">Voltar ao Início</a>
+        <button class="btn-pro">Próximo</button>
+      </div>
+    </div>
   </div>
-  
-  <div class="car-center">
-    <span class="view">VER CARRINHO</span>
-    <a href="#" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
-  </div>
-  
-  <div class="car-right">
-    <a href="/" class="btn-cancel">Voltar ao Início</a>
-    <!-- Opção 1 -->
-    <a href="@Url.Action("Cupom", "Home")" class="btn-pro">Próximo</a>
 
-    <!-- Opção 2 -->
-    <!-- <a href="TelaCPF" class="btn-pro">Próximo</a> -->
-  </div>
-</div>
-
-<!-- Modal do Carrinho -->
-<div id="cart-modal" class="cart-modal">
-  <div class="cart-content">
-    <div class="cart-header">
-      <h2>Seu Carrinho</h2>
-      <span class="close-cart">&times;</span>
-    </div>
-    
-    <div class="cart-items">
-      <!-- Itens serão adicionados dinamicamente aqui -->
-    </div>
-    
-    <div class="cart-summary">
-      <p>Total de itens: <span id="modal-total-items">0</span></p>
-      <p>Total do pedido: <span id="modal-total-price">R$ 0,00</span></p>
-    </div>
-    
-    <div class="cart-actions">
-      <button class="cancel-button">Fechar</button>
-      <button class="confirm-button">Confirmar Pedido</button>
+  <!-- Modal do Carrinho -->
+  <div id="cart-modal" class="cart-modal">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h2>Seu Carrinho</h2>
+        <span class="close-cart">&times;</span>
+      </div>
+      <div class="cart-items">
+        <!-- Itens serão adicionados dinamicamente aqui -->
+      </div>
+      <div class="cart-summary">
+        <p>Total de itens: <span id="modal-total-items">0</span></p>
+        <p>Total do pedido: <span id="modal-total-price">R$ 0,00</span></p>
+      </div>
+      <div class="cart-actions">
+        <button class="cancel-button">Fechar</button>
+        <button class="confirm-button">Confirmar Pedido</button>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- Scripts -->
   <script src="/js/telacarrinho.js"></script>
