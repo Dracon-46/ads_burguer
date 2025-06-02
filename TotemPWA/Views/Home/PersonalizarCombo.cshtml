@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combo Totem</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="/css/personalizarcombo.css">
+
+</head>
+<body>
+  <div class="top-image">
+    <img src="/images/lanche.jpeg" alt="Burger and Fries">
+  </div>
+
+  <div class="container">
+    <button class="back-btn">←</button>
+
+    <div class="card">
+      <div class="item-header">
+        <img src="/images/lanche1.png" alt="Chicken Junior" class="burger-img">
+        <div class="item-info">
+          <h3>Chicken Junior <a href="TelaEditarPed" class="icon-editar"><i class="fas fa-edit"></i></a></h3>
+          <p>Filé de frango empanado, alface, tomate e maionese.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card de Seleção de Bebidas -->
+    <div class="card">
+      <h4>Escolha sua bebida</h4>
+      <p>Selecione a bebida de sua preferência.</p>
+      
+      <div class="drink-options-main">
+        <div class="drink-option-main" onclick="selectDrinkType('Coca-Cola', '')">
+        <img src="/images/bebida1.png" alt="Coca-Cola" class="drink-icon">
+        <span>Coca-Cola</span>
+        </div>
+        <div class="drink-option-main" onclick="selectDrinkType('Suco de Laranja', '')">
+           <img src="/images/bebida2.png" alt="Suco de Laranja" class="drink-icon">
+          <span>Suco de Laranja</span>
+        </div>
+        <div class="drink-option-main" onclick="selectDrinkType('Suco de Uva', '')">
+           <img src="/images/bebida3.png" alt="Suco de Uva" class="drink-icon">
+          <span>Suco de Uva</span>
+        </div>
+        <div class="drink-option-main" onclick="selectDrinkType('Guaraná', '')">
+          <img src="/images/bebida4-guarana.png" alt="Guaraná" class="drink-icon">
+          <span>Guaraná</span>
+        </div>
+       
+      </div>
+      
+      <button class="change-btn" onclick="openDrinkModal()">Selecionar tamanho</button>
+      <div id="selected-drink-display" class="selected-item" style="display: none;">
+        <div>
+          <i id="selected-drink-icon" class="fas fa-bottle"></i>
+          <span id="selected-drink-text"></span>
+        </div>
+        <span id="selected-drink-price" class="price"></span>
+      </div>
+    </div>
+
+    <!-- Card de Seleção de Batatas -->
+    <div class="card">
+      <h4>Escolha o tamanho da batata</h4>
+      <p>Escolha o tamanho da batata para acompanhar o seu combo.</p>
+      <button class="change-btn" onclick="openFriesModal()">Selecionar batata</button>
+      <div id="selected-fries-display" class="selected-item" style="display: none;">
+        <span id="selected-fries-text"></span>
+        <span id="selected-fries-price" class="price"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Seleção de Tamanho da Bebida -->
+  <div id="drinkModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        Escolha o tamanho da bebida
+      </div>
+      <div class="modal-body">
+        <div id="modal-selected-drink" class="selected-drink-display" style="display: none;">
+          <i id="modal-drink-icon"></i>
+          <div class="selected-drink-info">
+            <h4 id="modal-drink-name"></h4>
+            <p id="modal-drink-description">Selecione o tamanho</p>
+          </div>
+        </div>
+        
+        <div class="size-options">
+          <div class="size-option" onclick="selectDrinkSize('350 ml', 5.00)">
+            350 ml<br>
+            <span class="price">R$ 5,00</span>
+          </div>
+          <div class="size-option" onclick="selectDrinkSize('500 ml', 7.00)">
+            500 ml<br>
+            <span class="price">R$ 7,00</span>
+          </div>
+          <div class="size-option" onclick="selectDrinkSize('700 ml', 10.00)">
+            700 ml<br>
+            <span class="price">R$ 10,00</span>
+          </div>
+          <div class="size-option" onclick="selectDrinkSize('1 litro', 15.00)">
+            1 litro<br>
+            <span class="price">R$ 15,00</span>
+          </div>
+        </div>
+        
+        <div id="drink-warning" class="warning-message">
+          Por favor, selecione o tamanho da bebida!
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="close-btn" onclick="closeDrinkModal()">Cancelar</button>
+        <button class="confirm-btn" onclick="confirmDrinkSelection()">Autorizar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Seleção de Tamanho da Batata -->
+  <div id="friesModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        Escolha o tamanho da batata
+      </div>
+      <div class="modal-body">
+        <div class="size-options">
+          <div class="size-option" onclick="selectFriesSize('Pequena', 6.00)">
+            Pequena<br>
+            <span class="price">R$ 6,00</span>
+          </div>
+          <div class="size-option" onclick="selectFriesSize('Média', 8.00)">
+            Média<br>
+            <span class="price">R$ 8,00</span>
+          </div>
+          <div class="size-option" onclick="selectFriesSize('Grande', 12.00)">
+            Grande<br>
+            <span class="price">R$ 12,00</span>
+          </div>
+          <div class="size-option" onclick="selectFriesSize('Gigante', 15.00)">
+            Gigante<br>
+            <span class="price">R$ 15,00</span>
+          </div>
+        </div>
+        
+        <div id="fries-warning" class="warning-message">
+          Por favor, selecione um tamanho para a batata!
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="close-btn" onclick="closeFriesModal()">Cancelar</button>
+        <button class="confirm-btn" onclick="confirmFriesSelection()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Alerta -->
+  <div id="alertModal" class="alert-modal">
+    <div class="alert-content">
+      <h3>Atenção!</h3>
+      <p id="alert-message">Por favor, selecione uma bebida antes de escolher o tamanho.</p>
+      <button class="alert-ok-btn" onclick="closeAlertModal()">OK</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>Total de itens: <span id="total-itens">0</span></div>
+    <div>Total do pedido: R$ <span id="total-pedido">0,00</span></div>
+    <button class="cancel-btn" onclick="resetPedido()">Voltar</button>
+    <button class="add-btn">Próximo</button>
+  </div>
+
+  <script>
+    // Variáveis para armazenar as seleções
+    let selectedDrink = null;
+    let selectedFries = null;
+    let selectedDrinkType = null;
+    let selectedDrinkSize = null;
+    let selectedFriesSize = null;
+
+    // Função para mostrar alerta
+    function showAlert(message) {
+      document.getElementById('alert-message').textContent = message;
+      document.getElementById('alertModal').style.display = 'flex';
+    }
+    
+    function closeAlertModal() {
+      document.getElementById('alertModal').style.display = 'none';
+    }
+
+    // Selecionar tipo de bebida
+    function selectDrinkType(type, iconClass) {
+      const options = document.querySelectorAll('.drink-option-main');
+      options.forEach(option => option.classList.remove('selected'));
+      
+      event.currentTarget.classList.add('selected');
+      
+      selectedDrinkType = {
+        name: type,
+        iconClass: iconClass
+      };
+      
+      // Se já tiver um tamanho selecionado, atualiza a exibição
+      if (selectedDrinkSize) {
+        updateDrinkDisplay();
+      }
+    }
+
+    // Abrir modal de tamanho da bebida
+    function openDrinkModal() {
+      if (!selectedDrinkType) {
+        showAlert('Por favor, selecione uma bebida antes de escolher o tamanho.');
+        return;
+      }
+      
+      document.getElementById('drinkModal').style.display = 'flex';
+      updateModalDrinkDisplay();
+    }
+    
+    // Atualizar exibição da bebida no modal
+    function updateModalDrinkDisplay() {
+      const display = document.getElementById('modal-selected-drink');
+      display.style.display = 'flex';
+      document.getElementById('modal-drink-icon').className = `fas ${selectedDrinkType.iconClass}`;
+      document.getElementById('modal-drink-name').textContent = selectedDrinkType.name;
+      
+      if (selectedDrinkSize) {
+        document.getElementById('modal-drink-description').textContent = 
+          `Tamanho: ${selectedDrinkSize.size} | R$ ${selectedDrinkSize.price.toFixed(2)}`;
+      } else {
+        document.getElementById('modal-drink-description').textContent = 'Selecione o tamanho';
+      }
+    }
+
+    // Selecionar tamanho da bebida
+    function selectDrinkSize(size, price) {
+      const options = document.querySelectorAll('#drinkModal .size-option');
+      options.forEach(option => option.classList.remove('selected'));
+      
+      event.currentTarget.classList.add('selected');
+      
+      selectedDrinkSize = { size, price };
+      document.getElementById('drink-warning').style.display = 'none';
+      
+      updateModalDrinkDisplay();
+    }
+
+    // Confirmar seleção de bebida
+    function confirmDrinkSelection() {
+      if (!selectedDrinkSize) {
+        document.getElementById('drink-warning').style.display = 'block';
+        return;
+      }
+      
+      selectedDrink = {
+        name: selectedDrinkType.name,
+        size: selectedDrinkSize.size,
+        price: selectedDrinkSize.price,
+        iconClass: selectedDrinkType.iconClass
+      };
+      
+      // Atualiza exibição principal
+      updateDrinkDisplay();
+      closeDrinkModal();
+      updateTotal();
+    }
+    
+    // Atualizar exibição da bebida na tela principal
+    function updateDrinkDisplay() {
+      document.getElementById('selected-drink-display').style.display = 'flex';
+      document.getElementById('selected-drink-text').textContent = 
+        `${selectedDrink.name} (${selectedDrink.size})`;
+      document.getElementById('selected-drink-price').textContent = 
+        `R$ ${selectedDrink.price.toFixed(2).replace('.', ',')}`;
+      document.getElementById('selected-drink-icon').className = `fas ${selectedDrink.iconClass}`;
+    }
+
+    // Abrir modal de tamanho da batata
+    function openFriesModal() {
+      document.getElementById('friesModal').style.display = 'flex';
+    }
+
+    // Selecionar tamanho da batata
+    function selectFriesSize(size, price) {
+      const options = document.querySelectorAll('#friesModal .size-option');
+      options.forEach(option => option.classList.remove('selected'));
+      
+      event.currentTarget.classList.add('selected');
+      
+      selectedFriesSize = { size, price };
+      document.getElementById('fries-warning').style.display = 'none';
+    }
+
+    // Confirmar seleção de batata
+    function confirmFriesSelection() {
+      if (!selectedFriesSize) {
+        document.getElementById('fries-warning').style.display = 'block';
+        return;
+      }
+      
+      selectedFries = {
+        name: 'Batata Frita',
+        size: selectedFriesSize.size,
+        price: selectedFriesSize.price
+      };
+      
+      // Atualiza exibição principal
+      document.getElementById('selected-fries-display').style.display = 'flex';
+      document.getElementById('selected-fries-text').textContent = 
+        `${selectedFries.name} (${selectedFries.size})`;
+      document.getElementById('selected-fries-price').textContent = 
+        `R$ ${selectedFries.price.toFixed(2).replace('.', ',')}`;
+      
+      document.getElementById('fries-warning').style.display = 'none';
+      closeFriesModal();
+      updateTotal();
+    }
+
+    // Fechar modais
+    function closeDrinkModal() {
+      document.getElementById('drinkModal').style.display = 'none';
+    }
+
+    function closeFriesModal() {
+      document.getElementById('friesModal').style.display = 'none';
+    }
+
+    // Atualizar total do pedido
+    function updateTotal() {
+      let total = 0;
+      let itemCount = 0;
+      
+      if (selectedDrink) {
+        total += selectedDrink.price;
+        itemCount++;
+      }
+      
+      if (selectedFries) {
+        total += selectedFries.price;
+        itemCount++;
+      }
+      
+      document.getElementById('total-itens').textContent = itemCount;
+      document.getElementById('total-pedido').textContent = total.toFixed(2).replace('.', ',');
+    }
+
+    // Resetar pedido
+    function resetPedido() {
+      selectedDrink = null;
+      selectedFries = null;
+      selectedDrinkType = null;
+      selectedDrinkSize = null;
+      selectedFriesSize = null;
+      
+      // Limpa seleções visuais
+      document.getElementById('selected-drink-display').style.display = 'none';
+      document.getElementById('selected-fries-display').style.display = 'none';
+      
+      const drinkOptions = document.querySelectorAll('.drink-option-main');
+      drinkOptions.forEach(option => option.classList.remove('selected'));
+      
+      const sizeOptions = document.querySelectorAll('.size-option');
+      sizeOptions.forEach(option => option.classList.remove('selected'));
+      
+      document.getElementById('drink-warning').style.display = 'none';
+      document.getElementById('fries-warning').style.display = 'none';
+      
+      updateTotal();
+    }
+  </script>
+</body>
+</html>
