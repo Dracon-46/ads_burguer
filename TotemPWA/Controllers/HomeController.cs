@@ -26,9 +26,7 @@ public class HomeController : Controller
     {
         return View();
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
+
     [HttpGet("teste/{categoryId:int?}/{subcategoryId:int?}")]
     // [HttpGet]
     public async Task<IActionResult> teste(int? categoryId, int? subcategoryId)
@@ -93,8 +91,6 @@ public class HomeController : Controller
 
         return View();
 
-=======
-=======
     public IActionResult TelaCPF()
     {
         return View();
@@ -103,7 +99,6 @@ public class HomeController : Controller
     {
         return View();
     }
->>>>>>> origin/feat_telas_Nome_CPF
      public IActionResult SelecionarPedido()
     {
         return View();
@@ -115,7 +110,6 @@ public class HomeController : Controller
       public IActionResult Cupom()
     {
         return View();
->>>>>>> origin/feature/feat_tela_pagamento
     }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
