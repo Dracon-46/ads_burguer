@@ -26,7 +26,6 @@ public class HomeController : Controller
     {
         return View();
     }
-<<<<<<< HEAD
     
     [HttpGet("teste/{categoryId:int?}/{subcategoryId:int?}")]
     // [HttpGet]
@@ -92,20 +91,8 @@ public class HomeController : Controller
 
         return View();
 
-=======
-     public IActionResult SelecionarPedido()
-    {
-        return View();
     }
-    public IActionResult SelecionarPagamento()
-    {
-        return View();
-    }
-      public IActionResult Cupom()
-    {
-        return View();
->>>>>>> origin/feature/feat_tela_pagamento
-    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
