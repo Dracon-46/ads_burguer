@@ -27,6 +27,7 @@ public class HomeController : Controller
         return View();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     [HttpGet("teste/{categoryId:int?}/{subcategoryId:int?}")]
     // [HttpGet]
@@ -93,6 +94,16 @@ public class HomeController : Controller
         return View();
 
 =======
+=======
+    public IActionResult TelaCPF()
+    {
+        return View();
+    }
+        public IActionResult TelaNome()
+    {
+        return View();
+    }
+>>>>>>> origin/feat_telas_Nome_CPF
      public IActionResult SelecionarPedido()
     {
         return View();
