@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* Configuração de exibição das seções */
-    #secaoPromocao { display: block; }
+    #secaoPromocao { display: flex; }
     #secaoCombo,
     #secaoBebidas,
     #secaoLanches,
@@ -31,13 +31,14 @@
         <div class="selection">
           @foreach (var category in ViewBag.Categories)
           {
-              string activeClass = category.active ? "active" : "";
-              <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.id'">
-                  <div class="icon">
-                      <img src="@category.icon" />
-                  </div>
-                  <span>@category.name</span>
-              </button>
+            string activeClass = category.active ? "active" : "";
+          
+            <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.id'">
+                <div class="icon">
+                    <img src="@category.icon" />
+                </div>
+                <span>@category.name</span>
+            </button>
           }
         </div>
       </div>
@@ -72,28 +73,37 @@
 
 <!-- Rodapé / Carrinho -->
 <div class="carrinho">
-  <div class="car-left">
-    <span class="total-itens">Total de itens: 
-      <span id="footer-total-items">0</span>
-    </span>
-    <span class="total-pedidos">Total do Pedido: 
-      <span id="footer-total-price" style="color: #426b1f;">R$ 0,00</span>
-    </span>
-  </div>
-  
-  <div class="car-center">
-    <span class="view">VER CARRINHO</span>
-    <a href="#" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
-  </div>
-  
-  <div class="car-right">
-    <a href="/" class="btn-cancel">Voltar ao Início</a>
-    <!-- Opção 1 -->
-    <a href="@Url.Action("Cupom", "Home")" class="btn-pro">Próximo</a>
+    <div class="car-left">
+      <div>
+        <span class="total-itens">Total de itens: 
+          <span id="footer-total-items">0</span>
+        </span>
+        <span class="total-pedidos">Total do Pedido: 
+          <span id="footer-total-price" style="color: #426b1f;">R$ 0,00</span>
+        </span>
+      </div>
 
-    <!-- Opção 2 -->
-    <!-- <a href="TelaCPF" class="btn-pro">Próximo</a> -->
-  </div>
+    
+    </div>
+    
+    <div class="car-center">
+      <span class="view">VER CARRINHO</span>
+      <a href="#" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+    
+    <div class="car-right">
+      <div>
+      <!-- Opção 1 -->
+        <a href="@Url.Action("Cupom", "Home")" class="btn">Próximo</a>
+      <!-- Opção 2 -->
+      <!-- <a href="TelaCPF" class="btn-pro">Próximo</a> -->
+      </div>
+
+      <div>
+        <a href="/" class="btn">Voltar ao Início</a>
+      </div>
+
+    </div>
 </div>
 
 <!-- Modal do Carrinho -->
