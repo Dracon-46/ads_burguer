@@ -32,7 +32,11 @@ public class HomeController : Controller
     {
         return View();
     }
-        public IActionResult TelaNome()
+    public IActionResult TelaNome()
+    {
+        return View();
+    }
+    public IActionResult TelaHome_Crud()
     {
         return View();
     }
