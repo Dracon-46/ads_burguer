@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Produto - ADSBurguer</title>
+    <link rel="stylesheet" href="/css/editar.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div>
+                <div class="header-logo">
+                    <div class="logo"><img src="/images/logo_crud.svg" /></div>
+                </div>
+                <div class="menu-item"><img src="/images/house-solid.svg" /> Início</div>
+                <div class="menu-item"><img src="/images/box-open-solid.svg" /> Produtos</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <a href="@Url.Action("CardapioCrud", "Home")" class="btn-voltar">← Voltar</a>
+
+            <h1>Editar Produto</h1>
+            <p class="subtitulo">Clique em “Salvar” para garantir que as informações foram armazenadas.</p>
+
+            <form class="formulario">
+                <label>Nome do produto</label>
+                <input type="text" placeholder="Ex: X-burger Clássico">
+
+                <div class="linha">
+                    <div class="coluna">
+                        <label>Categoria</label>
+                        <input type="text" placeholder="Ex: Lanche">
+                    </div>
+
+                    <div class="coluna">
+                        <label>Preço (R$)</label>
+                        <input type="number" placeholder="Ex: 20.00" step="0.01">
+                    </div>
+                </div>
+
+                <label>Descrição</label>
+                <textarea placeholder="Ex: Pão artesanal, hambúrguer de picanha 180g, queijo cheddar"></textarea>
+
+                <label>Ingredientes (separados por vírgula)</label>
+                <input type="text" placeholder="Ex: Pão, carne, queijo, alface, tomate">
+
+                <div class="switch-container">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Produto disponível no cardápio</span>
+                </div>
+
+                <div class="botoes">
+                    <button type="button" class="cancelar">Cancelar</button>
+                    <button type="submit" class="salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
