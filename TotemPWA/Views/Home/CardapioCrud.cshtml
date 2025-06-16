@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cardápio - ADSBurguer</title>
+    <link rel="stylesheet" href="/css/cardapio.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div>
+            <div class="header-logo">
+                <div class="logo"><img src="/images/logo_crud.svg" /></div>
+            </div>
+                <div class="menu-item"><img src="/images/house-solid.svg" /> Início</div>
+                <div class="menu-item"><img src="/images/box-open-solid.svg" /> Produtos</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="header">
+                <div>
+                    <h1>Cardápio</h1>
+                    <div class="subheader">Gerencie os produtos da hamburgueria.</div>
+                </div>
+                <a href="" class="btn-add">+ Novo Produto</a>
+            </div>
+
+            <input type="text" class="search-bar" placeholder="Buscar produtos...">
+
+            <div class="filters">
+                <button class="active">Todos (0)</button>
+                <button>Promoções (0)</button>
+                <button>Lanche (0)</button>
+                <button>Combo (0)</button>
+                <button>Bebida (0)</button>
+                <button>Unitários (0)</button>
+                <button>Sobremesa (0)</button>
+            </div>
+
+            <div class="products">
+                <!-- Produto exemplo -->
+                <div class="product-card">
+                    <div class="tag">Lanche</div>
+                    <h3>Big Burger Clássico</h3>
+                    <p>Hambúrguer artesanal 180g, queijo cheddar, alface, tomate, cebola roxa e molho especial da casa</p>
+                    <p>Ingredientes: pão, carne, queijo</p>
+                    <p class="price">R$ 24,90</p>
+                    <p class="status">✔ Disponível</p>
+                    <div class="buttons">
+                        <a href="@Url.Action("FormEditar", "Home")" class="btn-add"><button class="edit-btn">Editar</button></a>
+                        <button class="delete-btn">Excluir</button>
+                    </div>
+                </div>
+
+                <!-- Adicione os outros produtos dinamicamente -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

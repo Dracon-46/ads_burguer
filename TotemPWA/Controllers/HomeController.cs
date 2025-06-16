@@ -131,4 +131,16 @@ public class HomeController : Controller
 
         return View();
     }
+
+    // crud 
+
+    public IActionResult CardapioCrud()
+    {
+        return View();
+    }
+
+    public IActionResult FormEditar()
+    {
+        return View();
+    }
 }
