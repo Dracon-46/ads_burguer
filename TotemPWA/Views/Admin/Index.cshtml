@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home CRUD</title>
+  <link rel="stylesheet" href="/css/telahomecrud.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+     <div class="logo">
+</div>
+      <nav class="menu">
+        <h3>MENU</h3>
+        <ul>
+          <li> <i class="fa-solid fa-house"></i> Início</li>
+          <li> <i class="fa-solid fa-box-open"></i> Produtos</li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main">
+  <div class="main-card">
+    <div class="welcome">
+      <h2>Bem-vindo ao <strong>AdsBurguer</strong></h2>
+      <p>Seu painel de controle para <span>gerenciar os produtos.</span></p>
+    </div>
+    <div class="cards">
+      <div class="card red" onclick="cardClick('produtos')">
+        <h3><i class="fa-solid fa-list"></i> Ver Cardápio</h3>
+        <p>Seu painel de controle para gerenciar os produtos.</p>
+         <a href="@Url.Action("List", "Product")"><button>Adicionar Produto</button></a>
+      </div>
+      <div class="card orange" onclick="cardClick('novo-produto')">
+        <h3><i class="fa-solid fa-plus"></i> Ver Categoria</h3>
+        <p>Seu painel de controle para gerenciar as categorias.</p>
+         <a href="@Url.Action("List", "Category")"><button>Adicionar Produto</button></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+  </div>
+ 
+</body>
+</html>

@@ -44,10 +44,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2F0ZWdvcnlcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Category/_Form.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2F0ZWdvcnlcX0Zvcm0uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Conteudo/ads_burguer/totempwa/Views/Admin/Cupom/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3Vwb21cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -64,8 +60,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3Vwb21cTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Cupom/_Form.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3Vwb21cX0Zvcm0uY3NodG1s
+[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Employee/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1wbG95ZWVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Employee/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1wbG95ZWVcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Employee/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1wbG95ZWVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Employee/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1wbG95ZWVcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Conteudo/ads_burguer/totempwa/Views/Admin/Ingredient/Create.cshtml]
@@ -84,10 +96,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5ncmVkaWVudFxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Ingredient/_Form.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5ncmVkaWVudFxfRm9ybS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Conteudo/ads_burguer/totempwa/Views/Admin/Product/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZHVjdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -104,10 +112,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZHVjdFxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Product/_Form.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZHVjdFxfRm9ybS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Conteudo/ads_burguer/totempwa/Views/Admin/Promotion/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvbW90aW9uXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -122,10 +126,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Conteudo/ads_burguer/totempwa/Views/Admin/Promotion/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvbW90aW9uXExpc3QuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Conteudo/ads_burguer/totempwa/Views/Admin/Promotion/_Form.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvbW90aW9uXF9Gb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Conteudo/ads_burguer/totempwa/Views/Home/CardapioCrud.cshtml]

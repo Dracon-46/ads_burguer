@@ -6,10 +6,15 @@ namespace TotemPWA.Models
     {
         [Key]
         public int ClientId { get; set; }
-        public required Client Client { get; set; } // Adicionado 'required'
 
-        public required string Type { get; set; }    // Adicionado 'required'
-        public required string User { get; set; }    // Adicionado 'required'
-        public required string Password { get; set; } // Adicionado 'required'
+        // Mude Client para Client? (tornando-o anulável), pois é uma propriedade de navegação
+        // e pode não estar carregada/presente ao criar um Employee.
+        public Client? Client { get; set; }
+
+        // Inicialize as propriedades de string com string.Empty para satisfazer o compilador,
+        // já que elas são não-anuláveis (sem '?')
+        public string Type { get; set; } = string.Empty;
+        public string User { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }

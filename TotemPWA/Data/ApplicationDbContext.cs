@@ -23,8 +23,6 @@ namespace TotemPWA.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        // Se você tiver um modelo Payment, adicione-o aqui também:
-        // public DbSet<Payment> Payments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -133,13 +131,11 @@ namespace TotemPWA.Data
                 .WithMany(prod => prod.Promotions)
                 .HasForeignKey(p => p.ProductId);
 
-                // Dentro de OnModelCreating(ModelBuilder modelBuilder)
+            // Dentro de OnModelCreating(ModelBuilder modelBuilder)
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Order)
                 .WithMany(o => o.Payments)
                 .HasForeignKey(p => p.OrderId);
-
-
         }
     }
 }
