@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Lista de Funcionários";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // Ajuste se seu layout de admin for diferente
+ 
 }
 
 <h1>Lista de Funcionários</h1>
@@ -15,7 +15,8 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Client.Name)
+                @* Linha 18: Usando o operador null-forgiving (!) para suprimir o aviso, assumindo que Client.Name sempre estará disponível para fins de exibição de nome de coluna. *@
+                @Html.DisplayNameFor(model => model.Client!.Name) 
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Type)
@@ -31,7 +32,8 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Client.Name)
+                    @* Linha 34: Usando o operador null-conditional (?. ) e null-coalescing (?? ) para exibir "N/A" se o cliente ou o nome do cliente for nulo, evitando o aviso CS8602. *@
+                    @(item.Client?.Name ?? "N/A")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)

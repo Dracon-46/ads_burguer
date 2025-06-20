@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Excluir Funcionário";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // Ajuste se seu layout de admin for diferente
 }
 
 <h1>Excluir Funcionário</h1>
@@ -13,10 +12,12 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.Name)
+            @* Linha 16: Usando o operador null-forgiving (!) para suprimir o aviso, assumindo que Client.Name sempre estará disponível para fins de exibição de nome de coluna. *@
+            @Html.DisplayNameFor(model => model.Client!.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.Name)
+            @* Linha 19: Usando o operador null-conditional (?.) e null-coalescing (?? ) para exibir "N/A" se o cliente ou o nome do cliente for nulo. *@
+            @(Model.Client?.Name ?? "N/A")
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Type)
