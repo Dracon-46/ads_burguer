@@ -4,35 +4,67 @@
     ViewData["Title"] = "Lista de Produtos";
 }
 
-<h1>@ViewData["Title"]</h1>
+<link rel="stylesheet" href="/css/lista.css" />
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Criar Novo Produto</a>
-</p>
+<script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Description)</th>
-            <th>@Html.DisplayNameFor(model => model.Price)</th>
-            <th>@Html.DisplayNameFor(model => model.Category)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="container-geral">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/images/logo_crud.png" alt="">
+        </div>
+        <nav class="menu">
+        <h3>MENU</h3>
+            <ul>
+                <a asp-controller="Home" asp-action="Index"><li> <i class="fa-solid fa-house"></i> Início</li></a>
+                <a asp-controller="Product" asp-action="List"><li><i class="fa-solid fa-box-open"></i> Produtos</li></a>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="conteudo-principal">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <div>
+                <h1>@ViewData["Title"]</h1>
+                <p style="color: #666; margin: 0;">Gerencie os produtos da hamburgueria.</p>
+            </div>
+            <a asp-action="Create" class="btn-novo-produto">+ Novo Produto</a>
+        </div>
+
+        <div style="padding: 0 20px;">
+            <input type="text" placeholder="Buscar produtos..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+        </div>
+
+        <div class="filtros">
+            <button class="ativo">Todos <span class="badge">6</span></button>
+            <button>Promoções <span class="badge">2</span></button>
+            <button>Lanche <span class="badge">2</span></button>
+            <button>Combo <span class="badge">2</span></button>
+            <button>Bebida <span class="badge">2</span></button>
+            <button>Unitários <span class="badge">2</span></button>
+            <button>Sobremesa <span class="badge">2</span></button>
+        </div>
+
+        <div class="produtos-container">
+            @foreach (var item in Model)
+            {
+                <div class="produto-card">
+                    <div class="card-topo">
+                        <h3>@item.Name</h3>
+                        <span class="tag">@item.Category.Name</span>
+                    </div>
+                    <p>@item.Description</p>
+                    <p class="price">R$ @item.Price</p>
+                    <div class="status">
+                        @if (item.Active)
+                        {
+                            <span class="disponivel">✔ Disponível</span>
+                        }
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="excluir"><i class="fa-solid fa-trash"></i> Excluir</a>
+                    </div>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-editar">✏ Editar</a>
+                </div>
+            }
+        </div>
+    </main>
+</div>

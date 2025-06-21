@@ -4,36 +4,41 @@
     ViewData["Title"] = "Excluir Ingrediente";
 }
 
+<link rel="stylesheet" href="/css/excluirCrud.css">
 <h1>Excluir Ingrediente</h1>
 
 <h3>Tem certeza de que deseja excluir este ingrediente?</h3>
-<div>
-    <h4>Ingrediente</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Limit)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Limit)
-        </dd>
-    </dl>
+<div class="container">
+    <div class="product-details">
+        <h4>Ingrediente</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Limit)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Limit)
+            </dd>
+        </dl>
 
-    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Excluir" class="btn btn-danger" /> |
-        <a asp-action="List" class="btn btn-secondary">Cancelar</a>
-    </form>
+        <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-actions">
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+                <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
