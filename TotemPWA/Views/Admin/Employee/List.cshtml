@@ -1,0 +1,54 @@
+@model IEnumerable<TotemPWA.Models.Employee>
+
+@{
+    ViewData["Title"] = "Lista de Funcionários";
+ 
+}
+
+<h1>Lista de Funcionários</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Novo Funcionário</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* Linha 18: Usando o operador null-forgiving (!) para suprimir o aviso, assumindo que Client.Name sempre estará disponível para fins de exibição de nome de coluna. *@
+                @Html.DisplayNameFor(model => model.Client!.Name) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @* Linha 34: Usando o operador null-conditional (?. ) e null-coalescing (?? ) para exibir "N/A" se o cliente ou o nome do cliente for nulo, evitando o aviso CS8602. *@
+                    @(item.Client?.Name ?? "N/A")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ClientId" class="btn btn-warning btn-sm">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.ClientId" class="btn btn-info btn-sm">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ClientId" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* Nota: A action 'Details' não foi implementada no Controller, mas a opção está aqui. Você pode remover ou adicionar depois. *@

@@ -1,0 +1,67 @@
+@model IEnumerable<TotemPWA.Models.Promotion>
+
+@{
+    ViewData["Title"] = "Lista de Promoções";
+}
+
+<link rel="stylesheet" href="/css/lista.css" />
+<script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
+
+<div class="container-geral">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/images/logo_crud.png" alt="">
+        </div>
+        <nav class="menu">
+            <h3>MENU</h3>
+            <ul>
+                <a asp-controller="Home" asp-action="Index">
+                    <li><i class="fa-solid fa-house"></i> Início</li>
+                </a>
+                <a asp-controller="Promotion" asp-action="List">
+                    <li><i class="fa-solid fa-tags"></i> Promoções</li>
+                </a>
+                <a asp-controller="Product" asp-action="List">
+                    <li><i class="fa-solid fa-box-open"></i> Produtos</li>
+                </a>
+                <a asp-controller="Cupom" asp-action="List">
+                    <li><i class="fa-solid fa-ticket"></i> Cupons</li>
+                </a>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="conteudo-principal">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <div>
+                <h1>@ViewData["Title"]</h1>
+                <p style="color: #666; margin: 0;">Gerencie as promoções da hamburgueria.</p>
+            </div>
+            <a asp-action="Create" class="btn-novo-produto">+ Nova Promoção</a>
+        </div>
+
+        <div style="padding: 0 20px;">
+            <input type="text" placeholder="Buscar promoções..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+        </div>
+
+        <div class="produtos-container">
+            @foreach (var item in Model)
+            {
+                <div class="produto-card">
+                    <div class="card-topo">
+                        <h3>@(item.Product?.Name ?? "Produto Não Encontrado")</h3>
+                        <span class="tag">Promoção</span>
+                    </div>
+                    <p>Desconto de <strong>@item.Percent%</strong></p>
+                    <p>Válido até: <strong>@item.ValidUntil.ToString("dd/MM/yyyy")</strong></p>
+                    <div class="status">
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="excluir">
+                            <i class="fa-solid fa-trash"></i> Excluir
+                        </a>
+                    </div>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-editar">✏ Editar</a>
+                </div>
+            }
+        </div>
+    </main>
+</div>

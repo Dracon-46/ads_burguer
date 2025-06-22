@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home CRUD</title>
+  <link rel="stylesheet" href="/css/telahomecrud.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+     <div class="logo">
+      <img src="/images/logo_crud.png" alt="">
+</div>
+      <nav class="menu">
+        <h3>MENU</h3>
+        <ul>
+          <a href="#"><li> <i class="fa-solid fa-house"></i> Início</li></a>
+          <a asp-controller="Product" asp-action="List"><li><i class="fa-solid fa-box-open"></i> Produtos</li></a>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="main-card">
+        <div class="welcome">
+          <h2>Bem-vindo ao <strong>AdsBurguer</strong></h2>
+          <p>Seu painel de controle para <span>gerenciar os produtos.</span></p>
+        </div>
+
+        <div class="cards">
+          <div class="card red">
+            <h3><i class="fa-solid fa-list"></i> Ver Cardápio</h3>
+            <p>Gerencie os produtos disponíveis no cardápio.</p>
+            <a href="@Url.Action("List", "Product")"><button class="btn-gradient">Adicionar Produto</button></a>
+          </div>
+
+          <div class="card orange">
+            <h3><i class="fa-solid fa-layer-group"></i> Ver Categorias</h3>
+            <p>Gerencie as categorias de produtos.</p>
+            <a href="@Url.Action("List", "Category")"><button class="btn-gradient">Adicionar Categoria</button></a>
+          </div>
+
+          <div class="card green">
+            <h3><i class="fa-solid fa-carrot"></i> Ingredientes</h3>
+            <p>Adicione e controle os ingredientes utilizados.</p>
+            <a href="@Url.Action("List", "Ingredient")"><button class="btn-gradient">Adicionar Ingrediente</button></a>
+          </div>
+
+          <div class="card purple">
+            <h3><i class="fa-solid fa-ticket"></i> Cupons</h3>
+            <p>Crie cupons de desconto para seus clientes.</p>
+            <a href="@Url.Action("List", "Coupon")"><button class="btn-gradient">Adicionar Cupom</button></a>
+          </div>
+
+          <div class="card blue">
+            <h3><i class="fa-solid fa-user-tie"></i> Funcionários</h3>
+            <p>Gerencie os dados da equipe e permissões.</p>
+            <a href="@Url.Action("List", "Employee")"><button class="btn-gradient">Adicionar Funcionário</button></a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+ 
+</body>
+</html>

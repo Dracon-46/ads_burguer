@@ -1,0 +1,61 @@
+@model IEnumerable<TotemPWA.Models.Ingredient>
+
+@{
+    ViewData["Title"] = "Lista de Ingredientes";
+}
+
+<link rel="stylesheet" href="/css/list_ingrediente.css" />
+
+<div class="container-geral">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/images/logo_crud.png" alt="">
+        </div>
+        <nav class="menu">
+            <h3>MENU</h3>
+            <ul>
+                <a href="#"><li> <i class="fa-solid fa-house"></i> Início</li></a>
+                <a asp-controller="Product" asp-action="List"><li><i class="fa-solid fa-box-open"></i> Produtos</li></a>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="conteudo-principal">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <div>
+                <h1>@ViewData["Title"]</h1>
+                <p style="color: #666; margin: 0;">Gerencie os ingredientes dos produtos.</p>
+            </div>
+            <a asp-action="Create" class="btn-novo-produto">+ Adicionar Ingrediente</a>
+        </div>
+
+        <div style="padding: 0 20px;">
+            <input type="text" placeholder="Buscar ingredientes..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+        </div>
+
+        <div class="produtos-container">
+            @foreach (var item in Model)
+            {
+                <div class="produto-card">
+                    <div class="card-content">
+                        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                        <div class="ingredient-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Preço:</span>
+                                <span class="detail-value">@Html.DisplayFor(modelItem => item.Price)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Limite:</span>
+                                <span class="detail-value">@Html.DisplayFor(modelItem => item.Limit)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-editar">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-excluir">Excluir</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </main>
+</div>
