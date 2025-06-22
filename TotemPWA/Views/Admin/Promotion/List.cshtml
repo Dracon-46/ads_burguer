@@ -14,18 +14,24 @@
         </div>
         <nav class="menu">
             <h3>MENU</h3>
-            <ul>
-                <a asp-controller="Home" asp-action="Index">
+              <ul>
+                <a asp-controller="Admin" asp-action="Index">
                     <li><i class="fa-solid fa-house"></i> Início</li>
                 </a>
-                <a asp-controller="Promotion" asp-action="List">
-                    <li><i class="fa-solid fa-tags"></i> Promoções</li>
+                <a asp-controller="Category" asp-action="List">
+                    <li><i class="fa-solid fa-layer-group"></i> Categorias</li>
                 </a>
                 <a asp-controller="Product" asp-action="List">
                     <li><i class="fa-solid fa-box-open"></i> Produtos</li>
                 </a>
                 <a asp-controller="Cupom" asp-action="List">
                     <li><i class="fa-solid fa-ticket"></i> Cupons</li>
+                </a>
+                <a asp-controller="Promotion" asp-action="List">
+                    <li><i class="fa-solid fa-tags"></i> Promoções</li>
+                </a>
+                 <a asp-controller="Employee" asp-action="List">
+                    <li><i class="fa-solid fa-users-gear"></i> Funcionários</li>
                 </a>
             </ul>
         </nav>
