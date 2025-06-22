@@ -1,133 +1,23 @@
-@model TotemPWA.Models.Cupom
+@model TotemPWA.ViewModels.ProductViewModel
 
 @{
     ViewData["Title"] = "Criar Cupom";
 }
 
-
-<head>
-    <style>
-        body {
-            background-color: #f8f9fa; /* Fundo suave para toda a página */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais limpa e moderna */
-            margin: 0; /* Remove margens padrão do corpo */
-            padding: 0; /* Remove preenchimento padrão do corpo */
-        }
-
-        h1 {
-            color: #007bff; /* Azul primário vibrante para o título */
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 600; /* Um pouco mais de peso */
-            font-size: 2.5em; /* Título maior */
-            padding-top: 20px; /* Espaçamento no topo */
-        }
-
-        h4 {
-            color: #343a40; /* Cor escura para o subtítulo */
-            margin-top: 25px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid #dee2e6; /* Linha divisória neutra */
-            padding-bottom: 15px;
-            text-align: center; /* Centraliza o subtítulo */
-            font-size: 1.5em;
-        }
-
-        /* Contêiner principal do formulário */
-        .row {
-            justify-content: center; /* Centraliza a coluna do formulário */
-            margin-top: 30px; /* Mais espaço acima do formulário */
-        }
-
-        /* Estilo para a caixa do formulário (col-md-4) */
-        .col-md-4 {
-            background-color: #ffffff; /* Fundo branco para a caixa do formulário */
-            padding: 30px; /* Preenchimento interno generoso */
-            border-radius: 8px; /* Cantos bem arredondados */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidade */
-            transition: all 0.3s ease; /* Transição suave para efeitos de hover */
-        }
-
-        .col-md-4:hover {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Sombra ligeiramente maior ao passar o mouse */
-        }
-
-        /* Estilo para os campos de input (geralmente .form-control do Bootstrap) */
-        .form-control {
-            border-radius: 5px; /* Cantos arredondados */
-            border: 1px solid #ced4da; /* Borda padrão */
-            padding: 10px; /* Preenchimento confortável */
-            width: 100%; /* Ocupa toda a largura disponível */
-            box-sizing: border-box; /* Garante que padding não aumente a largura total */
-        }
-
-        .form-control:focus {
-            border-color: #007bff; /* Borda azul ao focar */
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra de foco sutil */
-            outline: none; /* Remove o outline padrão do navegador */
-        }
-
-        /* Estilo para o grupo de botões */
-        .form-group.mt-3 {
-            display: flex; /* Para alinhar os botões lado a lado */
-            gap: 15px; /* Espaço entre os botões */
-            justify-content: flex-end; /* Alinha os botões à direita */
-            margin-top: 30px; /* Mais espaço acima dos botões */
-        }
-
-        /* Botão "Criar" (verde) */
-        .btn-success {
-            background-color: #28a745; /* Verde Bootstrap */
-            border-color: #28a745;
-            padding: 12px 25px; /* Preenchimento */
-            font-size: 1em;
-            font-weight: 500;
-            border-radius: 5px;
-            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease; /* Transições suaves */
-        }
-
-        .btn-success:hover {
-            background-color: #218838; /* Verde mais escuro ao hover */
-            border-color: #1e7e34;
-            transform: translateY(-2px); /* Pequeno efeito de "levantar" */
-        }
-
-        /* Botão "Voltar para a Lista" (cinza) */
-        .btn-secondary {
-            background-color: #6c757d; /* Cinza Bootstrap */
-            border-color: #6c757d;
-            padding: 12px 25px;
-            font-size: 1em;
-            font-weight: 500;
-            border-radius: 5px;
-            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268; /* Cinza mais escuro ao hover */
-            border-color: #545b62;
-            transform: translateY(-2px); /* Pequeno efeito de "levantar" */
-        }
-
-        /* Mensagens de validação de erro */
-        .text-danger {
-            color: #dc3545; /* Vermelho de erro do Bootstrap */
-            font-size: 0.875em; /* Tamanho um pouco menor */
-            margin-top: 8px;
-        }
-    </style>
-</head>
+<link rel="stylesheet" href="/css/form_crud.css" />
 
 <h1>Criar Cupom</h1>
 
 <h4>Cupom</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            {{-- A PARTIAL VIEW "_Form" DEVE CONTER OS CAMPOS DO FORMULÁRIO --}}
-            <partial name="_Form" model="Model" /> 
+
+            <partial name="_Form" model="Model" />
+
             <div class="form-group mt-3">
                 <input type="submit" value="Criar" class="btn btn-success" />
                 <a asp-action="List" class="btn btn-secondary">Voltar para a Lista</a>

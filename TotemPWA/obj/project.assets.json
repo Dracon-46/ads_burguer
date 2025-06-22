@@ -5460,7 +5460,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vaio\\.nuget\\packages\\": {}
+    "C:\\Users\\Windows\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -5468,11 +5468,11 @@
       "projectUniqueName": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
       "projectName": "TotemPWA",
       "projectPath": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
-      "packagesPath": "C:\\Users\\Vaio\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
       "outputPath": "C:\\ads_burguer\\totempwa\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vaio\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Windows\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -5550,7 +5550,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

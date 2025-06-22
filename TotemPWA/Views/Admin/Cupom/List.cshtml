@@ -1,36 +1,76 @@
 @model IEnumerable<TotemPWA.Models.Cupom>
 
 @{
-    ViewData["Title"] = "Lista de Cupons";
+    ViewData["Title"] = "Cupons";
 }
 
-<h1>@ViewData["Title"]</h1>
+<link rel="stylesheet" href="/css/lista.css" />
+<script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Criar Novo Cupom</a>
-</p>
+<div class="container-geral">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/images/logo_crud.png" alt="">
+        </div>
+        <nav class="menu">
+            <h3>MENU</h3>
+            <ul>
+                <a asp-controller="Home" asp-action="Index"><li><i class="fa-solid fa-house"></i> Início</li></a>
+                <a asp-controller="Cupom" asp-action="List"><li><i class="fa-solid fa-ticket"></i> Cupons</li></a>
+                <a asp-controller="Product" asp-action="List"><li><i class="fa-solid fa-box-open"></i> Produtos</li></a>
+            </ul>
+        </nav>
+    </aside>
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Code)</th>
-            <th>@Html.DisplayNameFor(model => model.Type)</th>
-            <th>@Html.DisplayNameFor(model => model.Value)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Code)</td>
-                <td>@Html.DisplayFor(modelItem => item.Type)</td>
-                <td>@Html.DisplayFor(modelItem => item.Value)</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <main class="conteudo-principal">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <div>
+                <h1>@ViewData["Title"]</h1>
+                <p style="color: #666; margin: 0;">Gerencie os cupons de desconto da hamburgueria.</p>
+            </div>
+            <a asp-action="Create" class="btn-novo-produto">+ Novo Cupom</a>
+        </div>
+
+        <div style="padding: 0 20px;">
+            <input type="text" placeholder="Buscar cupons..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+        </div>
+
+        <div class="filtros">
+            <button class="ativo">Todos <span class="badge">@Model.Count()</span></button>
+            <button>Desconto %</button>
+            <button>Desconto R$</button>
+            <button>Frete Grátis</button>
+        </div>
+
+        <div class="produtos-container">
+            @foreach (var item in Model)
+            {
+                <div class="produto-card">
+                    <div class="card-topo">
+                        <h3>@item.Code</h3>
+                        <span class="tag">@item.Type</span>
+                    </div>
+                    <p>Valor: 
+                        @if (item.Type == "Porcentagem")
+                        {
+                            @($"{item.Value}%")
+                        }
+                        else if (item.Type == "Frete Grátis")
+                        {
+                            @("Frete Grátis")
+                        }
+                        else
+                        {
+                            @($"R$ {item.Value}")
+                        }
+                    </p>
+                    <div class="status">
+                        <span class="disponivel">✔ Ativo</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="excluir"><i class="fa-solid fa-trash"></i> Excluir</a>
+                    </div>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-editar">✏ Editar</a>
+                </div>
+            }
+        </div>
+    </main>
+</div>

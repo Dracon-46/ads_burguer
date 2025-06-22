@@ -1,52 +1,56 @@
 @model TotemPWA.Models.Product
 
 @{
-    ViewData["Title"] = "Excluir Produto";
+    ViewData["Title"] = "Excluir Promoção";
 }
 
-<h1>Excluir Produto</h1>
+<link rel="stylesheet" href="/css/excluirCrud.css" />
 
-<h3>Tem certeza de que deseja excluir este produto?</h3>
-<div>
-    <h4>Produto</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class="col-sm-9">
-            @* Linha 36: Usando o operador null-conditional (?.) e null-coalescing (?? ) para exibir "N/A" se a categoria ou o nome da categoria for nulo. *@
-            @(Model.Category?.Name ?? "N/A")
-        </dd>
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Active)
-        </dd>
-    </dl>
+<div class="container">
+    <h1>Excluir Promoção</h1>
 
-    <form asp-action="ConfirmDelete" asp-route-id="@Model.Id">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Excluir" class="btn btn-danger" /> |
-        <a asp-action="List" class="btn btn-secondary">Cancelar</a>
-    </form>
+    <h3>Tem certeza de que deseja excluir esta promoção?</h3>
+    <div class="product-details">
+        <h4>Produto</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd class="col-sm-9">
+                @* Linha 36: Usando o operador null-conditional (?.) e null-coalescing (?? ) para exibir "N/A" se a categoria ou o nome da categoria for nulo. *@
+                @(Model.Category?.Name ?? "N/A")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+        </dl>
+
+        <form asp-action="ConfirmDelete" asp-route-id="@Model.Id">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Excluir" class="btn btn-danger" /> |
+            <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>    
 </div>
