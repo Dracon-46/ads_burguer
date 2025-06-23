@@ -5460,24 +5460,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\0031432512005\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\arthu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\TotemPWA.csproj",
+      "projectUniqueName": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
       "projectName": "TotemPWA",
-      "projectPath": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\TotemPWA.csproj",
-      "packagesPath": "C:\\Users\\0031432512005\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\obj\\",
+      "projectPath": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
+      "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
+      "outputPath": "C:\\ads_burguer\\totempwa\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\0031432512005\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5503,7 +5498,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -5557,7 +5552,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
