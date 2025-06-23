@@ -1,0 +1,160 @@
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-geral {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    .conteudo-principal {
+        flex: 1;
+        background-color: #f7f7f7;
+    }
+
+    .sidebar {
+        width: 220px;
+        background: #fff;
+        border-right: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    .logo img {
+        width: 120%;
+        margin-left: -20px;
+    }
+
+    .menu h3 {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #777;
+    }
+
+    .menu a {
+        text-decoration: none;
+        color: inherit;
+        align-items: center;
+        padding: 10px 0;
+        font-weight: 600;
+    }
+
+    .menu ul {
+        list-style: none;
+        margin-top: 10px;
+        margin-left: -45px;
+    }
+
+    .menu li {
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        color: #444;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .menu li span {
+        margin-right: 8px;
+    }
+
+    .menu i {
+        margin: 5px;
+    }
+
+    .produtos-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .produto-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 80%;
+        min-height: 15px;
+    }
+
+    .card-content {
+        margin-bottom: 15px;
+    }
+
+    .ingredient-details {
+        margin-top: 15px;
+    }
+
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .detail-label {
+        color: #666;
+        font-weight: 500;
+    }
+
+    .detail-value {
+        color: #333;
+        font-weight: 600;
+    }
+
+    .card-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+
+    .btn-novo-produto {
+        background-color: #920000;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: 0.3s;
+    }
+
+    .btn-novo-produto:hover {
+        background-color: #7b0000;
+    }
+
+    .btn-editar {
+        padding: 8px 15px;
+        background-color: white;
+        color: #920000;
+        border: 1px solid #920000;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-editar:hover {
+        background-color: #f0eaea;
+    }
+
+    .btn-excluir {
+        padding: 8px 15px;
+        background-color: white;
+        color: #dc3545;
+        border: 1px solid #dc3545;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-excluir:hover {
+        background-color: #f8d7da;
+    }

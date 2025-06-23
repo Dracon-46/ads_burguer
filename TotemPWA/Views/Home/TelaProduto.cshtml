@@ -33,7 +33,7 @@
           {
             string activeClass = category.active ? "active" : "";
           
-            <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.id'">
+            <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.slug'">
                 <div class="icon">
                     <img src="@category.icon" />
                 </div>
@@ -49,7 +49,7 @@
           @foreach (var subcategory in ViewBag.SubCategories)
           {
               string activeClass = subcategory.active ? "active" : "";
-              <button class="@activeClass" onclick="location.href='/TelaProduto/@ViewBag.Category/@subcategory.id'">
+              <button class="@activeClass" onclick="location.href='/TelaProduto/@ViewBag.CategorySlug/@subcategory.slug'">
                   @subcategory.name
               </button>
           }

@@ -1,0 +1,31 @@
+@model TotemPWA.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Criar Produto";
+}
+
+<link rel="stylesheet" href="/css/form_crud.css" />
+
+<h1>Criar Produto</h1>
+
+<h4>Produto</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <partial name="_Form" model="Model" />
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Criar" class="btn btn-success" />
+                <a asp-action="List" class="btn btn-secondary">Voltar para a Lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
