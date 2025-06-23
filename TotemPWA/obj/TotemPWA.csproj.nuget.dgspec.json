@@ -1,20 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ads_burguer\\totempwa\\TotemPWA.csproj": {}
+    "C:\\Conteudo\\ads_burguer\\totempwa\\TotemPWA.csproj": {}
   },
   "projects": {
-    "C:\\ads_burguer\\totempwa\\TotemPWA.csproj": {
+    "C:\\Conteudo\\ads_burguer\\totempwa\\TotemPWA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
+        "projectUniqueName": "C:\\Conteudo\\ads_burguer\\totempwa\\TotemPWA.csproj",
         "projectName": "TotemPWA",
+<<<<<<< HEAD
         "projectPath": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
         "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
         "outputPath": "C:\\ads_burguer\\totempwa\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "projectPath": "C:\\Conteudo\\ads_burguer\\totempwa\\TotemPWA.csproj",
+        "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+        "outputPath": "C:\\Conteudo\\ads_burguer\\totempwa\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> origin/feature/FuncionalidadesCRUD
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
