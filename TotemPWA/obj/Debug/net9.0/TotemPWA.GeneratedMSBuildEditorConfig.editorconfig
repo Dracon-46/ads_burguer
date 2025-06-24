@@ -168,16 +168,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ads_burguer/TotemPWA/Views/Home/PersonalizarAcompanhamentos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJBY29tcGFuaGFtZW50b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Home/PersonalizarBebidas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJCZWJpZGFzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ads_burguer/TotemPWA/Views/Home/PersonalizarCombo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJDb21iby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ads_burguer/TotemPWA/Views/Home/SelecionarPagamento.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWxlY2lvbmFyUGFnYW1lbnRvLmNzaHRtbA==
+[C:/ads_burguer/TotemPWA/Views/Home/PersonalizarIngredientes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJJbmdyZWRpZW50ZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ads_burguer/TotemPWA/Views/Home/SelecionarPedido.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWxlY2lvbmFyUGVkaWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Home/TelaCarrinho.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZWxhQ2FycmluaG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ads_burguer/TotemPWA/Views/Home/TelaCPF.cshtml]
@@ -202,6 +214,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ads_burguer/TotemPWA/Views/Home/TelaProduto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZWxhUHJvZHV0by5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Payment/SelecionarPagamento.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxTZWxlY2lvbmFyUGFnYW1lbnRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Payment/TelaPagamentoCartao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxUZWxhUGFnYW1lbnRvQ2FydGFvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Payment/TelaPagamentoCartDigital.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxUZWxhUGFnYW1lbnRvQ2FydERpZ2l0YWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Payment/TelaPagamentoDinheiro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxUZWxhUGFnYW1lbnRvRGluaGVpcm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Payment/TelaPagamentoPix.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxUZWxhUGFnYW1lbnRvUGl4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ads_burguer/TotemPWA/Views/Shared/Error.cshtml]

@@ -1,0 +1,175 @@
+/* Estilo Burguer - Tema Vibrante */
+:root {
+    --vermelho-vivo: #FF3A2D;
+    --laranja-energetico: #FF6B35;
+    --amarelo-dourado: #FFA630;
+    --branco-creme: #FFF8F0;
+    --preto-sombra: #2D2D2A;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--branco-creme);
+    color: var(--preto-sombra);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-fullscreen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, var(--vermelho-vivo), var(--laranja-energetico));
+    padding: 2rem;
+    color: white;
+}
+
+.payment-header-burguer {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+}
+
+.payment-header-burguer h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+}
+
+.payment-header-burguer h2 {
+    font-size: 2rem;
+    margin: 0.5rem 0 0 0;
+    font-weight: 600;
+}
+
+.payment-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--branco-creme);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.payment-method {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.payment-icon-burguer {
+    font-size: 4rem;
+    margin: 1rem 0;
+    color: var(--vermelho-vivo);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.payment-form-burguer {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.btn-burguer {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin: 0.5rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-confirm-burguer {
+    background-color: var(--laranja-energetico);
+    color: white;
+}
+
+.btn-confirm-burguer:hover {
+    background-color: #E05A2B;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary-burguer {
+    background-color: var(--branco-creme);
+    color: var(--preto-sombra);
+    border: 2px solid var(--laranja-energetico);
+}
+
+.btn-secondary-burguer:hover {
+    background-color: #FFE8D6;
+    transform: translateY(-2px);
+}
+
+.btn-cancel-burguer {
+    background-color: var(--preto-sombra);
+    color: white;
+}
+
+.btn-cancel-burguer:hover {
+    background-color: #1A1A17;
+    transform: translateY(-2px);
+}
+
+.payment-alert-burguer {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-weight: 500;
+}
+
+.alert-danger {
+    background-color: #FFD3D0;
+    color: #D32F2F;
+    border-left: 5px solid #D32F2F;
+}
+
+.alert-success {
+    background-color: #D8F5D1;
+    color: #388E3C;
+    border-left: 5px solid #388E3C;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .payment-fullscreen {
+        padding: 1rem;
+    }
+    
+    .payment-header-burguer h1 {
+        font-size: 2.5rem;
+    }
+    
+    .payment-header-burguer h2 {
+        font-size: 1.5rem;
+    }
+    
+    .payment-content {
+        padding: 1.5rem;
+    }
+}
+
+/* Efeitos especiais */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.payment-icon-burguer:hover {
+    animation: pulse 1s infinite;
+}

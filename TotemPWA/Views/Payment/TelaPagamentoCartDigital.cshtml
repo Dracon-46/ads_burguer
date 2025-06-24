@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Pagamento - Cartão Digital";
+    var erro = TempData["Erro"] as string;
+    var sucesso = TempData["Sucesso"] as string;
+}
+
+<link rel="stylesheet" href="~/css/pagamento-burguer.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<div class="payment-fullscreen">
+    <div class="payment-header-burguer">
+        <h1>Burguer</h1>
+        <h2>Cartão Digital</h2>
+    </div>
+
+    <div class="payment-content">
+        <div class="payment-method">
+            <i class="fas fa-wallet payment-icon-burguer"></i>
+            <p>Apple Pay e Google Pay</p>
+
+            @if (!string.IsNullOrEmpty(erro))
+            {
+                <div class="payment-alert-burguer alert-danger">@erro</div>
+            }
+
+            @if (!string.IsNullOrEmpty(sucesso))
+            {
+                <div class="payment-alert-burguer alert-success">@sucesso</div>
+            }
+
+            <form method="post" asp-action="ValidarPagamento" class="payment-form-burguer">
+                <input type="hidden" name="metodo" value="CartaoDigital" />
+                <button type="submit" class="btn-burguer btn-confirm-burguer">
+                    <i class="fas fa-check-circle"></i> Confirmar Pagamento
+                </button>
+            </form>
+
+            <div class="payment-buttons">
+                <a asp-action="SelecionarPagamento" class="btn-burguer btn-secondary-burguer">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+                <a asp-action="SelecionarPagamento" class="btn-burguer btn-cancel-burguer">
+                    <i class="fas fa-times-circle"></i> Cancelar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

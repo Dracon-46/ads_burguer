@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L7M8km2/SIk=",
+  "dgSpecHash": "b6GpVLTuZp8=",
   "success": true,
-  "projectFilePath": "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
+  "projectFilePath": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\arthu\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\arthu\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

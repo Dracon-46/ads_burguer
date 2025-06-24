@@ -43,10 +43,6 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult SelecionarPagamento()
-    {
-        return View();
-    }
       public IActionResult Cupom()
     {
         return View();

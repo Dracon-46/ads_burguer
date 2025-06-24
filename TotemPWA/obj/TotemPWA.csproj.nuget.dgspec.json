@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj": {}
+    "C:\\ads_burguer\\totempwa\\TotemPWA.csproj": {}
   },
   "projects": {
-    "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj": {
+    "C:\\ads_burguer\\totempwa\\TotemPWA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
+        "projectUniqueName": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
         "projectName": "TotemPWA",
-        "projectPath": "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
+        "projectPath": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
         "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
-        "outputPath": "C:\\ads_burguer\\TotemPWA\\obj\\",
+        "outputPath": "C:\\ads_burguer\\totempwa\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
