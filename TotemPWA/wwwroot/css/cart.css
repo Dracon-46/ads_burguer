@@ -1,0 +1,177 @@
+/* cart.css */
+:root {
+    --primary-color: #990000;
+    --secondary-color: #426B1F;
+    --tertiary-color: #FF6501;
+    --text-color: #3f3f3f;
+    --bg-color: #FFFFFF;
+    --bg-color2: #F1F1F1;
+    --hover-color: #f58941;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 8px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: var(--text-color);
+    padding: 20px;
+}
+
+h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+/* Estilos da tabela */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-md);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--bg-color2);
+    vertical-align: middle;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+/* Estilos dos botões */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #880000;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-success {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #365a19;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Total do pedido */
+p strong {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+/* Container dos botões de ação */
+.mt-3 {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Mensagem de carrinho vazio */
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    padding: 30px;
+    background-color: var(--bg-color2);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .mt-3 {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .table th, 
+    .table td {
+        padding: 10px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.table tbody tr {
+    animation: fadeIn 0.3s ease forwards;
+    animation-delay: calc(var(--i) * 0.05s);
+    opacity: 0;
+}

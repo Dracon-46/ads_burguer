@@ -1,0 +1,65 @@
+@model List<TotemPWA.Models.ViewModels.CartItemViewModel>
+
+@{
+    ViewData["Title"] = "Carrinho";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+    
+</body>
+</html>
+<h2>Seu Carrinho</h2>
+
+@if (!Model.Any())
+{
+    <p>Seu carrinho está vazio.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Total</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>R$ @item.Price.ToString("F2")</td>
+                    <td>R$ @(item.Price * item.Quantity).ToString("F2")</td>
+                    <td>
+                        <form asp-action="RemoveItem" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p><strong>Total do Pedido:</strong> R$ @Model.Sum(x => x.Price * x.Quantity).ToString("F2")</p>
+
+    <form asp-action="Clear" method="post">
+        <button class="btn btn-warning">Esvaziar Carrinho</button>
+    </form>
+}
+
+<div class="mt-3">
+    <a href="@Url.Action("TelaProduto", "Home")" class="btn btn-primary">Continuar Comprando</a>
+    <a href="@Url.Action("Cupom", "Home")" class="btn btn-success">Finalizar Pedido</a>
+</div>

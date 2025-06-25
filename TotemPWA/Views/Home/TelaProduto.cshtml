@@ -1,3 +1,5 @@
+@model List<TotemPWA.Models.ViewModels.CartItemViewModel>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -59,79 +61,54 @@
           @foreach (var product in ViewBag.Products)
           {
               <div class="produto">
-                  <button class="btn-produto" data-nome="@product.name" data-preco="@product.price" data-imagem="https://fakeimg.pl/60x60/?retina=1&text=%F0%9F%8D%95">
+                  <div class="btn-produto">
                       <img src="https://fakeimg.pl/60x60/?retina=1&text=%F0%9F%8D%95" alt="@product.name">
                       <span class="nome">@product.name</span>
                       <span class="valor">@product.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
                       <p class="descricao">Descrição do produto</p>
-                  </button>
+                      
+                      <form asp-controller="Cart" asp-action="AddItem" method="post">
+                          <input type="hidden" name="productId" value="@product.id" />
+                          <button type="submit" class="btn-add-cart">Adicionar</button>
+                      </form>
+                  </div>
               </div>
           }
         </div>
       </div>
     </div>
 
-<!-- Rodapé / Carrinho -->
-<div class="carrinho">
-    <div class="car-left">
-      <div>
-        <span class="total-itens">Total de itens: 
-          <span id="footer-total-items">0</span>
-        </span>
-        <span class="total-pedidos">Total do Pedido: 
-          <span id="footer-total-price" style="color: #426b1f;">R$ 0,00</span>
-        </span>
-      </div>
+    <!-- Rodapé / Carrinho -->
+    <div class="carrinho">
+        <div class="car-left">
+            <div>
+                <span class="total-itens">Total de itens: 
+                    <span id="footer-total-items">@(Model?.Sum(item => item.Quantity) ?? 0)</span>
+                </span>
+                <span class="total-pedidos">Total do Pedido: 
+                    <span id="footer-total-price" style="color: #426b1f;">R$ @((Model?.Sum(item => item.Price * item.Quantity) ?? 0).ToString("F2"))</span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="car-center">
+            <span class="view">VER CARRINHO</span>
+            <a href="@Url.Action("Index", "Cart")" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+        
+        <div class="car-right">
+            <div>
+                <a href="@Url.Action("Cupom", "Home")" class="btn">Próximo</a>
+            </div>
 
-    
-    </div>
-    
-    <div class="car-center">
-      <span class="view">VER CARRINHO</span>
-      <a href="#" class="btn-car"><i class="fa-solid fa-cart-shopping"></i></a>
-    </div>
-    
-    <div class="car-right">
-      <div>
-      <!-- Opção 1 -->
-        <a href="@Url.Action("Cupom", "Home")" class="btn">Próximo</a>
-      <!-- Opção 2 -->
-      <!-- <a href="TelaCPF" class="btn-pro">Próximo</a> -->
-      </div>
-
-      <div>
-        <a href="/" class="btn">Voltar ao Início</a>
-      </div>
-
-    </div>
-</div>
-
-<!-- Modal do Carrinho -->
-<div id="cart-modal" class="cart-modal">
-  <div class="cart-content">
-    <div class="cart-header">
-      <h2>Seu Carrinho</h2>
-      <span class="close-cart">&times;</span>
-    </div>
-    
-    <div class="cart-items">
-      <!-- Itens serão adicionados dinamicamente aqui -->
-    </div>
-    
-    <div class="cart-summary">
-      <p>Total de itens: <span id="modal-total-items">0</span></p>
-      <p>Total do pedido: <span id="modal-total-price">R$ 0,00</span></p>
-    </div>
-    
-    <div class="cart-actions">
-      <button class="cancel-button">Fechar</button>
-      <button class="confirm-button">Confirmar Pedido</button>
+            <div>
+                <a href="/" class="btn">Voltar ao Início</a>
+            </div>
+        </div>
     </div>
   </div>
-</div>
 
-  <!-- Scripts -->
-  <script src="/js/telacarrinho.js"></script>
+  <!-- Scripts (remova o telacarrinho.js) -->
   <script src="/js/telaproduto.js"></script>
   <script src="/js/personalizar.js"></script>
 </body>

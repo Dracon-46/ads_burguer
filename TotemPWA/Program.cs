@@ -1,21 +1,27 @@
 using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
-using TotemPWA.Utilities; // <-- Mantenha este using para seu expander
+using TotemPWA.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// CORREÇÃO AQUI: Adiciona Controllers com Views e configura Razor Options para o ViewLocationExpander
 builder.Services.AddControllersWithViews()
-    .AddRazorOptions(options => // <-- Método correto para ViewLocationExpanders
+    .AddRazorOptions(options =>
     {
         options.ViewLocationExpanders.Add(new AdminViewLocationExpander());
     });
 
-// Resto dos serviços...
+// Configuração do banco de dados
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("SQLLiteConnection"))
-);
+    options.UseSqlite(builder.Configuration.GetConnectionString("SQLLiteConnection")));
+
+// Configuração da sessão (ADICIONE ESTE BLOCO)
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,22 +32,14 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
-     // Apaga o banco de dados completamente
     // context.Database.EnsureDeleted(); 
-
-    // Aplica as migrações do zero
     // context.Database.Migrate();       
-
-    // Executa o Seed (inicialização de dados)
     await DbInitializer.InitializeAsync(context);
 }
 
-// Configura o pipeline de requisições HTTP.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production 
-    // scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -51,20 +49,18 @@ app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TotemPWA AP
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+// Habilitar sessão (ADICIONE ESTA LINHA - deve vir após UseRouting e antes de UseAuthorization)
+app.UseSession();
+
 app.UseAuthorization();
 
-app.MapControllers(); // Mantenha esta linha
-
-// Certifique-se de que a rota 'admin' com '{area:exists}' foi removida
-// app.MapControllerRoute(
-//     name: "admin",
-//     pattern: "{area:exists}/{controller=Home}/{action=Index}"); 
-
-app.MapStaticAssets(); // Mantenha se for seu método de extensão
+app.MapControllers();
+app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets(); // Mantenha se for seu método de extensão
+    .WithStaticAssets();
 
 app.Run();
