@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
+using TotemPWA.Models.ViewModels;
+using TotemPWA.Utilities;
 
 namespace TotemPWA.Controllers;
 
@@ -10,7 +12,6 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
-
 
     public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
     {
@@ -22,32 +23,33 @@ public class HomeController : Controller
     {
         return View();
     }
-    //  public IActionResult TelaProduto()
-    // {
-    //     return View();
-    // }
 
     public IActionResult TelaCPF()
     {
         return View();
     }
+
     public IActionResult TelaNome()
     {
         return View();
     }
+
     public IActionResult TelaHome_Crud()
     {
         return View();
     }
-     public IActionResult SelecionarPedido()
+
+    public IActionResult SelecionarPedido()
     {
         return View();
     }
-      public IActionResult Cupom()
+
+    public IActionResult Cupom()
     {
         return View();
     }
-         public IActionResult TelaFinal()
+
+    public IActionResult TelaFinal()
     {
         return View();
     }
@@ -56,6 +58,7 @@ public class HomeController : Controller
     {
         return View();
     }
+
     public IActionResult TelaPersoCombo()
     {
         return View();
@@ -67,8 +70,7 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-
-    [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]     // <<< USAR ESTA NOVA ROTA
+    [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
     public async Task<IActionResult> TelaProduto(string categorySlug, string subcategorySlug = null)
     {
         // 1. Encontrar a categoria ativa usando o SLUG
@@ -100,9 +102,9 @@ public class HomeController : Controller
             {
                 id = c.Id,
                 name = c.Name,
-                slug = c.Slug, // <<< Importante passar o slug para a View
+                slug = c.Slug,
                 icon = c.Icon,
-                active = c.Id == activeCategoryId // A lógica de 'active' continua a mesma
+                active = c.Id == activeCategoryId
             })
             .ToList();
 
@@ -132,15 +134,14 @@ public class HomeController : Controller
             {
                 id = c.Id,
                 name = c.Name,
-                slug = c.Slug, // <<< Importante passar o slug para a View
+                slug = c.Slug,
                 icon = c.Icon,
                 active = c.Id == activeSubcategoryId
             })
             .ToList();
 
         // 3. Buscar produtos com base no ID da subcategoria ativa
-        // (A lógica aqui não muda, pois já depende do ID que acabamos de descobrir)
-        var products = new List<object>(); // Inicia uma lista vazia
+        var products = new List<object>();
         if (activeSubcategoryId != null)
         {
             products = await _context.Products
@@ -149,32 +150,26 @@ public class HomeController : Controller
                 {
                     id = p.Id,
                     name = p.Name,
-                    price = p.Price
+                    price = p.Price,
+                    image = p.Image
                 })
-                .ToListAsync<object>(); // Converte para lista de objetos
+                .ToListAsync<object>();
         }
 
-        // 4. Passar os dados para a ViewBag (usando o slug da categoria principal)
-        ViewBag.CategorySlug = activeCategory.Slug; // <<< MUDANÇA: Envie o SLUG, não o ID.
+        // Obter o carrinho da sessão
+        var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+
+        // Passar os dados para a ViewBag
+        ViewBag.CategorySlug = activeCategory.Slug;
         ViewBag.Categories = rootCategories;
         ViewBag.SubCategories = subcategories;
         ViewBag.Products = products;
 
-        // return Ok(
-        //     new
-        //     {
-        //         CategorySlug = activeCategory.Slug,
-        //         Categories = rootCategories,
-        //         SubCategories = subcategories,
-        //         Products = products
-        //     }
-        // );
-
-        return View();
+        // Passar o carrinho como modelo para a view
+        return View(cart);
     }
 
-    // crud 
-
+    // CRUD 
     public IActionResult CardapioCrud()
     {
         return View();

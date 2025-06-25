@@ -148,6 +148,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvbW90aW9uXF9Gb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ads_burguer/TotemPWA/Views/Cart/Cart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxDYXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ads_burguer/TotemPWA/Views/Home/CardapioCrud.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXJkYXBpb0NydWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -186,10 +190,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ads_burguer/TotemPWA/Views/Home/SelecionarPedido.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWxlY2lvbmFyUGVkaWRvLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ads_burguer/TotemPWA/Views/Home/TelaCarrinho.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZWxhQ2FycmluaG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ads_burguer/TotemPWA/Views/Home/TelaCPF.cshtml]
