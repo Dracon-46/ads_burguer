@@ -19,8 +19,9 @@
       <input type="text" placeholder="CPF" class="inputCPF" maxlength="14">
       <div class="simple-keyboard"></div>
       <div class="btns">
-          <a href="TelaNome" class="cont">Continuar</a>
-          <a href="TelaProduto" class="voltar">Voltar</a>
+          <a href="@Url.Action("Index", "Home")" ><button class="voltar">Voltar</button></a></button>
+          <a href="@Url.Action("SelecionarPedido", "Home")" ><button class="cont">Confirmar</button></a>
+          <a href="@Url.Action("TelaNome", "Home")" >Continuar com nome</a>
       </div>
     </div>
     <script src="https://unpkg.com/simple-keyboard/build/index.js"></script>
