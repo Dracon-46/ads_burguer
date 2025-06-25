@@ -1,6 +1,6 @@
 /* Estilo Burguer - Tema Vibrante */
 :root {
-    --vermelho-vivo: #FF3A2D;
+    --vermelho-vivo: #426b1f;
     --laranja-energetico: #FF6B35;
     --amarelo-dourado: #FFA630;
     --branco-creme: #FFF8F0;
@@ -22,17 +22,17 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, var(--vermelho-vivo), var(--laranja-energetico));
+    /* background: linear-gradient(160deg, var(--branco-creme), var(--vermelho-vivo)); */
     padding: 2rem;
-    color: white;
 }
 
 .payment-header-burguer {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 16px;
+    background-image: url('/images/lanche.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 25vh;
+    border-radius: 16px 16px 0px 0px;
 }
 
 .payment-header-burguer h1 {
@@ -56,7 +56,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--branco-creme);
-    border-radius: 16px;
+    border-radius: 0 0 16px 16px;
     padding: 2rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
@@ -65,6 +65,18 @@ body {
     width: 100%;
     max-width: 500px;
     text-align: center;
+}
+.payment-method .div p{
+    background-color: red;
+}
+
+.payment-buttons {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: center;
 }
 
 .payment-icon-burguer {
@@ -91,6 +103,7 @@ body {
     max-width: 300px;
     margin: 0.5rem 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
 }
 
 .btn-confirm-burguer {
@@ -144,31 +157,6 @@ body {
     border-left: 5px solid #388E3C;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .payment-fullscreen {
-        padding: 1rem;
-    }
-    
-    .payment-header-burguer h1 {
-        font-size: 2.5rem;
-    }
-    
-    .payment-header-burguer h2 {
-        font-size: 1.5rem;
-    }
-    
-    .payment-content {
-        padding: 1.5rem;
-    }
-}
-
-/* Efeitos especiais */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
 
 .payment-icon-burguer:hover {
     animation: pulse 1s infinite;
