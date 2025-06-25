@@ -5460,19 +5460,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\arthu\\.nuget\\packages\\": {}
+    "C:\\Users\\Isabella\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
+      "projectUniqueName": "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
       "projectName": "TotemPWA",
-      "projectPath": "C:\\ads_burguer\\totempwa\\TotemPWA.csproj",
-      "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
-      "outputPath": "C:\\ads_burguer\\totempwa\\obj\\",
+      "projectPath": "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
+      "packagesPath": "C:\\Users\\Isabella\\.nuget\\packages\\",
+      "outputPath": "C:\\ads_burguer\\TotemPWA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Isabella\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5498,7 +5498,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -5552,7 +5552,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

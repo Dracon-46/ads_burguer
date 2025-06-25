@@ -24,12 +24,11 @@
 </head>
 <body>
   <div class="container">
-    <!-- Banner -->
-    <div class="banner"></div>
+    
+    <div class="banner"></div> <!-- Banner -->
 
     <div class="content">
-      <!-- Menu Lateral -->
-      <div class="left">
+      <div class="left"> <!-- Menu Lateral -->
         <div class="selection">
           @foreach (var category in ViewBag.Categories)
           {
@@ -45,8 +44,8 @@
         </div>
       </div>
 
-      <!-- Seção Principal -->
-      <div class="right">
+      
+      <div class="right"> <!-- Seção Principal -->
         <div class="filtro">
           @foreach (var subcategory in ViewBag.SubCategories)
           {
@@ -60,19 +59,19 @@
         <div class="produto-lista">
           @foreach (var product in ViewBag.Products)
           {
-              <div class="produto">
-                  <div class="btn-produto">
-                      <img src="https://fakeimg.pl/60x60/?retina=1&text=%F0%9F%8D%95" alt="@product.name">
-                      <span class="nome">@product.name</span>
-                      <span class="valor">@product.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
-                      <p class="descricao">Descrição do produto</p>
-                      
-                      <form asp-controller="Cart" asp-action="AddItem" method="post">
-                          <input type="hidden" name="productId" value="@product.id" />
-                          <button type="submit" class="btn-add-cart">Adicionar</button>
-                      </form>
-                  </div>
-              </div>
+            
+            <div class="btn-produto">
+              
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlk0v2LMXzPI2uVcV3KDSVqXWy55_5NeNKCQ&s" alt="@product.name">
+              <span class="nome">@product.name</span>
+              <span class="valor">@product.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
+              <p class="descricao">Descrição do produto</p>
+              <form asp-controller="Cart" asp-action="AddItem" method="post">
+                <input type="hidden" name="productId" value="@product.id" />
+              </form>
+              
+            </div>
+            
           }
         </div>
       </div>

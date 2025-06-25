@@ -1,1191 +1,627 @@
 {
   "Files": [
     {
-<<<<<<< HEAD
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\TotemPWA.bundle.scp.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\TotemPWA.bundle.scp.css",
       "PackagePath": "staticwebassets\\TotemPWA.1367c3iv3a.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\cupom.css",
-      "PackagePath": "staticwebassets\\css\\cupom.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\persocombo.css",
-      "PackagePath": "staticwebassets\\css\\persocombo.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\personalizarcombo.css",
-      "PackagePath": "staticwebassets\\css\\personalizarcombo.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\persopedido.css",
-      "PackagePath": "staticwebassets\\css\\persopedido.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\selecionarpagamento.css",
-      "PackagePath": "staticwebassets\\css\\selecionarpagamento.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\selecionarpedido.css",
-      "PackagePath": "staticwebassets\\css\\selecionarpedido.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\siteProfessor.css",
-      "PackagePath": "staticwebassets\\css\\siteProfessor.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\telacarrinho.css",
-      "PackagePath": "staticwebassets\\css\\telacarrinho.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\telacpf_clube.css",
-      "PackagePath": "staticwebassets\\css\\telacpf_clube.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\telafinal.css",
-      "PackagePath": "staticwebassets\\css\\telafinal.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\telainicial.css",
-      "PackagePath": "staticwebassets\\css\\telainicial.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\telanome.css",
-      "PackagePath": "staticwebassets\\css\\telanome.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\css\\telaproduto.css",
-      "PackagePath": "staticwebassets\\css\\telaproduto.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\Lanche-chicken.png",
-      "PackagePath": "staticwebassets\\images\\Lanche-chicken.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa1-artesanal.png",
-      "PackagePath": "staticwebassets\\images\\Sobremesa1-artesanal.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa2-Browine.png",
-      "PackagePath": "staticwebassets\\images\\Sobremesa2-Browine.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa3-Milkshake.png",
-      "PackagePath": "staticwebassets\\images\\Sobremesa3-Milkshake.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa4-torta.png",
-      "PackagePath": "staticwebassets\\images\\Sobremesa4-torta.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa5-pudim.png",
-      "PackagePath": "staticwebassets\\images\\Sobremesa5-pudim.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\agua.jpeg",
-      "PackagePath": "staticwebassets\\images\\agua.jpeg"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\alface.png",
-      "PackagePath": "staticwebassets\\images\\alface.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\bacon.png",
-      "PackagePath": "staticwebassets\\images\\bacon.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\batata-frita.png",
-      "PackagePath": "staticwebassets\\images\\batata-frita.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\batatas.png",
-      "PackagePath": "staticwebassets\\images\\batatas.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\bebida1.png",
-      "PackagePath": "staticwebassets\\images\\bebida1.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\bebida2.png",
-      "PackagePath": "staticwebassets\\images\\bebida2.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\bebida3.png",
-      "PackagePath": "staticwebassets\\images\\bebida3.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\bebida4-guarana.png",
-      "PackagePath": "staticwebassets\\images\\bebida4-guarana.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\bebida5-guaranazero.png",
-      "PackagePath": "staticwebassets\\images\\bebida5-guaranazero.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\burger.png",
-      "PackagePath": "staticwebassets\\images\\burger.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\cebola.png",
-      "PackagePath": "staticwebassets\\images\\cebola.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\coca-cola0.png",
-      "PackagePath": "staticwebassets\\images\\coca-cola0.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\combo1-chickenduplo.png",
-      "PackagePath": "staticwebassets\\images\\combo1-chickenduplo.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\combo2.png",
-      "PackagePath": "staticwebassets\\images\\combo2.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\combo3.png",
-      "PackagePath": "staticwebassets\\images\\combo3.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\combo6-Duplo.png",
-      "PackagePath": "staticwebassets\\images\\combo6-Duplo.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\combo7-Classico.png",
-      "PackagePath": "staticwebassets\\images\\combo7-Classico.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\combo8-Executivo.png",
-      "PackagePath": "staticwebassets\\images\\combo8-Executivo.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\comida.png",
-      "PackagePath": "staticwebassets\\images\\comida.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\hamburguer.png",
-      "PackagePath": "staticwebassets\\images\\hamburguer.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\heineken.png",
-      "PackagePath": "staticwebassets\\images\\heineken.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche.jpeg",
-      "PackagePath": "staticwebassets\\images\\lanche.jpeg"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche1.png",
-      "PackagePath": "staticwebassets\\images\\lanche1.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche10-Stack.png",
-      "PackagePath": "staticwebassets\\images\\lanche10-Stack.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche11-Crispy.png",
-      "PackagePath": "staticwebassets\\images\\lanche11-Crispy.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche12-Byte.png",
-      "PackagePath": "staticwebassets\\images\\lanche12-Byte.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche13-Click.png",
-      "PackagePath": "staticwebassets\\images\\lanche13-Click.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche14-viggie.png",
-      "PackagePath": "staticwebassets\\images\\lanche14-viggie.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche15-CheeseI.png",
-      "PackagePath": "staticwebassets\\images\\lanche15-CheeseI.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche16-Overclock.png",
-      "PackagePath": "staticwebassets\\images\\lanche16-Overclock.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche17-Firewall.png",
-      "PackagePath": "staticwebassets\\images\\lanche17-Firewall.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche18-Console.png",
-      "PackagePath": "staticwebassets\\images\\lanche18-Console.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche19-Green.png",
-      "PackagePath": "staticwebassets\\images\\lanche19-Green.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche2.png",
-      "PackagePath": "staticwebassets\\images\\lanche2.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche3.png",
-      "PackagePath": "staticwebassets\\images\\lanche3.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche4.png",
-      "PackagePath": "staticwebassets\\images\\lanche4.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche5.png",
-      "PackagePath": "staticwebassets\\images\\lanche5.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche6.png",
-      "PackagePath": "staticwebassets\\images\\lanche6.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche7.png",
-      "PackagePath": "staticwebassets\\images\\lanche7.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche8.png",
-      "PackagePath": "staticwebassets\\images\\lanche8.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche9-melt.png",
-      "PackagePath": "staticwebassets\\images\\lanche9-melt.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanche_cpf.png",
-      "PackagePath": "staticwebassets\\images\\lanche_cpf.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\lanches.png",
-      "PackagePath": "staticwebassets\\images\\lanches.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\logo.png",
-      "PackagePath": "staticwebassets\\images\\logo.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\maionese.png",
-      "PackagePath": "staticwebassets\\images\\maionese.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\maionese_especial.png",
-      "PackagePath": "staticwebassets\\images\\maionese_especial.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\molho-Barbecue.png",
-      "PackagePath": "staticwebassets\\images\\molho-Barbecue.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\molho-especial.png",
-      "PackagePath": "staticwebassets\\images\\molho-especial.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\queijo.png",
-      "PackagePath": "staticwebassets\\images\\queijo.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\sundae.png",
-      "PackagePath": "staticwebassets\\images\\sundae.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\tomate.png",
-      "PackagePath": "staticwebassets\\images\\tomate.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\unitario1.png",
-      "PackagePath": "staticwebassets\\images\\unitario1.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\unitario2.png",
-      "PackagePath": "staticwebassets\\images\\unitario2.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\images\\unitario3.png",
-      "PackagePath": "staticwebassets\\images\\unitario3.png"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\js\\personalizar.js",
-      "PackagePath": "staticwebassets\\js\\personalizar.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\js\\telacarrinho.js",
-      "PackagePath": "staticwebassets\\js\\telacarrinho.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\js\\telacpf_clube.js",
-      "PackagePath": "staticwebassets\\js\\telacpf_clube.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\js\\telanome.js",
-      "PackagePath": "staticwebassets\\js\\telanome.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\js\\telaproduto.js",
-      "PackagePath": "staticwebassets\\js\\telaproduto.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\LICENSE",
-      "PackagePath": "staticwebassets\\lib\\bootstrap"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\LICENSE.txt",
-      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
-    },
-    {
-      "Id": "C:\\Users\\0031432512005\\Downloads\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
-=======
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\TotemPWA.bundle.scp.css",
-      "PackagePath": "staticwebassets\\TotemPWA.1367c3iv3a.bundle.scp.css"
-    },
-    {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\cardapio.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\cardapio.css",
       "PackagePath": "staticwebassets\\css\\cardapio.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\cupom.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\cart.css",
+      "PackagePath": "staticwebassets\\css\\cart.css"
+    },
+    {
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\cupom.css",
       "PackagePath": "staticwebassets\\css\\cupom.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\editar.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\editar.css",
       "PackagePath": "staticwebassets\\css\\editar.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\excluirCrud.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\excluirCrud.css",
       "PackagePath": "staticwebassets\\css\\excluirCrud.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\form_crud.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\form_crud.css",
       "PackagePath": "staticwebassets\\css\\form_crud.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\list_ingrediente.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\list_ingrediente.css",
       "PackagePath": "staticwebassets\\css\\list_ingrediente.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\lista.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\lista.css",
       "PackagePath": "staticwebassets\\css\\lista.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\persocombo.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\pagamento-burguer.css",
+      "PackagePath": "staticwebassets\\css\\pagamento-burguer.css"
+    },
+    {
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\persocombo.css",
       "PackagePath": "staticwebassets\\css\\persocombo.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\personalizarcombo.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\personalizarcombo.css",
       "PackagePath": "staticwebassets\\css\\personalizarcombo.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\persopedido.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\persopedido.css",
       "PackagePath": "staticwebassets\\css\\persopedido.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\selecionarpagamento.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\selecionarpagamento.css",
       "PackagePath": "staticwebassets\\css\\selecionarpagamento.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\selecionarpedido.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\selecionarpedido.css",
       "PackagePath": "staticwebassets\\css\\selecionarpedido.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\site.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\siteProfessor.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\siteProfessor.css",
       "PackagePath": "staticwebassets\\css\\siteProfessor.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\telacarrinho.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telacarrinho.css",
       "PackagePath": "staticwebassets\\css\\telacarrinho.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\telacpf_clube.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telacpf_clube.css",
       "PackagePath": "staticwebassets\\css\\telacpf_clube.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\telafinal.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telafinal.css",
       "PackagePath": "staticwebassets\\css\\telafinal.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\telahomecrud.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telahomecrud.css",
       "PackagePath": "staticwebassets\\css\\telahomecrud.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\telainicial.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telainicial.css",
       "PackagePath": "staticwebassets\\css\\telainicial.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\telanome.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telanome.css",
       "PackagePath": "staticwebassets\\css\\telanome.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\css\\telaproduto.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\css\\telaproduto.css",
       "PackagePath": "staticwebassets\\css\\telaproduto.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\favicon.ico",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\Lanche-chicken.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\Lanche-chicken.png",
       "PackagePath": "staticwebassets\\images\\Lanche-chicken.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa1-artesanal.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\Sobremesa1-artesanal.png",
       "PackagePath": "staticwebassets\\images\\Sobremesa1-artesanal.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa2-Browine.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\Sobremesa2-Browine.png",
       "PackagePath": "staticwebassets\\images\\Sobremesa2-Browine.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa3-Milkshake.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\Sobremesa3-Milkshake.png",
       "PackagePath": "staticwebassets\\images\\Sobremesa3-Milkshake.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa4-torta.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\Sobremesa4-torta.png",
       "PackagePath": "staticwebassets\\images\\Sobremesa4-torta.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\Sobremesa5-pudim.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\Sobremesa5-pudim.png",
       "PackagePath": "staticwebassets\\images\\Sobremesa5-pudim.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\agua.jpeg",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\agua.jpeg",
       "PackagePath": "staticwebassets\\images\\agua.jpeg"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\alface.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\alface.png",
       "PackagePath": "staticwebassets\\images\\alface.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\bacon.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\bacon.png",
       "PackagePath": "staticwebassets\\images\\bacon.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\batata-frita.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\batata-frita.png",
       "PackagePath": "staticwebassets\\images\\batata-frita.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\batatas.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\batatas.png",
       "PackagePath": "staticwebassets\\images\\batatas.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\bebida1.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\bebida1.png",
       "PackagePath": "staticwebassets\\images\\bebida1.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\bebida2.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\bebida2.png",
       "PackagePath": "staticwebassets\\images\\bebida2.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\bebida3.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\bebida3.png",
       "PackagePath": "staticwebassets\\images\\bebida3.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\bebida4-guarana.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\bebida4-guarana.png",
       "PackagePath": "staticwebassets\\images\\bebida4-guarana.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\bebida5-guaranazero.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\bebida5-guaranazero.png",
       "PackagePath": "staticwebassets\\images\\bebida5-guaranazero.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\box-open-solid.svg",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\box-open-solid.svg",
       "PackagePath": "staticwebassets\\images\\box-open-solid.svg"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\burger.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\burger.png",
       "PackagePath": "staticwebassets\\images\\burger.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\cebola.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\cebola.png",
       "PackagePath": "staticwebassets\\images\\cebola.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\coca-cola0.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\coca-cola0.png",
       "PackagePath": "staticwebassets\\images\\coca-cola0.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\combo1-chickenduplo.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\combo1-chickenduplo.png",
       "PackagePath": "staticwebassets\\images\\combo1-chickenduplo.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\combo2.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\combo2.png",
       "PackagePath": "staticwebassets\\images\\combo2.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\combo3.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\combo3.png",
       "PackagePath": "staticwebassets\\images\\combo3.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\combo6-Duplo.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\combo6-Duplo.png",
       "PackagePath": "staticwebassets\\images\\combo6-Duplo.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\combo7-Classico.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\combo7-Classico.png",
       "PackagePath": "staticwebassets\\images\\combo7-Classico.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\combo8-Executivo.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\combo8-Executivo.png",
       "PackagePath": "staticwebassets\\images\\combo8-Executivo.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\comida.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\comida.png",
       "PackagePath": "staticwebassets\\images\\comida.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\hamburguer.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\hamburguer.png",
       "PackagePath": "staticwebassets\\images\\hamburguer.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\heineken.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\heineken.png",
       "PackagePath": "staticwebassets\\images\\heineken.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\house-solid.svg",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\house-solid.svg",
       "PackagePath": "staticwebassets\\images\\house-solid.svg"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche.jpeg",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche.jpeg",
       "PackagePath": "staticwebassets\\images\\lanche.jpeg"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche1.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche1.png",
       "PackagePath": "staticwebassets\\images\\lanche1.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche10-Stack.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche10-Stack.png",
       "PackagePath": "staticwebassets\\images\\lanche10-Stack.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche11-Crispy.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche11-Crispy.png",
       "PackagePath": "staticwebassets\\images\\lanche11-Crispy.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche12-Byte.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche12-Byte.png",
       "PackagePath": "staticwebassets\\images\\lanche12-Byte.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche13-Click.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche13-Click.png",
       "PackagePath": "staticwebassets\\images\\lanche13-Click.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche14-viggie.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche14-viggie.png",
       "PackagePath": "staticwebassets\\images\\lanche14-viggie.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche15-CheeseI.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche15-CheeseI.png",
       "PackagePath": "staticwebassets\\images\\lanche15-CheeseI.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche16-Overclock.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche16-Overclock.png",
       "PackagePath": "staticwebassets\\images\\lanche16-Overclock.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche17-Firewall.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche17-Firewall.png",
       "PackagePath": "staticwebassets\\images\\lanche17-Firewall.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche18-Console.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche18-Console.png",
       "PackagePath": "staticwebassets\\images\\lanche18-Console.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche19-Green.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche19-Green.png",
       "PackagePath": "staticwebassets\\images\\lanche19-Green.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche2.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche2.png",
       "PackagePath": "staticwebassets\\images\\lanche2.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche3.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche3.png",
       "PackagePath": "staticwebassets\\images\\lanche3.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche4.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche4.png",
       "PackagePath": "staticwebassets\\images\\lanche4.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche5.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche5.png",
       "PackagePath": "staticwebassets\\images\\lanche5.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche6.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche6.png",
       "PackagePath": "staticwebassets\\images\\lanche6.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche7.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche7.png",
       "PackagePath": "staticwebassets\\images\\lanche7.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche8.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche8.png",
       "PackagePath": "staticwebassets\\images\\lanche8.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche9-melt.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche9-melt.png",
       "PackagePath": "staticwebassets\\images\\lanche9-melt.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanche_cpf.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanche_cpf.png",
       "PackagePath": "staticwebassets\\images\\lanche_cpf.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\lanches.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\lanches.png",
       "PackagePath": "staticwebassets\\images\\lanches.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\logo.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\logo.png",
       "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\logo_crud.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\logo_crud.png",
       "PackagePath": "staticwebassets\\images\\logo_crud.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\logo_crud.svg",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\logo_crud.svg",
       "PackagePath": "staticwebassets\\images\\logo_crud.svg"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\maionese.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\maionese.png",
       "PackagePath": "staticwebassets\\images\\maionese.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\maionese_especial.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\maionese_especial.png",
       "PackagePath": "staticwebassets\\images\\maionese_especial.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\molho-Barbecue.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\molho-Barbecue.png",
       "PackagePath": "staticwebassets\\images\\molho-Barbecue.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\molho-especial.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\molho-especial.png",
       "PackagePath": "staticwebassets\\images\\molho-especial.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\queijo.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\queijo.png",
       "PackagePath": "staticwebassets\\images\\queijo.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\sundae.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\sundae.png",
       "PackagePath": "staticwebassets\\images\\sundae.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\tomate.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\tomate.png",
       "PackagePath": "staticwebassets\\images\\tomate.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\unitario1.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\unitario1.png",
       "PackagePath": "staticwebassets\\images\\unitario1.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\unitario2.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\unitario2.png",
       "PackagePath": "staticwebassets\\images\\unitario2.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\images\\unitario3.png",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\images\\unitario3.png",
       "PackagePath": "staticwebassets\\images\\unitario3.png"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\js\\personalizar.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\js\\personalizar.js",
       "PackagePath": "staticwebassets\\js\\personalizar.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\js\\site.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\js\\telacarrinho.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\js\\telacarrinho.js",
       "PackagePath": "staticwebassets\\js\\telacarrinho.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\js\\telacpf_clube.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\js\\telacpf_clube.js",
       "PackagePath": "staticwebassets\\js\\telacpf_clube.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\js\\telanome.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\js\\telanome.js",
       "PackagePath": "staticwebassets\\js\\telanome.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\js\\telaproduto.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\js\\telaproduto.js",
       "PackagePath": "staticwebassets\\js\\telaproduto.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
     },
     {
-      "Id": "C:\\Conteudo\\ads_burguer\\totempwa\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
->>>>>>> origin/feature/FuncionalidadesCRUD
+      "Id": "C:\\ads_burguer\\TotemPWA\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
