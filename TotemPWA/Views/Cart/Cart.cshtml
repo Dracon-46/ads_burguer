@@ -40,19 +40,37 @@ else
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
                     <td>R$ @item.Price.ToString("F2")</td>
-                    <td>R$ @(item.Price * item.Quantity).ToString("F2")</td>
+                    <td>R$ @(item.Price * item.Quantity)</td>
                     <td>
-                        <form asp-action="RemoveItem" method="post">
-                            <input type="hidden" name="productId" value="@item.ProductId" />
-                            <button type="submit" class="btn btn-sm btn-danger">Remover</button>
-                        </form>
+                        <div class="btn-group">
+                            <!-- Botão Adicionar Mais -->
+                            <form asp-action="AddItem" method="post" style="display:inline;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="btn btn-sm btn-success">+</button>
+                            </form>
+
+                            <!-- Botão Remover -->
+                            <form asp-action="RemoveItem" method="post" style="display:inline;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="btn btn-sm btn-danger">−</button>
+                            </form>
+
+                             <!-- Botão Personalizar -->
+                            <form asp-action="Personalizar" asp-controller="Home" method="get" style="display:inline;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="btn btn-sm btn-warning" title="Personalizar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
+
                 </tr>
             }
         </tbody>
     </table>
 
-    <p><strong>Total do Pedido:</strong> R$ @Model.Sum(x => x.Price * x.Quantity).ToString("F2")</p>
+    <p><strong>Total do Pedido:</strong> R$ @Model.Sum(x => x.Price * x.Quantity)</p>
 
     <form asp-action="Clear" method="post">
         <button class="btn btn-warning">Esvaziar Carrinho</button>

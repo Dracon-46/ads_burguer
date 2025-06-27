@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TotemPWA
 build_property.RootNamespace = TotemPWA
@@ -144,10 +152,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxDYXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ads_burguer/TotemPWA/Views/Home/CardapioCrud.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXJkYXBpb0NydWQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/ads_burguer/TotemPWA/Views/Home/Cupom.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDdXBvbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -164,20 +168,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ads_burguer/TotemPWA/Views/Home/PersonalizarAcompanhamentos.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJBY29tcGFuaGFtZW50b3MuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ads_burguer/TotemPWA/Views/Home/PersonalizarBebidas.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJCZWJpZGFzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/ads_burguer/TotemPWA/Views/Home/PersonalizarCombo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJDb21iby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ads_burguer/TotemPWA/Views/Home/PersonalizarIngredientes.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJJbmdyZWRpZW50ZXMuY3NodG1s
+[C:/ads_burguer/TotemPWA/Views/Home/PersonalizarProdutos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJzb25hbGl6YXJQcm9kdXRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ads_burguer/TotemPWA/Views/Home/SelecionarPedido.cshtml]
@@ -190,10 +186,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ads_burguer/TotemPWA/Views/Home/TelaFinal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZWxhRmluYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ads_burguer/TotemPWA/Views/Home/TelaHome_Crud.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZWxhSG9tZV9DcnVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ads_burguer/TotemPWA/Views/Home/TelaNome.cshtml]
@@ -210,6 +202,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ads_burguer/TotemPWA/Views/Payment/SelecionarPagamento.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxTZWxlY2lvbmFyUGFnYW1lbnRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ads_burguer/TotemPWA/Views/Payment/TelaNotaFiscal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxUZWxhTm90YUZpc2NhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ads_burguer/TotemPWA/Views/Payment/TelaPagamentoCartao.cshtml]

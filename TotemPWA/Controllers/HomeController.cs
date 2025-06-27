@@ -169,6 +169,16 @@ public class HomeController : Controller
         return View(cart);
     }
 
+    [HttpGet]
+    public IActionResult Personalizar(int productId)
+    {
+        var product = _context.Products.FirstOrDefault(p => p.Id == productId);
+        if (product == null) return NotFound();
+
+        // Redirecionar para view de personalização
+        return View("PersonalizarProdutos", product);
+    }
+
     // CRUD 
     public IActionResult CardapioCrud()
     {

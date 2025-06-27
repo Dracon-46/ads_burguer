@@ -59,19 +59,17 @@
         <div class="produto-lista">
           @foreach (var product in ViewBag.Products)
           {
-            
-            <div class="btn-produto">
-              
+            <div class="btn-produto" onclick="document.getElementById('form-@product.id').submit();">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlk0v2LMXzPI2uVcV3KDSVqXWy55_5NeNKCQ&s" alt="@product.name">
               <span class="nome">@product.name</span>
               <span class="valor">@product.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
               <p class="descricao">Descrição do produto</p>
-              <form asp-controller="Cart" asp-action="AddItem" method="post">
+
+              <form id="form-@product.id" asp-controller="Cart" asp-action="AddItem" method="post" style="display:none;">
                 <input type="hidden" name="productId" value="@product.id" />
+                <button type="submit">Adicionar</button> <!-- necessário para submit, mas invisível -->
               </form>
-              
             </div>
-            
           }
         </div>
       </div>
@@ -109,6 +107,5 @@
 
   <!-- Scripts (remova o telacarrinho.js) -->
   <script src="/js/telaproduto.js"></script>
-  <script src="/js/personalizar.js"></script>
 </body>
 </html>

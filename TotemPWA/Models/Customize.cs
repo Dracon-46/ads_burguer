@@ -5,11 +5,11 @@ namespace TotemPWA.Models
         public int Id { get; set; }
 
         public int IngredientId { get; set; }
-        public required Ingredient Ingredient { get; set; } // Adicionado 'required'
+        public Ingredient? Ingredient { get; set; } // Navegação opcional
 
         public int OrderItemId { get; set; }
-        public required OrderItem OrderItem { get; set; } // Adicionado 'required'
+        public OrderItem? OrderItem { get; set; } // Navegação opcional
 
-        public required string Type { get; set; } // Adicionado 'required' (adicionar ou remover)
+        public string Type { get; set; } = ""; // Já inicializada, sem 'required'
     }
 }
