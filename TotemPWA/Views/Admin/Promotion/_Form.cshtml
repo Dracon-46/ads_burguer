@@ -1,14 +1,14 @@
 @model TotemPWA.ViewModels.PromotionViewModel
 
 <div class="form-group">
-    <label asp-for="ProductId" class="control-label"></label>
+    <label asp-for="ProductId" class="control-label">Produto:</label>
     <select asp-for="ProductId" class="form-control" asp-items="Model.Products">
         <option value="">-- Selecione um Produto --</option>
     </select>
     <span asp-validation-for="ProductId" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label asp-for="Percent" class="control-label"></label>
+    <label asp-for="Percent" class="control-label">Porcentagem:</label>
     <input asp-for="Percent" class="form-control" />
     <span asp-validation-for="Percent" class="text-danger"></span>
 </div>

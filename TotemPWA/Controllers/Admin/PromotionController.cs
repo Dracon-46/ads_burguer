@@ -4,15 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
 using TotemPWA.ViewModels;
+using System; // Adicione este using para DateTime.Today
+using System.Linq; // Adicione este using para métodos Linq como Any() e ToList()
 
 namespace TotemPWA.Controllers.Admin
 {
     [Route("Admin/[controller]/[action]")] // Garante o roteamento correto
     public class PromotionController : Controller
     {
-        private readonly ApplicationDbContext _context; // ALTERADO: AppDbContext para ApplicationDbContext
+        private readonly ApplicationDbContext _context;
 
-        public PromotionController(ApplicationDbContext context) // ALTERADO: AppDbContext para ApplicationDbContext
+        public PromotionController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -30,7 +32,8 @@ namespace TotemPWA.Controllers.Admin
         {
             var viewModel = new PromotionViewModel
             {
-                Products = await GetProductSelectListAsync()
+                Products = await GetProductSelectListAsync(),
+                ValidUntil = DateTime.Today // <<< ESTA É A LINHA QUE FAZ A DATA APARECER CORRETA!
             };
             return View(viewModel);
         }
@@ -40,7 +43,7 @@ namespace TotemPWA.Controllers.Admin
         public async Task<IActionResult> Create(PromotionViewModel model)
         {
             // Verifica se já existe uma promoção para o mesmo produto com data de validade futura
-            if (_context.Promotions.Any(p => p.ProductId == model.ProductId && p.ValidUntil >= DateTime.Today))
+            if (await _context.Promotions.AnyAsync(p => p.ProductId == model.ProductId && p.ValidUntil >= DateTime.Today))
             {
                 ModelState.AddModelError("ProductId", "Já existe uma promoção ativa para este produto.");
             }
@@ -60,6 +63,7 @@ namespace TotemPWA.Controllers.Admin
 
             _context.Promotions.Add(promotion);
             await _context.SaveChangesAsync();
+            TempData["Message"] = "Promoção criada com sucesso!"; // Mensagem de sucesso
             return RedirectToAction("List");
         }
 
@@ -85,7 +89,7 @@ namespace TotemPWA.Controllers.Admin
         public async Task<IActionResult> Edit(PromotionViewModel model)
         {
             // Verifica se existe outra promoção ativa para o mesmo produto (excluindo a própria)
-            if (_context.Promotions.Any(p => p.ProductId == model.ProductId && p.ValidUntil >= DateTime.Today && p.Id != model.Id))
+            if (await _context.Promotions.AnyAsync(p => p.ProductId == model.ProductId && p.ValidUntil >= DateTime.Today && p.Id != model.Id))
             {
                 ModelState.AddModelError("ProductId", "Já existe outra promoção ativa para este produto.");
             }
@@ -106,12 +110,12 @@ namespace TotemPWA.Controllers.Admin
 
             try
             {
-                _context.Update(promo); // Ou _context.Promotions.Update(promo);
+                _context.Update(promo);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Promotions.Any(e => e.Id == model.Id))
+                if (!PromotionExists(model.Id))
                 {
                     return NotFound();
                 }
@@ -121,6 +125,7 @@ namespace TotemPWA.Controllers.Admin
                 }
             }
 
+            TempData["Message"] = "Promoção atualizada com sucesso!"; // Mensagem de sucesso
             return RedirectToAction("List");
         }
 
@@ -133,15 +138,18 @@ namespace TotemPWA.Controllers.Admin
             return View(promo);
         }
 
-        [HttpPost("{id}"), ActionName("DeleteConfirmed")]
+        // CORREÇÃO AQUI: Renomeado ActionName de "DeleteConfirmed" para "Delete" para corresponder ao HttpPost,
+        // ou use apenas [HttpPost] e renomeie o método para Delete
+        [HttpPost("{id}"), ActionName("Delete")] // <<-- AÇÃO POST PARA DELETE AGORA SE CHAMA "Delete" NO ATRIBUTO
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id) // O nome do método pode permanecer o mesmo ou ser 'Delete'
         {
             var promo = await _context.Promotions.FindAsync(id);
             if (promo == null) return NotFound();
 
             _context.Promotions.Remove(promo);
             await _context.SaveChangesAsync();
+            TempData["Message"] = "Promoção excluída com sucesso!"; // Mensagem de sucesso
             return RedirectToAction("List");
         }
 
@@ -154,6 +162,11 @@ namespace TotemPWA.Controllers.Admin
                     Value = p.Id.ToString(),
                     Text = p.Name
                 }).ToListAsync();
+        }
+
+        private bool PromotionExists(int id)
+        {
+            return _context.Promotions.Any(e => e.Id == id);
         }
     }
 }

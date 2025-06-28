@@ -24,14 +24,14 @@
                 <a asp-controller="Product" asp-action="List">
                     <li><i class="fa-solid fa-box-open"></i> Produtos</li>
                 </a>
+                <a asp-controller="Product" asp-action="List">
+                    <li><i class="fa-solid fa-carrot"></i> Ingredientes</li>
+                </a>
                 <a asp-controller="Cupom" asp-action="List">
                     <li><i class="fa-solid fa-ticket"></i> Cupons</li>
                 </a>
                 <a asp-controller="Promotion" asp-action="List">
                     <li><i class="fa-solid fa-tags"></i> Promoções</li>
-                </a>
-                 <a asp-controller="Employee" asp-action="List">
-                    <li><i class="fa-solid fa-users-gear"></i> Funcionários</li>
                 </a>
             </ul>
         </nav>
@@ -47,22 +47,36 @@
         </div>
 
         <div style="padding: 0 20px;">
-            <input type="text" placeholder="Buscar categorias..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+            <input type="text" id="searchInput" placeholder="Buscar categorias..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+        </div>
+
+        <div class="filtros">
+            <button class="filter-button ativo" data-filter="Todos">Todos <span class="badge" id="badge-Todos">@Model.Count()</span></button>
+            <button class="filter-button" data-filter="Categoria Principal">Categorias Principais <span class="badge" id="badge-Categoria Principal">@Model.Count(c => c.ParentCategoryId == null)</span></button>
+            <button class="filter-button" data-filter="Subcategoria">Subcategorias <span class="badge" id="badge-Subcategoria">@Model.Count(c => c.ParentCategoryId != null)</span></button>
+            
+            @foreach (var mainCategory in (ViewBag.MainCategories as List<TotemPWA.Models.Category>) ?? new List<TotemPWA.Models.Category>())
+            {
+                <button class="filter-button" data-filter="@(mainCategory.Slug)">
+                    @mainCategory.Name <span class="badge" id="badge-@mainCategory.Slug">@Model.Count(c => c.Id == mainCategory.Id || (c.ParentCategoryId == mainCategory.Id))</span>
+                </button>
+            }
         </div>
 
         <div class="produtos-container">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Where(c => c.ParentCategoryId == null).OrderBy(c => c.Name))
             {
-                <div class="produto-card">
+                <div class="produto-card" 
+                     data-category-name="@(item.Name?.ToLower() ?? "")" 
+                     data-category-slug="@(item.Slug ?? "")"
+                     data-category-type="Categoria Principal"
+                     data-parent-category-slug="">
                     <div class="card-topo">
-                        <h3>@item.Name</h3>
-                        <span class="tag">
-                            @(item.ParentCategory != null ? $"Subcategoria de {item.ParentCategory.Name}" : "Categoria Principal")
-                        </span>
+                        <h3>@(item.Name ?? "Categoria sem nome")</h3>
+                        <span class="tag">Categoria Principal</span>
                     </div>
-                    <p><strong>Slug:</strong> @item.Slug</p>
-                    <p><strong>Ícone:</strong> @item.Icon</p>
                     <div class="status">
+                        <span class="disponivel">✔ Ativa</span>
                         <a asp-action="Delete" asp-route-id="@item.Id" class="excluir">
                             <i class="fa-solid fa-trash"></i> Excluir
                         </a>
@@ -72,16 +86,19 @@
 
                 @if (item.Subcategories != null && item.Subcategories.Any())
                 {
-                    foreach (var subcat in item.Subcategories)
+                    foreach (var subcat in item.Subcategories.OrderBy(s => s.Name))
                     {
-                        <div class="produto-card" style="margin-left: 20px; background-color: #fdfdfd;">
+                        <div class="produto-card subcategory-card" 
+                             style="margin-left: 20px; background-color: #fdfdfd;"
+                             data-category-name="@(subcat.Name?.ToLower() ?? "")" 
+                             data-category-slug="@(subcat.Slug ?? "")"
+                             data-category-type="Subcategoria">
                             <div class="card-topo">
-                                <h3>↳ @subcat.Name</h3>
-                                <span class="tag">Subcategoria</span>
+                                <h3>@(subcat.Name ?? "Subcategoria sem nome")</h3>
+                                <span class="tag">Subcategoria de @(item.Name ?? "N/A")</span>
                             </div>
-                            <p><strong>Slug:</strong> @subcat.Slug</p>
-                            <p><strong>Ícone:</strong> @subcat.Icon</p>
                             <div class="status">
+                                <span class="disponivel">✔ Ativa</span>
                                 <a asp-action="Delete" asp-route-id="@subcat.Id" class="excluir">
                                     <i class="fa-solid fa-trash"></i> Excluir
                                 </a>
@@ -94,3 +111,60 @@
         </div>
     </main>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const categoryCards = document.querySelectorAll('.produto-card');
+
+        let currentSearchTerm = '';
+        let currentFilter = 'Todos';
+
+        function applyFilters() {
+            categoryCards.forEach(card => {
+                const categoryName = card.dataset.categoryName || '';
+                const categoryType = card.dataset.categoryType || '';
+                const parentCategorySlug = card.dataset.parentCategorySlug || '';
+                const categorySlug = card.dataset.categorySlug || '';
+
+                const matchesSearch = categoryName.includes(currentSearchTerm);
+                let matchesFilter = false;
+
+                if (currentFilter === 'Todos') {
+                    matchesFilter = true;
+                } else if (currentFilter === 'Categoria Principal') {
+                    matchesFilter = categoryType === 'Categoria Principal';
+                } else if (currentFilter === 'Subcategoria') {
+                    matchesFilter = categoryType === 'Subcategoria';
+                } else {
+                    matchesFilter = (categoryType === 'Categoria Principal' && categorySlug === currentFilter) ||
+                                    (categoryType === 'Subcategoria' && parentCategorySlug === currentFilter);
+                }
+
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        searchInput.addEventListener('keyup', function () {
+            currentSearchTerm = searchInput.value.toLowerCase();
+            applyFilters();
+        });
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                filterButtons.forEach(btn => btn.classList.remove('ativo'));
+                this.classList.add('ativo');
+
+                currentFilter = this.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        applyFilters();
+    });
+</script>
