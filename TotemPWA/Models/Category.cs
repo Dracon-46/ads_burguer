@@ -25,18 +25,16 @@ namespace TotemPWA.Models
 
         public string Slug { get; private set; } = string.Empty;
 
-        [Required(ErrorMessage = "O ícone da categoria é obrigatório.")]
-        public string Icon { get; set; } = string.Empty; // Inicializa para evitar null
 
-        public int? ParentCategoryId { get; set; } // Pode ser nulo para categorias pai
+        public int? ParentCategoryId { get; set; }
 
-        [JsonIgnore] // Evita loop de serialização JSON
-        public Category? ParentCategory { get; set; } // Propriedade de navegação para a categoria pai
+        [JsonIgnore]
+        public Category? ParentCategory { get; set; }
 
-        [JsonIgnore] // Evita loop de serialização JSON
+        [JsonIgnore]
         public ICollection<Category> Subcategories { get; set; } = new List<Category>();
 
-        [JsonIgnore] // Evita loop de serialização JSON
+        [JsonIgnore]
         public ICollection<Product> Products { get; set; } = new List<Product>();
 
         private static string GenerateSlug(string text)
@@ -44,22 +42,16 @@ namespace TotemPWA.Models
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;
 
-            // Transforma para minúsculas e remove espaços extras
             text = text.ToLowerInvariant().Trim();
 
-            // Remove acentos (ex: ç, ã, é → c, a, e)
             text = RemoveDiacritics(text);
 
-            // Remove caracteres inválidos
             text = Regex.Replace(text, @"[^a-z0-9\s-]", "");
 
-            // Substitui espaços por hífens
             text = Regex.Replace(text, @"\s+", "-");
 
-            // Remove múltiplos hífens
             text = Regex.Replace(text, @"-+", "-");
 
-            // Remove hífens no início/fim
             return text.Trim('-');
         }
 

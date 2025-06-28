@@ -6,42 +6,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TotemPWA.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSlugToCategory : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Categories_Categories_ParentCategoryId",
-                table: "Categories");
-
-            migrationBuilder.AlterColumn<decimal>(
-                name: "Price",
-                table: "Products",
-                type: "TEXT",
-                nullable: false,
-                oldClrType: typeof(decimal),
-                oldType: "decimal(18,2)");
-
-            migrationBuilder.AddColumn<bool>(
-                name: "Active",
-                table: "Products",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Description",
-                table: "Products",
-                type: "TEXT",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Slug",
-                table: "Categories",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Slug = table.Column<string>(type: "TEXT", nullable: false),
+                    ParentCategoryId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Categories_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Clients",
@@ -55,31 +44,6 @@ namespace TotemPWA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Combos",
-                columns: table => new
-                {
-                    ProductComboId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Combos", x => new { x.ProductComboId, x.ProductId });
-                    table.ForeignKey(
-                        name: "FK_Combos_Products_ProductComboId",
-                        column: x => x.ProductComboId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Combos_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,22 +77,25 @@ namespace TotemPWA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Promotions",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Percent = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
-                    ValidUntil = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Image = table.Column<string>(type: "TEXT", nullable: true),
+                    Active = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Promotions", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Promotions_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -199,6 +166,52 @@ namespace TotemPWA.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Additionals_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Combos",
+                columns: table => new
+                {
+                    ProductComboId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Combos", x => new { x.ProductComboId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_Combos_Products_ProductComboId",
+                        column: x => x.ProductComboId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Combos_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Promotions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Percent = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    ValidUntil = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Promotions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Promotions_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -285,15 +298,20 @@ namespace TotemPWA.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Additionals_IngredientId",
+                table: "Additionals",
+                column: "IngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_ParentCategoryId",
+                table: "Categories",
+                column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Categories_Slug",
                 table: "Categories",
                 column: "Slug",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Additionals_IngredientId",
-                table: "Additionals",
-                column: "IngredientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Combos_ProductId",
@@ -348,26 +366,19 @@ namespace TotemPWA.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Promotions_ProductId",
                 table: "Promotions",
                 column: "ProductId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Categories_Categories_ParentCategoryId",
-                table: "Categories",
-                column: "ParentCategoryId",
-                principalTable: "Categories",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Categories_Categories_ParentCategoryId",
-                table: "Categories");
-
             migrationBuilder.DropTable(
                 name: "Additionals");
 
@@ -396,41 +407,16 @@ namespace TotemPWA.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Cupons");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Categories_Slug",
-                table: "Categories");
-
-            migrationBuilder.DropColumn(
-                name: "Active",
-                table: "Products");
-
-            migrationBuilder.DropColumn(
-                name: "Description",
-                table: "Products");
-
-            migrationBuilder.DropColumn(
-                name: "Slug",
-                table: "Categories");
-
-            migrationBuilder.AlterColumn<decimal>(
-                name: "Price",
-                table: "Products",
-                type: "decimal(18,2)",
-                nullable: false,
-                oldClrType: typeof(decimal),
-                oldType: "TEXT");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Categories_Categories_ParentCategoryId",
-                table: "Categories",
-                column: "ParentCategoryId",
-                principalTable: "Categories",
-                principalColumn: "Id");
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }
