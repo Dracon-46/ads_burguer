@@ -49,6 +49,7 @@
 
 
 
+
         <div class="produtos-container">
             @foreach (var item in Model)
             {
@@ -58,13 +59,9 @@
                         <span class="tag">@item.Type</span>
                     </div>
                     <p>Valor: 
-                        @if (item.Type == "Porcentagem")
+                        @if (item.Type == "Percentual")
                         {
                             @($"{item.Value}%")
-                        }
-                        else if (item.Type == "Frete Grátis")
-                        {
-                            @("Frete Grátis")
                         }
                         else
                         {
