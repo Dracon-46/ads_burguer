@@ -1,26 +1,29 @@
-@model TotemPWA.ViewModels.CategoryViewModel
+@model TotemPWA.ViewModels.CategoryViewModel 
 
 @{
-    ViewData["Title"] = "Criar Categoria";
+    ViewData["Title"] = "Criar Nova Categoria";
 }
 
-<link rel="stylesheet" href="/css/form_crud.css" />
+<link rel="stylesheet" href="/css/site.css" />
+<link rel="stylesheet" href="/css/form.css" />
+<script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
 
-<h1>Criar Categoria</h1>
+<div class="form-container">
+    <h2>Criar Nova Categoria</h2>
+    <hr />
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        @* Inclui a partial view que contém os campos do formulário *@
+        <partial name="_Form" model="Model" /> 
 
-<h4>Categoria</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <partial name="_Form" model="Model" /> @* Reutiliza o formulário *@
-            <div class="form-group mt-3">
-                <input type="submit" value="Criar" class="btn btn-success" />
-                <a asp-action="List" class="btn btn-secondary">Voltar para a Lista</a>
-            </div>
-        </form>
-    </div>
+        <div class="form-group button-group">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a asp-action="List" class="btn btn-secondary">Voltar para a Lista</a>
+        </div>
+        
+        @Html.AntiForgeryToken()
+    </form>
 </div>
 
 @section Scripts {

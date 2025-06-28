@@ -45,12 +45,12 @@
             </dd>
         </dl>
 
-        <form asp-action="ConfirmDelete" asp-route-id="@Model.Id">
-            <input type="hidden" asp-for="Id" />
-            <div class="form-actions">
-                <input type="submit" value="Excluir" class="btn btn-danger" />
-                <a asp-action="List" class="btn btn-secondary">Cancelar</a>
-            </div>
-        </form>
+       <form asp-action="Delete" asp-route-id="@Model.Id">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-actions">
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+        <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
     </div>
 </div>

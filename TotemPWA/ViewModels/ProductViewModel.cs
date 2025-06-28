@@ -1,15 +1,15 @@
+// TotemPWA\ViewModels\ProductViewModel.cs
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TotemPWA.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace TotemPWA.ViewModels
 {
     public class ProductViewModel
     {
-        // Remova '= new Product();' ou '= default!;'
-        // Apenas declare a propriedade:
-        public Product Product { get; set; } = null!; // Adicionado '= null!;' para suprimir o warning CS8618 se aparecer.
-                                                       // O Model Binder cuidará da inicialização.
-
-        public List<SelectListItem>? Categories { get; set; }
+        // CORREÇÃO AQUI: Inicializando Name para satisfazer o 'required'
+        public Product Product { get; set; } = new Product { Name = string.Empty }; // <<-- LINHA CORRIGIDA
+        public IEnumerable<SelectListItem>? Categories { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }

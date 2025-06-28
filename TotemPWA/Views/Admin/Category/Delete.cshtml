@@ -4,46 +4,51 @@
     ViewData["Title"] = "Excluir Categoria";
 }
 
-<link rel="stylesheet" href="/css/excluirCrud.css" />
+<link rel="stylesheet" href="/css/site.css" />
+<link rel="stylesheet" href="/css/form.css" />
+<script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
 
-<div class="container">
-    <h1>Excluir Categoria</h1>
+<div class="form-container">
+    <h2>Confirmação de Exclusão</h2>
+    <hr />
+    <h3>Tem certeza que deseja excluir esta categoria?</h3>
 
-    <h3>Tem certeza de que deseja excluir esta categoria?</h3>
-    <div class="product-details">
-        <h4>Categoria</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Slug)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Slug)
-            </dd>
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Icon)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Icon)
-            </dd>
-            <dt class="col-sm-3">
-                Categoria Pai
-            </dt>
-        <dd class="col-sm-10">
-        @(Model.ParentCategory?.Name ?? "Nenhuma")
-    </dd>
-        </dl>
+    @if (Model != null)
+    {
+        <p><strong>Nome:</strong> @Model.Name</p> 
+        
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <p><strong>Descrição:</strong> @Model.Description</p>
+        }
+        else
+        {
+            <p><strong>Descrição:</strong> N/A</p>
+        }
 
-        <form asp-action="ConfirmDelete" asp-route-id="@Model.Id">
-            <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Excluir" class="btn btn-danger" /> |
-            <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+        @* Corrigindo CS8602 e CS1963: Acessando diretamente ou verificando nulidade *@
+        @if (Model.ParentCategory != null)
+        {
+            <p><strong>Subcategoria de:</strong> @Model.ParentCategory.Name</p>
+        }
+        else
+        {
+            <p><strong>Tipo:</strong> Categoria Principal</p>
+        }
+
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            @* Corrigindo CS1963: Usando name/value em vez de asp-for para o ID oculto *@
+            <input type="hidden" name="Id" value="@Model.Id" /> 
+            <div class="form-group button-group">
+                <button type="submit" class="btn btn-danger">Excluir</button>
+                <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+            </div>
+            @Html.AntiForgeryToken()
         </form>
-    </div>
+    }
+    else
+    {
+        <p class="text-danger">Erro: Nenhuma categoria selecionada para exclusão ou categoria não encontrada.</p>
+        <a asp-action="List" class="btn btn-secondary">Voltar para a Lista de Categorias</a>
+    }
 </div>

@@ -103,7 +103,6 @@ public class HomeController : Controller
                 id = c.Id,
                 name = c.Name,
                 slug = c.Slug,
-                icon = c.Icon,
                 active = c.Id == activeCategoryId
             })
             .ToList();
@@ -135,7 +134,6 @@ public class HomeController : Controller
                 id = c.Id,
                 name = c.Name,
                 slug = c.Slug,
-                icon = c.Icon,
                 active = c.Id == activeSubcategoryId
             })
             .ToList();

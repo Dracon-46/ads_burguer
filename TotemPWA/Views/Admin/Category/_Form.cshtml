@@ -1,19 +1,35 @@
 @model TotemPWA.ViewModels.CategoryViewModel
 
+@* O sumário de validação e o hidden input para ID serão gerenciados pelas views principais (Create/Edit)
+   ou pela lógica condicional dentro desta partial. *@
+
+@* Campo oculto para o ID, essencial para o método POST Edit.
+   Só é renderizado se o ID não for 0 (indicando um objeto existente, não uma nova criação). *@
+@if (Model.Id != 0) 
+{
+    @* Corrigindo CS1963: Usando name/value em vez de asp-for para o ID oculto, se necessário aqui *@
+    <input type="hidden" name="Id" value="@Model.Id" /> 
+}
+
 <div class="form-group">
-    <label asp-for="Category.Name" class="control-label"></label>
-    <input asp-for="Category.Name" class="form-control" />
-    <span asp-validation-for="Category.Name" class="text-danger"></span>
+    <label asp-for="Name" class="control-label">Nome da Categoria</label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
 </div>
+
 <div class="form-group">
-    <label asp-for="Category.Icon" class="control-label"></label>
-    <input asp-for="Category.Icon" class="form-control" />
-    <span asp-validation-for="Category.Icon" class="text-danger"></span>
+    <label asp-for="Description" class="control-label">Descrição da categoria:</label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
 </div>
+
 <div class="form-group">
-    <label asp-for="Category.ParentCategoryId" class="control-label">Categoria Pai</label>
-    <select asp-for="Category.ParentCategoryId" class="form-control" asp-items="Model.Categories">
-        <option value="">-- Selecione uma Categoria Pai --</option>
+    <label asp-for="ParentCategoryId" class="control-label">Tipo:</label>
+    @* Corrigindo CS1963: Passamos Model.ParentCategoryOptions diretamente para asp-items *@
+    <select asp-for="ParentCategoryId" class="form-control"
+            asp-items="Model.ParentCategoryOptions"> 
     </select>
-    <span asp-validation-for="Category.ParentCategoryId" class="text-danger"></span>
+    <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
 </div>
+
+@* Botões de submissão foram movidos para as views principais (Create.cshtml e Edit.cshtml) *@

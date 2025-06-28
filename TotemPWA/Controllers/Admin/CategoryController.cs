@@ -1,175 +1,274 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using TotemPWA.Models;
 using TotemPWA.Data;
-using TotemPWA.ViewModels;
+using TotemPWA.Models;
+using TotemPWA.ViewModels; // <-- Importante: Adicionar este using
+using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic; // Para List<SelectListItem>
+using Microsoft.AspNetCore.Mvc.Rendering; // Para SelectListItem
 
 namespace TotemPWA.Controllers.Admin
 {
-    [Route("Admin/[controller]/[action]")] // Garante o roteamento correto
+    [Route("Admin/[controller]/[action]")]
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context; // ALTERADO: AppDbContext para ApplicationDbContext
+        private readonly ApplicationDbContext _context;
 
-        public CategoryController(ApplicationDbContext context) // ALTERADO: AppDbContext para ApplicationDbContext
+        public CategoryController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
+        // GET: Admin/Category/List
         public async Task<IActionResult> List()
         {
-            // Inclui as subcategorias para exibir a hierarquia
             var categories = await _context.Categories
-                .Include(c => c.Subcategories)
-                .Include(c => c.ParentCategory) // Inclui a categoria pai também
-                .Where(c => c.ParentCategoryId == null) // Apenas categorias raiz para evitar duplicação na lista principal
-                .ToListAsync();
-
+                                           .Include(c => c.Subcategories)
+                                           .Include(c => c.ParentCategory)
+                                           .ToListAsync();
+            
+            ViewBag.MainCategories = await _context.Categories
+                                                   .Where(c => c.ParentCategoryId == null)
+                                                   .OrderBy(c => c.Name)
+                                                   .ToListAsync();
+            
             return View(categories);
         }
 
-        [HttpGet]
-        public IActionResult Create()
+        // GET: Admin/Category/Create
+        public async Task<IActionResult> Create()
         {
-            var viewModel = new CategoryViewModel
-            {
-                // Carrega categorias pai, excluindo a própria categoria se for um caso de edição
-                Categories = _context.Categories
-                    .Where(c => c.ParentCategoryId == null) // Apenas categorias raiz podem ser pais
-                    .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
-                    .ToList()
-            };
-
-            return View(viewModel);
+            var viewModel = new CategoryViewModel();
+            // Carrega as categorias principais para o dropdown
+            viewModel.ParentCategoryOptions = await _context.Categories
+                                                           .Where(c => c.ParentCategoryId == null)
+                                                           .OrderBy(c => c.Name)
+                                                           .Select(c => new SelectListItem
+                                                           {
+                                                               Value = c.Id.ToString(),
+                                                               Text = c.Name
+                                                           })
+                                                           .ToListAsync();
+            
+            // Adiciona a opção "Nenhuma (Categoria Principal)" para o dropdown
+            viewModel.ParentCategoryOptions.Insert(0, new SelectListItem { Value = "0", Text = "Nenhuma (Categoria Principal)" });
+            
+            return View(viewModel); // Passa o ViewModel para a view
         }
 
+        // POST: Admin/Category/Create
         [HttpPost]
-        [ValidateAntiForgeryToken] // Adiciona validação de token anti-falsificação
+        [ValidateAntiForgeryToken]
+        // Agora recebe CategoryViewModel do formulário
         public async Task<IActionResult> Create(CategoryViewModel viewModel)
         {
-            // Verifica se o slug já existe, mesmo que o ModelState seja válido
-            if (_context.Categories.Any(c => c.Slug == viewModel.Category.Slug))
-            {
-                ModelState.AddModelError("Category.Name", "Uma categoria com este nome já existe.");
-            }
-
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(viewModel.Category);
+                var category = new Category // Cria uma nova instância de Category (modelo de domínio)
+                {
+                    Name = viewModel.Name,
+                    Description = viewModel.Description
+                    // O Slug será gerado automaticamente pelo setter de Name na classe Category
+                };
+
+                // Trata o ParentCategoryId do ViewModel
+                if (viewModel.ParentCategoryId.HasValue && viewModel.ParentCategoryId.Value != 0)
+                {
+                    category.ParentCategoryId = viewModel.ParentCategoryId;
+                }
+                else
+                {
+                    category.ParentCategoryId = null; // Garante que seja null se "0" for selecionado
+                }
+                
+                _context.Add(category);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("List");
+                TempData["Message"] = "Categoria criada com sucesso!";
+                return RedirectToAction(nameof(List));
             }
 
-            // Se o modelo for inválido, recarrega as categorias para o dropdown
-            viewModel.Categories = _context.Categories
-                .Where(c => c.ParentCategoryId == null)
-                .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
-                .ToList();
+            // Se o ModelState não for válido, recarrega as opções do dropdown para retornar à view
+            viewModel.ParentCategoryOptions = await _context.Categories
+                                                           .Where(c => c.ParentCategoryId == null)
+                                                           .OrderBy(c => c.Name)
+                                                           .Select(c => new SelectListItem
+                                                           {
+                                                               Value = c.Id.ToString(),
+                                                               Text = c.Name
+                                                           })
+                                                           .ToListAsync();
+            viewModel.ParentCategoryOptions.Insert(0, new SelectListItem { Value = "0", Text = "Nenhuma (Categoria Principal)" });
 
-            return View(viewModel);
+            return View(viewModel); // Retorna o ViewModel com erros de validação
         }
 
-        [HttpGet("{id}")] // Usa atributo de rota para pegar o ID da URL
-        public async Task<IActionResult> Edit(int id)
+        // GET: Admin/Category/Edit/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Edit(int? id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            // Mapeia o modelo de domínio (Category) para o ViewModel
             var viewModel = new CategoryViewModel
             {
-                Category = category,
-                // Carrega categorias pai, excluindo a categoria que está sendo editada
-                Categories = _context.Categories
-                    .Where(c => c.Id != id && c.ParentCategoryId == null) // Não pode ser pai de si mesma e apenas raiz
-                    .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
-                    .ToList()
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                ParentCategoryId = category.ParentCategoryId
             };
 
-            return View(viewModel);
+            // Popula as opções do dropdown para edição
+            // Exclui a própria categoria da lista de pais para evitar recursão
+            viewModel.ParentCategoryOptions = await _context.Categories
+                                                           .Where(c => c.ParentCategoryId == null && c.Id != category.Id)
+                                                           .OrderBy(c => c.Name)
+                                                           .Select(c => new SelectListItem
+                                                           {
+                                                               Value = c.Id.ToString(),
+                                                               Text = c.Name
+                                                           })
+                                                           .ToListAsync();
+            viewModel.ParentCategoryOptions.Insert(0, new SelectListItem { Value = "0", Text = "Nenhuma (Categoria Principal)" });
+
+            return View(viewModel); // Passa o ViewModel para a view
         }
 
-        [HttpPost("{id}")] // Usa atributo de rota para pegar o ID da URL
+        // POST: Admin/Category/Edit/5
+        [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(CategoryViewModel viewModel)
+        // Agora recebe CategoryViewModel do formulário
+        public async Task<IActionResult> Edit(int id, CategoryViewModel viewModel)
         {
-            // O ID deve vir do hidden field do formulário
-            if (viewModel.Category.Id == 0) // Ou outro valor padrão para ID não encontrado
+            if (id != viewModel.Id)
             {
-                return BadRequest("ID da categoria não fornecido.");
-            }
-
-            // Reobtém a categoria do banco de dados para garantir que todas as propriedades sejam rastreadas
-            var existingCategory = await _context.Categories.FindAsync(viewModel.Category.Id);
-            if (existingCategory == null) return NotFound();
-
-            // Evita erro de slug duplicado ao editar o nome da categoria
-            // e garante que não está verificando o próprio slug do item que está sendo editado
-            if (_context.Categories.Any(c => c.Slug == viewModel.Category.Slug && c.Id != viewModel.Category.Id))
-            {
-                ModelState.AddModelError("Category.Name", "Uma categoria com este nome já existe.");
+                return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                // Atualiza as propriedades manualmente ou usa Entry.CurrentValues.SetValues()
-                existingCategory.Name = viewModel.Category.Name;
-                existingCategory.Icon = viewModel.Category.Icon;
-                existingCategory.ParentCategoryId = viewModel.Category.ParentCategoryId;
-               // existingCategory.Slug = viewModel.Category.Slug; // O slug é gerado no setter de Name
+                try
+                {
+                    // Carrega a Category existente do banco de dados para atualizar
+                    var categoryToUpdate = await _context.Categories.FindAsync(viewModel.Id);
+                    if (categoryToUpdate == null)
+                    {
+                        return NotFound();
+                    }
 
-                _context.Categories.Update(existingCategory); // Marca como modificada
-                await _context.SaveChangesAsync();
-                return RedirectToAction("List");
+                    // Atualiza as propriedades do modelo de domínio com os dados do ViewModel
+                    categoryToUpdate.Name = viewModel.Name; // Isso vai gerar o novo Slug
+                    categoryToUpdate.Description = viewModel.Description;
+
+                    // Trata o ParentCategoryId do ViewModel
+                    if (viewModel.ParentCategoryId.HasValue && viewModel.ParentCategoryId.Value != 0)
+                    {
+                        categoryToUpdate.ParentCategoryId = viewModel.ParentCategoryId;
+                    }
+                    else
+                    {
+                        categoryToUpdate.ParentCategoryId = null; // Garante que seja null
+                    }
+                    
+                    _context.Update(categoryToUpdate); // O EF rastreia as mudanças e as salvará
+                    await _context.SaveChangesAsync();
+                    TempData["Message"] = "Categoria atualizada com sucesso!";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CategoryExists(viewModel.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(List));
             }
+            // Se o ModelState não for válido, recarrega as opções do dropdown
+            viewModel.ParentCategoryOptions = await _context.Categories
+                                                           .Where(c => c.ParentCategoryId == null && c.Id != viewModel.Id)
+                                                           .OrderBy(c => c.Name)
+                                                           .Select(c => new SelectListItem
+                                                           {
+                                                               Value = c.Id.ToString(),
+                                                               Text = c.Name
+                                                           })
+                                                           .ToListAsync();
+            viewModel.ParentCategoryOptions.Insert(0, new SelectListItem { Value = "0", Text = "Nenhuma (Categoria Principal)" });
 
-            // Se o modelo for inválido, recarrega as categorias para o dropdown
-            viewModel.Categories = _context.Categories
-                .Where(c => c.Id != viewModel.Category.Id && c.ParentCategoryId == null)
-                .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
-                .ToList();
-
-            return View(viewModel);
+            return View(viewModel); // Retorna o ViewModel com erros de validação
         }
+        
+        // --- MÉTODOS DE EXCLUSÃO ---
 
-
-        [HttpGet("{id}")] // Usa atributo de rota para pegar o ID da URL
-        public async Task<IActionResult> Delete(int id)
+        // GET: Admin/Category/Delete/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Delete(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var category = await _context.Categories
-                                .Include(c => c.ParentCategory) // Para exibir o nome da categoria pai
-                                .Include(c => c.Products) // Para verificar se há produtos
-                                .Include(c => c.Subcategories) // Para verificar se há subcategorias
-                                .FirstOrDefaultAsync(c => c.Id == id);
-            if (category == null) return NotFound();
-
-            // Adiciona lógica para evitar exclusão de categorias com dependências
-            if (category.Products != null && category.Products.Any())
+                .Include(c => c.ParentCategory) 
+                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            if (category == null)
             {
-                TempData["ErrorMessage"] = "Não é possível excluir esta categoria porque ela contém produtos.";
-                return RedirectToAction("List");
-            }
-            if (category.Subcategories != null && category.Subcategories.Any())
-            {
-                TempData["ErrorMessage"] = "Não é possível excluir esta categoria porque ela contém subcategorias.";
-                return RedirectToAction("List");
+                return NotFound();
             }
 
-            return View(category);
+            return View(category); // Retorna a view Delete.cshtml para confirmação
         }
 
-        [HttpPost("{id}")] // Usa atributo de rota para pegar o ID da URL
-        [ActionName("ConfirmDelete")] // Nomeia a ação para que a rota possa diferenciar
+        // POST: Admin/Category/Delete/5
+        [HttpPost("{id}")]
+        [ActionName("Delete")] 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmDelete(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await _context.Categories.FindAsync(id);
-            if (category == null) return NotFound();
+            if (category != null)
+            {
+                // Antes de excluir a categoria, lida com suas subcategorias, tornando-as principais.
+                var subcategories = await _context.Categories
+                                                     .Where(c => c.ParentCategoryId == id)
+                                                     .ToListAsync();
+                foreach (var subcat in subcategories)
+                {
+                    subcat.ParentCategoryId = null; 
+                }
+                _context.Categories.UpdateRange(subcategories);
+                await _context.SaveChangesAsync(); 
 
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("List");
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Categoria excluída com sucesso!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Categoria não encontrada para exclusão.";
+            }
+            return RedirectToAction(nameof(List));
+        }
+
+        // Método auxiliar para verificar se uma categoria existe.
+        private bool CategoryExists(int id)
+        {
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

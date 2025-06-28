@@ -14,7 +14,7 @@
         </div>
         <nav class="menu">
             <h3>MENU</h3>
-              <ul>
+            <ul>
                 <a asp-controller="Admin" asp-action="Index">
                     <li><i class="fa-solid fa-house"></i> Início</li>
                 </a>
@@ -24,14 +24,14 @@
                 <a asp-controller="Product" asp-action="List">
                     <li><i class="fa-solid fa-box-open"></i> Produtos</li>
                 </a>
+                <a asp-controller="Product" asp-action="List">
+                    <li><i class="fa-solid fa-carrot"></i> Ingredientes</li>
+                </a>
                 <a asp-controller="Cupom" asp-action="List">
                     <li><i class="fa-solid fa-ticket"></i> Cupons</li>
                 </a>
                 <a asp-controller="Promotion" asp-action="List">
                     <li><i class="fa-solid fa-tags"></i> Promoções</li>
-                </a>
-                 <a asp-controller="Employee" asp-action="List">
-                    <li><i class="fa-solid fa-users-gear"></i> Funcionários</li>
                 </a>
             </ul>
         </nav>
@@ -46,16 +46,9 @@
             <a asp-action="Create" class="btn-novo-produto">+ Novo Cupom</a>
         </div>
 
-        <div style="padding: 0 20px;">
-            <input type="text" placeholder="Buscar cupons..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
-        </div>
 
-        <div class="filtros">
-            <button class="ativo">Todos <span class="badge">@Model.Count()</span></button>
-            <button>Desconto %</button>
-            <button>Desconto R$</button>
-            <button>Frete Grátis</button>
-        </div>
+
+
 
         <div class="produtos-container">
             @foreach (var item in Model)
@@ -66,13 +59,9 @@
                         <span class="tag">@item.Type</span>
                     </div>
                     <p>Valor: 
-                        @if (item.Type == "Porcentagem")
+                        @if (item.Type == "Percentual")
                         {
                             @($"{item.Value}%")
-                        }
-                        else if (item.Type == "Frete Grátis")
-                        {
-                            @("Frete Grátis")
                         }
                         else
                         {

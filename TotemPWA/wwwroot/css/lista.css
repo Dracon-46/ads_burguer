@@ -168,3 +168,10 @@ body {
     .btn-editar:hover {
         background-color: #f0eaea;
     }
+
+    .product-image-container img{
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover;
+    }

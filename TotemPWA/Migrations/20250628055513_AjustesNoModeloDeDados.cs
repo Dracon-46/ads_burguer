@@ -5,24 +5,24 @@
 namespace TotemPWA.Migrations
 {
     /// <inheritdoc />
-    public partial class addedSlugToCategory : Migration
+    public partial class AjustesNoModeloDeDados : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Slug",
+                name: "Description",
                 table: "Categories",
                 type: "TEXT",
-                nullable: false,
-                defaultValue: "");
+                maxLength: 255,
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Slug",
+                name: "Description",
                 table: "Categories");
         }
     }
