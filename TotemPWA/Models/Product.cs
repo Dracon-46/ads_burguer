@@ -6,6 +6,7 @@ namespace TotemPWA.Models
         public required string Name { get; set; }
         public string? Description { get; set; } // Pode ser nulo
         public decimal Price { get; set; }
+        public string? ImageUrl { get; set; }
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
 

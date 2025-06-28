@@ -1,23 +1,67 @@
 @model TotemPWA.ViewModels.ProductViewModel
-
 @{
-    ViewData["Title"] = "Editar Produto";
+    ViewData["Title"] = Model.Product.Id == 0 ? "Novo Produto" : "Editar Produto";
 }
 
-<link rel="stylesheet" href="/css/form_crud" />
+<h1>@ViewData["Title"]</h1>
 
-<h1>Editar Produto</h1>
-
-<h4>Produto</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" asp-route-id="@Model.Product.Id">
+    <div class="col-md-6">
+        <form asp-action="@(Model.Product.Id == 0 ? "Create" : "Edit")" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Product.Id" />
-            <partial name="_Form" model="Model" />
-            <div class="form-group mt-3">
-                <input type="submit" value="Salvar" class="btn btn-success" />
+
+            @* Se for edição, o ID do produto é necessário *@
+            @if (Model.Product.Id != 0)
+            {
+                <input type="hidden" asp-for="Product.Id" />
+            }
+
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <textarea asp-for="Product.Description" class="form-control"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.CategoryId" class="control-label"></label>
+                <select asp-for="Product.CategoryId" asp-items="Model.Categories" class="form-control">
+                    <option value="">-- Selecione uma Categoria --</option>
+                </select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label">Imagem do Produto</label>
+                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Product.ImageUrl) && Model.Product.Id != 0)
+            {
+                <div class="form-group">
+                    <label class="control-label">Imagem Atual</label>
+                    <br />
+                    <img src="@Model.Product.ImageUrl" alt="Imagem do Produto" style="max-width: 200px; height: auto;" />
+                </div>
+            }
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Product.Active" /> @Html.DisplayNameFor(model => model.Product.Active)
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Salvar</button>
                 <a asp-action="List" class="btn btn-secondary">Voltar para a Lista</a>
             </div>
         </form>
@@ -25,6 +69,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
-</style>

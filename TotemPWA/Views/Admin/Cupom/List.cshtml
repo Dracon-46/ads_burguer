@@ -46,16 +46,8 @@
             <a asp-action="Create" class="btn-novo-produto">+ Novo Cupom</a>
         </div>
 
-        <div style="padding: 0 20px;">
-            <input type="text" placeholder="Buscar cupons..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
-        </div>
 
-        <div class="filtros">
-            <button class="ativo">Todos <span class="badge">@Model.Count()</span></button>
-            <button>Desconto %</button>
-            <button>Desconto R$</button>
-            <button>Frete Grátis</button>
-        </div>
+
 
         <div class="produtos-container">
             @foreach (var item in Model)

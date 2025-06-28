@@ -6,24 +6,51 @@ using System.Linq;
 using TotemPWA.Data;
 using TotemPWA.Models;
 using TotemPWA.ViewModels;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http; // Necessário para usar Request.Headers
 
 namespace TotemPWA.Controllers.Admin
 {
-    [Route("Admin/[controller]/[action]")] // Garante o roteamento correto
+    [Route("Admin/[controller]/[action]")]
     public class ProductController : Controller
     {
-        private readonly ApplicationDbContext _context; // ALTERADO: AppDbContext para ApplicationDbContext
-        public ProductController(ApplicationDbContext context) // ALTERADO: AppDbContext para ApplicationDbContext
+        private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ProductController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string? searchTerm)
         {
-            // Inclui a categoria para exibição
-            var products = await _context.Products.Include(p => p.Category).ToListAsync();
-            return View(products);
+            var allProducts = await _context.Products.Include(p => p.Category).ToListAsync();
+            
+            IEnumerable<Product> products = allProducts; 
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                products = products.Where(p => (p.Name != null && p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+                                                (p.Description != null && p.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
+            }
+
+            ViewData["CurrentSearchTerm"] = searchTerm;
+
+            // ***** AQUI ESTÁ A LÓGICA CHAVE: *****
+            // Se a requisição for AJAX (feita pelo JavaScript), retorna os dados em formato JSON.
+            // O JavaScript no frontend vai construir o HTML a partir desse JSON.
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return Json(products.ToList());
+            }
+
+            // Se não for uma requisição AJAX (primeira carga da página),
+            // retorna a View completa, que já tem o loop @foreach para renderizar os produtos.
+            return View(products.ToList());
         }
 
         [HttpGet]
@@ -31,6 +58,7 @@ namespace TotemPWA.Controllers.Admin
         {
             var viewModel = new ProductViewModel
             {
+                Product = new Product { Name = string.Empty, Description = string.Empty, Price = 0.01M, Active = true },
                 Categories = await GetCategorySelectListAsync()
             };
             return View(viewModel);
@@ -40,14 +68,39 @@ namespace TotemPWA.Controllers.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel viewModel)
         {
+            ModelState.Remove("Product.ImageUrl"); 
+
             if (ModelState.IsValid)
             {
+                if (viewModel.ImageFile != null)
+                {
+                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.ImageFile.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await viewModel.ImageFile.CopyToAsync(fileStream);
+                    }
+                    viewModel.Product.ImageUrl = "/images/products/" + uniqueFileName;
+                }
+                else
+                {
+                    viewModel.Product.ImageUrl = "/images/products/default_product.png";
+                }
+
                 _context.Products.Add(viewModel.Product);
                 await _context.SaveChangesAsync();
+                
+                TempData["Message"] = "Produto criado com sucesso!";
                 return RedirectToAction("List");
             }
 
-            // Se o modelo for inválido, recarrega as categorias para o dropdown
             viewModel.Categories = await GetCategorySelectListAsync();
             return View(viewModel);
         }
@@ -76,8 +129,42 @@ namespace TotemPWA.Controllers.Admin
                 return BadRequest("ID do produto não fornecido.");
             }
 
+            ModelState.Remove("Product.ImageUrl"); 
+
             if (ModelState.IsValid)
             {
+                var productInDb = await _context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == viewModel.Product.Id);
+                if (productInDb == null) return NotFound();
+
+                if (viewModel.ImageFile != null)
+                {
+                    if (!string.IsNullOrEmpty(productInDb.ImageUrl) && !productInDb.ImageUrl.Contains("default_product.png"))
+                    {
+                        string oldFilePath = Path.Combine(_webHostEnvironment.WebRootPath, productInDb.ImageUrl.TrimStart('/'));
+                        if (System.IO.File.Exists(oldFilePath))
+                        {
+                            System.IO.File.Delete(oldFilePath);
+                        }
+                    }
+
+                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.ImageFile.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await viewModel.ImageFile.CopyToAsync(fileStream);
+                    }
+                    viewModel.Product.ImageUrl = "/images/products/" + uniqueFileName;
+                }
+                else
+                {
+                    viewModel.Product.ImageUrl = productInDb.ImageUrl;
+                }
+
                 try
                 {
                     _context.Products.Update(viewModel.Product);
@@ -94,10 +181,10 @@ namespace TotemPWA.Controllers.Admin
                         throw;
                     }
                 }
+                TempData["Message"] = "Produto atualizado com sucesso!";
                 return RedirectToAction("List");
             }
 
-            // Recarregar categorias se inválido
             viewModel.Categories = await GetCategorySelectListAsync();
             return View(viewModel);
         }
@@ -106,51 +193,33 @@ namespace TotemPWA.Controllers.Admin
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _context.Products
-                                .Include(p => p.Category)
-                                .Include(p => p.Promotions) // Verifica promoções
-                                .Include(p => p.Additionals) // Verifica adicionais
-                                .Include(p => p.ProductCombos) // Verifica combos onde é o principal
-                                .Include(p => p.ComposedCombos) // Verifica combos onde é um componente
-                                .Include(p => p.OrderItems) // Verifica itens de pedido
-                                .FirstOrDefaultAsync(p => p.Id == id);
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null) return NotFound();
-
-            // Lógica para evitar exclusão se o produto estiver em uso
-            if (product.Promotions != null && product.Promotions.Any())
-            {
-                TempData["ErrorMessage"] = "Não é possível excluir este produto porque ele está associado a promoções.";
-                return RedirectToAction(nameof(List));
-            }
-            if (product.Additionals != null && product.Additionals.Any())
-            {
-                TempData["ErrorMessage"] = "Não é possível excluir este produto porque ele está associado a adicionais.";
-                return RedirectToAction(nameof(List));
-            }
-            if ((product.ProductCombos != null && product.ProductCombos.Any()) || (product.ComposedCombos != null && product.ComposedCombos.Any()))
-            {
-                TempData["ErrorMessage"] = "Não é possível excluir este produto porque ele está associado a combos.";
-                return RedirectToAction(nameof(List));
-            }
-            if (product.OrderItems != null && product.OrderItems.Any())
-            {
-                TempData["ErrorMessage"] = "Não é possível excluir este produto porque ele está associado a itens de pedido.";
-                return RedirectToAction(nameof(List));
-            }
-
-
             return View(product);
         }
 
         [HttpPost("{id}")]
-        [ActionName("ConfirmDelete")]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmDelete(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);
-            if (product == null) return NotFound();
-
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            if (product != null)
+            {
+                if (!string.IsNullOrEmpty(product.ImageUrl) && !product.ImageUrl.Contains("default_product.png"))
+                {
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, product.ImageUrl.TrimStart('/'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
+                
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Produto excluído com sucesso!";
+            }
             return RedirectToAction("List");
         }
 

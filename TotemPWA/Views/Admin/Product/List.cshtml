@@ -2,20 +2,22 @@
 
 @{
     ViewData["Title"] = "Lista de Produtos";
+
+    string currentSearchTerm = ViewData["CurrentSearchTerm"] as string;
 }
 
 <link rel="stylesheet" href="/css/lista.css" />
 
 <script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
 
-    <div class="container-geral">
+<div class="container-geral">
     <aside class="sidebar">
         <div class="logo">
             <img src="/images/logo_crud.png" alt="">
         </div>
         <nav class="menu">
         <h3>MENU</h3>
-              <ul>
+            <ul>
                 <a asp-controller="Admin" asp-action="Index">
                     <li><i class="fa-solid fa-house"></i> Início</li>
                 </a>
@@ -48,39 +50,147 @@
         </div>
 
         <div style="padding: 0 20px;">
-            <input type="text" placeholder="Buscar produtos..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+            <form asp-action="List" method="get" id="searchForm">
+                <input type="text" name="searchTerm" id="searchInput" value="@currentSearchTerm" placeholder="Buscar produtos..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
+                <button type="submit" style="display: none;"></button> 
+            </form>
         </div>
 
-        <div class="filtros">
-            <button class="ativo">Todos <span class="badge">6</span></button>
-            <button>Promoções <span class="badge">2</span></button>
-            <button>Lanche <span class="badge">2</span></button>
-            <button>Combo <span class="badge">2</span></button>
-            <button>Bebida <span class="badge">2</span></button>
-            <button>Unitários <span class="badge">2</span></button>
-            <button>Sobremesa <span class="badge">2</span></button>
-        </div>
-
-        <div class="produtos-container">
+        <div class="produtos-container" id="produtosContainer">
+            @* Este loop renderiza os produtos APENAS na carga INICIAL da página. * @
+            @* A busca em tempo real (via JavaScript) vai preencher este div dinamicamente depois. *@
             @foreach (var item in Model)
             {
                 <div class="produto-card">
                     <div class="card-topo">
                         <h3>@item.Name</h3>
-                        <span class="tag">@item.Category.Name</span>
+                        <span class="tag">@item.Category?.Name</span> @* Adicionado ?. para segurança caso Category seja null *@
                     </div>
+                    
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <div class="product-image-container">
+                            <img src="@item.ImageUrl" alt="Imagem de @item.Name">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="product-image-container">
+                            <img src="/images/products/default_product.png" alt="Produto sem imagem">
+                        </div>
+                    }
+
                     <p>@item.Description</p>
-                    <p class="price">R$ @item.Price</p>
+                    <p class="price">R$ @item.Price.ToString("F2")</p> @* Formatado para 2 casas decimais *@
                     <div class="status">
                         @if (item.Active)
                         {
                             <span class="disponivel">✔ Disponível</span>
                         }
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="excluir"><i class="fa-solid fa-trash"></i> Excluir</a>
+                        <a href="/Admin/Product/Delete/@item.Id" class="excluir"><i class="fa-solid fa-trash"></i> Excluir</a>
                     </div>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-editar">✏ Editar</a>
+                    <a href="/Admin/Product/Edit/@item.Id" class="btn-editar">✏ Editar</a>
                 </div>
             }
         </div>
     </main>
 </div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const produtosContainer = document.getElementById('produtosContainer');
+    const searchForm = document.getElementById('searchForm');
+
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário (para não recarregar a página)
+    });
+
+    let debounceTimeout; // Variável para controlar o "debounce" (espera um pouco antes de buscar)
+
+    // Função para gerar o HTML de um único cartão de produto a partir de um objeto JSON
+    function createProductCardHtml(product) {
+        const defaultImageUrl = '/images/products/default_product.png';
+        // Usa a URL da imagem do produto, ou a imagem padrão se não houver
+        const imageUrl = product.imageUrl && product.imageUrl.trim() !== '' ? product.imageUrl : defaultImageUrl;
+        // Pega o nome da categoria (garantindo que 'category' e 'name' existam) ou exibe 'Sem Categoria'
+        const categoryName = product.category ? product.category.name : 'Sem Categoria'; 
+        // Formata o preço para 2 casas decimais e usa vírgula como separador decimal
+        const priceFormatted = (product.price || 0).toFixed(2).replace('.', ',');
+
+        return `
+            <div class="produto-card">
+                <div class="card-topo">
+                    <h3>${product.name}</h3>
+                    <span class="tag">${categoryName}</span>
+                </div>
+                
+                <div class="product-image-container">
+                    <img src="${imageUrl}" alt="Imagem de ${product.name}">
+                </div>
+
+                <p>${product.description || ''}</p>
+                <p class="price">R$ ${priceFormatted}</p>
+                <div class="status">
+                    ${product.active ? '<span class="disponivel">✔ Disponível</span>' : ''}
+                    <a href="/Admin/Product/Delete/${product.id}" class="excluir"><i class="fa-solid fa-trash"></i> Excluir</a>
+                </div>
+                <a href="/Admin/Product/Edit/${product.id}" class="btn-editar">✏ Editar</a>
+            </div>
+        `;
+    }
+
+    // Função principal que busca os produtos via AJAX e atualiza a interface
+    function fetchProducts() {
+        const searchTerm = searchInput.value; // Pega o valor atual do campo de busca
+        // Constrói a URL para o Controller, incluindo o termo de busca
+        const url = `/Admin/Product/List?searchTerm=${encodeURIComponent(searchTerm)}`;
+
+        fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest' // Indica ao Controller que é uma requisição AJAX
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                // Se houver um erro HTTP (ex: 404, 500), lança uma exceção
+                throw new Error('Erro na rede ou no servidor: ' + response.statusText);
+            }
+            return response.json(); // Espera que a resposta seja um JSON
+        })
+        .then(products => {
+            // Limpa todo o conteúdo atual do container de produtos
+            produtosContainer.innerHTML = ''; 
+            
+            if (products.length === 0) {
+                // Se não encontrou nenhum produto, exibe uma mensagem
+                produtosContainer.innerHTML = '<p>Nenhum produto encontrado.</p>';
+                return;
+            }
+            
+            // Para cada produto recebido no JSON, cria o HTML do cartão e adiciona ao container
+            products.forEach(product => {
+                produtosContainer.innerHTML += createProductCardHtml(product);
+            });
+        })
+        .catch(error => {
+            // Em caso de erro na requisição (rede, JSON inválido, etc.), loga no console e exibe mensagem
+            console.error('Ocorreu um erro na operação de busca:', error);
+            produtosContainer.innerHTML = '<p style="color: red;">Ocorreu um erro ao carregar os produtos.</p>';
+        });
+    }
+
+    // Adiciona um "listener" ao campo de busca para detectar cada digitação
+    searchInput.addEventListener('input', function() {
+        // Limpa o timeout anterior para evitar múltiplas requisições rápidas
+        clearTimeout(debounceTimeout);
+        // Define um novo timeout: a função fetchProducts só será chamada 300ms depois
+        // da última digitação. Isso otimiza o desempenho.
+        debounceTimeout = setTimeout(fetchProducts, 300);
+    });
+
+    // Esta parte garante que, se você carregar a página já com um termo de busca na URL,
+    // a busca seja executada automaticamente ao carregar a página.
+    if (searchInput.value) {
+        fetchProducts();
+    }
+</script>

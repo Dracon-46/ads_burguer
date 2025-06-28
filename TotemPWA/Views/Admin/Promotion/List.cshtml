@@ -45,11 +45,6 @@
             </div>
             <a asp-action="Create" class="btn-novo-produto">+ Nova Promoção</a>
         </div>
-
-        <div style="padding: 0 20px;">
-            <input type="text" placeholder="Buscar promoções..." style="width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid #ccc; margin: 10px 0;">
-        </div>
-
         <div class="produtos-container">
             @foreach (var item in Model)
             {
