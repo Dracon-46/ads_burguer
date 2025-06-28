@@ -39,7 +39,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureDeleted(); // CUIDADO: Descomentar esta linha APAGA o banco de dados a cada inicialização!
+    //context.Database.EnsureDeleted(); // CUIDADO: Descomentar esta linha APAGA o banco de dados a cada inicialização!
     //context.Database.Migrate();      // Garante que o banco de dados está atualizado com as últimas migrações
     //await DbInitializer.InitializeAsync(context); // Se você estiver usando o DbInitializer para seed inicial
                                                     // Certifique-se de que este arquivo existe e está correto
