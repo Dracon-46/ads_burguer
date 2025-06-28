@@ -15,31 +15,32 @@
         <hr />
         <dl class="row">
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Product)
+                Produto:
             </dt>
             <dd class="col-sm-9">
                 @(Model.Product?.Name ?? "Produto Desconhecido")
             </dd>
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Percent)
+                Porcentagem de Desconto:
             </dt>
             <dd class="col-sm-9">
                 @Html.DisplayFor(model => model.Percent)%
             </dd>
             <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.ValidUntil)
+                Data de Validade:
             </dt>
             <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.ValidUntil)
+               @Html.DisplayFor(model => model.ValidUntil)
             </dd>
         </dl>
 
-        <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+        @* ESTA É A LINHA CORRIGIDA PARA O BOTÃO DE DELETAR FUNCIONAR: *@
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
             <input type="hidden" asp-for="Id" />
             <input type="submit" value="Excluir" class="btn btn-danger" /> |
             <a asp-action="List" class="btn btn-secondary">Cancelar</a>
         </form>
-    </div>     
+    </div>    
 </div>
 
 @section Scripts {

@@ -35,9 +35,6 @@
             string activeClass = category.active ? "active" : "";
           
             <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.slug'">
-                <div class="icon">
-                    <img src="@category.icon" />
-                </div>
                 <span>@category.name</span>
             </button>
           }

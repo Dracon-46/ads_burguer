@@ -24,6 +24,9 @@
                 <a asp-controller="Product" asp-action="List">
                     <li><i class="fa-solid fa-box-open"></i> Produtos</li>
                 </a>
+                <a asp-controller="Product" asp-action="List">
+                    <li><i class="fa-solid fa-carrot"></i> Ingredientes</li>
+                </a>
                 <a asp-controller="Cupom" asp-action="List">
                     <li><i class="fa-solid fa-ticket"></i> Cupons</li>
                 </a>
@@ -72,7 +75,6 @@
                         <h3>@(item.Name ?? "Categoria sem nome")</h3>
                         <span class="tag">Categoria Principal</span>
                     </div>
-                    <p><strong>Slug:</strong> @(item.Slug ?? "N/A")</p>
                     <div class="status">
                         <span class="disponivel">✔ Ativa</span>
                         <a asp-action="Delete" asp-route-id="@item.Id" class="excluir">
@@ -95,7 +97,6 @@
                                 <h3>@(subcat.Name ?? "Subcategoria sem nome")</h3>
                                 <span class="tag">Subcategoria de @(item.Name ?? "N/A")</span>
                             </div>
-                            <p><strong>Slug:</strong> @(subcat.Slug ?? "N/A")</p>
                             <div class="status">
                                 <span class="disponivel">✔ Ativa</span>
                                 <a asp-action="Delete" asp-route-id="@subcat.Id" class="excluir">
