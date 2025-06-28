@@ -1,0 +1,36 @@
+/* --------------------------- BASE --------------------------- */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    :root { --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --text-color: #181818; --bg-color: #FFFFFF; --bg-color2: #F1F1F1; --hover-color: #f58941; --btn-sim-color: #C1D443; --shadow-sm: 0 1px 3px rgba(0,0,0,0.12); --shadow-md: 0 4px 6px rgba(0,0,0,0.15); --shadow-lg: 0 10px 25px rgba(0,0,0,0.2); --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); --border-radius: 10px; }
+
+    body { margin: 0; display: flex; align-items: center; flex-direction: column; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;}
+    .voltar{ background-color: var(--primary-color); color: white; font-weight: bold; font-size: 16px; padding: 12px 40px; border: none; border-radius: var(--border-radius); cursor: pointer; transition: 0.3s; width: 160px; text-decoration: none; }
+    .cont{ background-color: var(--btn-sim-color); color: var(--text-color); font-weight: bold; font-size: 16px; padding: 12px 40px; border: none; border-radius: var(--border-radius);  cursor: pointer; transition: 0.3s; width: 160px; text-decoration: none; }
+/* --------------------------- END ---------------------------- */
+
+/* --------------------------- INDEX ----------------------- */
+    .container { background-image: url('/images/hamburguer.png'); background-repeat: no-repeat; background-position: 10vw 40vh; background-size: 30%; background-color: var(--bg-color); width: 100vw; height: 100vh; }
+    .container .banner { width: 100%; background-size: cover; background-position: top center; background-repeat: no-repeat; height: 30%;}
+    .container .banner div:nth-child(1) { background-image: url('/images/logo.png'); background-position: center;  background-repeat: no-repeat; background-size: 600px; height: 250px; background-color: #9B0000; }
+    .container .banner div:nth-child(2) { height: 60px; background-color: #FF6501; }
+    .container .banner div:nth-child(3) { height: 50px; background-color: #C1D443; }
+    .container .hamburguer { position: relative; height: 600px; top: 100px; background-image: url('/images/burger.png'); background-size: 560px; background-position: right; background-repeat: no-repeat; }
+    .container .hamburguer div { position: relative; top: -235px; left: 585px; background-image: url('/images/batatas.png'); background-size: 350px; background-repeat: no-repeat; background-position: right; height: 45%; width: 27%; }
+    .container .btnStart { display: flex; justify-content: center; align-items: center; position: relative; top: 150px; height: auto; width: 100%; }
+    .container .btn-inicial { background-color: #ff6700; color: white;  font-weight: bold; font-size: 16px; display: flex; align-items: center ; justify-content: center; text-decoration: none; padding: 12px 40px; border: none; border-radius: var(--border-radius); cursor: pointer; transition: 0.3s; width: 40%; margin: 0 auto;  }
+    .container .btn-inicial:hover { background-color: #e55c00; }
+/* --------------------------- END --------------------------- */
+
+/* --------------------------- CPF ----------------------- */
+    .containerNoBG { text-align: center; }
+    .containerNoBG .navbar { background-color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; height: 80px; padding: 15px 50px; }
+    .containerNoBG .img { width: 800px; height: 400px; background-image: url('../images/lanche_cpf.png'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 50px; }
+    .containerNoBG .text { margin-bottom: 50px; }
+    .containerNoBG .text h1:nth-child(1) { font-weight: bold; text-align: center; font-size: 25px; color: var(--text-color); }
+    .containerNoBG .text h1:nth-child(2) { font-weight: bold; text-align: center; font-size: 25px; color: var(--text-color); filter: opacity(0.8); }
+    .containerNoBG input{ width: 350px; height: 60px; border: 2px solid #969696; border-radius: var(--border-radius); padding: 0 10px; font-size: 16px; outline: none;}
+    .containerNoBG .btns { display: flex; align-items: center; justify-content: space-around; gap: 20px; }
+    .containerNoBG .btns a { color: var(--text-color);}
+    .containerNoBG .simple-keyboard { max-width: 600px; margin: 20px auto; }
+    .hg-button .hg-functionBtn .hg-button-bksp { background-color: red !important; color: white; }
+/* --------------------------- END --------------------------- */
+

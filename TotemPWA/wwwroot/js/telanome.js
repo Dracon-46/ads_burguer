@@ -18,10 +18,10 @@ const keyboard = new SimpleKeyboard.default({
   }
 });
 
-function onChange(input) {
-  nomeInput.value = input;
-  keyboard.setInput(input);
-}
+// function onChange(input) {
+//   nomeInput.value = input;
+//   keyboard.setInput(input);
+// }
 
 function onKeyPress(button) {
   if (button === "{shift}" || button === "{lock}") handleShift();
@@ -33,13 +33,13 @@ function handleShift() {
   keyboard.setOptions({ layoutName: shiftToggle });
 }
 
-nomeInput.addEventListener("focus", () => {
-  document.querySelector(".simple-keyboard").style.display = "block";
-});
+// nomeInput.addEventListener("focus", () => {
+//   document.querySelector(".simple-keyboard").style.display = "block";
+// });
 
-document.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("nome") && 
-      !e.target.closest(".simple-keyboard")) {
-    document.querySelector(".simple-keyboard").style.display = "none";
-  }
-});
+// document.addEventListener("click", (e) => {
+//   if (!e.target.classList.contains("nome") && 
+//       !e.target.closest(".simple-keyboard")) {
+//     document.querySelector(".simple-keyboard").style.display = "none";
+//   }
+// });

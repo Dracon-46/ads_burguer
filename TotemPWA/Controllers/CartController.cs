@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TotemPWA.Data;
 using TotemPWA.Utilities;
 using TotemPWA.Models.ViewModels;
-
+using System.Linq; 
 namespace TotemPWA.Controllers
 {
     [Route("[controller]/[action]")]
@@ -48,6 +48,7 @@ namespace TotemPWA.Controllers
             return RedirectToAction("Index");
         }
 
+        // Ação original RemoveItem (mantida, mas agora serve para remover item COMPLETO)
         [HttpPost]
         public IActionResult RemoveItem(int productId)
         {
@@ -60,6 +61,33 @@ namespace TotemPWA.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        // --- NOVA AÇÃO: DecreaseItem ---
+        // Esta ação é chamada quando o usuário clica no botão de subtração para reduzir a quantidade em 1.
+        [HttpPost]
+        public IActionResult DecreaseItem(int productId)
+        {
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
+            var item = cart.FirstOrDefault(x => x.ProductId == productId);
+
+            if (item != null)
+            {
+                if (item.Quantity > 1)
+                {
+                    item.Quantity--; // Decrementa a quantidade em 1
+                }
+                else
+                {
+                    // Se a quantidade for 1, remove o item completamente do carrinho
+                    cart.Remove(item);
+                }
+                HttpContext.Session.SetObject("Cart", cart); // Salva o carrinho atualizado na sessão
+            }
+            
+            return RedirectToAction("Index"); // Redireciona de volta para a tela do carrinho
+        }
+        // --- FIM DA NOVA AÇÃO ---
+
 
         [HttpPost]
         public IActionResult Clear()

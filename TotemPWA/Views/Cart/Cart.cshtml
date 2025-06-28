@@ -8,76 +8,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    
+    <div class="cart-container">
+        <h2>Seu Carrinho</h2>
+
+        @if (!Model.Any())
+        {
+            <p class="empty-cart-message">Seu carrinho está vazio.</p>
+            <div class="cart-actions-bottom empty-cart-actions">
+                <a href="@Url.Action("TelaProduto", "Home")" class="btn btn-primary">Continuar Comprando</a>
+            </div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Total</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        var item = Model[i];
+                        <tr style="--i: @(i);">
+                            <td data-label="Produto">@item.Name</td>
+                            <td data-label="Quantidade">@item.Quantity</td>
+                            <td data-label="Preço Unitário">R$ @item.Price.ToString("F2")</td>
+                            <td data-label="Total">R$ @((item.Price * item.Quantity).ToString("F2"))</td>
+                            <td data-label="Ações">
+                                <div class="btn-group">
+                                    <form asp-action="AddItem" method="post" style="display:inline;">
+                                        <input type="hidden" name="productId" value="@item.ProductId" />
+                                        <button type="submit" class="btn btn-sm btn-success" title="Adicionar Mais">+</button>
+                                    </form>
+
+                                    <form asp-action="DecreaseItem" method="post" style="display:inline;"> 
+                                        <input type="hidden" name="productId" value="@item.ProductId" />
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Remover Unidade">−</button>
+                                    </form>
+
+                                    <form asp-action="Personalizar" asp-controller="Home" method="get" style="display:inline;">
+                                        <input type="hidden" name="productId" value="@item.ProductId" />
+                                        <button type="submit" class="btn btn-sm btn-warning" title="Personalizar">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <p class="order-total">
+                <strong>Total do Pedido:</strong> <span>R$ @Model.Sum(x => x.Price * x.Quantity).ToString("F2")</span>
+            </p>
+
+            <div class="cart-actions-bottom">
+                <form asp-action="Clear" method="post" style="display:inline;">
+                    <button class="btn btn-warning"><i class="fa-solid fa-trash-can"></i> Esvaziar Carrinho</button>
+                </form>
+            
+                <a href="@Url.Action("TelaProduto", "Home")" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i> Continuar Comprando</a>
+                <a href="@Url.Action("Cupom", "Home")" class="btn btn-success"><i class="fa-solid fa-cash-register"></i> Finalizar Pedido</a>
+            </div>
+        }
+    </div>
 </body>
 </html>
-<h2>Seu Carrinho</h2>
-
-@if (!Model.Any())
-{
-    <p>Seu carrinho está vazio.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-                <th>Total</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Quantity</td>
-                    <td>R$ @item.Price.ToString("F2")</td>
-                    <td>R$ @(item.Price * item.Quantity)</td>
-                    <td>
-                        <div class="btn-group">
-                            <!-- Botão Adicionar Mais -->
-                            <form asp-action="AddItem" method="post" style="display:inline;">
-                                <input type="hidden" name="productId" value="@item.ProductId" />
-                                <button type="submit" class="btn btn-sm btn-success">+</button>
-                            </form>
-
-                            <!-- Botão Remover -->
-                            <form asp-action="RemoveItem" method="post" style="display:inline;">
-                                <input type="hidden" name="productId" value="@item.ProductId" />
-                                <button type="submit" class="btn btn-sm btn-danger">−</button>
-                            </form>
-
-                             <!-- Botão Personalizar -->
-                            <form asp-action="Personalizar" asp-controller="Home" method="get" style="display:inline;">
-                                <input type="hidden" name="productId" value="@item.ProductId" />
-                                <button type="submit" class="btn btn-sm btn-warning" title="Personalizar">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <p><strong>Total do Pedido:</strong> R$ @Model.Sum(x => x.Price * x.Quantity)</p>
-
-    <form asp-action="Clear" method="post">
-        <button class="btn btn-warning">Esvaziar Carrinho</button>
-    </form>
-}
-
-<div class="mt-3">
-    <a href="@Url.Action("TelaProduto", "Home")" class="btn btn-primary">Continuar Comprando</a>
-    <a href="@Url.Action("Cupom", "Home")" class="btn btn-success">Finalizar Pedido</a>
-</div>

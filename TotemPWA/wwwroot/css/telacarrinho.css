@@ -1,396 +1,325 @@
+/* cart.css - Versão Aprimorada */
+
+/* Variáveis CSS para um tema consistente */
 :root {
-    --primary-color: #990000;
-    --secondary-color: #426B1F;
-    --tertiary-color: #FF6501;
-    --text-color: #3f3f3f;
-    --bg-color: #FFFFFF;
-    --bg-color2: #F1F1F1;
-    --hover-color: #f58941;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.15);
-    --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
-    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --border-radius: 8px;
+    --primary-color: #990000; /* Vermelho mais profundo para destaque */
+    --secondary-color: #426B1F; /* Verde escuro para ações positivas */
+    --tertiary-color: #FF6501; /* Laranja vibrante para avisos ou detalhes */
+    --text-color: #333333; /* Texto principal mais escuro para melhor legibilidade */
+    --light-text-color: #666666; /* Texto secundário */
+    --bg-color: #FFFFFF; /* Fundo principal claro */
+    --bg-light: #f5f5f5; /* Fundo mais claro para seções */
+    --border-color: #e0e0e0; /* Cor de borda suave */
+    --hover-color: #f58941; /* Laranja para estados de hover */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave */
+    --shadow-md: 0 6px 12px rgba(0,0,0,0.15); /* Sombra média */
+    --transition: all 0.3s ease; /* Transição mais suave */
+    --border-radius: 10px; /* Bordas mais arredondadas */
 }
 
-/* Estilos Base do Modal - Versão Aprimorada */
-.cart-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    max-width: 800px;
-    max-height: 90vh;
-    background-color: transparent;
-    z-index: 1001;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    will-change: transform, opacity;
-}
-
-.cart-modal.active {
-    opacity: 1;
-    display: block;
-}
-
-.cart-content {
-    background-color: var(--bg-color);
-    margin: 0 auto;
-    padding: 1.5rem;
-    width: 100%;
-    max-height: calc(90vh - 3rem);
-    overflow-y: auto;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(0);
-    transition: var(--transition);
-}
-
-/* Efeito de entrada suave */
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -45%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.cart-modal.active {
-    animation: modalSlideIn 0.3s ease-out forwards;
-}
-
-/* Overlay Moderno */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
-/* Cabeçalho Aprimorado */
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--bg-color2);
-}
-
-.cart-header h2 {
+/* Estilos Globais e Reset */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light); /* Fundo um pouco mais suave */
+    color: var(--text-color);
+    padding: 20px;
+    line-height: 1.6; /* Melhor espaçamento entre linhas */
     margin: 0;
-    color: var(--text-color);
-    font-size: 1.5rem;
+    -webkit-font-smoothing: antialiased; /* Suavização de fonte para Webkit */
+    -moz-osx-font-smoothing: grayscale; /* Suavização de fonte para Firefox */
 }
 
-.close-cart {
-    font-size: 1.75rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: var(--transition);
-    background: none;
-    border: none;
-    color: var(--text-color);
-    padding: 0.5rem;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.close-cart:hover,
-.close-cart:focus {
-    transform: scale(1.1);
+/* Título da Página */
+h2 {
     color: var(--primary-color);
-    background-color: rgba(0,0,0,0.05);
-    outline: none;
-}
-
-/* Itens do Carrinho - Estilo Moderno */
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--bg-color2);
-    transition: var(--transition);
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem; /* Título maior */
+    font-weight: 700; /* Mais negrito */
+    letter-spacing: -0.5px; /* Espaçamento sutil */
     position: relative;
 }
 
-.cart-item:last-child {
-    border-bottom: none;
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--tertiary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
-.cart-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-}
-
-.item-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex: 1;
-    min-width: 0; /* Permite que o texto quebre corretamente */
-}
-
-.item-info img {
-    width: 4rem;
-    height: 4rem;
-    object-fit: cover;
+/* Container Principal do Carrinho */
+.cart-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    padding: 30px;
     border-radius: var(--border-radius);
-    flex-shrink: 0;
+    box-shadow: var(--shadow-md);
 }
 
-.item-info-text {
-    min-width: 0; /* Permite que o texto quebre corretamente */
-}
-
-.item-info h4 {
-    margin: 0 0 0.25rem 0;
-    color: var(--text-color);
-    font-size: 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.item-info p {
-    margin: 0;
-    font-weight: bold;
-    color: var(--secondary-color);
-    font-size: 0.95rem;
-}
-
-/* Controles de Quantidade Aprimorados */
-.item-quantity {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.quantity-btn {
-    width: 2rem;
-    height: 2rem;
-    background: var(--secondary-color);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-    user-select: none;
-}
-
-.quantity-btn:hover,
-.quantity-btn:focus {
-    opacity: 0.9;
-    transform: scale(1.05);
-    outline: none;
-}
-
-.quantity-btn:active {
-    transform: scale(0.95);
-}
-
-.quantity-value {
-    min-width: 1.5rem;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-/* Resumo e Ações - Estilo Atualizado */
-.cart-summary {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--bg-color2);
-    font-size: 1.1rem;
-}
-
-.cart-summary p {
-    margin: 0.75rem 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-.cart-summary span {
-    color: var(--secondary-color);
-    font-weight: bold;
-}
-
-.cart-actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.cancel-button, 
-.confirm-button {
-    flex: 1;
-    padding: 0.75rem;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.cancel-button {
-    background: var(--primary-color);
-    color: white;
-}
-
-.cancel-button:hover,
-.cancel-button:focus {
-    background: #880000;
+/* Estilos da Tabela de Itens */
+.table {
+    width: 100%;
+    border-collapse: separate; /* Permite border-radius nas células */
+    border-spacing: 0;
+    margin-bottom: 30px;
     box-shadow: var(--shadow-sm);
-    outline: none;
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Garante que o border-radius funcione */
 }
 
-.confirm-button {
-    background: var(--tertiary-color);
-    color: white;
+.table th,
+.table td {
+    padding: 18px 20px; /* Aumenta o padding para melhor visual */
+    text-align: left;
+    border-bottom: 1px solid var(--border-color); /* Borda mais suave */
 }
 
-.confirm-button:hover,
-.confirm-button:focus {
-    background: #e55c00;
-    box-shadow: var(--shadow-sm);
-    outline: none;
-}
-
-/* Carrinho Vazio - Estilo Melhorado */
-.empty-cart {
-    text-align: center;
-    padding: 2rem;
-    color: #666;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.empty-cart svg {
-    width: 3rem;
-    height: 3rem;
-    opacity: 0.5;
-}
-
-.dialog-cancel{
+.table th {
     background-color: var(--primary-color);
     color: white;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 5px 30px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s;
+    font-weight: 600;
+    text-transform: uppercase; /* Deixa os cabeçalhos em maiúsculas */
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
-.dialog-confirm{
-    background-color: var(--tertiary-color);
+
+/* Arredonda os cantos da primeira e última célula do cabeçalho */
+.table thead tr th:first-child {
+    border-top-left-radius: var(--border-radius);
+}
+.table thead tr th:last-child {
+    border-top-right-radius: var(--border-radius);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none; /* Remove a borda da última linha */
+}
+
+.table tbody tr:hover {
+    background-color: var(--bg-light); /* Cor de hover mais perceptível */
+    transition: var(--transition);
+}
+
+.table td {
+    vertical-align: middle;
+    color: var(--text-color);
+}
+
+/* Estilos para o grupo de botões dentro da tabela */
+.btn-group {
+    display: flex;
+    gap: 8px; /* Espaçamento entre os botões */
+    flex-wrap: wrap; /* Quebra de linha se não houver espaço */
+}
+
+/* Estilos dos Botões Genéricos */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex; /* Para alinhar ícones e texto */
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    white-space: nowrap; /* Evita quebra de linha em botões */
+}
+
+.btn i {
+    margin-right: 5px; /* Espaço entre ícone e texto */
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 6px; /* Menor border-radius para botões pequenos */
+}
+
+/* Cores dos Botões */
+.btn-danger {
+    background-color: #dc3545; /* Vermelho de perigo */
     color: white;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 5px 30px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s;
 }
-/* Responsividade Aprimorada */
+
+.btn-danger:hover {
+    background-color: #c82333;
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px); /* Efeito sutil de levantar */
+}
+
+.btn-warning {
+    background-color: var(--tertiary-color); /* Laranja da paleta */
+    color: white; /* Texto branco para contraste */
+}
+
+.btn-warning:hover {
+    background-color: #e05c00; /* Laranja mais escuro */
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #7b0000; /* Vermelho mais escuro */
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #365a19;
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+/* Total do Pedido */
+.order-total {
+    text-align: right;
+    font-size: 1.3rem; /* Tamanho maior para o total */
+    margin-top: 20px;
+    padding: 15px 20px;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-total strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Container de Botões Inferiores */
+.cart-actions-bottom {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between; /* Espaço entre os grupos de botões */
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaçamento entre os botões quando quebram a linha */
+}
+
+.cart-actions-bottom .btn {
+    flex-grow: 1; /* Faz os botões preencherem o espaço disponível */
+    max-width: 250px; /* Limita a largura máxima dos botões */
+}
+
+/* Mensagem de Carrinho Vazio */
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--light-text-color);
+    padding: 40px;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    margin-top: 30px;
+}
+
+/* Animação para itens da tabela (requer um loop no Razor para 'animation-delay') */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.table tbody tr {
+    animation: fadeIn 0.4s ease-out forwards;
+    opacity: 0; /* Esconde inicialmente */
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    .cart-modal {
+    .cart-container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .table thead {
+        display: none; /* Esconde o cabeçalho da tabela em telas pequenas */
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block; /* Transforma a tabela em blocos */
         width: 100%;
-        max-height: 100vh;
-        height: 100vh;
-        border-radius: 0;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-sm);
+        padding: 10px;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 50%; /* Espaço para o pseudo-elemento do label */
+        position: relative;
+        border: none;
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+
+    .table td::before {
+        content: attr(data-label); /* Usa o atributo data-label como pseudo-elemento */
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--light-text-color);
+    }
+
+    .table td:last-child {
+        border-bottom: none;
+    }
+
+    .btn-group {
+        justify-content: flex-end; /* Alinha os botões de ação à direita */
+        margin-top: 10px;
     }
     
-    .cart-content {
-        max-height: 100vh;
-        height: 100%;
-        border-radius: 0;
-        padding: 1rem;
+    .btn-group form {
+        display: block !important; /* Garante que os formulários se comportem como blocos */
     }
-    
-    .cart-item {
+
+    .order-total {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.75rem;
-        padding: 1rem 0;
+        font-size: 1.1rem;
     }
-    
-    .item-info {
-        width: 100%;
+    .order-total strong {
+        margin-top: 5px;
     }
-    
-    .item-quantity {
-        width: 100%;
-        justify-content: flex-end;
-    }
-    
-    .cart-actions {
+
+    .cart-actions-bottom {
         flex-direction: column;
-        gap: 0.75rem;
+        align-items: stretch; /* Estica os botões para largura total */
     }
-    
-    .cart-header h2 {
-        font-size: 1.25rem;
-    }
-}
 
-@media (min-width: 769px) and (max-width: 992px) {
-    .cart-content {
-        width: 90%;
+    .cart-actions-bottom .btn {
+        max-width: 100%; /* Botões ocupam largura total */
     }
-}
-
-/* Animações Adicionais */
-@keyframes slideInUp {
-    from {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.cart-item {
-    animation: slideInUp 0.3s ease forwards;
-    animation-delay: calc(var(--i) * 0.05s);
-    opacity: 0;
 }
