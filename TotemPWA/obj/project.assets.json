@@ -5460,19 +5460,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Isabella\\.nuget\\packages\\": {}
+    "C:\\Users\\nicol\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
+      "projectUniqueName": "C:\\Conteudo\\ads_burguer\\totempwa\\TotemPWA.csproj",
       "projectName": "TotemPWA",
-      "projectPath": "C:\\ads_burguer\\TotemPWA\\TotemPWA.csproj",
-      "packagesPath": "C:\\Users\\Isabella\\.nuget\\packages\\",
-      "outputPath": "C:\\ads_burguer\\TotemPWA\\obj\\",
+      "projectPath": "C:\\Conteudo\\ads_burguer\\totempwa\\TotemPWA.csproj",
+      "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+      "outputPath": "C:\\Conteudo\\ads_burguer\\totempwa\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Isabella\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
