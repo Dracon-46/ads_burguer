@@ -24,11 +24,12 @@ namespace TotemPWA.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SalvarPersonalizacao(PersonalizarProdutoInputModel model)
         {
-            var product = await _context.Products // Inclua category e additionals aqui
+            var product = await _context.Products
                                 .Include(p => p.Category)
+                                    .ThenInclude(c => c.ParentCategory) // Inclua a categoria pai
                                 .Include(p => p.Additionals!)
                                     .ThenInclude(pa => pa.Ingredient)
-                                .FirstOrDefaultAsync(p => p.Id == model.ProdutoId); // Usa ProdutoId do inputModel
+                                .FirstOrDefaultAsync(p => p.Id == model.ProdutoId);
 
             if (product == null) return NotFound("Produto não encontrado.");
 
@@ -37,9 +38,11 @@ namespace TotemPWA.Controllers
 
             var productAdditionals = product.Additionals ?? new List<Additional>();
             var defaultIngredients = productAdditionals.Where(pa => pa.IsDefault).Select(pa => pa.Ingredient!).ToList();
-            var addableIngredients = productAdditionals.Where(pa => pa.CanBeAdded).ToList(); // Mantenha o Additional completo para pegar o Price
+            var addableIngredients = productAdditionals.Where(pa => pa.CanBeAdded).ToList();
+
 
             // Processar ingredientes REMOVIDOS do padrão
+            // Mantenha a mesma lógica para remoção, pois se o usuário clicou em remover, ele não quer aquele ingrediente padrão.
             foreach (var removedId in model.IngredientesParaRemover)
             {
                 var ingredientToRemove = defaultIngredients.FirstOrDefault(i => i.Id == removedId);
@@ -51,10 +54,12 @@ namespace TotemPWA.Controllers
                 }
             }
 
-            // Processar ingredientes ADICIONADOS
+            // Processar ingredientes ADICIONADOS (Agora pode ser múltiplos do mesmo)
+            // O inputModel.IngredientesParaAdicionar deve ter os IDs de todos os adicionados,
+            // mesmo que repetidos para indicar múltiplas unidades.
             foreach (var addedId in model.IngredientesParaAdicionar)
             {
-                var additionalToAdd = addableIngredients.FirstOrDefault(a => a.IngredientId == addedId); // Busca o Additional para pegar o Price
+                var additionalToAdd = addableIngredients.FirstOrDefault(a => a.IngredientId == addedId);
                 if (additionalToAdd != null)
                 {
                     personalizedPrice += additionalToAdd.Price; // Adiciona o custo do ingrediente extra
@@ -65,8 +70,10 @@ namespace TotemPWA.Controllers
             // Processar tamanho selecionado
             if (!string.IsNullOrEmpty(model.TamanhoSelecionado))
             {
-                // Lógica de preço por tamanho
-                if (product.Category?.Name?.ToLower() == "bebidas" || product.Category?.Name?.ToLower() == "acompanhamentos")
+                // Lógica de preço por tamanho. Ajuste os nomes das categorias aqui conforme seu DB.
+                string mainCategoryName = product.Category?.ParentCategory?.Name?.ToLower() ?? product.Category?.Name?.ToLower() ?? "";
+                
+                if (mainCategoryName == "bebidas" || mainCategoryName == "acompanhamentos")
                 {
                     if (model.TamanhoSelecionado.ToLower() == "grande") personalizedPrice += 2.00M;
                     else if (model.TamanhoSelecionado.ToLower() == "família") personalizedPrice += 5.00M;
@@ -74,14 +81,12 @@ namespace TotemPWA.Controllers
                 personalizationSummary.Add($"tamanho {model.TamanhoSelecionado}");
             }
 
-            // Gerar o resumo final da personalização
             var summaryText = personalizationSummary.Any() ? "(" + string.Join(", ", personalizationSummary) + ")" : "";
 
-            // Lógica para adicionar/atualizar no CARRINHO (SESSÃO)
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
 
             CartItemViewModel? cartItemToModify = null;
-            if (model.CartItemId != Guid.Empty) // model.CartItemId já é Guid
+            if (model.CartItemId != Guid.Empty)
             {
                 cartItemToModify = cart.FirstOrDefault(ci => ci.CartItemId == model.CartItemId);
             }
@@ -95,10 +100,10 @@ namespace TotemPWA.Controllers
                     Price = personalizedPrice,
                     Image = product.Image ?? product.ImageUrl ?? "/images/products/default_product.png",
                     Quantity = 1,
-                    CartItemId = Guid.NewGuid(), // Novo GUID para esta instância única
+                    CartItemId = Guid.NewGuid(),
                     SelectedSize = model.TamanhoSelecionado,
-                    AddedIngredientIds = model.IngredientesParaAdicionar,
-                    RemovedIngredientIds = model.IngredientesParaRemover,
+                    AddedIngredientIds = model.IngredientesParaAdicionar, // Guarda todos os IDs adicionados
+                    RemovedIngredientIds = model.IngredientesParaRemover, // Guarda todos os IDs removidos
                     PersonalizationSummary = summaryText
                 });
             }
@@ -111,48 +116,49 @@ namespace TotemPWA.Controllers
                 cartItemToModify.PersonalizationSummary = summaryText;
             }
 
-            HttpContext.Session.SetObject("Cart", cart); // Salva o carrinho na sessão
+            HttpContext.Session.SetObject("Cart", cart);
             TempData["Message"] = "Produto personalizado e adicionado/atualizado no carrinho!";
             return RedirectToAction("Index", "Cart");
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> PersonalizarProdutos(int productId, Guid? cartItemId) // Mude orderItemId para productId e adicione cartItemId
+        public async Task<IActionResult> PersonalizarProdutos(int productId, Guid? cartItemId)
         {
-            var product = await _context.Products // Carrega o produto para a tela de personalização
+            var product = await _context.Products
                                 .Include(p => p.Category)
-                                .Include(p => p.Additionals!) // Carrega os Additionals para saber os ingredientes padrão/adicionáveis
+                                    .ThenInclude(c => c.ParentCategory) // Carrega a categoria pai
+                                .Include(p => p.Additionals!)
                                     .ThenInclude(pa => pa.Ingredient)
                                 .FirstOrDefaultAsync(p => p.Id == productId);
 
             if (product == null)
                 return NotFound("Produto não encontrado.");
 
-            // Identifica o tipo do produto pela Category.Name, que é mais robusto
-            string tipo = product.Category?.Name?.ToLower() ?? "lanche"; // Padrão "lanche" se categoria for nula
+            // Determina o tipo do produto usando a categoria PAI se existir, senão a própria categoria
+            string mainCategoryName = product.Category?.ParentCategory?.Name?.ToLower() ?? product.Category?.Name?.ToLower() ?? "outro";
 
             var viewModel = new PersonalizarProdutoViewModel
             {
                 Produto = product,
-                TipoProduto = tipo,
-                CartItemId = cartItemId ?? Guid.Empty // Passa o GUID para a view
+                TipoProduto = mainCategoryName, // Usa o nome da categoria principal para definir o "tipo"
+                CartItemId = cartItemId ?? Guid.Empty
             };
 
-            // Popula IngredientesDisponiveis (ingredientes que podem ser adicionados)
-            viewModel.IngredientesDisponiveis = await _context.Additionals
-                                                    .Where(a => a.ProductId == product.Id && a.CanBeAdded)
+            // Popula IngredientesDisponiveis (ingredientes que podem ser adicionados para ESTE PRODUTO)
+            viewModel.IngredientesDisponiveis = product.Additionals!
+                                                    .Where(a => a.CanBeAdded) // Apenas os que podem ser adicionados para este produto
                                                     .Select(a => a.Ingredient!)
-                                                    .ToListAsync();
+                                                    .ToList();
 
-            // Popula IngredientesPadrao (ingredientes que vêm com o produto por padrão)
+            // Popula IngredientesPadrao (ingredientes que vêm com ESTE PRODUTO por padrão)
             viewModel.IngredientesPadrao = product.Additionals!
                                                 .Where(pa => pa.IsDefault)
                                                 .Select(pa => pa.Ingredient!)
                                                 .ToList();
 
-            // Popula TamanhosDisponiveis com base na categoria
-            viewModel.TamanhosDisponiveis = GetTamanhosParaCategoria(tipo);
+            // Popula TamanhosDisponiveis com base na categoria principal
+            viewModel.TamanhosDisponiveis = GetTamanhosParaCategoria(mainCategoryName);
 
             // Se for edição, pré-preenche o ViewModel com as personalizações atuais do carrinho
             if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
@@ -166,21 +172,22 @@ namespace TotemPWA.Controllers
                     viewModel.IngredientesAtuaisRemovidos = existingCartItem.RemovedIngredientIds;
                 }
             }
-            // Use o nome da sua view de personalização, que pelo que vi é "PersonalizarProdutos"
-            return View("~/Views/Home/PersonalizarProdutos.cshtml", viewModel); // <<-- CORRIGIDO AQUI!
+
+            return View("~/Views/Home/PersonalizarProdutos.cshtml", viewModel);
         }
 
-        // Função auxiliar para obter tamanhos por categoria (coloque-a aqui ou em um helper)
+        // Função auxiliar para obter tamanhos por categoria
         private List<string> GetTamanhosParaCategoria(string? categoryName)
         {
             if (string.IsNullOrEmpty(categoryName)) return new List<string>();
 
             switch (categoryName.ToLower())
             {
-                case "bebidas": // Use o nome da categoria que você tem no banco de dados (plural ou singular)
+                case "bebidas":
                     return new List<string> { "Pequeno", "Médio", "Grande" };
-                case "acompanhamentos": // Use o nome da categoria que você tem no banco de dados
+                case "acompanhamentos":
                     return new List<string> { "Pequeno", "Médio", "Grande", "Família" };
+                // Adicione outras categorias que precisam de tamanhos específicos
                 default:
                     return new List<string>();
             }
