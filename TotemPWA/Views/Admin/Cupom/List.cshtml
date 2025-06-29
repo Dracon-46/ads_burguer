@@ -46,9 +46,12 @@
             <a asp-action="Create" class="btn-novo-produto">+ Novo Cupom</a>
         </div>
 
-
-
-
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["ErrorMessage"]
+            </div>
+        }
 
         <div class="produtos-container">
             @foreach (var item in Model)
@@ -59,14 +62,16 @@
                         <span class="tag">@item.Type</span>
                     </div>
                     <p>Valor: 
-                        @if (item.Type == "Percentual")
+                        @* --- CORREÇÃO: Exibe o valor de porcentagem corretamente --- *@
+                        @if (item.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
                         {
-                            @($"{item.Value}%")
+                            @($"{item.Value * 100M}%") 
                         }
                         else
                         {
-                            @($"R$ {item.Value}")
+                            @($"R$ {item.Value:N2}") 
                         }
+                        @* --- FIM DA CORREÇÃO --- *@
                     </p>
                     <div class="status">
                         <span class="disponivel">✔ Ativo</span>

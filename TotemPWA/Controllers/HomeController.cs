@@ -5,6 +5,7 @@ using TotemPWA.Data;
 using TotemPWA.Models;
 using TotemPWA.Models.ViewModels;
 using TotemPWA.Utilities;
+using Newtonsoft.Json;
 
 namespace TotemPWA.Controllers;
 
@@ -44,9 +45,61 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Cupom()
+    public IActionResult Cupom(decimal totalPedido, int totalItens)
     {
+        ViewBag.TotalPedido = totalPedido;
+        ViewBag.TotalItens = totalItens;
         return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ValidarCupom([FromBody] CupomValidationRequest request)
+    {
+        _logger.LogInformation($"ValidarCupom: Requisição recebida para o cupom '{request.CodigoCupom}'.");
+
+        if (string.IsNullOrWhiteSpace(request.CodigoCupom))
+        {
+            _logger.LogWarning("ValidarCupom: Código do cupom não pode ser vazio.");
+            return Json(new { isValid = false, message = "Código do cupom não pode ser vazio." });
+        }
+
+        var cupom = await _context.Cupons
+                                .FirstOrDefaultAsync(c => c.Code.ToUpper() == request.CodigoCupom.ToUpper());
+
+        if (cupom == null)
+        {
+            _logger.LogWarning($"ValidarCupom: Cupom com código '{request.CodigoCupom}' NÃO encontrado no banco de dados.");
+            return Json(new { isValid = false, message = "Cupom não encontrado." });
+        }
+        else
+        {
+            // Log do valor exato que veio do banco de dados
+            _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' encontrado. ID: {cupom.Id}, Valor LIDO DO DB: {cupom.Value}, Tipo: {cupom.Type}.");
+
+            decimal calculatedDesconto;
+
+            // --- MUDANÇA CRÍTICA AQUI: Não divide por 100M para percentual ---
+            if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
+            {
+                // Se o DB já armazena 0.5 para 50%, usamos esse valor diretamente.
+                calculatedDesconto = cupom.Value; // Se cupom.Value é 0.5, calculatedDesconto será 0.5
+                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}.");
+            }
+            else // Para cupons fixos, o valor já está pronto
+            {
+                calculatedDesconto = cupom.Value;
+                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é do tipo '{cupom.Type}'. Valor FINAL enviado para cálculo: {calculatedDesconto}.");
+            }
+            // --- FIM DA MUDANÇA CRÍTICA ---
+
+            // Retorna o 'calculatedDesconto' (que deve ser 0.5 para 50%) para o JavaScript
+            return Json(new { isValid = true, message = "Cupom válido!", desconto = calculatedDesconto, tipoDesconto = cupom.Type });
+        }
+    }
+
+    public class CupomValidationRequest
+    {
+        public string CodigoCupom { get; set; }
     }
 
     public IActionResult TelaFinal()
@@ -73,7 +126,6 @@ public class HomeController : Controller
     [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
     public async Task<IActionResult> TelaProduto(string categorySlug, string subcategorySlug = null)
     {
-        // 1. Encontrar a categoria ativa usando o SLUG
         var rootCategoriesRaw = await _context.Categories
             .Where(c => c.ParentCategoryId == null)
             .ToListAsync();
@@ -82,19 +134,15 @@ public class HomeController : Controller
 
         if (!string.IsNullOrEmpty(categorySlug))
         {
-            // Se um slug foi passado na URL, encontre a categoria correspondente
             activeCategory = rootCategoriesRaw.FirstOrDefault(c => c.Slug == categorySlug);
         }
         else
         {
-            // Se nenhum slug foi passado, pegue a primeira categoria como padrão
             activeCategory = rootCategoriesRaw.FirstOrDefault();
         }
         
-        // Se nenhuma categoria for encontrada, pode ser bom tratar o erro (ex: return NotFound();)
         if (activeCategory == null) return NotFound("Categoria não encontrada.");
         
-        // Pega o ID da categoria ativa para usar nas próximas consultas
         var activeCategoryId = activeCategory.Id;
 
         var rootCategories = rootCategoriesRaw
@@ -107,7 +155,6 @@ public class HomeController : Controller
             })
             .ToList();
 
-        // 2. Encontrar a subcategoria ativa usando o SLUG
         var subcategoriesRaw = await _context.Categories
             .Where(c => c.ParentCategoryId == activeCategoryId)
             .ToListAsync();
@@ -116,16 +163,13 @@ public class HomeController : Controller
 
         if (!string.IsNullOrEmpty(subcategorySlug))
         {
-            // Se um slug de subcategoria foi passado, encontre-o
             activeSubcategory = subcategoriesRaw.FirstOrDefault(s => s.Slug == subcategorySlug);
         }
         else
         {
-            // Senão, pegue a primeira subcategoria como padrão
             activeSubcategory = subcategoriesRaw.FirstOrDefault();
         }
 
-        // O ID da subcategoria ativa (pode ser nulo se não houver subcategorias)
         var activeSubcategoryId = activeSubcategory?.Id;
 
         var subcategories = subcategoriesRaw
@@ -138,7 +182,6 @@ public class HomeController : Controller
             })
             .ToList();
 
-        // 3. Buscar produtos com base no ID da subcategoria ativa
         var products = new List<object>();
         if (activeSubcategoryId != null)
         {
@@ -154,16 +197,13 @@ public class HomeController : Controller
                 .ToListAsync<object>();
         }
 
-        // Obter o carrinho da sessão
         var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
 
-        // Passar os dados para a ViewBag
         ViewBag.CategorySlug = activeCategory.Slug;
         ViewBag.Categories = rootCategories;
         ViewBag.SubCategories = subcategories;
         ViewBag.Products = products;
 
-        // Passar o carrinho como modelo para a view
         return View(cart);
     }
 
@@ -173,11 +213,9 @@ public class HomeController : Controller
         var product = _context.Products.FirstOrDefault(p => p.Id == productId);
         if (product == null) return NotFound();
 
-        // Redirecionar para view de personalização
         return View("PersonalizarProdutos", product);
     }
 
-    // CRUD 
     public IActionResult CardapioCrud()
     {
         return View();

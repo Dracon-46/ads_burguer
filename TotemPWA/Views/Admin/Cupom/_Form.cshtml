@@ -1,39 +1,19 @@
-@model TotemPWA.Models.Cupom 
+@model TotemPWA.Models.Cupom
 
 <div class="form-group">
-    <label for="Code" class="control-label">Código do Cupom:</label>
-    <input type="text" id="Code" name="Code" value="@(Model?.Code)" class="form-control" />
+    <label asp-for="Code" class="control-label"></label>
+    <input asp-for="Code" class="form-control" />
     <span asp-validation-for="Code" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label for="Type" class="control-label">Tipo:</label>
-    <select id="Type" name="Type" class="form-control">
-        @{
-            // Define o tipo selecionado pelo modelo.
-            string selectedType = Model?.Type ?? ""; // Garante que não é nulo para comparação
-        }
-        
-        @* Renderiza as opções de forma condicional, gerando o HTML completo *@
-        @if (selectedType == "Percentual")
-        {
-            <option value="Percentual" selected>Porcentagem</option>
-            <option value="Fixo">Fixo</option>
-        }
-        else if (selectedType == "Fixo")
-        {
-            <option value="Percentual">Porcentagem</option>
-            <option value="Fixo" selected>Fixo</option>
-        }
-        else // Caso o tipo seja nulo ou inválido, nenhuma opção é pré-selecionada.
-        {
-            <option value="Percentual">Porcentagem</option>
-            <option value="Fixo">Fixo</option>
-        }
+    <label asp-for="Type" class="control-label"></label>
+    <select asp-for="Type" class="form-control">
+        <option value="fixo">Fixo</option>
+        <option value="percentual">Percentual</option>
     </select>
     <span asp-validation-for="Type" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label for="Value" class="control-label">Valor:</label>
-    <input type="text" id="Value" name="Value" value="@(Model?.Value.ToString(System.Globalization.CultureInfo.InvariantCulture))" class="form-control" /> 
-    <span asp-validation-for="Value" class="text-danger"></span>
+    <label asp-for="Value" class="control-label"></label>
+    <input asp-for="Value" class="form-control" type="number" step="0.01" /> <span asp-validation-for="Value" class="text-danger"></span>
 </div>

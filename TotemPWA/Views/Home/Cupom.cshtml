@@ -1,13 +1,13 @@
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
     <meta charset="UTF-8">
     <title>Inserir Cupom</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/css/cupom.css">
-    </head>
-    <body>
+</head>
+<body>
     <div class="banner"></div>
     <div class="container">
         <h2>Digite abaixo o código do seu cupom:</h2>
@@ -15,105 +15,169 @@
         <button onclick="confirmarCupom()">Confirmar</button>
         <div class="keyboard" id="teclado"></div>
     </div>
-    <!-- Modal Cupom Válido -->
+
     <div class="modal" id="modalValido">
         <div class="modal-content">
-        <span class="close" onclick="fecharModal('modalValido')">&times;</span>
-        <i class="fa-solid fa-circle-check icon" style="color: #4CAF50;"></i>
-        <p style="color: #4CAF50; font-weight: bold;">Cupom válido!</p>
-        <p>Aproveite seu desconto.</p>
+            <span class="close" onclick="fecharModal('modalValido')">&times;</span>
+            <i class="fa-solid fa-circle-check icon" style="color: #4CAF50;"></i>
+            <p style="color: #4CAF50; font-weight: bold;">Cupom válido!</p>
+            <p id="mensagemCupomValido"></p>
+            <p>Aproveite seu desconto.</p>
         </div>
     </div>
 
-    <!-- Modal Cupom Inválido -->
     <div class="modal" id="modalInvalido">
         <div class="modal-content">
-        <span class="close" onclick="fecharModal('modalInvalido')">&times;</span>
-        <i class="fa-solid fa-circle-exclamation icon" style="color: #f44336;"></i>
-        <p style="color: #f44336; font-weight: bold; font-family:poppins;">Cupom inválido</p>
-        <p>Verifique o código e tente novamente.</p>
+            <span class="close" onclick="fecharModal('modalInvalido')">&times;</span>
+            <i class="fa-solid fa-circle-exclamation icon" style="color: #f44336;"></i>
+            <p style="color: #f44336; font-weight: bold; font-family:poppins;">Cupom inválido</p>
+            <p id="mensagemCupomInvalido"></p>
+            <p>Verifique o código e tente novamente.</p>
         </div>
     </div>
 
-    <!-- Modal Campo Vazio -->
     <div class="modal" id="modalVazio">
         <div class="modal-content">
-        <span class="close" onclick="fecharModal('modalVazio')">&times;</span>
-        <i class="fa-solid fa-triangle-exclamation icon" style="color: #FF9800;"></i>
-        <p style="color: #FF9800; font-weight: bold;">Atenção</p>
-        <p>Por favor, digite um código de cupom.</p>
+            <span class="close" onclick="fecharModal('modalVazio')">&times;</span>
+            <i class="fa-solid fa-triangle-exclamation icon" style="color: #FF9800;"></i>
+            <p style="color: #FF9800; font-weight: bold;">Atenção</p>
+            <p>Por favor, digite um código de cupom.</p>
         </div>
     </div>
+
     <div class="resumo-pedido">
-    <div class="totais">
-        <p>Total de itens: <strong>0</strong></p>
-        <p>Total do pedido: <strong>R$ 0</strong></p>
-    </div>
-    <div class="botoes">
-        <a href="@Url.Action("TelaProduto", "Home")" ><button class="cancelar">Voltar</button></a></button>
-        <a href="@Url.Action("SelecionarPagamento", "Payment")" ><button class="adicionar">Confirmar Pedido</button></a>
-    </div>
+        <div class="totais">
+            <p>Total de itens: <strong id="totalItensDisplay">0</strong></p>
+            <p>Total do pedido: <strong id="totalPedidoOriginalDisplay">R$ 0,00</strong></p>
+            <p id="descontoAplicado" style="display: none;">Desconto: <strong id="valorDescontoDisplay">R$ 0,00</strong></p>
+            <p id="totalPedidoFinalDiv" style="display: none;">Total com desconto: <strong id="totalPedidoFinalDisplay">R$ 0,00</strong></p>
+        </div>
+        <div class="botoes">
+            <a href="@Url.Action("TelaProduto", "Home")" ><button class="cancelar">Voltar</button></a>
+            <a href="@Url.Action("SelecionarPagamento", "Payment")" ><button class="adicionar">Confirmar Pedido</button></a>
+        </div>
     </div>
 
     <script>
-        const cuponsValidos = ["PROMO10", "DESCONTO5", "BEMVINDO", "FRETEGRATIS"];
+        const urlParams = new URLSearchParams(window.location.search);
+        let totalPedidoOriginal = parseFloat(urlParams.get('totalPedido')) || 0;
+        let totalItens = parseInt(urlParams.get('totalItens')) || 0;
+        
+        document.getElementById('totalItensDisplay').textContent = totalItens;
+        document.getElementById('totalPedidoOriginalDisplay').textContent = totalPedidoOriginal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
         const teclas = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890".split("");
         const teclado = document.getElementById("teclado");
         const campo = document.getElementById("campoCupom");
 
-        // Cria o teclado quando a página carrega
         window.onload = function() {
-        // Teclas alfanuméricas
-        teclas.forEach(t => {
-            const tecla = document.createElement("div");
-            tecla.className = "key";
-            tecla.textContent = t;
-            tecla.onclick = () => {
-            campo.value += t;
+            teclas.forEach(t => {
+                const tecla = document.createElement("div");
+                tecla.className = "key";
+                tecla.textContent = t;
+                tecla.onclick = () => {
+                    campo.value += t;
+                };
+                teclado.appendChild(tecla);
+            });
+
+            const apagar = document.createElement("div");
+            apagar.className = "key";
+            apagar.style.background = "#f88";
+            apagar.innerHTML = '<i class="fa-solid fa-delete-left" style="color: #FFF;"></i>';
+            apagar.onclick = () => {
+                campo.value = campo.value.slice(0, -1);
             };
-            teclado.appendChild(tecla);
-        });
-
-        // Tecla de apagar
-        const apagar = document.createElement("div");
-        apagar.className = "key";
-        apagar.style.background = "#f88";
-        apagar.innerHTML = '<i class="fa-solid fa-delete-left" style="color: #FFF;"></i>';
-        apagar.onclick = () => {
-            campo.value = campo.value.slice(0, -1);
+            teclado.appendChild(apagar);
         };
-        teclado.appendChild(apagar);
-        };
+        
+        async function confirmarCupom() {
+            const valorCupom = campo.value.trim().toUpperCase();
 
-        function confirmarCupom() {
-        const valor = campo.value.trim().toUpperCase();
+            if (valorCupom === "") {
+                abrirModal("modalVazio");
+                campo.style.borderColor = "";
+                return;
+            }
 
-        if (valor === "") {
-            abrirModal("modalVazio");
-            campo.style.borderColor = "";
-        } else if (cuponsValidos.includes(valor)) {
-            abrirModal("modalValido");
-             campo.style.borderColor = "green"; // borda verde para válido
-        } else {
-            abrirModal("modalInvalido");
-            campo.style.borderColor = "red";
-        }
+            try {
+                const response = await fetch('/Home/ValidarCupom', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ codigoCupom: valorCupom })
+                });
+
+                const data = await response.json();
+                
+                // --- LOGS CRÍTICOS PARA DEPURAR ---
+                // MANTENHA ESTES LOGS ATIVOS PARA VERIFICAR OS VALORES!
+                console.log("Resposta completa do backend:", data);
+                console.log("isValid:", data.isValid);
+                console.log("mensagem:", data.message);
+                console.log("desconto (valor vindo do backend):", data.desconto); // ESTE É O VALOR CRÍTICO!
+                console.log("tipoDesconto:", data.tipoDesconto);
+                console.log("Total Pedido Original (no frontend):", totalPedidoOriginal);
+                // --- FIM DOS LOGS CRÍTICOS ---
+
+                if (data.isValid) {
+                    abrirModal("modalValido");
+                    document.getElementById('mensagemCupomValido').textContent = data.message;
+                    campo.style.borderColor = "green";
+
+                    let valorDesconto = 0;
+                    let totalComDesconto = totalPedidoOriginal;
+
+                    // O 'data.desconto' DEVE VIR DO BACKEND COMO 0.5 PARA 50% OU O VALOR FIXO
+                    const descontoValue = parseFloat(data.desconto); 
+                    
+                    const tipoDescontoLower = data.tipoDesconto.toLowerCase(); 
+
+                    if (tipoDescontoLower === "percentual") {
+                        valorDesconto = totalPedidoOriginal * descontoValue; // Ex: 19.90 * 0.5 = 9.95
+                        totalComDesconto = totalPedidoOriginal - valorDesconto;
+                    } else if (tipoDescontoLower === "fixo") {
+                        valorDesconto = descontoValue;
+                        totalComDesconto = totalPedidoOriginal - valorDesconto;
+                    }
+
+                    if (totalComDesconto < 0) totalComDesconto = 0;
+
+                    document.getElementById('valorDescontoDisplay').textContent = valorDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    document.getElementById('descontoAplicado').style.display = 'block';
+                    document.getElementById('totalPedidoFinalDisplay').textContent = totalComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    document.getElementById('totalPedidoFinalDiv').style.display = 'block';
+
+                } else {
+                    abrirModal("modalInvalido");
+                    document.getElementById('mensagemCupomInvalido').textContent = data.message;
+                    campo.style.borderColor = "red";
+                    document.getElementById('descontoAplicado').style.display = 'none';
+                    document.getElementById('totalPedidoFinalDiv').style.display = 'none';
+                }
+
+            } catch (error) {
+                console.error('Erro ao validar cupom:', error);
+                abrirModal("modalInvalido");
+                document.getElementById('mensagemCupomInvalido').textContent = "Erro na comunicação com o servidor.";
+                campo.style.borderColor = "red";
+            }
         }
 
         function abrirModal(id) {
-        document.getElementById(id).style.display = "block";
+            document.getElementById(id).style.display = "block";
         }
 
         function fecharModal(id) {
-        document.getElementById(id).style.display = "none";
+            document.getElementById(id).style.display = "none";
         }
 
-        // Fechar modal clicando fora
         window.onclick = function(evento) {
-        if (evento.target.className === "modal") {
-            evento.target.style.display = "none";
-        }
+            if (evento.target.className === "modal") {
+                evento.target.style.display = "none";
+            }
         }
     </script>
-    </body>
-    </html>
+</body>
+</html>

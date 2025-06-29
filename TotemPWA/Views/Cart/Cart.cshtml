@@ -2,6 +2,11 @@
 
 @{
     ViewData["Title"] = "Carrinho";
+
+    // --- CORREÇÃO: O CÁLCULO DAS VARIÁVEIS DEVE ESTAR AQUI, NO INÍCIO DA VIEW ---
+    decimal totalPedidoCalculado = Model.Sum(x => x.Price * x.Quantity);
+    int totalItensCalculado = Model.Sum(x => x.Quantity);
+    // --- FIM DA CORREÇÃO ---
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +84,8 @@
                 </form>
             
                 <a href="@Url.Action("TelaProduto", "Home")" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i> Continuar Comprando</a>
-                <a href="@Url.Action("Cupom", "Home")" class="btn btn-success"><i class="fa-solid fa-cash-register"></i> Finalizar Pedido</a>
+                
+                <a href="@Url.Action("Cupom", "Home", new { totalPedido = totalPedidoCalculado, totalItens = totalItensCalculado })" class="btn btn-success"><i class="fa-solid fa-cash-register"></i> Finalizar Pedido</a>
             </div>
         }
     </div>
