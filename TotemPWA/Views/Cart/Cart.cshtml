@@ -90,4 +90,26 @@
         }
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const carrinho = [];
+        const linhas = document.querySelectorAll("table tbody tr");
+
+        linhas.forEach(linha => {
+            const nome = linha.querySelector('[data-label="Produto"]').textContent.trim();
+            const quantidade = parseInt(linha.querySelector('[data-label="Quantidade"]').textContent);
+            const precoTexto = linha.querySelector('[data-label="Preço Unitário"]').textContent.replace("R$", "").replace(",", ".").trim();
+            const preco = parseFloat(precoTexto);
+
+            carrinho.push({ nome: nome, quantidade: quantidade, preco: preco });
+        });
+
+        const totalItens = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
+        const valorTotal = carrinho.reduce((soma, item) => soma + (item.quantidade * item.preco), 0);
+
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        localStorage.setItem("totalItens", totalItens);
+        localStorage.setItem("valorTotal", valorTotal.toFixed(2));
+    });
+</script>
 </html>
