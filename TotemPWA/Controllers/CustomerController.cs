@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using TotemPWA.Data;
 using TotemPWA.Models;
-using TotemPWA.ViewModels;
+using TotemPWA.Models.ViewModels; // Garanta que este using está presente
+using TotemPWA.ViewModels; // Garanta que este using está presente
 using Microsoft.EntityFrameworkCore;
-
+using TotemPWA.Utilities;
+using System; // Adicione este using para Guid
+using System.Linq; // Para FirstOrDefault
+using System.Collections.Generic; // Para List
 
 namespace TotemPWA.Controllers
 {
@@ -20,88 +24,166 @@ namespace TotemPWA.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SalvarPersonalizacao(PersonalizarProdutoInputModel model)
         {
-            var orderItem = await _context.OrderItems.FindAsync(model.OrderItemId);
-            if (orderItem == null) return NotFound();
+            var product = await _context.Products // Inclua category e additionals aqui
+                                .Include(p => p.Category)
+                                .Include(p => p.Additionals!)
+                                    .ThenInclude(pa => pa.Ingredient)
+                                .FirstOrDefaultAsync(p => p.Id == model.ProdutoId); // Usa ProdutoId do inputModel
 
-            if (model.TipoProduto == "lanche")
+            if (product == null) return NotFound("Produto não encontrado.");
+
+            decimal personalizedPrice = product.Price;
+            var personalizationSummary = new List<string>();
+
+            var productAdditionals = product.Additionals ?? new List<Additional>();
+            var defaultIngredients = productAdditionals.Where(pa => pa.IsDefault).Select(pa => pa.Ingredient!).ToList();
+            var addableIngredients = productAdditionals.Where(pa => pa.CanBeAdded).ToList(); // Mantenha o Additional completo para pegar o Price
+
+            // Processar ingredientes REMOVIDOS do padrão
+            foreach (var removedId in model.IngredientesParaRemover)
             {
-                foreach (var id in model.IngredientesParaAdicionar)
-                {
-                    _context.Customizes.Add(new Customize
-                    {
-                        OrderItemId = model.OrderItemId,
-                        IngredientId = id,
-                        Type = "adicionar"
-                    });
-                }
+                var ingredientToRemove = defaultIngredients.FirstOrDefault(i => i.Id == removedId);
+                var additionalEntry = productAdditionals.FirstOrDefault(a => a.IngredientId == removedId && a.IsDefault && a.CanBeRemoved);
 
-                foreach (var id in model.IngredientesParaRemover)
+                if (ingredientToRemove != null && additionalEntry != null)
                 {
-                    _context.Customizes.Add(new Customize
-                    {
-                        OrderItemId = model.OrderItemId,
-                        IngredientId = id,
-                        Type = "remover"
-                    });
+                    personalizationSummary.Add($"sem {ingredientToRemove.Name}");
                 }
             }
-            else if (model.TipoProduto == "bebida" || model.TipoProduto == "acompanhamento")
+
+            // Processar ingredientes ADICIONADOS
+            foreach (var addedId in model.IngredientesParaAdicionar)
             {
-                _context.Customizes.Add(new Customize
+                var additionalToAdd = addableIngredients.FirstOrDefault(a => a.IngredientId == addedId); // Busca o Additional para pegar o Price
+                if (additionalToAdd != null)
                 {
-                    OrderItemId = model.OrderItemId,
-                    IngredientId = 0,
-                    Type = model.TamanhoSelecionado ?? "padrão"
+                    personalizedPrice += additionalToAdd.Price; // Adiciona o custo do ingrediente extra
+                    personalizationSummary.Add($"com {additionalToAdd.Ingredient!.Name}");
+                }
+            }
+
+            // Processar tamanho selecionado
+            if (!string.IsNullOrEmpty(model.TamanhoSelecionado))
+            {
+                // Lógica de preço por tamanho
+                if (product.Category?.Name?.ToLower() == "bebidas" || product.Category?.Name?.ToLower() == "acompanhamentos")
+                {
+                    if (model.TamanhoSelecionado.ToLower() == "grande") personalizedPrice += 2.00M;
+                    else if (model.TamanhoSelecionado.ToLower() == "família") personalizedPrice += 5.00M;
+                }
+                personalizationSummary.Add($"tamanho {model.TamanhoSelecionado}");
+            }
+
+            // Gerar o resumo final da personalização
+            var summaryText = personalizationSummary.Any() ? "(" + string.Join(", ", personalizationSummary) + ")" : "";
+
+            // Lógica para adicionar/atualizar no CARRINHO (SESSÃO)
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+
+            CartItemViewModel? cartItemToModify = null;
+            if (model.CartItemId != Guid.Empty) // model.CartItemId já é Guid
+            {
+                cartItemToModify = cart.FirstOrDefault(ci => ci.CartItemId == model.CartItemId);
+            }
+
+            if (cartItemToModify == null) // Novo item personalizado
+            {
+                cart.Add(new CartItemViewModel
+                {
+                    ProductId = product.Id,
+                    Name = product.Name,
+                    Price = personalizedPrice,
+                    Image = product.Image ?? product.ImageUrl ?? "/images/products/default_product.png",
+                    Quantity = 1,
+                    CartItemId = Guid.NewGuid(), // Novo GUID para esta instância única
+                    SelectedSize = model.TamanhoSelecionado,
+                    AddedIngredientIds = model.IngredientesParaAdicionar,
+                    RemovedIngredientIds = model.IngredientesParaRemover,
+                    PersonalizationSummary = summaryText
                 });
             }
+            else // Editando item existente no carrinho
+            {
+                cartItemToModify.Price = personalizedPrice;
+                cartItemToModify.SelectedSize = model.TamanhoSelecionado;
+                cartItemToModify.AddedIngredientIds = model.IngredientesParaAdicionar;
+                cartItemToModify.RemovedIngredientIds = model.IngredientesParaRemover;
+                cartItemToModify.PersonalizationSummary = summaryText;
+            }
 
-            await _context.SaveChangesAsync();
+            HttpContext.Session.SetObject("Cart", cart); // Salva o carrinho na sessão
+            TempData["Message"] = "Produto personalizado e adicionado/atualizado no carrinho!";
             return RedirectToAction("Index", "Cart");
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> PersonalizarCombo(int orderItemId)
+        public async Task<IActionResult> PersonalizarProdutos(int productId, Guid? cartItemId) // Mude orderItemId para productId e adicione cartItemId
         {
-            var orderItem = await _context.OrderItems
-                .Include(oi => oi.Product)
-                .FirstOrDefaultAsync(oi => oi.Id == orderItemId);
+            var product = await _context.Products // Carrega o produto para a tela de personalização
+                                .Include(p => p.Category)
+                                .Include(p => p.Additionals!) // Carrega os Additionals para saber os ingredientes padrão/adicionáveis
+                                    .ThenInclude(pa => pa.Ingredient)
+                                .FirstOrDefaultAsync(p => p.Id == productId);
 
-            if (orderItem == null || orderItem.Product == null)
-                return NotFound("Item do pedido não encontrado.");
+            if (product == null)
+                return NotFound("Produto não encontrado.");
 
-            // Identifica o tipo do produto por nome ou CategoryId (ajuste conforme seu modelo)
-            string tipo = "";
-            if (orderItem.Product.Name.ToLower().Contains("bebida"))
-                tipo = "bebida";
-            else if (orderItem.Product.Name.ToLower().Contains("acomp"))
-                tipo = "acompanhamento";
-            else
-                tipo = "lanche"; // padrão
-
-            // Ingredientes (só para lanche)
-            var ingredientes = tipo == "lanche"
-                ? await _context.Ingredients.ToListAsync()
-                : new List<Ingredient>();
-
-            // Tamanhos (só para bebida ou acompanhamento)
-            var tamanhos = tipo switch
-            {
-                "bebida" => new List<string> { "300ml", "500ml", "700ml" },
-                "acompanhamento" => new List<string> { "Pequeno", "Médio", "Grande" },
-                _ => new List<string>()
-            };
+            // Identifica o tipo do produto pela Category.Name, que é mais robusto
+            string tipo = product.Category?.Name?.ToLower() ?? "lanche"; // Padrão "lanche" se categoria for nula
 
             var viewModel = new PersonalizarProdutoViewModel
             {
-                Produto = orderItem.Product,
+                Produto = product,
                 TipoProduto = tipo,
-                Ingredientes = ingredientes,
-                Tamanhos = tamanhos,
-                OrderItemId = orderItem.Id
+                CartItemId = cartItemId ?? Guid.Empty // Passa o GUID para a view
             };
 
-            return View("PersonalizarCombo", viewModel);
+            // Popula IngredientesDisponiveis (ingredientes que podem ser adicionados)
+            viewModel.IngredientesDisponiveis = await _context.Additionals
+                                                    .Where(a => a.ProductId == product.Id && a.CanBeAdded)
+                                                    .Select(a => a.Ingredient!)
+                                                    .ToListAsync();
+
+            // Popula IngredientesPadrao (ingredientes que vêm com o produto por padrão)
+            viewModel.IngredientesPadrao = product.Additionals!
+                                                .Where(pa => pa.IsDefault)
+                                                .Select(pa => pa.Ingredient!)
+                                                .ToList();
+
+            // Popula TamanhosDisponiveis com base na categoria
+            viewModel.TamanhosDisponiveis = GetTamanhosParaCategoria(tipo);
+
+            // Se for edição, pré-preenche o ViewModel com as personalizações atuais do carrinho
+            if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
+            {
+                var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
+                var existingCartItem = cart.FirstOrDefault(ci => ci.CartItemId == cartItemId.Value);
+                if (existingCartItem != null)
+                {
+                    viewModel.TamanhoAtual = existingCartItem.SelectedSize;
+                    viewModel.IngredientesAtuaisAdicionados = existingCartItem.AddedIngredientIds;
+                    viewModel.IngredientesAtuaisRemovidos = existingCartItem.RemovedIngredientIds;
+                }
+            }
+            // Use o nome da sua view de personalização, que pelo que vi é "PersonalizarProdutos"
+            return View("~/Views/Home/PersonalizarProdutos.cshtml", viewModel); // <<-- CORRIGIDO AQUI!
         }
 
+        // Função auxiliar para obter tamanhos por categoria (coloque-a aqui ou em um helper)
+        private List<string> GetTamanhosParaCategoria(string? categoryName)
+        {
+            if (string.IsNullOrEmpty(categoryName)) return new List<string>();
+
+            switch (categoryName.ToLower())
+            {
+                case "bebidas": // Use o nome da categoria que você tem no banco de dados (plural ou singular)
+                    return new List<string> { "Pequeno", "Médio", "Grande" };
+                case "acompanhamentos": // Use o nome da categoria que você tem no banco de dados
+                    return new List<string> { "Pequeno", "Médio", "Grande", "Família" };
+                default:
+                    return new List<string>();
+            }
+        }
     }
 }

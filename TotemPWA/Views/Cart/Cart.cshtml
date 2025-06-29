@@ -40,26 +40,42 @@
                     {
                         var item = Model[i];
                         <tr style="--i: @(i);">
-                            <td data-label="Produto">@item.Name</td>
+                            <td data-label="Produto">
+                                @item.Name
+                                @if (!string.IsNullOrEmpty(item.PersonalizationSummary))
+                                {
+                                    <br /><small class="personalization-summary">@item.PersonalizationSummary</small>
+                                }
+                            </td>
                             <td data-label="Quantidade">@item.Quantity</td>
                             <td data-label="Preço Unitário">R$ @item.Price.ToString("F2")</td>
                             <td data-label="Total">R$ @((item.Price * item.Quantity).ToString("F2"))</td>
                             <td data-label="Ações">
                                 <div class="btn-group">
-                                    <form asp-action="AddItem" method="post" style="display:inline;">
-                                        <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <form asp-action="AddItem" asp-controller="Cart" method="post" style="display:inline;">
+                                        <input type="hidden" name="cartItemId" value="@item.CartItemId" /> @* Passa o CartItemId *@
                                         <button type="submit" class="btn btn-sm btn-success" title="Adicionar Mais">+</button>
                                     </form>
 
-                                    <form asp-action="DecreaseItem" method="post" style="display:inline;"> 
-                                        <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <form asp-action="DecreaseItem" asp-controller="Cart" method="post" style="display:inline;">
+                                        <input type="hidden" name="cartItemId" value="@item.CartItemId" /> @* Passa o CartItemId *@
                                         <button type="submit" class="btn btn-sm btn-danger" title="Remover Unidade">−</button>
                                     </form>
 
-                                    <form asp-action="Personalizar" asp-controller="Home" method="get" style="display:inline;">
+                                    @* Use CustomerController e PersonalizarCombo para edição *@
+                                    <form asp-action="PersonalizarProdutos" asp-controller="Customer" method="get" style="display:inline;">
                                         <input type="hidden" name="productId" value="@item.ProductId" />
+                                        <input type="hidden" name="cartItemId" value="@item.CartItemId" /> @* Passa o CartItemId para edição *@
                                         <button type="submit" class="btn btn-sm btn-warning" title="Personalizar">
                                             <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                    </form>
+
+                                    @* Remova o item completamente, diferente de DecreaseItem *@
+                                    <form asp-action="RemoveItem" asp-controller="Cart" method="post" style="display:inline;">
+                                        <input type="hidden" name="cartItemId" value="@item.CartItemId" />
+                                        <button type="submit" class="btn btn-sm btn-info" title="Remover Item">
+                                            <i class="fa-solid fa-xmark"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -74,10 +90,10 @@
             </p>
 
             <div class="cart-actions-bottom">
-                <form asp-action="Clear" method="post" style="display:inline;">
+                <form asp-action="Clear" asp-controller="Cart" method="post" style="display:inline;">
                     <button class="btn btn-warning"><i class="fa-solid fa-trash-can"></i> Esvaziar Carrinho</button>
                 </form>
-            
+
                 <a href="@Url.Action("TelaProduto", "Home")" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i> Continuar Comprando</a>
                 <a href="@Url.Action("Cupom", "Home")" class="btn btn-success"><i class="fa-solid fa-cash-register"></i> Finalizar Pedido</a>
             </div>

@@ -1,7 +1,7 @@
 @model TotemPWA.ViewModels.PersonalizarProdutoViewModel
 @{
     Layout = null;
-    var tipo = Model.TipoProduto.ToLower();
+    var tipo = Model.TipoProduto.ToLower(); // Isso provavelmente será "code burgers" ou "lanches"
 }
 
 <link rel="stylesheet" href="~/css/personalizarcombo.css" />
@@ -11,81 +11,125 @@
 
     <div class="card">
         <div class="item-header">
-            <img src="@Model.Produto.Image" alt="Produto" class="burger-img" />
+            <img src="@(Model.Produto.Image ?? Model.Produto.ImageUrl ?? "/images/products/default_product.png")" alt="Produto" class="burger-img" />
             <div class="item-info">
                 <h3>@Model.Produto.Name <span class="icon-editar">(@Model.TipoProduto)</span></h3>
                 <p>@Model.Produto.Description</p>
-                <p class="price">R$ @Model.Produto.Price.ToString("F2")</p>
+                <p class="price">Preço base: R$ <span id="precoBase">@Model.Produto.Price.ToString("F2")</span></p>
             </div>
         </div>
     </div>
 
-    @if (tipo == "lanche")
-    {
-        <div class="card">
-           <div class="card">
-                <h4>Ingredientes</h4>
+    <form asp-controller="Customer" asp-action="SalvarPersonalizacao" method="post">
+        <input type="hidden" name="CartItemId" value="@Model.CartItemId" />
+        <input type="hidden" name="ProdutoId" value="@Model.Produto.Id" />
+        <input type="hidden" name="TipoProduto" value="@Model.TipoProduto" />
+
+        @* AQUI ESTÁ A CORREÇÃO: VERIFIQUE O NOME DA CATEGORIA NO SEU BANCO DE DADOS (SeedData.json) *@
+        @* Se 'C# Burger' está em 'Code Burgers', então 'tipo' será "code burgers" **
+        * Você pode querer verificar pela categoria pai ("Lanches") ou pela subcategoria ("Code Burgers").
+        * Vou colocar "lanches" E "code burgers" como exemplo. Verifique a categoria EXATA que seu produto está vinculado. *@
+        @if (tipo == "lanches" || tipo == "code burgers")
+        {
+            <div class="card">
+                <h4>Ingredientes Padrão (Manter ou Remover)</h4>
                 <div class="size-options">
-                    @foreach (var ing in Model.Ingredientes)
+                    @foreach (var ing in Model.IngredientesPadrao)
                     {
+                        var isRemoved = Model.IngredientesAtuaisRemovidos.Contains(ing.Id);
                         <div class="size-option">
                             <span>@ing.Name</span>
-                            <p>+ R$ @ing.Price.ToString("F2")</p>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name="IngredientesParaAdicionar" value="@ing.Id" />
-                                    Adicionar
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="IngredientesParaRemover" value="@ing.Id" />
-                                    Remover
-                                </label>
-                            </div>
+                            <label style="margin-left: 10px;">
+                                <input type="checkbox" name="IngredientesParaRemover" value="@ing.Id" @(isRemoved ? "checked" : "") />
+                                Remover
+                            </label>
                         </div>
                     }
                 </div>
             </div>
 
-        </div>
-    }
-    else if (tipo == "bebida")
-    {
-        <div class="card">
-            <h4>Volume da Bebida</h4>
-            <div class="size-options">
-                @foreach (var volume in Model.Tamanhos)
-                {
-                    <div class="size-option" onclick="selecionarTamanho(this)">
-                        <span>@volume</span>
-                    </div>
-                }
+            <div class="card">
+                <h4>Ingredientes Adicionais (Com custo extra)</h4>
+                <div class="size-options">
+                    @foreach (var ing in Model.IngredientesDisponiveis)
+                    {
+                        var isAdded = Model.IngredientesAtuaisAdicionados.Contains(ing.Id);
+                        <div class="size-option">
+                            <span>@ing.Name</span>
+                            <p>+ R$ @ing.Price.ToString("F2")</p>
+                            <label style="margin-left: 10px;">
+                                <input type="checkbox" name="IngredientesParaAdicionar" value="@ing.Id" @(isAdded ? "checked" : "") data-preco="@ing.Price.ToString("F2").Replace(",", ".")" />
+                                Adicionar
+                            </label>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-    }
-    else if (tipo == "acompanhamento")
-    {
-        <div class="card">
-            <h4>Tamanho do Acompanhamento</h4>
-            <div class="size-options">
-                @foreach (var tamanho in Model.Tamanhos)
-                {
-                    <div class="size-option" onclick="selecionarTamanho(this)">
-                        <span>@tamanho</span>
-                    </div>
-                }
+        }
+        @* AQUI TAMBÉM: VERIFIQUE O NOME DA CATEGORIA NO SEU BANCO DE DADOS *@
+        else if (tipo == "bebidas" || tipo == "acompanhamentos")
+        {
+            <div class="card">
+                <h4>Tamanho</h4>
+                <div class="size-options">
+                    @foreach (var tamanho in Model.TamanhosDisponiveis)
+                    {
+                        var isSelected = Model.TamanhoAtual == tamanho;
+                        <div class="size-option" onclick="selecionarTamanho(this, '@tamanho')">
+                            <label>
+                                <input type="radio" name="TamanhoSelecionado" value="@tamanho" @(isSelected ? "checked" : "") required />
+                                <span>@tamanho</span>
+                            </label>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-    }
+        }
 
-    <div class="footer">
-        <button class="cancel-btn" onclick="history.back()">Cancelar</button>
-        <form method="post" asp-action="SalvarPersonalizacao" asp-controller="Customer">
-            <input type="hidden" name="TipoProduto" value="@Model.TipoProduto" />
-            <input type="hidden" name="ProdutoId" value="@Model.Produto.Id" />
-            <input type="hidden" name="OrderItemId" value="@Model.OrderItemId" />
-            <input type="text" name="TamanhoSelecionado" hidden /> <!-- preenche via radio/input se necessário -->
+        <div class="card">
+            <h4>Preço Estimado:</h4>
+            <p id="precoTotal">R$ @Model.Produto.Price.ToString("F2")</p>
+        </div>
+
+        <div class="footer">
+            <button type="button" class="cancel-btn" onclick="history.back()">Cancelar</button>
             <button type="submit" class="add-btn">Confirmar</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
+<script>
+    function selecionarTamanho(element, value) {
+        const radios = document.querySelectorAll('input[name="TamanhoSelecionado"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+            radio.closest('.size-option').classList.remove('selected');
+        });
+
+        const clickedRadio = element.querySelector('input[type="radio"]');
+        if (clickedRadio) {
+            clickedRadio.checked = true;
+            element.classList.add('selected');
+        }
+    }
+
+    function atualizarPreco() {
+        let precoBase = parseFloat(document.getElementById("precoBase").innerText.replace(",", "."));
+        let adicionais = document.querySelectorAll('input[name="IngredientesParaAdicionar"]:checked');
+
+        adicionais.forEach(function(cb) {
+            let precoAdicional = parseFloat(cb.getAttribute("data-preco"));
+            if (!isNaN(precoAdicional)) precoBase += precoAdicional;
+        });
+
+        document.getElementById("precoTotal").innerText = "R$ " + precoBase.toFixed(2).replace(".", ",");
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('input[name="IngredientesParaAdicionar"]').forEach(cb => {
+            cb.addEventListener('change', atualizarPreco);
+        });
+
+        atualizarPreco(); // calcular ao carregar
+    });
+</script>

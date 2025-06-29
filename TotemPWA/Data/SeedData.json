@@ -7,8 +7,32 @@
         "name": "Code Burgers",
         "icon": "https://img.icons8.com/color/48/hamburger.png",
         "products": [
-          { "name": "C# Burger", "price": 18.50 },
-          { "name": "Java Deluxe", "price": 19.90 },
+          {
+            "name": "C# Burger",
+            "price": 18.50,
+            "Additionals": [
+              { "IngredientName": "Pão de Brioche", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Carne de 180g", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Queijo Cheddar", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 2.00 },
+              { "IngredientName": "Alface", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Tomate", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Cebola Roxa", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Molho Especial", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 1.50 },
+              { "IngredientName": "Bacon Crocante", "IsDefault": false, "CanBeRemoved": false, "CanBeAdded": true, "Price": 3.00 },
+              { "IngredientName": "Ovo Frito", "IsDefault": false, "CanBeRemoved": false, "CanBeAdded": true, "Price": 2.50 }
+            ]
+          },
+          {
+            "name": "Java Deluxe",
+            "price": 19.90,
+            "Additionals": [
+              { "IngredientName": "Pão Australiano", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Carne de 200g", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Queijo Provolone", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 2.50 },
+              { "IngredientName": "Rúcula", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Cebola Caramelizada", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 1.00 }
+            ]
+          },
           { "name": "Python Smash", "price": 17.50 },
           { "name": "Rusty Double", "price": 20.00 },
           { "name": "Go Stack", "price": 18.00 }
@@ -18,7 +42,18 @@
         "name": "Dev Dogs",
         "icon": "https://img.icons8.com/color/48/hot-dog.png",
         "products": [
-          { "name": "React Dog", "price": 14.00 },
+          {
+            "name": "React Dog",
+            "price": 14.00,
+            "Additionals": [
+              { "IngredientName": "Pão de Hot Dog", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Salsicha", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
+              { "IngredientName": "Maionese", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 0.50 },
+              { "IngredientName": "Ketchup", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 0.50 },
+              { "IngredientName": "Mostarda", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 0.50 },
+              { "IngredientName": "Batata Palha", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 1.00 }
+            ]
+          },
           { "name": "Vue Sausage", "price": 13.50 },
           { "name": "Angular Dog", "price": 14.50 },
           { "name": "Svelte Dog", "price": 13.00 }
