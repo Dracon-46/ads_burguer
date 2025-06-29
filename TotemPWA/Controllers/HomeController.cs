@@ -77,23 +77,28 @@ public class HomeController : Controller
             _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' encontrado. ID: {cupom.Id}, Valor LIDO DO DB: {cupom.Value}, Tipo: {cupom.Type}.");
 
             decimal calculatedDesconto;
+            string valorParaExibicao = ""; // Variável para o texto de exibição no frontend
 
-            // --- MUDANÇA CRÍTICA AQUI: Não divide por 100M para percentual ---
+            // --- LÓGICA DE CONVERSÃO E FORMATAÇÃO PARA EXIBIÇÃO ---
             if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
             {
-                // Se o DB já armazena 0.5 para 50%, usamos esse valor diretamente.
-                calculatedDesconto = cupom.Value; // Se cupom.Value é 0.5, calculatedDesconto será 0.5
-                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}.");
+                // Se o DB já armazena 0.5 para 50%, usamos esse valor diretamente para o cálculo.
+                calculatedDesconto = cupom.Value; 
+                // Para exibição, convertemos 0.5 para "50%"
+                valorParaExibicao = (cupom.Value * 100).ToString("N0") + "%"; 
+                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
             }
-            else // Para cupons fixos, o valor já está pronto
+            else // Para cupons fixos (ex: R$ 10,00)
             {
                 calculatedDesconto = cupom.Value;
-                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é do tipo '{cupom.Type}'. Valor FINAL enviado para cálculo: {calculatedDesconto}.");
+                // Formata para moeda local (ex: R$ 10,00)
+                valorParaExibicao = cupom.Value.ToString("C2", new System.Globalization.CultureInfo("pt-BR")); 
+                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é do tipo '{cupom.Type}'. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
             }
-            // --- FIM DA MUDANÇA CRÍTICA ---
+            // --- FIM DA LÓGICA DE CONVERSÃO E FORMATAÇÃO ---
 
-            // Retorna o 'calculatedDesconto' (que deve ser 0.5 para 50%) para o JavaScript
-            return Json(new { isValid = true, message = "Cupom válido!", desconto = calculatedDesconto, tipoDesconto = cupom.Type });
+            // Retorna o 'calculatedDesconto' e 'valorParaExibicao' para o JavaScript
+            return Json(new { isValid = true, message = "Cupom válido!", desconto = calculatedDesconto, tipoDesconto = cupom.Type, valorParaExibicao = valorParaExibicao });
         }
     }
 

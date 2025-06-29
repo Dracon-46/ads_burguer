@@ -20,9 +20,9 @@
         <div class="modal-content">
             <span class="close" onclick="fecharModal('modalValido')">&times;</span>
             <i class="fa-solid fa-circle-check icon" style="color: #4CAF50;"></i>
-            <p style="color: #4CAF50; font-weight: bold;">Cupom válido!</p>
-            <p id="mensagemCupomValido"></p>
-            <p>Aproveite seu desconto.</p>
+            <p style="color: #4CAF50; font-weight: bold;">Cupom válido!</p> 
+            <p id="mensagemCupomValido"></p> 
+            <p>Aproveite seu desconto de <strong id="cupomValorExibicao"></strong>.</p>
         </div>
     </div>
 
@@ -112,24 +112,30 @@
                 const data = await response.json();
                 
                 // --- LOGS CRÍTICOS PARA DEPURAR ---
-                // MANTENHA ESTES LOGS ATIVOS PARA VERIFICAR OS VALORES!
+                // MANTENHA ESTES LOGS ATIVOS PARA VERIFICAR OS VALORES NO CONSOLE DO NAVEGADOR!
                 console.log("Resposta completa do backend:", data);
                 console.log("isValid:", data.isValid);
                 console.log("mensagem:", data.message);
-                console.log("desconto (valor vindo do backend):", data.desconto); // ESTE É O VALOR CRÍTICO!
+                console.log("desconto (valor vindo do backend):", data.desconto);
                 console.log("tipoDesconto:", data.tipoDesconto);
+                console.log("valorParaExibicao (vindo do backend):", data.valorParaExibicao); // Este é o valor formatado para exibição
                 console.log("Total Pedido Original (no frontend):", totalPedidoOriginal);
                 // --- FIM DOS LOGS CRÍTICOS ---
 
                 if (data.isValid) {
                     abrirModal("modalValido");
-                    document.getElementById('mensagemCupomValido').textContent = data.message;
+                    // O data.message (se for "Cupom válido!") pode ir aqui ou ser deixado fixo no HTML
+                    // document.getElementById('mensagemCupomValido').textContent = data.message; 
+                    
+                    // Preenche o strong com o valor formatado para exibição (ex: "50%" ou "R$ 10,00")
+                    document.getElementById('cupomValorExibicao').textContent = data.valorParaExibicao;
+                    
                     campo.style.borderColor = "green";
 
                     let valorDesconto = 0;
                     let totalComDesconto = totalPedidoOriginal;
 
-                    // O 'data.desconto' DEVE VIR DO BACKEND COMO 0.5 PARA 50% OU O VALOR FIXO
+                    // O 'data.desconto' é o valor usado para o CÁLCULO (ex: 0.5 para 50%)
                     const descontoValue = parseFloat(data.desconto); 
                     
                     const tipoDescontoLower = data.tipoDesconto.toLowerCase(); 
