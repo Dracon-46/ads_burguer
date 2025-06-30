@@ -37,6 +37,10 @@ namespace TotemPWA.Controllers
         {
             return View();
         }
+        public IActionResult TelaNotaFiscal()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult ValidarPagamento(string metodo)
@@ -60,9 +64,10 @@ namespace TotemPWA.Controllers
                 }
 
                 // Log successful payment
-                _logger.LogInformation($"Pagamento com {metodo} realizado com sucesso");
+               _logger.LogInformation($"Pagamento com {metodo} realizado com sucesso");
                 TempData["Sucesso"] = "Pagamento realizado com sucesso!";
-                return RedirectToAction("SelecionarPagamento");
+                return RedirectToAction("TelaNotaFiscal");
+
             }
             catch (Exception ex)
             {

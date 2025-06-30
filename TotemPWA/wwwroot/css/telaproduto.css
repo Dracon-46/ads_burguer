@@ -1,4 +1,4 @@
-body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; }
+body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; padding: 0px !important; }
 
 :root{ --primary-color: #990000; --secondary-color: #426B1F; --tertiary-color: #FF6501; --forty-color: #C1D343; --text-color: #3f3f3f; --bg-color:#FFFFFF; }
 

@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Nota Fiscal";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Nota Fiscal</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <div class="nota-container">
+        <div class="nota-header">
+            Nota Fiscal
+        </div>
+
+        <div class="nota-body">
+            <div class="info">
+                <div><strong>Nome: </strong> @Model?.NomeComprador</div>
+                <div><strong>CPF: </strong> @Model?.CPFComprador</div>
+            </div>
+
+            <div class="produtos">
+                <strong>Produtos comprados: </strong>
+                <ul>
+                    @if (Model?.Produtos != null)
+                    {
+                        foreach (var produto in Model.Produtos)
+                        {
+                            <li>@produto</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>Nenhum produto listado.</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="nota-footer">
+            <div class="totais">
+                <div>Desconto aplicado: R$ @Model?.Desconto.ToString("F2")</div>
+                <div>Subtotal: R$ @Model?.Subtotal.ToString("F2")</div>
+            </div>
+            <div class="voltar">
+                <a href="@Url.Action("Index", "Home")" class="btn-voltar">Voltar à Tela Inicial</a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
