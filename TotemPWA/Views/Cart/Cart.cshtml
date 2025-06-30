@@ -2,6 +2,11 @@
 
 @{
     ViewData["Title"] = "Carrinho";
+
+    // --- CORREÇÃO: O CÁLCULO DAS VARIÁVEIS DEVE ESTAR AQUI, NO INÍCIO DA VIEW ---
+    decimal totalPedidoCalculado = Model.Sum(x => x.Price * x.Quantity);
+    int totalItensCalculado = Model.Sum(x => x.Quantity);
+    // --- FIM DA CORREÇÃO ---
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -95,9 +100,32 @@
                 </form>
 
                 <a href="@Url.Action("TelaProduto", "Home")" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i> Continuar Comprando</a>
-                <a href="@Url.Action("Cupom", "Home")" class="btn btn-success"><i class="fa-solid fa-cash-register"></i> Finalizar Pedido</a>
+                
+                <a href="@Url.Action("Cupom", "Home", new { totalPedido = totalPedidoCalculado, totalItens = totalItensCalculado })" class="btn btn-success"><i class="fa-solid fa-cash-register"></i> Finalizar Pedido</a>
             </div>
         }
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const carrinho = [];
+        const linhas = document.querySelectorAll("table tbody tr");
+
+        linhas.forEach(linha => {
+            const nome = linha.querySelector('[data-label="Produto"]').textContent.trim();
+            const quantidade = parseInt(linha.querySelector('[data-label="Quantidade"]').textContent);
+            const precoTexto = linha.querySelector('[data-label="Preço Unitário"]').textContent.replace("R$", "").replace(",", ".").trim();
+            const preco = parseFloat(precoTexto);
+
+            carrinho.push({ nome: nome, quantidade: quantidade, preco: preco });
+        });
+
+        const totalItens = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
+        const valorTotal = carrinho.reduce((soma, item) => soma + (item.quantidade * item.preco), 0);
+
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        localStorage.setItem("totalItens", totalItens);
+        localStorage.setItem("valorTotal", valorTotal.toFixed(2));
+    });
+</script>
 </html>

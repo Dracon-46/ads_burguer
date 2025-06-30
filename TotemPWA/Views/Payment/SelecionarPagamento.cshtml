@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ADS Burguer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="/css/selecionarpagamento.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/selecionarpagamento.css" />
 </head>
 <body>
     <div class="container">
@@ -18,8 +19,11 @@
             <span class="subtitulo">Como deseja pagar?</span>
         </div>
 
+        <!-- MENSAGEM DE ERRO -->
+        <div id="erro-pagamento" class="payment-alert-burguer"></div>
+
         <div class="selecao-pagamento">
-            <button class="btn-pagamento" onclick="location.href='@Url.Action("TelaPagamentoCartao", "Payment")'">
+            <button class="btn-pagamento" onclick="validarPagamento('@Url.Action("TelaPagamentoCartao", "Payment")')">
                 <div>
                     <p class="tp-pagamento">Cartão</p>
                     <p class="subinfo">Crédito, débito ou refeição</p>
@@ -27,7 +31,7 @@
                 <i class="fas fa-credit-card"></i>
             </button>
 
-            <button class="btn-pagamento" onclick="location.href='@Url.Action("TelaPagamentoCartDigital", "Payment")'">
+            <button class="btn-pagamento" onclick="validarPagamento('@Url.Action("TelaPagamentoCartDigital", "Payment")')">
                 <div>
                     <p class="tp-pagamento">Cartão Digital</p>
                     <p class="subinfo">Apple Pay e Google Pay</p>
@@ -35,15 +39,15 @@
                 <i class="fas fa-wallet"></i>
             </button>
 
-            <button class="btn-pagamento" onclick="location.href='@Url.Action("TelaPagamentoPix", "Payment")'">
+            <button class="btn-pagamento" onclick="validarPagamento('@Url.Action("TelaPagamentoPix", "Payment")')">
                 <div>
                     <p class="tp-pagamento">Pix</p>
-                    <p class="subinfo">Pagamento instantâneo.</p>
+                    <p class="subinfo">Pagamento instantâneo</p>
                 </div>
                 <i class="fas fa-qrcode"></i>
             </button>
 
-            <button class="btn-pagamento" onclick="location.href='@Url.Action("TelaPagamentoDinheiro", "Payment")'">
+            <button class="btn-pagamento" onclick="validarPagamento('@Url.Action("TelaPagamentoDinheiro", "Payment")')">
                 <div>
                     <p class="tp-pagamento">Dinheiro</p>
                     <p class="subinfo">Termine o pagamento no caixa</p>
@@ -52,16 +56,57 @@
             </button>
         </div>
 
-        <!-- Carrinho fixo -->
         <div class="resumo-pedido">
             <div class="totais">
-                <p>Total de itens:  <strong>0</strong></p>
-                <p>Total do pedido:  <strong>R$ 0</strong></p>
+                <p>Total de itens: <strong id="totalItens">0</strong></p>
+                <p>Total do pedido: <strong id="valorTotalPedido">R$ 0,00</strong></p>
             </div>
             <div class="botoes">
                 <a href="@Url.Action("Cupom", "Home")"><button class="cancelar">Voltar</button></a>
             </div>
         </div>
     </div>
+
+    <script>
+    function validarPagamento(destino) {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const valorTotal = parseFloat(localStorage.getItem("valorTotal")) || 0;
+
+        const divErro = document.getElementById("erro-pagamento");
+        divErro.style.display = "none";
+        divErro.innerText = "";
+
+        if (carrinho.length === 0) {
+            mostrarErro("Seu carrinho está vazio. Adicione itens antes de continuar.");
+            return;
+        }
+
+        if (valorTotal <= 0) {
+            mostrarErro("O valor total do pedido não pode ser zero.");
+            return;
+        }
+
+        // Se passou nas validações, vai para a próxima página
+        window.location.href = destino;
+    }
+
+    function mostrarErro(msg) {
+        const divErro = document.getElementById("erro-pagamento");
+        divErro.innerText = msg;
+        divErro.style.display = "block";
+    }
+
+    // Atualiza os dados no resumo
+    document.addEventListener("DOMContentLoaded", function () {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const valorTotal = parseFloat(localStorage.getItem("valorTotal")) || 0;
+
+        const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+
+        document.getElementById("totalItens").textContent = totalItens;
+        document.getElementById("valorTotalPedido").textContent = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    });
+</script>
+
 </body>
 </html>

@@ -6,10 +6,12 @@ using TotemPWA.Data;
 using TotemPWA.Models;
 using TotemPWA.Models.ViewModels;
 using TotemPWA.ViewModels;
-using TotemPWA.Utilities; // Certifique-se de que SessionExtensions está aqui
+using TotemPWA.Utilities;
 using System.Linq; // Adicione este using
 using System.Collections.Generic; // Adicione este using
 using System; // Adicione este using para Guid
+using Newtonsoft.Json;
+
 
 namespace TotemPWA.Controllers
 {
@@ -49,10 +51,67 @@ namespace TotemPWA.Controllers
             return View();
         }
 
-        public IActionResult Cupom()
+    public IActionResult Cupom(decimal totalPedido, int totalItens)
+    {
+        ViewBag.TotalPedido = totalPedido;
+        ViewBag.TotalItens = totalItens;
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ValidarCupom([FromBody] CupomValidationRequest request)
+    {
+        _logger.LogInformation($"ValidarCupom: Requisição recebida para o cupom '{request.CodigoCupom}'.");
+
+        if (string.IsNullOrWhiteSpace(request.CodigoCupom))
         {
-            return View();
+            _logger.LogWarning("ValidarCupom: Código do cupom não pode ser vazio.");
+            return Json(new { isValid = false, message = "Código do cupom não pode ser vazio." });
         }
+
+        var cupom = await _context.Cupons
+                                .FirstOrDefaultAsync(c => c.Code.ToUpper() == request.CodigoCupom.ToUpper());
+
+        if (cupom == null)
+        {
+            _logger.LogWarning($"ValidarCupom: Cupom com código '{request.CodigoCupom}' NÃO encontrado no banco de dados.");
+            return Json(new { isValid = false, message = "Cupom não encontrado." });
+        }
+        else
+        {
+            // Log do valor exato que veio do banco de dados
+            _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' encontrado. ID: {cupom.Id}, Valor LIDO DO DB: {cupom.Value}, Tipo: {cupom.Type}.");
+
+            decimal calculatedDesconto;
+            string valorParaExibicao = ""; // Variável para o texto de exibição no frontend
+
+            // --- LÓGICA DE CONVERSÃO E FORMATAÇÃO PARA EXIBIÇÃO ---
+            if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
+            {
+                // Se o DB já armazena 0.5 para 50%, usamos esse valor diretamente para o cálculo.
+                calculatedDesconto = cupom.Value; 
+                // Para exibição, convertemos 0.5 para "50%"
+                valorParaExibicao = (cupom.Value * 100).ToString("N0") + "%"; 
+                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
+            }
+            else // Para cupons fixos (ex: R$ 10,00)
+            {
+                calculatedDesconto = cupom.Value;
+                // Formata para moeda local (ex: R$ 10,00)
+                valorParaExibicao = cupom.Value.ToString("C2", new System.Globalization.CultureInfo("pt-BR")); 
+                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é do tipo '{cupom.Type}'. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
+            }
+            // --- FIM DA LÓGICA DE CONVERSÃO E FORMATAÇÃO ---
+
+            // Retorna o 'calculatedDesconto' e 'valorParaExibicao' para o JavaScript
+            return Json(new { isValid = true, message = "Cupom válido!", desconto = calculatedDesconto, tipoDesconto = cupom.Type, valorParaExibicao = valorParaExibicao });
+        }
+    }
+
+    public class CupomValidationRequest
+    {
+        public string CodigoCupom { get; set; }
+    }
 
         public IActionResult TelaFinal()
         {
@@ -75,32 +134,32 @@ namespace TotemPWA.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
-        public async Task<IActionResult> TelaProduto(string categorySlug, string subcategorySlug = null)
-        {
-            // 1. Encontrar a categoria ativa usando o SLUG
-            var rootCategoriesRaw = await _context.Categories
-                .Where(c => c.ParentCategoryId == null)
-                .ToListAsync();
+    [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
+    public async Task<IActionResult> TelaProduto(string categorySlug, string subcategorySlug = null)
+    {
+        // 1. Encontrar a categoria ativa usando o SLUG
+        var rootCategoriesRaw = await _context.Categories
+            .Where(c => c.ParentCategoryId == null)
+            .ToListAsync();
 
             Category activeCategory;
 
-            if (!string.IsNullOrEmpty(categorySlug))
-            {
-                // Se um slug foi passado na URL, encontre a categoria correspondente
-                activeCategory = rootCategoriesRaw.FirstOrDefault(c => c.Slug == categorySlug);
-            }
-            else
-            {
-                // Se nenhum slug foi passado, pegue a primeira categoria como padrão
-                activeCategory = rootCategoriesRaw.FirstOrDefault();
-            }
-
-            // Se nenhuma categoria for encontrada, pode ser bom tratar o erro (ex: return NotFound();)
-            if (activeCategory == null) return NotFound("Categoria não encontrada.");
-
-            // Pega o ID da categoria ativa para usar nas próximas consultas
-            var activeCategoryId = activeCategory.Id;
+        if (!string.IsNullOrEmpty(categorySlug))
+        {
+            // Se um slug foi passado na URL, encontre a categoria correspondente
+            activeCategory = rootCategoriesRaw.FirstOrDefault(c => c.Slug == categorySlug);
+        }
+        else
+        {
+            // Se nenhum slug foi passado, pegue a primeira categoria como padrão
+            activeCategory = rootCategoriesRaw.FirstOrDefault();
+        }
+        
+        // Se nenhuma categoria for encontrada, pode ser bom tratar o erro (ex: return NotFound();)
+        if (activeCategory == null) return NotFound("Categoria não encontrada.");
+        
+        // Pega o ID da categoria ativa para usar nas próximas consultas
+        var activeCategoryId = activeCategory.Id;
 
             var rootCategories = rootCategoriesRaw
                 .Select(c => new
@@ -112,26 +171,26 @@ namespace TotemPWA.Controllers
                 })
                 .ToList();
 
-            // 2. Encontrar a subcategoria ativa usando o SLUG
-            var subcategoriesRaw = await _context.Categories
-                .Where(c => c.ParentCategoryId == activeCategoryId)
-                .ToListAsync();
+        // 2. Encontrar a subcategoria ativa usando o SLUG
+        var subcategoriesRaw = await _context.Categories
+            .Where(c => c.ParentCategoryId == activeCategoryId)
+            .ToListAsync();
 
             Category activeSubcategory;
 
-            if (!string.IsNullOrEmpty(subcategorySlug))
-            {
-                // Se um slug de subcategoria foi passado, encontre-o
-                activeSubcategory = subcategoriesRaw.FirstOrDefault(s => s.Slug == subcategorySlug);
-            }
-            else
-            {
-                // Senão, pegue a primeira subcategoria como padrão
-                activeSubcategory = subcategoriesRaw.FirstOrDefault();
-            }
+        if (!string.IsNullOrEmpty(subcategorySlug))
+        {
+            // Se um slug de subcategoria foi passado, encontre-o
+            activeSubcategory = subcategoriesRaw.FirstOrDefault(s => s.Slug == subcategorySlug);
+        }
+        else
+        {
+            // Senão, pegue a primeira subcategoria como padrão
+            activeSubcategory = subcategoriesRaw.FirstOrDefault();
+        }
 
-            // O ID da subcategoria ativa (pode ser nulo se não houver subcategorias)
-            var activeSubcategoryId = activeSubcategory?.Id;
+        // O ID da subcategoria ativa (pode ser nulo se não houver subcategorias)
+        var activeSubcategoryId = activeSubcategory?.Id;
 
             var subcategories = subcategoriesRaw
                 .Select(c => new
@@ -143,34 +202,34 @@ namespace TotemPWA.Controllers
                 })
                 .ToList();
 
-            // 3. Buscar produtos com base no ID da subcategoria ativa
-            var products = new List<object>();
-            if (activeSubcategoryId != null)
-            {
-                products = await _context.Products
-                    .Where(p => p.CategoryId == activeSubcategoryId)
-                    .Select(p => new
-                    {
-                        id = p.Id,
-                        name = p.Name,
-                        price = p.Price,
-                        image = p.Image
-                    })
-                    .ToListAsync<object>();
-            }
-
-            // Obter o carrinho da sessão
-            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
-
-            // Passar os dados para a ViewBag
-            ViewBag.CategorySlug = activeCategory.Slug;
-            ViewBag.Categories = rootCategories;
-            ViewBag.SubCategories = subcategories;
-            ViewBag.Products = products;
-
-            // Passar o carrinho como modelo para a view
-            return View(cart);
+        // 3. Buscar produtos com base no ID da subcategoria ativa
+        var products = new List<object>();
+        if (activeSubcategoryId != null)
+        {
+            products = await _context.Products
+                .Where(p => p.CategoryId == activeSubcategoryId)
+                .Select(p => new
+                {
+                    id = p.Id,
+                    name = p.Name,
+                    price = p.Price,
+                    image = p.Image
+                })
+                .ToListAsync<object>();
         }
+
+        // Obter o carrinho da sessão
+        var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+
+        // Passar os dados para a ViewBag
+        ViewBag.CategorySlug = activeCategory.Slug;
+        ViewBag.Categories = rootCategories;
+        ViewBag.SubCategories = subcategories;
+        ViewBag.Products = products;
+
+        // Passar o carrinho como modelo para a view
+        return View(cart);
+    }
 
         // NOVO: Ação Personalizar (GET) para carregar os dados para a view
         [HttpGet]
@@ -359,11 +418,11 @@ namespace TotemPWA.Controllers
             }
         }
 
-        // CRUD
-        public IActionResult CardapioCrud()
-        {
-            return View();
-        }
+    // CRUD 
+    public IActionResult CardapioCrud()
+    {
+        return View();
+    }
 
         public IActionResult FormEditar()
         {
