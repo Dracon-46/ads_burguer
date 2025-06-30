@@ -1,7 +1,7 @@
 @model TotemPWA.ViewModels.PersonalizarProdutoViewModel
 @{
     Layout = null;
-    var tipo = Model.TipoProduto.ToLower();
+    var tipo = Model.TipoProduto.ToLower(); // Este 'tipo' virá da categoria principal agora
 }
 
 <link rel="stylesheet" href="~/css/personalizarcombo.css" />
@@ -11,81 +11,199 @@
 
     <div class="card">
         <div class="item-header">
-            <img src="@Model.Produto.Image" alt="Produto" class="burger-img" />
+            <img src="@(Model.Produto.Image ?? Model.Produto.ImageUrl ?? "/images/products/default_product.png")" alt="Produto" class="burger-img" />
             <div class="item-info">
                 <h3>@Model.Produto.Name <span class="icon-editar">(@Model.TipoProduto)</span></h3>
                 <p>@Model.Produto.Description</p>
-                <p class="price">R$ @Model.Produto.Price.ToString("F2")</p>
+                <p class="price">Preço base: R$ <span id="precoBase">@Model.Produto.Price.ToString("F2")</span></p>
             </div>
         </div>
     </div>
 
-    @if (tipo == "lanche")
-    {
-        <div class="card">
-           <div class="card">
-                <h4>Ingredientes</h4>
+    <form asp-controller="Customer" asp-action="SalvarPersonalizacao" method="post" id="personalizacaoForm">
+        <input type="hidden" name="CartItemId" value="@Model.CartItemId" />
+        <input type="hidden" name="ProdutoId" value="@Model.Produto.Id" />
+        <input type="hidden" name="TipoProduto" value="@Model.TipoProduto" />
+
+        @* AQUI ESTÁ A CORREÇÃO: VERIFIQUE PELO NOME DA CATEGORIA PAI, OU PELA PRÓPRIA CATEGORIA **
+           Inclua as categorias que você quer que tenham essa seção de ingredientes. *@
+        @if (tipo == "lanches" || tipo == "code burgers" || tipo == "dev dogs" || tipo == "natural bits" || tipo == "toasts do terminal" || tipo == "combos full stack")
+        {
+            <div class="card">
+                <h4>Ingredientes Padrão (Manter ou Remover)</h4>
                 <div class="size-options">
-                    @foreach (var ing in Model.Ingredientes)
+                    @foreach (var ing in Model.IngredientesPadrao)
                     {
-                        <div class="size-option">
+                        var isRemoved = Model.IngredientesAtuaisRemovidos.Contains(ing.Id);
+                        <div class="size-option" data-ingredient-id="@ing.Id">
                             <span>@ing.Name</span>
-                            <p>+ R$ @ing.Price.ToString("F2")</p>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name="IngredientesParaAdicionar" value="@ing.Id" />
-                                    Adicionar
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="IngredientesParaRemover" value="@ing.Id" />
-                                    Remover
-                                </label>
-                            </div>
+                            <label style="margin-left: 10px;">
+                                <input type="checkbox" class="remover-ingrediente"
+                                       name="IngredientesParaRemover" value="@ing.Id" @(isRemoved ? "checked" : "") />
+                                Remover
+                            </label>
                         </div>
                     }
                 </div>
             </div>
 
-        </div>
-    }
-    else if (tipo == "bebida")
-    {
-        <div class="card">
-            <h4>Volume da Bebida</h4>
-            <div class="size-options">
-                @foreach (var volume in Model.Tamanhos)
-                {
-                    <div class="size-option" onclick="selecionarTamanho(this)">
-                        <span>@volume</span>
-                    </div>
-                }
+            <div class="card">
+                <h4>Ingredientes Adicionais (Com custo extra)</h4>
+                <div class="size-options">
+                    @foreach (var ing in Model.IngredientesDisponiveis)
+                    {
+                        var currentAddedCount = Model.IngredientesAtuaisAdicionados.Count(id => id == ing.Id);
+                        <div class="size-option" data-ingredient-id="@ing.Id" data-ing-price="@ing.Price.ToString("F2").Replace(",", ".")">
+                            <span>@ing.Name</span>
+                            <p>+ R$ @ing.Price.ToString("F2")</p>
+                            <div class="quantity-control">
+                                <button type="button" class="btn-quantidade-sub">-</button>
+                                <span class="quantidade-ingrediente">@currentAddedCount</span>
+                                <button type="button" class="btn-quantidade-add">+</button>
+                                @* Input hidden que será preenchido pelo JS para enviar os IDs múltiplos **
+                                   Cada input com o mesmo nome e ID indica uma unidade adicionada. *@
+                                @for (int i = 0; i < currentAddedCount; i++)
+                                {
+                                    <input type="hidden" class="ingrediente-adicionar-hidden" name="IngredientesParaAdicionar" value="@ing.Id" />
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-    }
-    else if (tipo == "acompanhamento")
-    {
-        <div class="card">
-            <h4>Tamanho do Acompanhamento</h4>
-            <div class="size-options">
-                @foreach (var tamanho in Model.Tamanhos)
-                {
-                    <div class="size-option" onclick="selecionarTamanho(this)">
-                        <span>@tamanho</span>
-                    </div>
-                }
+        }
+        @* AQUI TAMBÉM: VERIFIQUE O NOME DA CATEGORIA PAI OU PRINCIPAL **
+           Inclua as categorias que você quer que tenham essa seção de tamanho. *@
+        else if (tipo == "bebidas" || tipo == "acompanhamentos" || tipo == "café da manhã")
+        {
+            <div class="card">
+                <h4>Tamanho</h4>
+                <div class="size-options">
+                    @foreach (var tamanho in Model.TamanhosDisponiveis)
+                    {
+                        var isSelected = Model.TamanhoAtual == tamanho;
+                        <div class="size-option" onclick="selecionarTamanho(this, '@tamanho')">
+                            <label>
+                                <input type="radio" name="TamanhoSelecionado" value="@tamanho" @(isSelected ? "checked" : "") required />
+                                <span>@tamanho</span>
+                            </label>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-    }
+        }
+        @* Adicione blocos para outras categorias (sobremesas, etc.) se tiver personalizações diferentes *@
+        else if (tipo == "sobremesas")
+        {
+            @* Lógica de personalização específica para sobremesas, se houver *@
+            <p>Opções de personalização para sobremesas.</p>
+        }
 
-    <div class="footer">
-        <button class="cancel-btn" onclick="history.back()">Cancelar</button>
-        <form method="post" asp-action="SalvarPersonalizacao" asp-controller="Customer">
-            <input type="hidden" name="TipoProduto" value="@Model.TipoProduto" />
-            <input type="hidden" name="ProdutoId" value="@Model.Produto.Id" />
-            <input type="hidden" name="OrderItemId" value="@Model.OrderItemId" />
-            <input type="text" name="TamanhoSelecionado" hidden /> <!-- preenche via radio/input se necessário -->
+
+        <div class="card">
+            <h4>Preço Estimado:</h4>
+            <p id="precoTotal">R$ @Model.Produto.Price.ToString("F2")</p>
+        </div>
+
+        <div class="footer">
+            <button type="button" class="cancel-btn" onclick="history.back()">Cancelar</button>
             <button type="submit" class="add-btn">Confirmar</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
+<script>
+    // Inicializa o preço total com base no preço base do produto.
+    let currentTotal = parseFloat(document.getElementById("precoBase").innerText.replace(",", "."));
+
+    function selecionarTamanho(element, value) {
+        const radios = document.querySelectorAll('input[name="TamanhoSelecionado"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+            radio.closest('.size-option').classList.remove('selected');
+        });
+
+        const clickedRadio = element.querySelector('input[type="radio"]');
+        if (clickedRadio) {
+            clickedRadio.checked = true;
+            element.classList.add('selected');
+        }
+        // A lógica de preço para tamanhos é mais complexa e é melhor tratada no backend (SalvarPersonalizacao)
+        // ou via um mapa JS se os preços por tamanho forem fixos e conhecidos no frontend.
+        // Por simplicidade, o preço do tamanho não será atualizado aqui no frontend agora.
+    }
+
+    function atualizarPrecoAdicionais() {
+        // Recalcula apenas o preço dos adicionais e adiciona ao preço base
+        let precoBaseInicial = parseFloat(document.getElementById("precoBase").innerText.replace(",", "."));
+        let precoAdicionais = 0;
+
+        // Itera sobre todos os controles de quantidade para ingredientes adicionais
+        document.querySelectorAll('.size-option[data-ing-price]').forEach(function(div) {
+            const ingredientId = div.getAttribute('data-ingredient-id');
+            const precoUnitarioAdicional = parseFloat(div.getAttribute('data-ing-price'));
+            const quantidade = parseInt(div.querySelector('.quantidade-ingrediente').innerText);
+
+            if (!isNaN(precoUnitarioAdicional) && !isNaN(quantidade)) {
+                precoAdicionais += precoUnitarioAdicional * quantidade;
+            }
+        });
+
+        // Ingredientes removidos não alteram o preço no frontend por padrão,
+        // a menos que você tenha uma lógica de "desconto por remoção" (mais complexo).
+
+        currentTotal = precoBaseInicial + precoAdicionais;
+        document.getElementById("precoTotal").innerText = "R$ " + currentTotal.toFixed(2).replace(".", ",");
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lógica para botões de adicionar/subtrair ingredientes adicionais
+        document.querySelectorAll('.btn-quantidade-add').forEach(button => {
+            button.addEventListener('click', function() {
+                const sizeOptionDiv = this.closest('.size-option');
+                const quantidadeSpan = sizeOptionDiv.querySelector('.quantidade-ingrediente');
+                let quantidade = parseInt(quantidadeSpan.innerText);
+                quantidade++;
+                quantidadeSpan.innerText = quantidade;
+                
+                // Adiciona um input hidden para o formulário
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'IngredientesParaAdicionar'; // Mesmos nomes para múltiplos valores
+                hiddenInput.value = sizeOptionDiv.getAttribute('data-ingredient-id');
+                hiddenInput.classList.add('ingrediente-adicionar-hidden');
+                document.getElementById('personalizacaoForm').appendChild(hiddenInput);
+
+                atualizarPrecoAdicionais();
+            });
+        });
+
+        document.querySelectorAll('.btn-quantidade-sub').forEach(button => {
+            button.addEventListener('click', function() {
+                const sizeOptionDiv = this.closest('.size-option');
+                const quantidadeSpan = sizeOptionDiv.querySelector('.quantidade-ingrediente');
+                let quantidade = parseInt(quantidadeSpan.innerText);
+
+                if (quantidade > 0) {
+                    quantidade--;
+                    quantidadeSpan.innerText = quantidade;
+
+                    // Remove um input hidden correspondente
+                    const hiddenInputs = sizeOptionDiv.querySelectorAll('.ingrediente-adicionar-hidden');
+                    if (hiddenInputs.length > 0) {
+                        hiddenInputs[hiddenInputs.length - 1].remove(); // Remove o último
+                    }
+                    atualizarPrecoAdicionais();
+                }
+            });
+        });
+
+        // Lógica para checkboxes de remover ingredientes padrão
+        document.querySelectorAll('.remover-ingrediente').forEach(checkbox => {
+            checkbox.addEventListener('change', atualizarPrecoAdicionais); // Não altera preço por padrão, mas pode ser útil para recalcular
+        });
+
+        // Inicializa o preço total ao carregar a página
+        atualizarPrecoAdicionais();
+    });
+</script>

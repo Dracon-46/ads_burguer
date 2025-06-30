@@ -4,7 +4,7 @@ using TotemPWA.Models;
 
 public class PersonalizarProdutoInputModel
 {
-    public int OrderItemId { get; set; }
+    public Guid CartItemId { get; set; } 
     public int ProdutoId { get; set; }
     public string TipoProduto { get; set; } = string.Empty;
 

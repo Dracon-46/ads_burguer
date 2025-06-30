@@ -1,8 +1,11 @@
+// Controllers/CartController.cs
 using Microsoft.AspNetCore.Mvc;
 using TotemPWA.Data;
 using TotemPWA.Utilities;
 using TotemPWA.Models.ViewModels;
-using System.Linq; 
+using System.Linq;
+using System; // Adicione este using para Guid
+
 namespace TotemPWA.Controllers
 {
     [Route("[controller]/[action]")]
@@ -22,53 +25,30 @@ namespace TotemPWA.Controllers
             return View("Cart", cart);
         }
 
+        // MODIFICADO: AddItem agora recebe um GUID para aumentar a quantidade de um item ESPECÍFICO
+        // IMPORTANTE: Para ADICIONAR UM NOVO ITEM PERSONALIZADO, use a ação SalvarPersonalizacao do HomeController.
+        // Esta ação é para aumentar a quantidade de um item JÁ EXISTENTE E PERSONALIZADO NO CARRINHO.
         [HttpPost]
-        public IActionResult AddItem(int productId)
-        {
-            var product = _context.Products.FirstOrDefault(p => p.Id == productId);
-            if (product == null)
-                return NotFound();
-
-            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
-            var item = cart.FirstOrDefault(x => x.ProductId == productId);
-
-            if (item != null)
-                item.Quantity++;
-            else
-                cart.Add(new CartItemViewModel
-                {
-                    ProductId = product.Id,
-                    Name = product.Name,
-                    Price = product.Price,
-                    Image = product.Image,
-                    Quantity = 1
-                });
-
-            HttpContext.Session.SetObject("Cart", cart);
-            return RedirectToAction("Index");
-        }
-
-        // Ação original RemoveItem (mantida, mas agora serve para remover item COMPLETO)
-        [HttpPost]
-        public IActionResult RemoveItem(int productId)
+        public IActionResult AddItem(Guid cartItemId) // Recebe o GUID agora
         {
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
-            var item = cart.FirstOrDefault(x => x.ProductId == productId);
+            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId); // Busca pelo CartItemId
+
             if (item != null)
             {
-                cart.Remove(item);
+                item.Quantity++;
                 HttpContext.Session.SetObject("Cart", cart);
             }
+            // Se o item não for encontrado, ele não deve ser adicionado aqui, mas sim pela Personalização
             return RedirectToAction("Index");
         }
 
-        // --- NOVA AÇÃO: DecreaseItem ---
-        // Esta ação é chamada quando o usuário clica no botão de subtração para reduzir a quantidade em 1.
+        // MODIFICADO: DecreaseItem agora recebe um GUID
         [HttpPost]
-        public IActionResult DecreaseItem(int productId)
+        public IActionResult DecreaseItem(Guid cartItemId) // Recebe o GUID agora
         {
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
-            var item = cart.FirstOrDefault(x => x.ProductId == productId);
+            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId); // Busca pelo CartItemId
 
             if (item != null)
             {
@@ -83,11 +63,23 @@ namespace TotemPWA.Controllers
                 }
                 HttpContext.Session.SetObject("Cart", cart); // Salva o carrinho atualizado na sessão
             }
-            
+
             return RedirectToAction("Index"); // Redireciona de volta para a tela do carrinho
         }
-        // --- FIM DA NOVA AÇÃO ---
 
+        // MODIFICADO: RemoveItem agora recebe um GUID para remover a instância COMPLETA de um item personalizado
+        [HttpPost]
+        public IActionResult RemoveItem(Guid cartItemId) // Recebe o GUID agora
+        {
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
+            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId); // Busca pelo CartItemId
+            if (item != null)
+            {
+                cart.Remove(item);
+                HttpContext.Session.SetObject("Cart", cart);
+            }
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         public IActionResult Clear()
@@ -100,7 +92,8 @@ namespace TotemPWA.Controllers
         public IActionResult GetCartSummary()
         {
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
-            return Json(new {
+            return Json(new
+            {
                 totalItems = cart.Sum(item => item.Quantity),
                 totalPrice = cart.Sum(item => item.Price * item.Quantity)
             });

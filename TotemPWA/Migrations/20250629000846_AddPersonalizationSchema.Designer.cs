@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TotemPWA.Data;
 
@@ -10,9 +11,11 @@ using TotemPWA.Data;
 namespace TotemPWA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250629000846_AddPersonalizationSchema")]
+    partial class AddPersonalizationSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -147,8 +150,8 @@ namespace TotemPWA.Migrations
                     b.Property<int>("IngredientId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("OrderItemId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("OrderItemId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -242,9 +245,9 @@ namespace TotemPWA.Migrations
 
             modelBuilder.Entity("TotemPWA.Models.OrderItem", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("INTEGER");
@@ -451,8 +454,7 @@ namespace TotemPWA.Migrations
 
                     b.HasOne("TotemPWA.Models.Cupom", "Cupom")
                         .WithMany("Orders")
-                        .HasForeignKey("CupomId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("CupomId");
 
                     b.Navigation("Client");
 
@@ -470,7 +472,7 @@ namespace TotemPWA.Migrations
                     b.HasOne("TotemPWA.Models.Product", "Product")
                         .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
