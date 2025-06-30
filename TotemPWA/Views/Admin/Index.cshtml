@@ -33,9 +33,6 @@
                 <a asp-controller="Promotion" asp-action="List">
                     <li><i class="fa-solid fa-tags"></i> Promoções</li>
                 </a>
-                 <a asp-controller="Employee" asp-action="List">
-                    <li><i class="fa-solid fa-users-gear"></i> Funcionários</li>
-                </a>
             </ul>
       </nav>
     </aside>
@@ -72,9 +69,9 @@
           </div>
 
           <div class="card blue">
-            <h3><i class="fa-solid fa-user-tie"></i> Promoções</h3>
+            <h3><i class="fa-solid fa-percent"></i> Promoções</h3>
             <p>Gerencie as promoções dos produtos.</p>
-            <a href="@Url.Action("List", "Promotions")"><button class="btn-gradient">Adicionar Funcionário</button></a>
+            <a href="@Url.Action("List", "Promotion")"><button class="btn-gradient">Adicionar Promoção</button></a>
           </div>
         </div>
       </div>

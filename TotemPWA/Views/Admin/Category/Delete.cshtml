@@ -7,7 +7,105 @@
 <link rel="stylesheet" href="/css/site.css" />
 <link rel="stylesheet" href="/css/form.css" />
 <script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">   
 
+<style>
+    /* Estilos para o contêiner principal */
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff; /* Fundo branco */
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+        text-align: center; /* Centraliza o conteúdo geral do container */
+    }
+
+    /* Estilos para o título da página */
+    .form-container h2 {
+        color: #f66302; /* Cor do título */
+        margin-bottom: 25px;
+        font-size: 2em;
+        font-weight: 600;
+    }
+
+    /* Estilos para a linha divisória */
+    .form-container hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+        margin-bottom: 30px;
+    }
+
+    /* Estilos para a pergunta de confirmação */
+    .form-container h3 {
+        color: #333333;
+        margin-bottom: 25px;
+        font-size: 1.4em;
+        font-weight: 500;
+    }
+
+    /* Estilos para os parágrafos de detalhes da categoria */
+    .form-container p {
+        font-size: 1.1em;
+        color: #555555;
+        margin-bottom: 10px;
+    }
+
+    /* Estilos para o texto de erro */
+    .text-danger {
+        color: #a50000; /* Cor de erro */
+        font-size: 1.1em;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Estilos para o grupo de botões */
+    .button-group {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Estilos para os botões */
+    .btn {
+        width: 170px; /* Largura fixa para os botões */
+        height: 48px; /* Altura fixa para os botões */
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Apenas transição de cor */
+        text-decoration: none;
+        display: flex;
+        align-items: center; /* Centraliza verticalmente o texto */
+        justify-content: center; /* Centraliza horizontalmente o texto */
+        font-weight: 500;
+        box-sizing: border-box; /* Inclui padding e borda na largura/altura */
+    }
+
+    /* Estilo para o botão de exclusão (Perigo) */
+    .btn-danger {
+        background-color: #a50000; /* Cor do botão Excluir: #a50000 */
+        color: #ffffff; /* Cor do texto branca para contraste */
+    }
+
+    .btn-danger:hover {
+        background-color: #8c0000; /* Vermelho mais escuro ao passar o mouse */
+    }
+
+    /* Estilo para o botão secundário (Cancelar) */
+    .btn-secondary {
+        background-color: #f66302; /* Cor do botão Cancelar: #f66302 */
+        color: #ffffff; /* Cor do texto branca para contraste */
+    }
+
+    .btn-secondary:hover {
+        background-color: #e05c00; /* Laranja mais escuro ao passar o mouse */
+    }
+</style>
 <div class="form-container">
     <h2>Confirmação de Exclusão</h2>
     <hr />

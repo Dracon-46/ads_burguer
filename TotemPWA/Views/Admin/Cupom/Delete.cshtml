@@ -4,8 +4,145 @@
     ViewData["Title"] = "Excluir Cupom";
 }
 
-<link rel="stylesheet" href="/css/excluirCrud.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+<style>
+    /* A importação da fonte Poppins já está no HTML fornecido */
 
+    /* Estilos para o contêiner principal da página */
+    .container {
+        max-width: 700px; /* Um pouco maior para acomodar os detalhes do cupom */
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif;
+        text-align: center; /* Centraliza o texto principal */
+    }
+
+    /* Estilos para o título principal */
+    .container h1 {
+        color: #f66302; /* Cor do título */
+        margin-bottom: 20px;
+        font-size: 2.5em;
+        font-weight: 700;
+    }
+
+    /* Estilos para a pergunta de confirmação */
+    .container h3 {
+        color: #333333;
+        margin-bottom: 30px;
+        font-size: 1.4em;
+        font-weight: 500;
+    }
+
+    /* Estilos para o bloco de detalhes do cupom */
+    .product-details {
+        text-align: left; /* Alinha os detalhes à esquerda dentro do bloco */
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #e0e0e0; /* Uma borda suave para o bloco de detalhes */
+        border-radius: 8px;
+        background-color: #fdfdfd; /* Fundo ligeiramente diferente para o bloco */
+    }
+
+    /* Estilos para o subtítulo "Cupom" dentro dos detalhes */
+    .product-details h4 {
+        font-family: 'Poppins', sans-serif;
+        text-align: left; /* Alinha o subtítulo "Cupom" à esquerda */
+        color: #555555;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+
+    /* Estilos para a linha divisória dentro dos detalhes */
+    .product-details hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
+        margin-bottom: 20px;
+        margin-left: 0; /* Garante que a linha comece na esquerda */
+        max-width: none; /* Remove a limitação de largura se houver */
+    }
+
+    /* Estilos para a lista de descrição (dl, dt, dd) */
+    .dl-horizontal { /* Se a classe dl-horizontal for aplicada */
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .dl-horizontal dt,
+    .dl-horizontal dd {
+        margin-bottom: 10px;
+    }
+
+    .col-sm-3 { /* Estilo para os termos (labels) */
+        flex-basis: 25%; /* 3 colunas de 12 */
+        max-width: 25%;
+        font-weight: 600; /* Negrito para os termos */
+        color: #333333;
+        padding-right: 15px; /* Espaçamento entre termo e descrição */
+        text-align: right; /* Alinha o termo à direita */
+    }
+
+    .col-sm-9 { /* Estilo para as descrições (valores) */
+        flex-basis: 75%; /* 9 colunas de 12 */
+        max-width: 75%;
+        color: #555555;
+        text-align: left; /* Alinha a descrição à esquerda */
+    }
+    
+    /* Quando não há classes col-sm, para um comportamento mais básico */
+    dl.row dt {
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 5px;
+    }
+    dl.row dd {
+        color: #555555;
+        margin-bottom: 15px;
+    }
+
+    /* Estilos para os botões */
+    .btn {
+        width: 170px; /* Largura fixa para os botões */
+        height: 48px; /* Altura fixa para os botões */
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Apenas transição de cor */
+        text-decoration: none;
+        display: inline-flex; /* Usa inline-flex para os botões ficarem lado a lado */
+        align-items: center; /* Centraliza verticalmente o texto */
+        justify-content: center; /* Centraliza horizontalmente o texto */
+        font-weight: 500;
+        box-sizing: border-box; /* Inclui padding e borda na largura/altura */
+        font-family: 'Poppins', sans-serif;
+        margin: 0 10px; /* Espaçamento entre os botões */
+    }
+
+    /* Estilo para o botão de exclusão (Perigo) */
+    .btn-danger {
+        background-color: #a50000; /* Cor do botão Excluir: #a50000 */
+        color: #ffffff; /* Cor do texto branca para contraste */
+    }
+
+    .btn-danger:hover {
+        background-color: #8c0000; /* Vermelho mais escuro ao passar o mouse */
+    }
+
+    /* Estilo para o botão secundário (Cancelar) */
+    .btn-secondary {
+        background-color: #f66302; /* Cor do botão Cancelar: #f66302 */
+        color: #ffffff; /* Cor do texto branca para contraste */
+    }
+
+    .btn-secondary:hover {
+        background-color: #e05c00; /* Laranja mais escuro ao passar o mouse */
+    }
+</style>
 <div class="container">
     <h1>Excluir Cupom</h1>
     <h3>Tem certeza de que deseja excluir este cupom?</h3>
@@ -35,7 +172,7 @@
 
         <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
             <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Excluir" class="btn btn-danger" /> |
+            <input type="submit" value="Excluir" class="btn btn-danger" /> 
             <a asp-action="List" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>    

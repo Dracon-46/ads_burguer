@@ -4,8 +4,216 @@
     ViewData["Title"] = "Criar Promoção";
 }
 
-<link rel="stylesheet" href="/css/form_crud.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+<style>
+    /* A importação da fonte Poppins já está no HTML fornecido */
 
+    /* Estilos para o título principal da página */
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        color: #f66302; /* Cor do título */
+        margin-top: 50px;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+        font-weight: 700;
+    }
+
+    /* Estilos para o subtítulo "Promoção" (H4) */
+    h4 {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        color: #555555;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+
+    /* Estilos para a linha divisória */
+    hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+        margin-bottom: 30px;
+        max-width: 600px; /* Alinha com a largura do contêiner do formulário */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Contêiner para centralizar o formulário */
+    .row {
+        display: flex;
+        justify-content: center; /* Centraliza o conteúdo da linha */
+        margin-top: 30px;
+        margin-bottom: 50px; /* Adiciona margem inferior para espaçamento */
+    }
+
+    .col-md-4 { /* Usando col-md-4 como o container principal do formulário */
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 600px; /* Largura para o formulário de promoção */
+        padding: 30px; /* Espaçamento interno */
+        background-color: #ffffff; /* Fundo branco */
+        border-radius: 10px; /* Cantos arredondados */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        box-sizing: border-box; /* Inclui padding na largura */
+    }
+
+    /* Estilos para os grupos de formulário (rótulo + input) */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Estilos para os labels (rótulos) */
+    .form-group label,
+    .control-label { /* Adicionado control-label para compatibilidade */
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #555555;
+        font-size: 1.05em;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Estilos para os inputs de texto, número, textarea, select e file */
+    /* Estas regras são importantes para a Partial View _Form também */
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="date"], /* Adicionado type="date" para promoções */
+    .form-group input[type="datetime-local"], /* Adicionado type="datetime-local" */
+    .form-group textarea,
+    .form-group select,
+    .form-control { /* Adicionado form-control para compatibilidade */
+        width: calc(100% - 20px); /* Ocupa a largura total menos o padding */
+        padding: 12px 10px;
+        border: 1px solid #cccccc;
+        border-radius: 6px;
+        font-size: 1em;
+        color: #333333;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box; /* Garante que padding e borda não aumentem a largura */
+    }
+    
+    /* Estilo para SELECT com seta personalizada */
+    .form-group select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: #fff;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236c757d%22%20d%3D%22M287%2C197.9c-3.6%2C3.6-8.2%2C5.3-12.8%2C5.3s-9.2-1.8-12.8-5.3L146.2%2C88.8l-115.2%2C115c-3.6%2C3.6-8.2%2C5.3-12.8%2C5.3s-9.2-1.8-12.8-5.3c-7-7-7-18.4%2C0-25.4L133.4%2C60.4c7-7%2C18.4-7%2C25.4%2C0l128.2%2C128.2C294%2C179.6%2C294%2C190.9%2C287%2C197.9z%22%2F%3E%3C%2Fsvg%3E');
+        background-repeat: no-repeat;
+        background-position: right 10px top 50%;
+        background-size: 12px auto;
+        padding-right: 30px; /* Garante espaço para a seta */
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group input[type="number"]:focus,
+    .form-group input[type="date"]:focus,
+    .form-group input[type="datetime-local"]:focus,
+    .form-group textarea:focus,
+    .form-group select:focus,
+    .form-control:focus { /* Adicionado form-control para compatibilidade */
+        border-color: #d4f245;
+        box-shadow: 0 0 0 3px rgba(212, 242, 69, 0.3);
+        outline: none;
+    }
+
+    /* Estilo para o checkbox (se houver no _Form, como em Produto) */
+    .form-check {
+        display: flex; /* Para alinhar o input e o label */
+        align-items: center; /* Alinha verticalmente */
+        margin-bottom: 20px;
+    }
+
+    .form-check-input {
+        width: auto !important; /* Reseta a largura para o padrão do checkbox */
+        height: auto !important; /* Reseta a altura */
+        margin-right: 8px; /* Espaço entre o checkbox e o label */
+        border: 1px solid #cccccc; /* Borda padrão */
+        border-radius: 3px; /* Cantos levemente arredondados */
+        -webkit-appearance: checkbox; /* Garante o estilo padrão do sistema */
+        -moz-appearance: checkbox;
+        appearance: checkbox;
+        cursor: pointer;
+    }
+
+    .form-check-label {
+        margin-bottom: 0; /* Remove margem inferior para alinhamento */
+        font-weight: 500;
+        color: #555555;
+        font-family: 'Poppins', sans-serif;
+    }
+
+
+    /* Estilos para as mensagens de validação */
+    .text-danger {
+        color: #a50000; /* Cor de erro */
+        font-size: 0.9em;
+        margin-top: 5px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Estilos para o grupo de botões */
+    .form-group.mt-3 { /* Seleciona o form-group que contém os botões */
+        margin-top: 30px !important; /* Garante margem superior, pode ser .mt-3 */
+        display: flex;
+        justify-content: center; /* Centraliza os botões */
+        gap: 20px;
+        padding-top: 20px; /* Adiciona um padding superior para separar dos campos */
+        border-top: 1px solid #eee; /* Linha sutil acima dos botões */
+        align-items: center; /* Alinha verticalmente os botões */
+    }
+
+    /* Estilos para os botões */
+    .btn {
+        width: 170px; /* Largura fixa para os botões */
+        height: 48px; /* Altura fixa para os botões */
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Apenas transição de cor */
+        text-decoration: none;
+        display: flex; /* Garante que seja um flex container */
+        align-items: center; /* Centraliza verticalmente o conteúdo (texto) */
+        justify-content: center; /* Centraliza horizontalmente o conteúdo (texto) */
+        font-weight: 500;
+        box-sizing: border-box; /* Inclui padding e borda na largura/altura */
+        font-family: 'Poppins', sans-serif;
+        padding: 0; /* Remover qualquer padding padrão do link ou input */
+        margin: 0; /* Remover qualquer margem padrão do link ou input */
+        line-height: 1; /* Garantir que o line-height seja consistente */
+        vertical-align: middle; /* Ajuda a alinhar o elemento em si */
+    }
+
+    /* Estilo para o botão primário (Criar) */
+    .btn-success { /* Usando .btn-success para o botão "Criar" */
+        background-color: #d4f245; /* Cor principal (verde claro/amarelo) */
+        color: #333333; /* Cor do texto escura para contraste */
+    }
+
+    .btn-success:hover {
+        background-color: #c0de3a; /* Uma tonalidade ligeiramente mais escura ao passar o mouse */
+    }
+
+    /* Estilo para o botão secundário (Voltar para a Lista) */
+    .btn-secondary {
+        background-color: #f66302; /* Cor do botão Voltar */
+        color: #ffffff; /* Cor do texto branca para contraste */
+    }
+
+    .btn-secondary:hover {
+        background-color: #e05c00; /* Laranja mais escuro ao passar o mouse */
+    }
+
+    /* Estilo para links que também são botões, para garantir consistência visual */
+    a.btn {
+        text-decoration: none; 
+        text-align: center; 
+    }
+</style>
 <h1>Criar Promoção</h1>
 
 <h4>Promoção</h4>
