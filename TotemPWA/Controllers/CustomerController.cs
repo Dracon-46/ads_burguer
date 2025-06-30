@@ -1,13 +1,14 @@
+// Controllers/CustomerController.cs
 using Microsoft.AspNetCore.Mvc;
 using TotemPWA.Data;
 using TotemPWA.Models;
-using TotemPWA.Models.ViewModels; // Garanta que este using está presente
-using TotemPWA.ViewModels; // Garanta que este using está presente
+using TotemPWA.Models.ViewModels;
+using TotemPWA.ViewModels;
+using TotemPWA.Utilities; // Certifique-se de que SessionExtensions está aqui
 using Microsoft.EntityFrameworkCore;
-using TotemPWA.Utilities;
-using System; // Adicione este using para Guid
-using System.Linq; // Para FirstOrDefault
-using System.Collections.Generic; // Para List
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TotemPWA.Controllers
 {
