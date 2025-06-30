@@ -85,6 +85,7 @@ body { margin: 0; background-color: #e3e3e3; font-family: 'Poppins', sans-serif;
     height: 250px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.258); 
     margin: 10px 6px;
+     text-align: center; /* centraliza textos */
 }
 
 

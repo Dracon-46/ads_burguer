@@ -50,15 +50,13 @@
                 </div>
 
                 <div class="produto-lista">
-                    @foreach (var product in ViewBag.Products)
+                    @foreach (var product in ViewBag.Products) // <-- Correto: iterar sobre ViewBag.Products
                     {
                         <div class="btn-produto"
-                             onclick="location.href='@Url.Action("PersonalizarProdutos", "Customer", new { productId = product.id })'">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlk0v2LMXzPI2uVcV3KDSVqXWy55_5NeNKCQ&s" alt="@product.name">
-                            <span class="nome">@product.name</span>
+                             onclick="location.href='@Url.Action("Personalizar", "Home", new { productId = product.id })'"> 
+                            <img src="@(product.imageUrl ?? "/images/products/default_product.png")" alt="@product.name"> <span class="nome">@product.name</span>
                             <span class="valor">@product.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
-                            <p class="descricao">Descrição do produto</p>
-                        </div>
+                            <p class="descricao">@product.description</p> </div>
                     }
                 </div>
             </div>

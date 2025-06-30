@@ -213,7 +213,9 @@ namespace TotemPWA.Controllers
                     id = p.Id,
                     name = p.Name,
                     price = p.Price,
-                    image = p.Image
+                    image = p.Image,       // Mantém se você usa esta propriedade também (ex: para base64)
+                    imageUrl = p.ImageUrl,   // <-- ADICIONE ESTA LINHA
+                    description = p.Description // <-- ADICIONE ESTA LINHA
                 })
                 .ToListAsync<object>();
         }
