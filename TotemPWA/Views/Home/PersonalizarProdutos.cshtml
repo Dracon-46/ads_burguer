@@ -25,8 +25,6 @@
         <input type="hidden" name="ProdutoId" value="@Model.Produto.Id" />
         <input type="hidden" name="TipoProduto" value="@Model.TipoProduto" />
 
-        @* AQUI ESTÁ A CORREÇÃO: VERIFIQUE PELO NOME DA CATEGORIA PAI, OU PELA PRÓPRIA CATEGORIA **
-           Inclua as categorias que você quer que tenham essa seção de ingredientes. *@
         @if (tipo == "lanches" || tipo == "code burgers" || tipo == "dev dogs" || tipo == "natural bits" || tipo == "toasts do terminal" || tipo == "combos full stack")
         {
             <div class="card">
