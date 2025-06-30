@@ -35,10 +35,12 @@
         </dl>
 
         @* ESTA É A LINHA CORRIGIDA PARA O BOTÃO DE DELETAR FUNCIONAR: *@
-        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
             <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Excluir" class="btn btn-danger" /> |
-            <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+            <div class="form-actions">
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+                <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+            </div>
         </form>
     </div>    
 </div>

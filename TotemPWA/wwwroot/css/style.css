@@ -14,7 +14,6 @@
     .container .banner div:nth-child(2) { height: 60px; background-color: #FF6501; }
     .container .banner div:nth-child(3) { height: 50px; background-color: #C1D443; }
     .container .hamburguer { position: relative; height: 600px; top: 100px; background-image: url('/images/burger.png'); background-size: 560px; background-position: right; background-repeat: no-repeat; }
-    .container .hamburguer div { position: relative; top: -235px; left: 585px; background-image: url('/images/batatas.png'); background-size: 350px; background-repeat: no-repeat; background-position: right; height: 45%; width: 27%; }
     .container .btnStart { display: flex; justify-content: center; align-items: center; position: relative; top: 150px; height: auto; width: 100%; }
     .container .btn-inicial { background-color: #ff6700; color: white;  font-weight: bold; font-size: 16px; display: flex; align-items: center ; justify-content: center; text-decoration: none; padding: 12px 40px; border: none; border-radius: var(--border-radius); cursor: pointer; transition: 0.3s; width: 40%; margin: 0 auto;  }
     .container .btn-inicial:hover { background-color: #e55c00; }

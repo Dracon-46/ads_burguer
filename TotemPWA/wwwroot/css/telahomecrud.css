@@ -8,6 +8,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #f9f9f9;
   color: #333;
+  overflow-y: hidden;
 }
 
 .container {
@@ -16,7 +17,7 @@ body {
 }
 
 .sidebar {
-  width: 220px;
+  width: 260px;
   background: #fff;
   border-right: 1px solid #ddd;
   padding: 20px;
@@ -197,6 +198,8 @@ body {
   background: #e0f1ff;
   border: 1px solid #90caf9;
   color: #1565c0;
+  position: relative;
+  left: -310px;
 }
 
 .card.blue button {
@@ -216,8 +219,9 @@ body {
 .main-card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.253);
+  box-shadow: 8px 0 16px -8px rgba(0, 0, 0, 0.2);
   padding: 40px;
   max-width: 100%; 
+  margin-left: -40px;
 }
 

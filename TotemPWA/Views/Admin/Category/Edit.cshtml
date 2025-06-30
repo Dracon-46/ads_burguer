@@ -4,29 +4,29 @@
     ViewData["Title"] = "Editar Categoria";
 }
 
-<link rel="stylesheet" href="/css/site.css" />
-<link rel="stylesheet" href="/css/form.css" />
+<link rel="stylesheet" href="/css/form_crud.css">
 <script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
 
-<div class="form-container">
-    <h2>Editar Categoria</h2>
-    <hr />
-    <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
-        @* Sumário de validação para exibir erros gerais do modelo *@
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        
-        @* Inclui a partial view que contém os campos do formulário.
-           Passamos o 'Model' atual (CategoryViewModel) para ela. *@
-        <partial name="_Form" model="Model" />
+<h1>Editar Categoria</h1>
 
-        <div class="form-group button-group">
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-            <a asp-action="List" class="btn btn-secondary">Cancelar</a>
-        </div>
-        
-        @* Token de validação para segurança (CSRF) *@
-        @Html.AntiForgeryToken() 
-    </form>
+<h4>Categoria</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+            <partial name="_Form" model="Model" />
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-success">Salvar Alterações</button>
+                <a asp-action="List" class="btn btn-secondary">Cancelar</a>
+            </div>
+
+            @Html.AntiForgeryToken()
+        </form>
+    </div>
 </div>
 
 @section Scripts {

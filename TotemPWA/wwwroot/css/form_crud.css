@@ -9,6 +9,7 @@ h1 {
     color: #920000;
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 h4 {
@@ -49,7 +50,8 @@ h4 {
     font-size: 1rem;
 }
 
-.form-group input[type="submit"] {
+/* Altere esta regra */
+.form-group button[type="submit"] { /* AGORA APLICARÁ AO SEU BOTÃO */
     background-color: #C1D443;
     color: white;
     border: none;
@@ -58,12 +60,15 @@ h4 {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+    height: 42px;
 }
 
-.form-group input[type="submit"]:hover {
-    background-color: #a50000;
+/* E esta regra de hover */
+.form-group button[type="submit"]:hover { /* AGORA APLICARÁ AO SEU BOTÃO */
+    background-color: #97a346;
 }
 
+/* As demais regras para .form-group a (para o botão Cancelar) estão corretas */
 .form-group a {
     display: inline-block;
     margin-top: 10px;
@@ -73,12 +78,12 @@ h4 {
     border-radius: 8px;
     text-decoration: none;
     transition: background-color 0.3s;
+    height: 24px;
 }
 
 .form-group a:hover {
     background-color: #f66302;
 }
-
 .text-danger {
     margin-top: 10px;
     font-weight: bold

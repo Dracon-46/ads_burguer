@@ -5,91 +5,96 @@
 }
 
 <style>
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f7f7f7;
-        margin: 0;
-        padding: 0;
-    }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
 
-    h1 {
-        color: #920000;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+h1 {
+    color: #920000;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
 
-    h4 {
-        color: #333;
-        text-align: center;
-        font-size: 20px;
-    }
+h4 {
+    color: #333;
+    text-align: center;
+    font-size: 20px;
+}
 
-    .row {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
+.row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-    .col-md-4 {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 400px;
-    }
+.col-md-4 {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+.form-group {
+    margin-bottom: 15px;
+}
 
-    .form-group input[type="text"],
-    .form-group input[type="number"],
-    .form-group input[type="email"],
-    .form-group textarea,
-    .form-group select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        margin-top: 5px;
-        font-size: 1rem;
-    }
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="email"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    font-size: 1rem;
+}
 
-    .form-group input[type="submit"] {
-        background-color: #C1D443;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
+/* Altere esta regra */
+.form-group button[type="submit"] { /* AGORA APLICARÁ AO SEU BOTÃO */
+    background-color: #C1D443;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    height: 42px;
+}
 
-    .form-group input[type="submit"]:hover {
-        background-color: #a50000;
-    }
+/* E esta regra de hover */
+.form-group button[type="submit"]:hover { /* AGORA APLICARÁ AO SEU BOTÃO */
+    background-color: #97a346;
+}
 
-    .form-group a {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: #FF6501;
-        color: white;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
+/* As demais regras para .form-group a (para o botão Cancelar) estão corretas */
+.form-group a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #FF6501;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    height: 24px;
+}
 
-    .form-group a:hover {
-        background-color: #f66302;
-    }
-
-    .text-danger {
-        margin-top: 10px;
-        font-weight: bold;
-    }
+.form-group a:hover {
+    background-color: #f66302;
+}
+.text-danger {
+    margin-top: 10px;
+    font-weight: bold
+}
 </style>
 
 <h1>Editar Promoção</h1>
@@ -103,7 +108,7 @@
             <input type="hidden" asp-for="Id" />
             <partial name="_Form" model="Model" />
             <div class="form-group mt-3">
-                <input type="submit" value="Salvar" class="btn btn-success" />
+                <button type="submit" value="Salvar" class="btn btn-primary">Salvar</button>
                 <a asp-action="List" class="btn btn-secondary">Voltar para a Lista</a>
             </div>
         </form>

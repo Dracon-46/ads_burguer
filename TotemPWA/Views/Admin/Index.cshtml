@@ -27,14 +27,14 @@
                 <a asp-controller="Product" asp-action="List">
                     <li><i class="fa-solid fa-box-open"></i> Produtos</li>
                 </a>
+                <a asp-controller="Ingredient" asp-action="List">
+                    <li><i class="fa-solid fa-box-open"></i> Ingredientes</li>
+                </a>
                 <a asp-controller="Cupom" asp-action="List">
                     <li><i class="fa-solid fa-ticket"></i> Cupons</li>
                 </a>
                 <a asp-controller="Promotion" asp-action="List">
                     <li><i class="fa-solid fa-tags"></i> Promoções</li>
-                </a>
-                 <a asp-controller="Employee" asp-action="List">
-                    <li><i class="fa-solid fa-users-gear"></i> Funcionários</li>
                 </a>
             </ul>
       </nav>
@@ -50,31 +50,31 @@
           <div class="card red">
             <h3><i class="fa-solid fa-list"></i> Ver Cardápio</h3>
             <p>Gerencie os produtos disponíveis no cardápio.</p>
-            <a href="@Url.Action("List", "Product")"><button class="btn-gradient">Adicionar Produto</button></a>
+            <a href="@Url.Action("Create", "Product")"><button class="btn-gradient">Adicionar Produto</button></a>
           </div>
 
           <div class="card orange">
             <h3><i class="fa-solid fa-layer-group"></i> Ver Categorias</h3>
             <p>Gerencie as categorias de produtos.</p>
-            <a href="@Url.Action("List", "Category")"><button class="btn-gradient">Adicionar Categoria</button></a>
+            <a href="@Url.Action("Create", "Category")"><button class="btn-gradient">Adicionar Categoria</button></a>
           </div>
 
           <div class="card green">
             <h3><i class="fa-solid fa-carrot"></i> Ingredientes</h3>
             <p>Adicione e controle os ingredientes utilizados.</p>
-            <a href="@Url.Action("List", "Ingredient")"><button class="btn-gradient">Adicionar Ingrediente</button></a>
+            <a href="@Url.Action("Create", "Ingredient")"><button class="btn-gradient">Adicionar Ingrediente</button></a>
           </div>
 
           <div class="card purple">
             <h3><i class="fa-solid fa-ticket"></i> Cupons</h3>
             <p>Crie cupons de desconto para seus clientes.</p>
-            <a href="@Url.Action("List", "Coupon")"><button class="btn-gradient">Adicionar Cupom</button></a>
+            <a href="@Url.Action("Create", "Cupom")"><button class="btn-gradient">Adicionar Cupom</button></a>
           </div>
 
           <div class="card blue">
-            <h3><i class="fa-solid fa-user-tie"></i> Promoções</h3>
+            <h3><i class="fa-solid fa-percent"></i> Promoções</h3>
             <p>Gerencie as promoções dos produtos.</p>
-            <a href="@Url.Action("List", "Promotions")"><button class="btn-gradient">Adicionar Funcionário</button></a>
+            <a href="@Url.Action("Create", "Promotion")"><button class="btn-gradient">Adicionar Promoção</button></a>
           </div>
         </div>
       </div>
