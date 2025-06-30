@@ -6,8 +6,150 @@
 
 <link rel="stylesheet" href="/css/site.css" />
 <link rel="stylesheet" href="/css/form.css" />
+
 <script src="https://kit.fontawesome.com/ed744b56ed.js" crossorigin="anonymous"></script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">   
+<style>
+
+
+    /* Estilos para o contêiner principal do formulário */
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff; /* Fundo branco */
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+    }
+
+    /* Estilos para o título do formulário */
+    .form-container h2 {
+        text-align: center;
+        color: #f66302; /* Cor do título */
+        margin-bottom: 25px;
+        font-size: 2em;
+        font-weight: 600;
+    }
+
+    /* Estilos para a linha divisória */
+    .form-container hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+        margin-bottom: 30px;
+    }
+
+    /* Estilos para os grupos de formulário (rótulo + input) */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Estilos para os labels (rótulos) */
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #555555;
+        font-size: 1.05em;
+    }
+
+    /* Estilos para os inputs de texto, áreas de texto e SELECT */
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group textarea,
+    .form-group select {
+        width: calc(100% - 20px);
+        padding: 12px 10px;
+        border: 1px solid #cccccc;
+        border-radius: 6px;
+        font-size: 1em;
+        color: #333333;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: #fff;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236c757d%22%20d%3D%22M287%2C197.9c-3.6%2C3.6-8.2%2C5.3-12.8%2C5.3s-9.2-1.8-12.8-5.3L146.2%2C88.8l-115.2%2C115c-3.6%2C3.6-8.2%2C5.3-12.8%2C5.3s-9.2-1.8-12.8-5.3c-7-7-7-18.4%2C0-25.4L133.4%2C60.4c7-7%2C18.4-7%2C25.4%2C0l128.2%2C128.2C294%2C179.6%2C294%2C190.9%2C287%2C197.9z%22%2F%3E%3C%2Fsvg%3E');
+        background-repeat: no-repeat;
+        background-position: right 10px top 50%;
+        background-size: 12px auto;
+        padding-right: 30px;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group input[type="email"]:focus,
+    .form-group input[type="password"]:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        border-color: #d4f245;
+        box-shadow: 0 0 0 3px rgba(212, 242, 69, 0.3);
+        outline: none;
+    }
+
+    /* Estilos para as mensagens de validação */
+    .text-danger {
+        color: #a50000;
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    /* Estilos para o grupo de botões */
+    .button-group {
+        text-align: center;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Estilos para os botões */
+    .btn {
+        /* Largura e altura fixas para garantir o mesmo tamanho */
+        width: 150px; /* Definindo uma largura fixa */
+        height: 48px; /* Mantendo a altura fixa */
+
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Apenas transição de cor */
+        text-decoration: none;
+        
+        /* Flexbox para centralizar o conteúdo do botão (texto) */
+        display: flex;
+        align-items: center; /* Centraliza verticalmente */
+        justify-content: center; /* Centraliza horizontalmente */
+        
+        font-weight: 500;
+        box-sizing: border-box; /* Garante que padding e borda não aumentem o tamanho final */
+    }
+
+    /* Estilo para o botão primário (Salvar) */
+    .btn-primary {
+        background-color: #d4f245;
+        color: #333333;
+    }
+
+    .btn-primary:hover {
+        background-color: #c0de3a;
+    }
+
+    /* Estilo para o botão secundário (Voltar) */
+    .btn-secondary {
+        background-color: #f66302;
+        color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e05c00;
+    }
+</style>  
 <div class="form-container">
     <h2>Criar Nova Categoria</h2>
     <hr />
