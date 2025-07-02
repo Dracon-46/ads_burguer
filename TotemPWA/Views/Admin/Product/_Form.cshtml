@@ -90,3 +90,25 @@
         }
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Seleciona todos os checkboxes de ingredientes
+        const checkboxes = document.querySelectorAll(".ingredient-checkbox");
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener("change", function () {
+                const container = cb.closest(".ingredient-item");
+                const options = container.querySelector(".ingredient-options");
+
+                if (cb.checked) {
+                    options.style.display = "";
+                } else {
+                    options.style.display = "none";
+                    const inputQtd = options.querySelector("input[type='number']");
+                    if (inputQtd) inputQtd.value = ""; // limpa quantidade se desmarcar
+                }
+            });
+        });
+    });
+</script>
