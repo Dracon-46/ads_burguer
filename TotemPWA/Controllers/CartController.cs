@@ -1,10 +1,12 @@
-// Controllers/CartController.cs
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore; // Adicionar para usar .Include
 using TotemPWA.Data;
 using TotemPWA.Utilities;
 using TotemPWA.Models.ViewModels;
 using System.Linq;
-using System; // Adicione este using para Guid
+using System.Collections.Generic;
+using System;
+using TotemPWA.Models; // Adicionar para Product e Additional
 
 namespace TotemPWA.Controllers
 {
@@ -18,16 +20,99 @@ namespace TotemPWA.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public IActionResult Index()
+               [HttpGet]
+        public async Task<IActionResult> Index() // Tornar a ação assíncrona
         {
-            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
+            // Recupera o carrinho da sessão. Se não existir, cria uma nova lista vazia.
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+
+            // Lista para armazenar itens que precisam ser removidos se o produto base não for encontrado
+            var itemsToRemove = new List<CartItemViewModel>();
+
+            // Recalcular o preço e o resumo para cada item no carrinho
+            foreach (var item in cart)
+            {
+                // Inclui as propriedades necessárias para o cálculo do preço e resumo
+                var product = await _context.Products
+                                    .Include(p => p.Additionals!) // Inclui os 'Additionals' do produto
+                                        .ThenInclude(pa => pa.Ingredient) // Em seguida, inclui o 'Ingredient' de cada 'Additional'
+                                    .FirstOrDefaultAsync(p => p.Id == item.ProductId);
+
+                if (product == null)
+                {
+                    // Se o produto base não for encontrado no banco de dados, marca para remoção
+                    itemsToRemove.Add(item);
+                    continue; // Pula para o próximo item do carrinho
+                }
+
+                // Inicia o preço recalculado com o preço base do produto
+                decimal recalculatedPrice = product.Price;
+                var tempPersonalizationSummary = new List<string>();
+
+                foreach (var entry in item.ManipulatedIngredientsWithQuantity)
+                {
+                    var ingredientId = entry.Key;
+                    var finalQuantity = entry.Value;
+
+                    // Tenta encontrar o 'Additional' correspondente no produto carregado.
+                    // Isso é crucial para acessar as propriedades IsDefault e o preço do Ingredient.
+                    var productAdditional = product.Additionals?.FirstOrDefault(a => a.IngredientId == ingredientId);
+
+                    // Verifica se o ingrediente existe no produto ou se foi um erro de dado.
+                    if (productAdditional == null || productAdditional.Ingredient == null)
+                    {
+                        // Se o ingrediente não faz parte do produto ou não tem dados, ignora ou loga.
+                        if (finalQuantity > 0)
+                        {
+                            tempPersonalizationSummary.Add($"Erro: Ingrediente ID {ingredientId} inválido");
+                        }
+                        continue;
+                    }
+
+                    if (productAdditional.IsDefault)
+                    {
+                        // Adiciona ao resumo se a quantidade for > 0
+                        if (finalQuantity > 0)
+                        {
+                            tempPersonalizationSummary.Add($"{finalQuantity}x {productAdditional.Ingredient.Name}");
+                        } else {
+                            // Se a quantidade final for 0 para um ingrediente padrão, significa que ele foi removido.
+                            tempPersonalizationSummary.Add($"sem {productAdditional.Ingredient.Name}");
+                        }
+
+                        // Se a quantidade final é maior que 1, cobre as unidades adicionais
+                        if (finalQuantity > 1)
+                        {
+                            recalculatedPrice += productAdditional.Ingredient.Price * (finalQuantity - 1);
+                        }
+                    }
+                    else // Se o ingrediente NÃO é padrão (é um "extra" adicionado pelo usuário)
+                    {
+                        // Todas as unidades são cobradas.
+                        if (finalQuantity > 0)
+                        {
+                            recalculatedPrice += productAdditional.Ingredient.Price * finalQuantity;
+                            tempPersonalizationSummary.Add($"{finalQuantity}x {productAdditional.Ingredient.Name}");
+                        }
+                        // Se finalQuantity for 0 para um não-padrão, ele simplesmente não é adicionado ao preço nem ao resumo.
+                    }
+                }
+                
+                // Atualiza o preço e o resumo do item no carrinho
+                item.Price = recalculatedPrice;
+                item.PersonalizationSummary = tempPersonalizationSummary.Any() ?
+                                              "(" + string.Join(", ", tempPersonalizationSummary) + ")" : "";
+            }
+
+            // Remove quaisquer itens de carrinho para os quais o produto base não foi encontrado
+            cart.RemoveAll(item => itemsToRemove.Contains(item));
+
+            // Salva o carrinho atualizado de volta na sessão
+            HttpContext.Session.SetObject("Cart", cart);
+
             return View("Cart", cart);
         }
 
-        // MODIFICADO: AddItem agora recebe um GUID para aumentar a quantidade de um item ESPECÍFICO
-        // IMPORTANTE: Para ADICIONAR UM NOVO ITEM PERSONALIZADO, use a ação SalvarPersonalizacao do HomeController.
-        // Esta ação é para aumentar a quantidade de um item JÁ EXISTENTE E PERSONALIZADO NO CARRINHO.
         [HttpPost]
         public IActionResult AddItem(Guid cartItemId) // Recebe o GUID agora
         {

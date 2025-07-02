@@ -124,7 +124,6 @@ namespace TotemPWA.Data
                                 IsDefault = additionalSeed.IsDefault,
                                 CanBeRemoved = additionalSeed.CanBeRemoved,
                                 CanBeAdded = additionalSeed.CanBeAdded,
-                                Price = additionalSeed.Price // Preço do adicional (se tiver)
                             });
                         }
                         else

@@ -8,12 +8,12 @@ namespace TotemPWA.Models.ViewModels
         public string Image { get; set; } = "";
         public int Quantity { get; set; }
 
-        // NOVAS PROPRIEDADES para personalização
         public Guid CartItemId { get; set; } // Um ID único para esta *instância* do item no carrinho
 
-        public string? SelectedSize { get; set; } // Tamanho selecionado (para bebidas/acompanhamentos)
-        public List<int> AddedIngredientIds { get; set; } = new List<int>(); // IDs dos ingredientes adicionados
-        public List<int> RemovedIngredientIds { get; set; } = new List<int>(); // IDs dos ingredientes removidos
+        // Dicionário para armazenar a quantidade de cada ingrediente manipulado nesta personalização
+        // Chave: IngredientId, Valor: Quantidade final do ingrediente
+        public Dictionary<int, int> ManipulatedIngredientsWithQuantity { get; set; } = new Dictionary<int, int>();
+
         public string? PersonalizationSummary { get; set; } // Resumo amigável da personalização
     }
 }

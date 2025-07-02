@@ -51,67 +51,67 @@ namespace TotemPWA.Controllers
             return View();
         }
 
-    public IActionResult Cupom(decimal totalPedido, int totalItens)
-    {
-        ViewBag.TotalPedido = totalPedido;
-        ViewBag.TotalItens = totalItens;
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> ValidarCupom([FromBody] CupomValidationRequest request)
-    {
-        _logger.LogInformation($"ValidarCupom: Requisição recebida para o cupom '{request.CodigoCupom}'.");
-
-        if (string.IsNullOrWhiteSpace(request.CodigoCupom))
+        public IActionResult Cupom(decimal totalPedido, int totalItens)
         {
-            _logger.LogWarning("ValidarCupom: Código do cupom não pode ser vazio.");
-            return Json(new { isValid = false, message = "Código do cupom não pode ser vazio." });
+            ViewBag.TotalPedido = totalPedido;
+            ViewBag.TotalItens = totalItens;
+            return View();
         }
 
-        var cupom = await _context.Cupons
-                                .FirstOrDefaultAsync(c => c.Code.ToUpper() == request.CodigoCupom.ToUpper());
-
-        if (cupom == null)
+        [HttpPost]
+        public async Task<IActionResult> ValidarCupom([FromBody] CupomValidationRequest request)
         {
-            _logger.LogWarning($"ValidarCupom: Cupom com código '{request.CodigoCupom}' NÃO encontrado no banco de dados.");
-            return Json(new { isValid = false, message = "Cupom não encontrado." });
-        }
-        else
-        {
-            // Log do valor exato que veio do banco de dados
-            _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' encontrado. ID: {cupom.Id}, Valor LIDO DO DB: {cupom.Value}, Tipo: {cupom.Type}.");
+            _logger.LogInformation($"ValidarCupom: Requisição recebida para o cupom '{request.CodigoCupom}'.");
 
-            decimal calculatedDesconto;
-            string valorParaExibicao = ""; // Variável para o texto de exibição no frontend
-
-            // --- LÓGICA DE CONVERSÃO E FORMATAÇÃO PARA EXIBIÇÃO ---
-            if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrWhiteSpace(request.CodigoCupom))
             {
-                // Se o DB já armazena 0.5 para 50%, usamos esse valor diretamente para o cálculo.
-                calculatedDesconto = cupom.Value; 
-                // Para exibição, convertemos 0.5 para "50%"
-                valorParaExibicao = (cupom.Value * 100).ToString("N0") + "%"; 
-                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
+                _logger.LogWarning("ValidarCupom: Código do cupom não pode ser vazio.");
+                return Json(new { isValid = false, message = "Código do cupom não pode ser vazio." });
             }
-            else // Para cupons fixos (ex: R$ 10,00)
+
+            var cupom = await _context.Cupons
+                                    .FirstOrDefaultAsync(c => c.Code.ToUpper() == request.CodigoCupom.ToUpper());
+
+            if (cupom == null)
             {
-                calculatedDesconto = cupom.Value;
-                // Formata para moeda local (ex: R$ 10,00)
-                valorParaExibicao = cupom.Value.ToString("C2", new System.Globalization.CultureInfo("pt-BR")); 
-                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é do tipo '{cupom.Type}'. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
+                _logger.LogWarning($"ValidarCupom: Cupom com código '{request.CodigoCupom}' NÃO encontrado no banco de dados.");
+                return Json(new { isValid = false, message = "Cupom não encontrado." });
             }
-            // --- FIM DA LÓGICA DE CONVERSÃO E FORMATAÇÃO ---
+            else
+            {
+                // Log do valor exato que veio do banco de dados
+                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' encontrado. ID: {cupom.Id}, Valor LIDO DO DB: {cupom.Value}, Tipo: {cupom.Type}.");
 
-            // Retorna o 'calculatedDesconto' e 'valorParaExibicao' para o JavaScript
-            return Json(new { isValid = true, message = "Cupom válido!", desconto = calculatedDesconto, tipoDesconto = cupom.Type, valorParaExibicao = valorParaExibicao });
+                decimal calculatedDesconto;
+                string valorParaExibicao = ""; // Variável para o texto de exibição no frontend
+
+                // --- LÓGICA DE CONVERSÃO E FORMATAÇÃO PARA EXIBIÇÃO ---
+                if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Se o DB já armazena 0.5 para 50%, usamos esse valor diretamente para o cálculo.
+                    calculatedDesconto = cupom.Value; 
+                    // Para exibição, convertemos 0.5 para "50%"
+                    valorParaExibicao = (cupom.Value * 100).ToString("N0") + "%"; 
+                    _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
+                }
+                else // Para cupons fixos (ex: R$ 10,00)
+                {
+                    calculatedDesconto = cupom.Value;
+                    // Formata para moeda local (ex: R$ 10,00)
+                    valorParaExibicao = cupom.Value.ToString("C2", new System.Globalization.CultureInfo("pt-BR")); 
+                    _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é do tipo '{cupom.Type}'. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
+                }
+                // --- FIM DA LÓGICA DE CONVERSÃO E FORMATAÇÃO ---
+
+                // Retorna o 'calculatedDesconto' e 'valorParaExibicao' para o JavaScript
+                return Json(new { isValid = true, message = "Cupom válido!", desconto = calculatedDesconto, tipoDesconto = cupom.Type, valorParaExibicao = valorParaExibicao });
+            }
         }
-    }
 
-    public class CupomValidationRequest
-    {
-        public string CodigoCupom { get; set; }
-    }
+        public class CupomValidationRequest
+        {
+            public string CodigoCupom { get; set; }
+        }
 
         public IActionResult TelaFinal()
         {
@@ -123,169 +123,142 @@ namespace TotemPWA.Controllers
             return View();
         }
 
-        public IActionResult TelaPersoCombo()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-    [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
-    public async Task<IActionResult> TelaProduto(string categorySlug, string subcategorySlug = null)
-    {
-        // 1. Encontrar a categoria ativa usando o SLUG
-        var rootCategoriesRaw = await _context.Categories
-            .Where(c => c.ParentCategoryId == null)
-            .ToListAsync();
-
-            Category activeCategory;
-
-        if (!string.IsNullOrEmpty(categorySlug))
+        [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
+        public async Task<IActionResult> TelaProduto(string categorySlug, string subcategorySlug = null)
         {
-            // Se um slug foi passado na URL, encontre a categoria correspondente
-            activeCategory = rootCategoriesRaw.FirstOrDefault(c => c.Slug == categorySlug);
+            // 1. Encontrar a categoria ativa usando o SLUG
+            var rootCategoriesRaw = await _context.Categories
+                .Where(c => c.ParentCategoryId == null)
+                .ToListAsync();
+
+                Category activeCategory;
+
+            if (!string.IsNullOrEmpty(categorySlug))
+            {
+                // Se um slug foi passado na URL, encontre a categoria correspondente
+                activeCategory = rootCategoriesRaw.FirstOrDefault(c => c.Slug == categorySlug);
+            }
+            else
+            {
+                // Se nenhum slug foi passado, pegue a primeira categoria como padrão
+                activeCategory = rootCategoriesRaw.FirstOrDefault();
+            }
+            
+            // Se nenhuma categoria for encontrada, pode ser bom tratar o erro (ex: return NotFound();)
+            if (activeCategory == null) return NotFound("Categoria não encontrada.");
+            
+            // Pega o ID da categoria ativa para usar nas próximas consultas
+            var activeCategoryId = activeCategory.Id;
+
+                var rootCategories = rootCategoriesRaw
+                    .Select(c => new
+                    {
+                        id = c.Id,
+                        name = c.Name,
+                        slug = c.Slug,
+                        active = c.Id == activeCategoryId
+                    })
+                    .ToList();
+
+            // 2. Encontrar a subcategoria ativa usando o SLUG
+            var subcategoriesRaw = await _context.Categories
+                .Where(c => c.ParentCategoryId == activeCategoryId)
+                .ToListAsync();
+
+                Category activeSubcategory;
+
+            if (!string.IsNullOrEmpty(subcategorySlug))
+            {
+                // Se um slug de subcategoria foi passado, encontre-o
+                activeSubcategory = subcategoriesRaw.FirstOrDefault(s => s.Slug == subcategorySlug);
+            }
+            else
+            {
+                // Senão, pegue a primeira subcategoria como padrão
+                activeSubcategory = subcategoriesRaw.FirstOrDefault();
+            }
+
+            // O ID da subcategoria ativa (pode ser nulo se não houver subcategorias)
+            var activeSubcategoryId = activeSubcategory?.Id;
+
+                var subcategories = subcategoriesRaw
+                    .Select(c => new
+                    {
+                        id = c.Id,
+                        name = c.Name,
+                        slug = c.Slug,
+                        active = c.Id == activeSubcategoryId
+                    })
+                    .ToList();
+
+            // 3. Buscar produtos com base no ID da subcategoria ativa
+            var products = new List<object>();
+            if (activeSubcategoryId != null)
+            {
+                products = await _context.Products
+                    .Where(p => p.CategoryId == activeSubcategoryId)
+                    .Select(p => new
+                    {
+                        id = p.Id,
+                        name = p.Name,
+                        price = p.Price,
+                        image = p.Image,       // Mantém se você usa esta propriedade também (ex: para base64)
+                        imageUrl = p.ImageUrl,   // <-- ADICIONE ESTA LINHA
+                        description = p.Description // <-- ADICIONE ESTA LINHA
+                    })
+                    .ToListAsync<object>();
+            }
+
+            // Obter o carrinho da sessão
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+
+            // Passar os dados para a ViewBag
+            ViewBag.CategorySlug = activeCategory.Slug;
+            ViewBag.Categories = rootCategories;
+            ViewBag.SubCategories = subcategories;
+            ViewBag.Products = products;
+
+            // Passar o carrinho como modelo para a view
+            return View(cart);
         }
-        else
-        {
-            // Se nenhum slug foi passado, pegue a primeira categoria como padrão
-            activeCategory = rootCategoriesRaw.FirstOrDefault();
-        }
-        
-        // Se nenhuma categoria for encontrada, pode ser bom tratar o erro (ex: return NotFound();)
-        if (activeCategory == null) return NotFound("Categoria não encontrada.");
-        
-        // Pega o ID da categoria ativa para usar nas próximas consultas
-        var activeCategoryId = activeCategory.Id;
 
-            var rootCategories = rootCategoriesRaw
-                .Select(c => new
-                {
-                    id = c.Id,
-                    name = c.Name,
-                    slug = c.Slug,
-                    active = c.Id == activeCategoryId
-                })
-                .ToList();
-
-        // 2. Encontrar a subcategoria ativa usando o SLUG
-        var subcategoriesRaw = await _context.Categories
-            .Where(c => c.ParentCategoryId == activeCategoryId)
-            .ToListAsync();
-
-            Category activeSubcategory;
-
-        if (!string.IsNullOrEmpty(subcategorySlug))
-        {
-            // Se um slug de subcategoria foi passado, encontre-o
-            activeSubcategory = subcategoriesRaw.FirstOrDefault(s => s.Slug == subcategorySlug);
-        }
-        else
-        {
-            // Senão, pegue a primeira subcategoria como padrão
-            activeSubcategory = subcategoriesRaw.FirstOrDefault();
-        }
-
-        // O ID da subcategoria ativa (pode ser nulo se não houver subcategorias)
-        var activeSubcategoryId = activeSubcategory?.Id;
-
-            var subcategories = subcategoriesRaw
-                .Select(c => new
-                {
-                    id = c.Id,
-                    name = c.Name,
-                    slug = c.Slug,
-                    active = c.Id == activeSubcategoryId
-                })
-                .ToList();
-
-        // 3. Buscar produtos com base no ID da subcategoria ativa
-        var products = new List<object>();
-        if (activeSubcategoryId != null)
-        {
-            products = await _context.Products
-                .Where(p => p.CategoryId == activeSubcategoryId)
-                .Select(p => new
-                {
-                    id = p.Id,
-                    name = p.Name,
-                    price = p.Price,
-                    image = p.Image,       // Mantém se você usa esta propriedade também (ex: para base64)
-                    imageUrl = p.ImageUrl,   // <-- ADICIONE ESTA LINHA
-                    description = p.Description // <-- ADICIONE ESTA LINHA
-                })
-                .ToListAsync<object>();
-        }
-
-        // Obter o carrinho da sessão
-        var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
-
-        // Passar os dados para a ViewBag
-        ViewBag.CategorySlug = activeCategory.Slug;
-        ViewBag.Categories = rootCategories;
-        ViewBag.SubCategories = subcategories;
-        ViewBag.Products = products;
-
-        // Passar o carrinho como modelo para a view
-        return View(cart);
-    }
-
-        // NOVO: Ação Personalizar (GET) para carregar os dados para a view
         [HttpGet]
         public async Task<IActionResult> Personalizar(int productId, Guid? cartItemId) // cartItemId é opcional para edição
         {
             var product = await _context.Products
-                                .Include(p => p.Category)
-                                .Include(p => p.Additionals!) // Carrega os Additionals associados ao produto
-                                    .ThenInclude(pa => pa.Ingredient) // E os Ingredients dentro dos Additionals
+                                .Include(p => p.Additionals!) // Inclua todos os Additionals
+                                    .ThenInclude(pa => pa.Ingredient) // E os Ingredientes relacionados
                                 .FirstOrDefaultAsync(p => p.Id == productId);
 
             if (product == null) return NotFound();
 
-            // Preenche o ViewModel de Personalização
             var viewModel = new PersonalizarProdutoViewModel
             {
                 Produto = product,
-                TipoProduto = product.Category?.Name ?? "Outro", // Garante que TipoProduto não seja nulo
-                CartItemId = cartItemId ?? Guid.Empty // Passa o GUID, ou um GUID vazio se for um novo item
+                CartItemId = cartItemId ?? Guid.Empty,
+                ProdutoAdditionals = product.Additionals // Passa todos os additionals do produto para a view
             };
 
-            // Popula IngredientesDisponiveis (todos os que podem ser adicionados)
-            viewModel.IngredientesDisponiveis = await _context.Additionals
-                                                    .Where(a => a.CanBeAdded) // Apenas ingredientes que podem ser adicionados
-                                                    .Select(a => a.Ingredient!) // Seleciona o Ingredient em si
-                                                    .Distinct() // Evita duplicatas se um ingrediente puder ser adicionado a vários produtos
-                                                    .ToListAsync();
-
-            // Popula IngredientesPadrao (os que vêm com o produto por padrão)
-            viewModel.IngredientesPadrao = product.Additionals!
-                                                .Where(pa => pa.IsDefault)
-                                                .Select(pa => pa.Ingredient!)
-                                                .ToList();
-
-            // Popula TamanhosDisponiveis com base na categoria
-            viewModel.TamanhosDisponiveis = GetTamanhosParaCategoria(viewModel.TipoProduto);
-
-            // Se for edição, pré-preenche o ViewModel com as personalizações atuais do carrinho
+          // Se for edição, pré-preenche o ViewModel com as personalizações atuais do carrinho
             if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
             {
-                var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
+                var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
                 var existingCartItem = cart.FirstOrDefault(ci => ci.CartItemId == cartItemId.Value);
                 if (existingCartItem != null)
                 {
-                    viewModel.TamanhoAtual = existingCartItem.SelectedSize;
-                    viewModel.IngredientesAtuaisAdicionados = existingCartItem.AddedIngredientIds;
-                    viewModel.IngredientesAtuaisRemovidos = existingCartItem.RemovedIngredientIds;
+                    viewModel.QuantidadesManipuladas = existingCartItem.ManipulatedIngredientsWithQuantity ?? new Dictionary<int, int>();
                 }
             }
 
             return View("PersonalizarProdutos", viewModel);
         }
 
-        // NOVO: Ação SalvarPersonalizacao (POST) para processar os dados do formulário
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SalvarPersonalizacao(PersonalizarProdutoInputModel inputModel)
@@ -293,78 +266,65 @@ namespace TotemPWA.Controllers
             // Validação básica do modelo
             if (!ModelState.IsValid)
             {
-                // Se o modelo for inválido, você pode recarregar a tela de personalização com erros
-                // Para simplificar, estamos apenas redirecionando, mas em um cenário real, você
-                // recarregaria a view PersonalizarProdutos com o inputModel e erros.
                 TempData["ErrorMessage"] = "Erro nos dados de personalização. Tente novamente.";
                 return RedirectToAction("Personalizar", new { productId = inputModel.ProdutoId, cartItemId = inputModel.CartItemId });
             }
 
             var product = await _context.Products
-                                .Include(p => p.Category)
-                                .Include(p => p.Additionals!)
-                                    .ThenInclude(pa => pa.Ingredient)
+                                .Include(p => p.Additionals!) // Inclua todos os Additionals
+                                    .ThenInclude(pa => pa.Ingredient) // E os Ingredientes relacionados
                                 .FirstOrDefaultAsync(p => p.Id == inputModel.ProdutoId);
 
             if (product == null) return NotFound("Produto não encontrado.");
 
-            decimal personalizedPrice = product.Price;
+            decimal personalizedPrice = product.Price; // Começa com o preço base do produto
             var personalizationSummary = new List<string>();
 
-            // Obter todos os ingredientes disponíveis e padrão para o produto
-            var productAdditionals = product.Additionals ?? new List<Additional>();
-            var defaultIngredients = productAdditionals.Where(pa => pa.IsDefault).Select(pa => pa.Ingredient!).ToList();
-            var addableIngredients = productAdditionals.Where(pa => pa.CanBeAdded).Select(pa => pa).ToList();
+            var manipulatedIngredientsWithQuantity = new Dictionary<int, int>();
 
-
-            // 1. Processar ingredientes REMOVIDOS do padrão
-            foreach (var removedId in inputModel.IngredientesParaRemover)
+            // Itera sobre os ingredientes manipulados enviados do formulário
+            foreach (var entry in inputModel.IngredientesManipuladosQuantidades)
             {
-                var ingredientToRemove = defaultIngredients.FirstOrDefault(i => i.Id == removedId);
-                var additionalEntry = productAdditionals.FirstOrDefault(a => a.IngredientId == removedId && a.IsDefault);
+                var ingredientId = entry.Key;
+                var finalQuantity = entry.Value; // Quantidade final para este ingrediente
 
-                if (ingredientToRemove != null && additionalEntry != null && additionalEntry.CanBeRemoved)
-                {
-                    // Remover não altera o preço base em lanches, apenas o que vem no produto.
-                    // Se a lógica fosse que remover algo caro diminui o preço, seria aqui.
-                    personalizationSummary.Add($"sem {ingredientToRemove.Name}");
-                }
-            }
+                // Encontra o Additional correspondente para verificar as flags e obter o Ingredient
+                var additional = product.Additionals?.FirstOrDefault(a => a.IngredientId == ingredientId);
 
-            // 2. Processar ingredientes ADICIONADOS
-            foreach (var addedId in inputModel.IngredientesParaAdicionar)
-            {
-                var ingredientToAdd = addableIngredients.FirstOrDefault(a => a.IngredientId == addedId);
-                if (ingredientToAdd != null)
+                if (additional != null && additional.Ingredient != null)
                 {
-                    personalizedPrice += ingredientToAdd.Price; // Adiciona o custo do ingrediente extra
-                    personalizationSummary.Add($"com {ingredientToAdd.Ingredient!.Name}");
-                }
-            }
-
-            // 3. Processar tamanho selecionado (se aplicável)
-            if (!string.IsNullOrEmpty(inputModel.TamanhoSelecionado))
-            {
-                // A lógica de preço por tamanho deve ser definida aqui.
-                // Exemplo: se o tamanho "Grande" de uma bebida custa mais
-                if (product.Category?.Name?.ToLower() == "bebida" || product.Category?.Name?.ToLower() == "acompanhamento")
-                {
-                    // Adapte esta lógica conforme a sua tabela de preços por tamanho, se houver
-                    if (inputModel.TamanhoSelecionado.ToLower() == "grande")
+                    // Valida o limite do ingrediente (se a quantidade for de adição)
+                    if (additional.CanBeAdded && finalQuantity > additional.Ingredient.Limit)
                     {
-                        personalizedPrice += 2.00M; // Exemplo de acréscimo de preço para "Grande"
+                        finalQuantity = additional.Ingredient.Limit; // Limita à quantidade máxima permitida
+                        // Opcional: Adicionar um ModelState.AddModelError para informar o usuário sobre o limite
                     }
-                    else if (inputModel.TamanhoSelecionado.ToLower() == "família")
+
+                    // Calcula o impacto no preço e adiciona ao resumo
+                    // Se o ingrediente for adicionável e a quantidade for > 0, adiciona o custo
+                    if (additional.CanBeAdded)
                     {
-                        personalizedPrice += 5.00M; // Exemplo para "Família"
+                        personalizedPrice += additional.Ingredient.Price * finalQuantity;
+                        if (finalQuantity > 0)
+                        {
+                            personalizationSummary.Add($"{finalQuantity}x com {additional.Ingredient.Name}");
+                        }
                     }
+                    // Se for um ingrediente padrão e puder ser removido (e a quantidade final for 0 ou menor), registra a remoção
+                    // Importante: A quantidade para um ingrediente padrão removido deve ser 0
+                    else if (additional.IsDefault && additional.CanBeRemoved && finalQuantity == 0) // Alterado para finalQuantity == 0
+                    {
+                        personalizationSummary.Add($"sem {additional.Ingredient.Name}"); // Exemplo: "sem Queijo"
+                    }
+                    // Se for um ingrediente padrão e a quantidade final for > 0 (mantido), não adiciona ao summary complexo
+                    // Ele já faz parte do produto base, não é uma "personalização" extra para o resumo.
+
+                    manipulatedIngredientsWithQuantity[ingredientId] = finalQuantity; // Armazena a quantidade final manipulada
                 }
-                personalizationSummary.Add($"tamanho {inputModel.TamanhoSelecionado}");
             }
 
-
-            // Gerar o resumo final da personalização
-            var summaryText = personalizationSummary.Any() ? "(" + string.Join(", ", personalizationSummary) + ")" : "";
+            var summaryText = personalizationSummary.Any() ?
+            "(" + string.Join(", ", personalizationSummary) + ")" : "";
 
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
 
@@ -374,28 +334,24 @@ namespace TotemPWA.Controllers
                 cartItemToModify = cart.FirstOrDefault(ci => ci.CartItemId == inputModel.CartItemId);
             }
 
-            if (cartItemToModify == null) // Novo item personalizado
+           if (cartItemToModify == null) // Novo item personalizado
             {
                 cart.Add(new CartItemViewModel
                 {
                     ProductId = product.Id,
                     Name = product.Name,
                     Price = personalizedPrice, // Preço já com personalizações
-                    Image = product.Image ?? product.ImageUrl ?? "/images/products/default_product.png", // Imagem padrão
+                    Image = product.Image ?? product.ImageUrl ?? "/images/products/default_product.png",
                     Quantity = 1,
-                    CartItemId = Guid.NewGuid(), // Novo GUID para identificar esta personalização única
-                    SelectedSize = inputModel.TamanhoSelecionado,
-                    AddedIngredientIds = inputModel.IngredientesParaAdicionar,
-                    RemovedIngredientIds = inputModel.IngredientesParaRemover,
+                    CartItemId = Guid.NewGuid(),
+                    ManipulatedIngredientsWithQuantity = manipulatedIngredientsWithQuantity, // SALVA O DICIONÁRIO COMPLETO
                     PersonalizationSummary = summaryText
                 });
             }
             else // Editando item existente
             {
                 cartItemToModify.Price = personalizedPrice;
-                cartItemToModify.SelectedSize = inputModel.TamanhoSelecionado;
-                cartItemToModify.AddedIngredientIds = inputModel.IngredientesParaAdicionar;
-                cartItemToModify.RemovedIngredientIds = inputModel.IngredientesParaRemover;
+                cartItemToModify.ManipulatedIngredientsWithQuantity = manipulatedIngredientsWithQuantity; // ATUALIZA O DICIONÁRIO COMPLETO
                 cartItemToModify.PersonalizationSummary = summaryText;
             }
 
@@ -404,21 +360,6 @@ namespace TotemPWA.Controllers
             return RedirectToAction("Index", "Cart"); // Redireciona para o carrinho
         }
 
-        // Função auxiliar para obter tamanhos por categoria
-        private List<string> GetTamanhosParaCategoria(string? categoryName)
-        {
-            if (string.IsNullOrEmpty(categoryName)) return new List<string>();
-
-            switch (categoryName.ToLower())
-            {
-                case "bebidas": // Use o nome da categoria que você tem no banco de dados
-                    return new List<string> { "Pequeno", "Médio", "Grande" };
-                case "acompanhamentos": // Use o nome da categoria que você tem no banco de dados
-                    return new List<string> { "Pequeno", "Médio", "Grande", "Família" };
-                default:
-                    return new List<string>();
-            }
-        }
 
     // CRUD 
     public IActionResult CardapioCrud()
