@@ -1,85 +1,232 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-    --primary-color: #990000;
-    --btn-sim-color: #C1D443;
+    --primary-color: #D32F2F; /* Vermelho mais vibrante */
+    --secondary-color: #FF9800; /* Laranja para contrastar */
+    --btn-color: #388E3C; /* Verde para botão confirmar */
+    --bg-color: #F5F5F5; /* Cor de fundo suave */
+    --text-color: #212121; /* Cor do texto principal */
+    --input-bg: #FFFFFF; /* Fundo do input */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.2);
 }
-.container{
-    text-align: center;
-}
-h1{
+
+body {
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 50px;
-    margin-top: 250px;
-    margin-bottom: 100px;
-    color: black;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text-color);
+    background-image: linear-gradient(135deg, rgba(255,152,0,0.05) 0%, rgba(211,47,47,0.05) 100%);
 }
-input {
-    box-shadow: 0 0 15px rgba(170, 160, 160, 0.8);
-    border-radius: 20px; 
-    height: 60px; 
-    width: 600px;
-    font-size: 30px;
+
+.container {
     text-align: center;
-    padding: 0 15px; 
-    border: 1px solid #ffffff;
+    width: 90%;
+    max-width: 800px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin: 30px 0 50px;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+}
+
+input {
+    width: 100%;
+    max-width: 600px;
+    height: 70px;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 0 25px;
+    border: 2px solid #e0e0e0;
+    border-radius: 35px;
     font-family: 'Poppins', sans-serif;
     color: var(--primary-color);
+    background-color: var(--input-bg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    margin: 20px auto;
+    display: block;
 }
+
 input:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
 }
+
 input::placeholder {
-    font-weight: bold;
-    color: var(--primary-color)
+    color: #9E9E9E;
+    font-weight: 500;
+    opacity: 0.7;
 }
-.btn-fim{
-    background-color: var(--btn-sim-color);
+
+.error-message {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-top: 10px;
+    height: 20px;
+}
+.btn-voltar {
+    background-color: var(--btn-color);
     color: white;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 12px 40px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding: 15px 50px;
     border: none;
-    border-radius: 30px;
+    border-radius: 35px;
     cursor: pointer;
-    transition: 0.3s;
-    width: 250px;
-    margin-top: 90px;
-    text-decoration: none; 
+    transition: all 0.3s ease;
+    margin: 40px 10px 20px;
+    box-shadow: var(--shadow-md);
+    display: inline-block;
+    min-width: 250px;
 }
-.simple-keyboard {
-    margin: 20px auto;
-    max-width: 700px;
-    background-color: #222222;
-    border-radius: 10px;
-    padding: 20px;
+
+.btn-fim {
+    background-color: var(--btn-color);
+    color: white;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 40px 10px 20px;
+    box-shadow: var(--shadow-md);
+    display: inline-block;
+    min-width: 250px;
+}
+
+.btn-fim:hover {
+    background-color: #2E7D32;
+    transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
 
+.btn-fim:disabled {
+    background-color: #BDBDBD;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* Teclado virtual */
+.simple-keyboard {
+    margin: 30px auto;
+    max-width: 700px;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid #e0e0e0;
+}
+
 .hg-button {
-    background-color: #333333;
-    color: #000000;
+    background-color: white;
+    color: var(--text-color);
     border: none;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 .hg-button:hover {
-    background-color: #444444;
+    background-color: #f0f0f0;
 }
 
 .hg-button:active {
-    background-color: #555555;
+    background-color: #e0e0e0;
 }
 
 .hg-button.hg-functionBtn {
     background-color: var(--primary-color);
+    color: white;
 }
 
 .hg-button.hg-functionBtn:hover {
-    background-color: #b30000;
+    background-color: #B71C1C;
 }
 
+/* Responsividade */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        margin: 20px 0 40px;
+    }
+    
+    input {
+        height: 60px;
+        font-size: 1.25rem;
+    }
+    
+    .btn-fim {
+        font-size: 1.1rem;
+        padding: 12px 40px;
+    }
+    
+    .simple-keyboard {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+        width: 95%;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    input {
+        height: 55px;
+        font-size: 1.1rem;
+    }
+    
+    .btn-fim {
+        width: 100%;
+        margin: 20px 0;
+    }
+}

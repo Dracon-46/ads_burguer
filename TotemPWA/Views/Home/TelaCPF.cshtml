@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/simple-keyboard/build/css/index.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/simple-keyboard/build/css/index.css">
 
-    <title>Clube CPF</title>
-  </head>
-  <body class="bodyNocenter">
-    <div class="containerNoBG">
-      <nav class="navbar"></nav>
-      <div class="img"></div>
-      <div class="text">
-          <h1>Tem o clube?</h1>
-          <h1>Digite o seu CPF:</h1>
-      </div>
-      <input type="text" placeholder="xxx.xxx.xxx-xx" class="inputCPF" maxlength="14">
-      <div class="simple-keyboard"></div>
-      <div class="btns">
-          <a href="@Url.Action("Index", "Home")" ><button class="voltar">Voltar</button></a></button>
-          <a href="@Url.Action("TelaNome", "Home")" >Não tenho o CLUBE</a>
-          <a href="@Url.Action("SelecionarPedido", "Home")" ><button class="cont">Confirmar</button></a>
-      </div>
-    </div>
-    <script src="https://unpkg.com/simple-keyboard/build/index.js"></script>
-    <script src="/js/telacpf_clube.js"></script>
-  </body>
+    <title>Clube CPF</title>
+  </head>
+  <body class="bodyNocenter">
+    <div class="containerNoBG">
+      <nav class="navbar"></nav>
+      <div class="img"></div>
+      <div class="text">
+          <h1>Tem o clube?</h1>
+          <h1>Digite o seu CPF:</h1>
+      </div>
+      <input type="text" placeholder="xxx.xxx.xxx-xx" class="inputCPF" maxlength="14">
+      <span id="cpfError" style="color: red; font-size: 0.9em; margin-top: 5px; display: block;"></span>
+      <div class="simple-keyboard"></div>
+      <div class="btns">
+          <a href="@Url.Action("Index", "Home")" ><button class="voltar">Voltar</button></a>
+          <a href="@Url.Action("TelaNome", "Home")" >Não tenho o CLUBE</a>
+          <button class="cont">Confirmar</button>       </div>
+    </div>
+    <script src="https://unpkg.com/simple-keyboard/build/index.js"></script>
+    <script src="/js/telacpf_clube.js"></script>
+  </body>
 </html>

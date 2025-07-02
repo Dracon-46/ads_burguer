@@ -33,6 +33,7 @@
     .containerNoBG .btns a { color: var(--text-color);}
     .containerNoBG .simple-keyboard { max-width: 600px; margin: 20px auto; }
     .hg-button .hg-functionBtn .hg-button-bksp { background-color: red !important; color: white; }
+    .simple-keyboard {display: block !important;}
 /* --------------------------- END --------------------------- */
 
 /* --------------------------- NOTA FISCAL --------------------------- */
