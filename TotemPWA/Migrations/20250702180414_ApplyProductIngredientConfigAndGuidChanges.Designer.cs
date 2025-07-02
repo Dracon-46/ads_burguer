@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TotemPWA.Data;
 
@@ -10,9 +11,11 @@ using TotemPWA.Data;
 namespace TotemPWA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250702180414_ApplyProductIngredientConfigAndGuidChanges")]
+    partial class ApplyProductIngredientConfigAndGuidChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -25,7 +28,13 @@ namespace TotemPWA.Migrations
                     b.Property<int>("IngredientId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Quantity")
+                    b.Property<bool>("CanBeAdded")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("CanBeRemoved")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDefault")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ProductId", "IngredientId");
@@ -43,9 +52,6 @@ namespace TotemPWA.Migrations
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Icon")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")

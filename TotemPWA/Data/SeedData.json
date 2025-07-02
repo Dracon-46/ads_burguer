@@ -10,32 +10,68 @@
           {
             "name": "C# Burger",
             "price": 18.50,
+            "Description": "O clássico burger para devs, com sabor de compilação bem-sucedida!",
+            "ImageUrl": "/images/products/csharp_burger.png",
             "Additionals": [
-              { "IngredientName": "Pão de Brioche", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Carne de 180g", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Queijo Cheddar", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 2.00 },
-              { "IngredientName": "Alface", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Tomate", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Cebola Roxa", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Molho Especial", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 1.50 },
-              { "IngredientName": "Bacon Crocante", "IsDefault": false, "CanBeRemoved": false, "CanBeAdded": true, "Price": 3.00 },
-              { "IngredientName": "Ovo Frito", "IsDefault": false, "CanBeRemoved": false, "CanBeAdded": true, "Price": 2.50 }
+              { "IngredientName": "Pão de Brioche", "Quantity": 1 },
+              { "IngredientName": "Carne de 180g", "Quantity": 1 },
+              { "IngredientName": "Queijo Cheddar", "Quantity": 1 },
+              { "IngredientName": "Alface", "Quantity": 1 },
+              { "IngredientName": "Tomate", "Quantity": 1 },
+              { "IngredientName": "Cebola Roxa", "Quantity": 1 },
+              { "IngredientName": "Molho Especial", "Quantity": 1 }
             ]
           },
           {
             "name": "Java Deluxe",
             "price": 19.90,
+            "Description": "Um burger robusto e versátil, como a linguagem que o inspirou.",
+            "ImageUrl": "/images/products/java_deluxe.png",
             "Additionals": [
-              { "IngredientName": "Pão Australiano", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Carne de 200g", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Queijo Provolone", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 2.50 },
-              { "IngredientName": "Rúcula", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Cebola Caramelizada", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 1.00 }
+              { "IngredientName": "Pão Australiano", "Quantity": 1 },
+              { "IngredientName": "Carne de 200g", "Quantity": 1 },
+              { "IngredientName": "Queijo Provolone", "Quantity": 1 },
+              { "IngredientName": "Rúcula", "Quantity": 1 },
+              { "IngredientName": "Cebola Caramelizada", "Quantity": 1 }
             ]
           },
-          { "name": "Python Smash", "price": 17.50 },
-          { "name": "Rusty Double", "price": 20.00 },
-          { "name": "Go Stack", "price": 18.00 }
+          {
+            "name": "Python Smash",
+            "price": 17.50,
+            "Description": "Simples e direto, com um sabor que se encaixa em qualquer paladar.",
+            "ImageUrl": "/images/products/python_smash.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Brioche", "Quantity": 1 },
+              { "IngredientName": "Carne de 100g", "Quantity": 2 },
+              { "IngredientName": "Queijo Americano", "Quantity": 2 },
+              { "IngredientName": "Picles", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Rusty Double",
+            "price": 20.00,
+            "Description": "Duplamente saboroso e seguro, sem surpresas desagradáveis.",
+            "ImageUrl": "/images/products/rusty_double.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Gergelim", "Quantity": 1 },
+              { "IngredientName": "Carne de 150g", "Quantity": 2 },
+              { "IngredientName": "Queijo Suíço", "Quantity": 2 },
+              { "IngredientName": "Molho Aioli", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Go Stack",
+            "price": 18.00,
+            "Description": "Leve e eficiente, ideal para quem busca performance no sabor.",
+            "ImageUrl": "/images/products/go_stack.png",
+            "Additionals": [
+              { "IngredientName": "Pão Integral", "Quantity": 1 },
+              { "IngredientName": "Frango Grelhado", "Quantity": 1 },
+              { "IngredientName": "Queijo Minas", "Quantity": 1 },
+              { "IngredientName": "Espinafre", "Quantity": 1 },
+              { "IngredientName": "Tomate Seco", "Quantity": 1 }
+            ]
+          }
         ]
       },
       {
@@ -45,49 +81,219 @@
           {
             "name": "React Dog",
             "price": 14.00,
+            "Description": "Um hot dog reativo, que se adapta ao seu paladar.",
+            "ImageUrl": "/images/products/react_dog.png",
             "Additionals": [
-              { "IngredientName": "Pão de Hot Dog", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Salsicha", "IsDefault": true, "CanBeRemoved": false, "CanBeAdded": false, "Price": 0.00 },
-              { "IngredientName": "Maionese", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 0.50 },
-              { "IngredientName": "Ketchup", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 0.50 },
-              { "IngredientName": "Mostarda", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 0.50 },
-              { "IngredientName": "Batata Palha", "IsDefault": true, "CanBeRemoved": true, "CanBeAdded": true, "Price": 1.00 }
+              { "IngredientName": "Pão de Hot Dog", "Quantity": 1 },
+              { "IngredientName": "Salsicha", "Quantity": 1 },
+              { "IngredientName": "Maionese", "Quantity": 1 },
+              { "IngredientName": "Ketchup", "Quantity": 1 },
+              { "IngredientName": "Mostarda", "Quantity": 1 },
+              { "IngredientName": "Batata Palha", "Quantity": 1 }
             ]
           },
-          { "name": "Vue Sausage", "price": 13.50 },
-          { "name": "Angular Dog", "price": 14.50 },
-          { "name": "Svelte Dog", "price": 13.00 }
+          {
+            "name": "Vue Sausage",
+            "price": 13.50,
+            "Description": "Simples e performático, para quem busca agilidade no sabor.",
+            "ImageUrl": "/images/products/vue_sausage.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Hot Dog", "Quantity": 1 },
+              { "IngredientName": "Salsicha", "Quantity": 1 },
+              { "IngredientName": "Molho Barbecue", "Quantity": 1 },
+              { "IngredientName": "Cebola Crispy", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Angular Dog",
+            "price": 14.50,
+            "Description": "Estruturado e completo, com tudo que um bom hot dog precisa.",
+            "ImageUrl": "/images/products/angular_dog.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Hot Dog", "Quantity": 1 },
+              { "IngredientName": "Salsicha", "Quantity": 1 },
+              { "IngredientName": "Purê de Batata", "Quantity": 1 },
+              { "IngredientName": "Vinagrete", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Svelte Dog",
+            "price": 13.00,
+            "Description": "Leve e delicioso, feito para ser consumido rapidamente.",
+            "ImageUrl": "/images/products/svelte_dog.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Hot Dog", "Quantity": 1 },
+              { "IngredientName": "Salsicha", "Quantity": 1 },
+              { "IngredientName": "Queijo Ralado", "Quantity": 1 }
+            ]
+          }
         ]
       },
       {
         "name": "Natural Bits",
         "icon": "https://img.icons8.com/color/48/salad.png",
         "products": [
-          { "name": "HTML Veggie", "price": 12.00 },
-          { "name": "CSS Light", "price": 12.50 },
-          { "name": "API Chicken", "price": 13.00 },
-          { "name": "JSON Wrap", "price": 11.50 }
+          {
+            "name": "HTML Veggie",
+            "price": 12.00,
+            "Description": "Uma explosão de cores e sabores para sua dieta.",
+            "ImageUrl": "/images/products/html_veggie.png",
+            "Additionals": [
+              { "IngredientName": "Alface Americana", "Quantity": 1 },
+              { "IngredientName": "Tomate Cereja", "Quantity": 1 },
+              { "IngredientName": "Pepino", "Quantity": 1 },
+              { "IngredientName": "Grão de Bico", "Quantity": 1 },
+              { "IngredientName": "Molho Balsâmico", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "CSS Light",
+            "price": 12.50,
+            "Description": "Leve e elegante, com um toque especial de frescor.",
+            "ImageUrl": "/images/products/css_light.png",
+            "Additionals": [
+              { "IngredientName": "Rúcula", "Quantity": 1 },
+              { "IngredientName": "Manga", "Quantity": 1 },
+              { "IngredientName": "Castanha de Caju", "Quantity": 1 },
+              { "IngredientName": "Molho de Maracujá", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "API Chicken",
+            "price": 13.00,
+            "Description": "Conexão perfeita entre sabor e saúde.",
+            "ImageUrl": "/images/products/api_chicken.png",
+            "Additionals": [
+              { "IngredientName": "Frango Desfiado", "Quantity": 1 },
+              { "IngredientName": "Milho", "Quantity": 1 },
+              { "IngredientName": "Queijo Coalho", "Quantity": 1 },
+              { "IngredientName": "Croutons", "Quantity": 1 },
+              { "IngredientName": "Molho Caesar", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "JSON Wrap",
+            "price": 11.50,
+            "Description": "Simples, estruturado e delicioso, sem complicação.",
+            "ImageUrl": "/images/products/json_wrap.png",
+            "Additionals": [
+              { "IngredientName": "Wrap Integral", "Quantity": 1 },
+              { "IngredientName": "Peito de Peru", "Quantity": 1 },
+              { "IngredientName": "Cream Cheese", "Quantity": 1 },
+              { "IngredientName": "Cenoura Ralada", "Quantity": 1 }
+            ]
+          }
         ]
       },
       {
         "name": "Toasts do Terminal",
         "icon": "https://img.icons8.com/color/48/toast.png",
         "products": [
-          { "name": "Bash Toast", "price": 10.00 },
-          { "name": "Zsh Queijo", "price": 10.50 },
-          { "name": "CMD Bacon", "price": 11.00 },
-          { "name": "PowerShell Frango", "price": 11.50 }
+          {
+            "name": "Bash Toast",
+            "price": 10.00,
+            "Description": "Um toast robusto, pronto para qualquer comando do seu apetite.",
+            "ImageUrl": "/images/products/bash_toast.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Forma", "Quantity": 2 },
+              { "IngredientName": "Queijo Mussarela", "Quantity": 2 },
+              { "IngredientName": "Tomate", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Zsh Queijo",
+            "price": 10.50,
+            "Description": "Um toast com a flexibilidade e o sabor que você espera.",
+            "ImageUrl": "/images/products/zsh_queijo.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Forma", "Quantity": 2 },
+              { "IngredientName": "Queijo Prato", "Quantity": 2 },
+              { "IngredientName": "Orégano", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "CMD Bacon",
+            "price": 11.00,
+            "Description": "Direto e com sabor inconfundível do bacon crocante.",
+            "ImageUrl": "/images/products/cmd_bacon.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Forma", "Quantity": 2 },
+              { "IngredientName": "Bacon Crocante", "Quantity": 1 },
+              { "IngredientName": "Ovo Frito", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "PowerShell Frango",
+            "price": 11.50,
+            "Description": "Poderoso e cheio de sabor, para recarregar suas energias.",
+            "ImageUrl": "/images/products/powershell_frango.png",
+            "Additionals": [
+              { "IngredientName": "Pão de Forma", "Quantity": 2 },
+              { "IngredientName": "Frango Desfiado", "Quantity": 1 },
+              { "IngredientName": "Requeijão", "Quantity": 1 }
+            ]
+          }
         ]
       },
       {
         "name": "Combos Full Stack",
         "icon": "https://img.icons8.com/color/48/combo-chart--v1.png",
         "products": [
-          { "name": "Frontend Combo", "price": 25.00 },
-          { "name": "Backend Combo", "price": 26.50 },
-          { "name": "Full Stack Monster", "price": 28.00 },
-          { "name": "DevOps Meal", "price": 27.00 },
-          { "name": "Bug Hunter Combo", "price": 24.00 }
+          {
+            "name": "Frontend Combo",
+            "price": 25.00,
+            "Description": "O essencial para quem domina a arte do visual.",
+            "ImageUrl": "/images/products/frontend_combo.png",
+            "Additionals": [
+              { "IngredientName": "C# Burger", "Quantity": 1 },
+              { "IngredientName": "Fritas DevOps", "Quantity": 1 },
+              { "IngredientName": "Refrigerante", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Backend Combo",
+            "price": 26.50,
+            "Description": "A base sólida para sua fome, com sabor que sustenta.",
+            "ImageUrl": "/images/products/backend_combo.png",
+            "Additionals": [
+              { "IngredientName": "Java Deluxe", "Quantity": 1 },
+              { "IngredientName": "Anéis de Cebola", "Quantity": 1 },
+              { "IngredientName": "Café Espresso", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Full Stack Monster",
+            "price": 28.00,
+            "Description": "Completo e robusto, para enfrentar qualquer desafio.",
+            "ImageUrl": "/images/products/fullstack_monster.png",
+            "Additionals": [
+              { "IngredientName": "Rusty Double", "Quantity": 1 },
+              { "IngredientName": "Molho ORM", "Quantity": 1 },
+              { "IngredientName": "Shake Chocolate", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "DevOps Meal",
+            "price": 27.00,
+            "Description": "Sinergia perfeita entre praticidade e sabor.",
+            "ImageUrl": "/images/products/devops_meal.png",
+            "Additionals": [
+              { "IngredientName": "Go Stack", "Quantity": 1 },
+              { "IngredientName": "Salada JSON", "Quantity": 1 },
+              { "IngredientName": "Suco de Laranja", "Quantity": 1 }
+            ]
+          },
+          {
+            "name": "Bug Hunter Combo",
+            "price": 24.00,
+            "Description": "Para quando a fome ataca, a solução está aqui.",
+            "ImageUrl": "/images/products/bug_hunter_combo.png",
+            "Additionals": [
+              { "IngredientName": "Python Smash", "Quantity": 1 },
+              { "IngredientName": "Petiscos de API", "Quantity": 1 },
+              { "IngredientName": "Fanta Laranja", "Quantity": 1 }
+            ]
+          }
         ]
       }
     ]
@@ -100,50 +306,50 @@
         "name": "Refrigerantes",
         "icon": "https://img.icons8.com/color/48/soda.png",
         "products": [
-          { "name": "Pepsi", "price": 5.00 },
-          { "name": "Coca-Cola", "price": 5.50 },
-          { "name": "Guaraná", "price": 5.50 },
-          { "name": "Fanta Laranja", "price": 6.00 }
+          { "name": "Pepsi", "price": 5.00, "Description": "Sabor clássico para refrescar o seu código.", "ImageUrl": "/images/products/pepsi.png", "Additionals": [] },
+          { "name": "Coca-Cola", "price": 5.50, "Description": "A mais famosa para turbinar suas ideias.", "ImageUrl": "/images/products/coca_cola.png", "Additionals": [] },
+          { "name": "Guaraná", "price": 5.50, "Description": "Sabor do Brasil para impulsionar sua criatividade.", "ImageUrl": "/images/products/guarana.png", "Additionals": [] },
+          { "name": "Fanta Laranja", "price": 6.00, "Description": "Explosão cítrica para energizar seu dia.", "ImageUrl": "/images/products/fanta_laranja.png", "Additionals": [] }
         ]
       },
       {
         "name": "Cafés",
         "icon": "https://img.icons8.com/color/48/coffee-to-go.png",
         "products": [
-          { "name": "Café Espresso", "price": 7.00 },
-          { "name": "Latte", "price": 8.00 },
-          { "name": "Mocha", "price": 8.50 },
-          { "name": "Café com Leite", "price": 7.50 }
+          { "name": "Café Espresso", "price": 7.00, "Description": "O shot de energia para começar o dia.", "ImageUrl": "/images/products/cafe_espresso.png", "Additionals": [] },
+          { "name": "Latte", "price": 8.00, "Description": "Cremoso e reconfortante para momentos de pausa.", "ImageUrl": "/images/products/latte.png", "Additionals": [] },
+          { "name": "Mocha", "price": 8.50, "Description": "Café com chocolate, uma doçura para seu código.", "ImageUrl": "/images/products/mocha.png", "Additionals": [] },
+          { "name": "Café com Leite", "price": 7.50, "Description": "Clássico e suave, ideal para qualquer hora.", "ImageUrl": "/images/products/cafe_com_leite.png", "Additionals": [] }
         ]
       },
       {
         "name": "Sucos Naturais",
         "icon": "https://img.icons8.com/color/48/orange-juice.png",
         "products": [
-          { "name": "Suco de Laranja", "price": 7.00 },
-          { "name": "Suco de Limão", "price": 7.50 },
-          { "name": "Suco de Maracujá", "price": 8.00 },
-          { "name": "Suco de Hortelã", "price": 7.20 }
+          { "name": "Suco de Laranja", "price": 7.00, "Description": "Puro e vibrante, como um código bem otimizado.", "ImageUrl": "/images/products/suco_laranja.png", "Additionals": [] },
+          { "name": "Suco de Limão", "price": 7.50, "Description": "Refrescante e com um toque ácido, para desbugar.", "ImageUrl": "/images/products/suco_limao.png", "Additionals": [] },
+          { "name": "Suco de Maracujá", "price": 8.00, "Description": "Tranquilizante e saboroso, para relaxar a mente.", "ImageUrl": "/images/products/suco_maracuja.png", "Additionals": [] },
+          { "name": "Suco de Hortelã", "price": 7.20, "Description": "Fresco e revigorante, para manter o foco.", "ImageUrl": "/images/products/suco_hortela.png", "Additionals": [] }
         ]
       },
       {
         "name": "Milkshakes",
         "icon": "https://img.icons8.com/color/48/milkshake.png",
         "products": [
-          { "name": "Shake Chocolate", "price": 10.00 },
-          { "name": "Shake Morango", "price": 9.50 },
-          { "name": "Shake Baunilha", "price": 10.50 },
-          { "name": "Shake Ovomaltine", "price": 11.00 }
+          { "name": "Shake Chocolate", "price": 10.00, "Description": "Doçura pura para os amantes de chocolate.", "ImageUrl": "/images/products/shake_chocolate.png", "Additionals": [] },
+          { "name": "Shake Morango", "price": 9.50, "Description": "Sabor frutado e cremoso, um clássico delicioso.", "ImageUrl": "/images/products/shake_morango.png", "Additionals": [] },
+          { "name": "Shake Baunilha", "price": 10.50, "Description": "A suavidade da baunilha em uma explosão de sabor.", "ImageUrl": "/images/products/shake_baunilha.png", "Additionals": [] },
+          { "name": "Shake Ovomaltine", "price": 11.00, "Description": "Para quem ama uma crocância extra e muito sabor.", "ImageUrl": "/images/products/shake_ovomaltine.png", "Additionals": [] }
         ]
       },
       {
         "name": "Chás",
         "icon": "https://img.icons8.com/color/48/tea.png",
         "products": [
-          { "name": "Chá de Camomila", "price": 6.50 },
-          { "name": "Chá de Hortelã", "price": 6.00 },
-          { "name": "Chá Preto", "price": 7.00 },
-          { "name": "Chá Verde", "price": 6.80 }
+          { "name": "Chá de Camomila", "price": 6.50, "Description": "Para acalmar a mente depois de um bug.", "ImageUrl": "/images/products/cha_camomila.png", "Additionals": [] },
+          { "name": "Chá de Hortelã", "price": 6.00, "Description": "Refrescante e revigorante para qualquer momento.", "ImageUrl": "/images/products/cha_hortela.png", "Additionals": [] },
+          { "name": "Chá Preto", "price": 7.00, "Description": "Energia na medida certa para suas linhas de código.", "ImageUrl": "/images/products/cha_preto.png", "Additionals": [] },
+          { "name": "Chá Verde", "price": 6.80, "Description": "Para uma mente focada e um corpo saudável.", "ImageUrl": "/images/products/cha_verde.png", "Additionals": [] }
         ]
       }
     ]
@@ -156,50 +362,74 @@
         "name": "Doces Clássicos",
         "icon": "https://img.icons8.com/color/48/cupcake.png",
         "products": [
-          { "name": "Brownie", "price": 9.00 },
-          { "name": "Pudim", "price": 8.50 },
-          { "name": "Torta de Limão", "price": 10.00 },
-          { "name": "Mousse de Chocolate", "price": 9.50 }
+          { "name": "Brownie", "price": 9.00, "Description": "Perfeito para uma pausa doce no seu dia.", "ImageUrl": "/images/products/brownie.png", "Additionals": [] },
+          { "name": "Pudim", "price": 8.50, "Description": "Clássico da vovó, sabor que acolhe.", "ImageUrl": "/images/products/pudim.png", "Additionals": [] },
+          { "name": "Torta de Limão", "price": 10.00, "Description": "O equilíbrio perfeito entre doce e cítrico.", "ImageUrl": "/images/products/torta_limao.png", "Additionals": [] },
+          { "name": "Mousse de Chocolate", "price": 9.50, "Description": "Leve e aveludada, para fechar com chave de ouro.", "ImageUrl": "/images/products/mousse_chocolate.png", "Additionals": [] }
         ]
       },
       {
         "name": "Bolos",
         "icon": "https://img.icons8.com/color/48/birthday-cake.png",
         "products": [
-          { "name": "Bolo de Cenoura", "price": 10.00 },
-          { "name": "Bolo de Chocolate", "price": 10.50 },
-          { "name": "Bolo de Fubá", "price": 9.50 },
-          { "name": "Bolo de Morango", "price": 11.00 }
+          { "name": "Bolo de Cenoura", "price": 10.00, "Description": "Com cobertura de chocolate, a combinação perfeita.", "ImageUrl": "/images/products/bolo_cenoura.png", "Additionals": [] },
+          { "name": "Bolo de Chocolate", "price": 10.50, "Description": "Para os chocólatras de plantão, puro prazer.", "ImageUrl": "/images/products/bolo_chocolate.png", "Additionals": [] },
+          { "name": "Bolo de Fubá", "price": 9.50, "Description": "Sabor caseiro para um momento de nostalgia.", "ImageUrl": "/images/products/bolo_fuba.png", "Additionals": [] },
+          { "name": "Bolo de Morango", "price": 11.00, "Description": "Doce e frutado, uma delícia a cada mordida.", "ImageUrl": "/images/products/bolo_morango.png", "Additionals": [] }
         ]
       },
       {
         "name": "Sorvetes",
         "icon": "https://img.icons8.com/color/48/ice-cream-cone.png",
         "products": [
-          { "name": "Sorvete de Creme", "price": 7.50 },
-          { "name": "Sorvete de Chocolate", "price": 7.00 },
-          { "name": "Sorvete de Morango", "price": 8.00 },
-          { "name": "Sorvete de Flocos", "price": 8.50 }
+          { "name": "Sorvete de Creme", "price": 7.50, "Description": "Leve e refrescante, um toque de suavidade.", "ImageUrl": "/images/products/sorvete_creme.png", "Additionals": [] },
+          { "name": "Sorvete de Chocolate", "price": 7.00, "Description": "Para refrescar a mente e o paladar.", "ImageUrl": "/images/products/sorvete_chocolate.png", "Additionals": [] },
+          { "name": "Sorvete de Morango", "price": 8.00, "Description": "Frutado e delicioso, para um verão sem bugs.", "ImageUrl": "/images/products/sorvete_morango.png", "Additionals": [] },
+          { "name": "Sorvete de Flocos", "price": 8.50, "Description": "A união perfeita de creme e chocolate.", "ImageUrl": "/images/products/sorvete_flocos.png", "Additionals": [] }
         ]
       },
       {
         "name": "Extras",
         "icon": "https://img.icons8.com/color/48/sprinkles.png",
         "products": [
-          { "name": "Granulado", "price": 2.00 },
-          { "name": "Chantilly", "price": 2.50 },
-          { "name": "Calda de Chocolate", "price": 2.50 },
-          { "name": "Farofa Doce", "price": 2.00 }
+          { "name": "Granulado", "price": 2.00, "Description": "Para deixar sua sobremesa ainda mais divertida.", "ImageUrl": "/images/products/granulado.png", "Additionals": [] },
+          { "name": "Chantilly", "price": 2.50, "Description": "Um toque cremoso para qualquer doce.", "ImageUrl": "/images/products/chantilly.png", "Additionals": [] },
+          { "name": "Calda de Chocolate", "price": 2.50, "Description": "Intensifique o sabor com essa calda deliciosa.", "ImageUrl": "/images/products/calda_chocolate.png", "Additionals": [] },
+          { "name": "Farofa Doce", "price": 2.00, "Description": "Crocância e sabor em cada colherada.", "ImageUrl": "/images/products/farofa_doce.png", "Additionals": [] }
         ]
       },
       {
         "name": "Combos Doces",
         "icon": "https://img.icons8.com/color/48/dessert.png",
         "products": [
-          { "name": "Café & Brownie", "price": 12.00 },
-          { "name": "Chocolate & Bolo", "price": 13.50 },
-          { "name": "Café & Cookie", "price": 11.50 },
-          { "name": "Mousse & Shake", "price": 14.00 }
+          {
+            "name": "Café & Brownie",
+            "price": 12.00,
+            "Description": "A dupla perfeita para sua pausa programada.",
+            "ImageUrl": "/images/products/cafe_brownie.png",
+            "Additionals": []
+          },
+          {
+            "name": "Chocolate & Bolo",
+            "price": 13.50,
+            "Description": "Para os amantes de chocolate, a combinação ideal.",
+            "ImageUrl": "/images/products/chocolate_bolo.png",
+            "Additionals": []
+          },
+          {
+            "name": "Café & Cookie",
+            "price": 11.50,
+            "Description": "Um par clássico para adoçar o dia.",
+            "ImageUrl": "/images/products/cafe_cookie.png",
+            "Additionals": []
+          },
+          {
+            "name": "Mousse & Shake",
+            "price": 14.00,
+            "Description": "Uma experiência de sabor inesquecível.",
+            "ImageUrl": "/images/products/mousse_shake.png",
+            "Additionals": []
+          }
         ]
       }
     ]
@@ -212,50 +442,146 @@
         "name": "Fritas",
         "icon": "https://img.icons8.com/color/48/french-fries.png",
         "products": [
-          { "name": "Fritas DevOps", "price": 9.00 },
-          { "name": "Fritas com Bacon JS", "price": 10.00 },
-          { "name": "Fritas com Cheddar PHP", "price": 9.50 },
-          { "name": "Fritas Curly Kotlin", "price": 9.80 }
+          {
+            "name": "Fritas DevOps",
+            "price": 9.00,
+            "Description": "Perfeitas para acompanhar qualquer tarefa.",
+            "ImageUrl": "/images/products/fritas_devops.png",
+            "Additionals": []
+          },
+          {
+            "name": "Fritas com Bacon JS",
+            "price": 10.00,
+            "Description": "A crocância do bacon para seu código.",
+            "ImageUrl": "/images/products/fritas_bacon_js.png",
+            "Additionals": []
+          },
+          {
+            "name": "Fritas com Cheddar PHP",
+            "price": 9.50,
+            "Description": "O queijo cremoso para um sabor inigualável.",
+            "ImageUrl": "/images/products/fritas_cheddar_php.png",
+            "Additionals": []
+          },
+          {
+            "name": "Fritas Curly Kotlin",
+            "price": 9.80,
+            "Description": "Enroladas e saborosas, para uma experiência única.",
+            "ImageUrl": "/images/products/fritas_curly_kotlin.png",
+            "Additionals": []
+          }
         ]
       },
       {
         "name": "Anéis de Cebola",
         "icon": "https://img.icons8.com/color/48/onion-ring.png",
         "products": [
-          { "name": "Onion JavaScript", "price": 8.00 },
-          { "name": "Onion Angular", "price": 8.50 },
-          { "name": "Onion React", "price": 9.00 },
-          { "name": "Onion HTML", "price": 8.20 }
+          {
+            "name": "Onion JavaScript",
+            "price": 8.00,
+            "Description": "Crocância e sabor, com a flexibilidade do JavaScript.",
+            "ImageUrl": "/images/products/onion_javascript.png",
+            "Additionals": []
+          },
+          {
+            "name": "Onion Angular",
+            "price": 8.50,
+            "Description": "Estruturado e delicioso, para quem busca organização.",
+            "ImageUrl": "/images/products/onion_angular.png",
+            "Additionals": []
+          },
+          {
+            "name": "Onion React",
+            "price": 9.00,
+            "Description": "Reativo e com sabor único, uma experiência inesquecível.",
+            "ImageUrl": "/images/products/onion_react.png",
+            "Additionals": []
+          },
+          {
+            "name": "Onion HTML",
+            "price": 8.20,
+            "Description": "A base de todo o sabor, com simplicidade e muito gosto.",
+            "ImageUrl": "/images/products/onion_html.png",
+            "Additionals": []
+          }
         ]
       },
       {
         "name": "Petiscos de API",
         "icon": "https://img.icons8.com/color/48/snack.png",
         "products": [
-          { "name": "API Bites", "price": 7.00 },
-          { "name": "Restful Chips", "price": 6.80 },
-          { "name": "Token Nachos", "price": 7.50 },
-          { "name": "Cookie Crumbs", "price": 6.90 }
+          {
+            "name": "API Bites",
+            "price": 7.00,
+            "Description": "Pequenas porções de sabor para suas requisições.",
+            "ImageUrl": "/images/products/api_bites.png",
+            "Additionals": []
+          },
+          {
+            "name": "Restful Chips",
+            "price": 6.80,
+            "Description": "Batatas crocantes para um snack rápido e fácil.",
+            "ImageUrl": "/images/products/restful_chips.png",
+            "Additionals": []
+          },
+          {
+            "name": "Token Nachos",
+            "price": 7.50,
+            "Description": "Nachos com queijo e pimenta, para um sabor autêntico.",
+            "ImageUrl": "/images/products/token_nachos.png",
+            "Additionals": []
+          },
+          {
+            "name": "Cookie Crumbs",
+            "price": 6.90,
+            "Description": "Biscoitos crocantes com pedaços de chocolate.",
+            "ImageUrl": "/images/products/cookie_crumbs.png",
+            "Additionals": []
+          }
         ]
       },
       {
         "name": "Saladas",
         "icon": "https://img.icons8.com/color/48/greek-salad.png",
         "products": [
-          { "name": "Salada JSON", "price": 10.00 },
-          { "name": "Salada YAML", "price": 9.50 },
-          { "name": "Salada Swagger", "price": 10.50 },
-          { "name": "Salada REST", "price": 9.80 }
+          {
+            "name": "Salada JSON",
+            "price": 10.00,
+            "Description": "Organizada e saborosa, para uma refeição leve.",
+            "ImageUrl": "/images/products/salada_json.png",
+            "Additionals": []
+          },
+          {
+            "name": "Salada YAML",
+            "price": 9.50,
+            "Description": "Simples e direta, com um toque de frescor.",
+            "ImageUrl": "/images/products/salada_yaml.png",
+            "Additionals": []
+          },
+          {
+            "name": "Salada Swagger",
+            "price": 10.50,
+            "Description": "Completa e bem documentada, para quem busca clareza.",
+            "ImageUrl": "/images/products/salada_swagger.png",
+            "Additionals": []
+          },
+          {
+            "name": "Salada REST",
+            "price": 9.80,
+            "Description": "Versátil e com ingredientes que se complementam.",
+            "ImageUrl": "/images/products/salada_rest.png",
+            "Additionals": []
+          }
         ]
       },
       {
         "name": "Extras Dev",
         "icon": "https://img.icons8.com/color/48/sauce.png",
         "products": [
-          { "name": "Molho ORM", "price": 2.50 },
-          { "name": "Cheddar CLI", "price": 2.00 },
-          { "name": "Bacon NGINX", "price": 3.00 },
-          { "name": "Ketchup DNS", "price": 1.50 }
+          { "name": "Molho ORM", "price": 2.50, "Description": "Integração perfeita de sabor.", "ImageUrl": "/images/products/molho_orm.png", "Additionals": [] },
+          { "name": "Cheddar CLI", "price": 2.00, "Description": "Sabor direto e sem rodeios.", "ImageUrl": "/images/products/cheddar_cli.png", "Additionals": [] },
+          { "name": "Bacon NGINX", "price": 3.00, "Description": "Otimizado para máxima crocância.", "ImageUrl": "/images/products/bacon_nginx.png", "Additionals": [] },
+          { "name": "Ketchup DNS", "price": 1.50, "Description": "Sempre encontra o caminho para o seu paladar.", "ImageUrl": "/images/products/ketchup_dns.png", "Additionals": [] }
         ]
       }
     ]
@@ -268,50 +594,50 @@
         "name": "Pães e Torradas",
         "icon": "https://img.icons8.com/color/48/bread.png",
         "products": [
-          { "name": "Pão na Chapa", "price": 5.00 },
-          { "name": "Pão Francês", "price": 5.50 },
-          { "name": "Croissant", "price": 6.00 },
-          { "name": "Torrada com Manteiga", "price": 5.20 }
+          { "name": "Pão na Chapa", "price": 5.00, "Description": "Clássico para começar o dia com energia.", "ImageUrl": "/images/products/pao_na_chapa.png", "Additionals": [] },
+          { "name": "Pão Francês", "price": 5.50, "Description": "Crocante por fora, macio por dentro.", "ImageUrl": "/images/products/pao_frances.png", "Additionals": [] },
+          { "name": "Croissant", "price": 6.00, "Description": "Delicado e saboroso, para um café especial.", "ImageUrl": "/images/products/croissant.png", "Additionals": [] },
+          { "name": "Torrada com Manteiga", "price": 5.20, "Description": "Simples e deliciosa, ideal para qualquer hora.", "ImageUrl": "/images/products/torrada_manteiga.png", "Additionals": [] }
         ]
       },
       {
         "name": "Bebidas Quentes",
         "icon": "https://img.icons8.com/color/48/hot-chocolate.png",
         "products": [
-          { "name": "Café Preto", "price": 6.00 },
-          { "name": "Chá Natural", "price": 5.50 },
-          { "name": "Capuccino", "price": 7.00 },
-          { "name": "Chocolate Quente", "price": 7.50 }
+          { "name": "Café Preto", "price": 6.00, "Description": "O clássico para despertar sua criatividade.", "ImageUrl": "/images/products/cafe_preto.png", "Additionals": [] },
+          { "name": "Chá Natural", "price": 5.50, "Description": "Para um momento de calma e inspiração.", "ImageUrl": "/images/products/cha_natural.png", "Additionals": [] },
+          { "name": "Capuccino", "price": 7.00, "Description": "Espumoso e saboroso, para um toque de classe.", "ImageUrl": "/images/products/capuccino.png", "Additionals": [] },
+          { "name": "Chocolate Quente", "price": 7.50, "Description": "Conforto em uma xícara, para dias de código frio.", "ImageUrl": "/images/products/chocolate_quente.png", "Additionals": [] }
         ]
       },
       {
         "name": "Frutas",
         "icon": "https://img.icons8.com/color/48/fruit-bag.png",
         "products": [
-          { "name": "Banana", "price": 3.00 },
-          { "name": "Maçã", "price": 3.20 },
-          { "name": "Uva", "price": 3.50 },
-          { "name": "Manga", "price": 3.80 }
+          { "name": "Banana", "price": 3.00, "Description": "Energia natural para seu dia a dia.", "ImageUrl": "/images/products/banana.png", "Additionals": [] },
+          { "name": "Maçã", "price": 3.20, "Description": "Crocante e nutritiva, um snack saudável.", "ImageUrl": "/images/products/maca.png", "Additionals": [] },
+          { "name": "Uva", "price": 3.50, "Description": "Pequenas explosões de sabor em cada mordida.", "ImageUrl": "/images/products/uva.png", "Additionals": [] },
+          { "name": "Manga", "price": 3.80, "Description": "Exótica e doce, para um toque tropical.", "ImageUrl": "/images/products/manga.png", "Additionals": [] }
         ]
       },
       {
         "name": "Iogurtes",
         "icon": "https://img.icons8.com/color/48/yogurt.png",
         "products": [
-          { "name": "Iogurte Natural", "price": 6.00 },
-          { "name": "Iogurte com Granola", "price": 6.50 },
-          { "name": "Iogurte com Mel", "price": 6.80 },
-          { "name": "Iogurte com Frutas", "price": 7.00 }
+          { "name": "Iogurte Natural", "price": 6.00, "Description": "Leve e versátil, para combinar como quiser.", "ImageUrl": "/images/products/iogurte_natural.png", "Additionals": [] },
+          { "name": "Iogurte com Granola", "price": 6.50, "Description": "Sabor e crocância para um café da manhã completo.", "ImageUrl": "/images/products/iogurte_granola.png", "Additionals": [] },
+          { "name": "Iogurte com Mel", "price": 6.80, "Description": "Doçura natural para adoçar seu dia.", "ImageUrl": "/images/products/iogurte_mel.png", "Additionals": [] },
+          { "name": "Iogurte com Frutas", "price": 7.00, "Description": "Fresco e nutritivo, com pedaços de fruta.", "ImageUrl": "/images/products/iogurte_frutas.png", "Additionals": [] }
         ]
       },
       {
         "name": "Cereais",
         "icon": "https://img.icons8.com/color/48/cornflakes.png",
         "products": [
-          { "name": "Cereal com Leite", "price": 5.50 },
-          { "name": "Cereal de Milho", "price": 5.80 },
-          { "name": "Cereal de Aveia", "price": 6.00 },
-          { "name": "Cereal Integral", "price": 6.20 }
+          { "name": "Cereal com Leite", "price": 5.50, "Description": "Clássico e rápido, para um café da manhã ágil.", "ImageUrl": "/images/products/cereal_leite.png", "Additionals": [] },
+          { "name": "Cereal de Milho", "price": 5.80, "Description": "Crocante e delicioso, para começar bem o dia.", "ImageUrl": "/images/products/cereal_milho.png", "Additionals": [] },
+          { "name": "Cereal de Aveia", "price": 6.00, "Description": "Saudável e nutritivo, para uma energia duradoura.", "ImageUrl": "/images/products/cereal_aveia.png", "Additionals": [] },
+          { "name": "Cereal Integral", "price": 6.20, "Description": "Fibras e sabor para um dia produtivo.", "ImageUrl": "/images/products/cereal_integral.png", "Additionals": [] }
         ]
       }
     ]

@@ -24,8 +24,11 @@ namespace TotemPWA.Models
             }
         }
 
-        // O set é privado, significando que só o código DENTRO desta classe pode alterá-lo.
-        public string Slug { get; private set; } = string.Empty; 
+         // Mudar para 'public set;' para permitir atribuição externa
+        public string Slug { get; set; } = string.Empty; 
+
+        // ADICIONAR ESTA PROPRIEDADE
+        public string? Icon { get; set; } 
 
         [StringLength(255, ErrorMessage = "A descrição não pode exceder 255 caracteres.")]
         public string? Description { get; set; } // Pode ser nulo

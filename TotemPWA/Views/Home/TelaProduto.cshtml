@@ -53,7 +53,7 @@
                     @foreach (var product in ViewBag.Products) // <-- Correto: iterar sobre ViewBag.Products
                     {
                         <div class="btn-produto"
-                             onclick="location.href='@Url.Action("Personalizar", "Home", new { productId = product.id })'"> 
+                             onclick="location.href='@Url.Action("PersonalizarProdutos", "Customer", new { productId = product.id })'"> 
                             <img src="@(product.imageUrl ?? "/images/products/default_product.png")" alt="@product.name"> <span class="nome">@product.name</span>
                             <span class="valor">@product.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
                             <p class="descricao">@product.description</p> </div>

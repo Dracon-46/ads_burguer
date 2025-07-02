@@ -3,13 +3,12 @@ namespace TotemPWA.Models
 {
     public class OrderItem
     {
-        // Mude de 'int Id' para 'Guid Id'
-        public Guid Id { get; set; } // <<-- MUDANÇA AQUI!
+        public Guid Id { get; set; } 
 
         public int ProductId { get; set; }
         public required Product Product { get; set; }
 
-        public int OrderId { get; set; } // O Id da Order continua sendo int
+        public int OrderId { get; set; } 
         public required Order Order { get; set; }
 
         public int Quantity { get; set; }

@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = Model.Product.Id == 0 ? "Novo Produto" : "Editar Produto";
 }
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <h1>@ViewData["Title"]</h1>
 
 <hr />
@@ -216,50 +216,9 @@
                 <input type="hidden" asp-for="Product.Id" />
             }
 
-            <div class="form-group">
-                <label asp-for="Product.Name" class="control-label">Nome:</label>
-                <input asp-for="Product.Name" class="form-control" />
-                <span asp-validation-for="Product.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Product.Description" class="control-label">Descrição:</label>
-                <textarea asp-for="Product.Description" class="form-control"></textarea>
-                <span asp-validation-for="Product.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Product.Price" class="control-label">Preço:</label>
-                <input asp-for="Product.Price" class="form-control" />
-                <span asp-validation-for="Product.Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Product.CategoryId" class="control-label">Categoria:</label>
-                <select asp-for="Product.CategoryId" asp-items="Model.Categories" class="form-control">
-                    <option value="">-- Selecione uma Categoria --</option>
-                </select>
-                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-            </div>
+            <partial name="_Form" model="Model" />
 
-            <div class="form-group">
-                <label asp-for="ImageFile" class="control-label">Imagem do Produto:</label>
-                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
-            </div>
-
-            @if (!string.IsNullOrEmpty(Model.Product.ImageUrl) && Model.Product.Id != 0)
-            {
-                <div class="form-group">
-                    <label class="control-label">Imagem Atual</label>
-                    <br />
-                    <img src="@Model.Product.ImageUrl" alt="Imagem do Produto" style="max-width: 200px; height: auto;" />
-                </div>
-            }
-
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Product.Active" /> @Html.DisplayNameFor(model => model.Product.Active)
-                </label>
-            </div>
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <button type="submit" class="btn btn-primary">Salvar</button>
                 <a asp-action="List" class="btn btn-secondary">Voltar</a>
             </div>
@@ -268,7 +227,26 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.ingredient-checkbox').forEach(function(checkbox) {
+                function toggleOptions() {
+                    const optionsDiv = this.closest('.ingredient-item').querySelector('.ingredient-options');
+                    if (this.checked) {
+                        optionsDiv.style.display = 'block';
+                    } else {
+                        optionsDiv.style.display = 'none';
+                        // Ao desmarcar, reseta a quantidade para 1 (ou 0)
+                        optionsDiv.querySelectorAll('input[type="number"]').forEach(function(input) {
+                            input.value = 1; // Reseta para a quantidade padrão (1, ou defina 0 se preferir)
+                        });
+                    }
+                }
+                checkbox.addEventListener('change', toggleOptions);
+                toggleOptions.call(checkbox); // Chama no carregamento para o estado inicial
+            });
+        });
+    </script>
 }

@@ -1,10 +1,10 @@
+// Models/Additional.cs
 using System.Text.Json.Serialization;
 
 namespace TotemPWA.Models
 {
     public class Additional
     {
-        // Propriedades existentes
         public int ProductId { get; set; }
         [JsonIgnore]
         public Product? Product { get; set; }
@@ -13,8 +13,7 @@ namespace TotemPWA.Models
         [JsonIgnore]
         public Ingredient? Ingredient { get; set; }
 
-        public bool IsDefault { get; set; } // Indica se este ingrediente vem por padrão com o produto
-        public bool CanBeRemoved { get; set; } // Indica se este ingrediente padrão pode ser removido pelo cliente
-        public bool CanBeAdded { get; set; } // Indica se este ingrediente pode ser adicionado (ex: extra)
+        // Removidas: IsDefault, CanBeRemoved, CanBeAdded
+        public int Quantity { get; set; } = 1; // Mantida e agora crucial
     }
 }

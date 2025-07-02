@@ -1,3 +1,5 @@
+@model TotemPWA.ViewModels.PersonalizarProdutoViewModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,7 @@
     <link rel="stylesheet" href="/css/personalizarProduto.css">
 </head>
 <body>
-    
+
 <div class="container">
     <button class="back-btn" onclick="history.back()">← Voltar</button>
 
@@ -26,56 +28,43 @@
         <input type="hidden" name="CartItemId" value="@Model.CartItemId" />
         <input type="hidden" name="ProdutoId" value="@Model.Produto.Id" />
 
-        @if (Model.ProdutoAdditionals != null && ((IEnumerable<TotemPWA.Models.Additional>)Model.ProdutoAdditionals).Any())
+        @if (Model.ProdutoAdditionals != null && Model.ProdutoAdditionals.Any())
         {
             <div class="card">
                 <h4>Ingredientes</h4>
                 <div class="size-options">
-                    @foreach (var additional in ((IEnumerable<TotemPWA.Models.Additional>)Model.ProdutoAdditionals).OrderBy(a => a.Ingredient?.Name))
+                    @foreach (var additional in Model.ProdutoAdditionals.OrderBy(a => a.Ingredient?.Name))
                     {
                         var ing = additional.Ingredient;
                         if (ing != null)
                         {
+                            var productStandardQuantity = additional.Quantity; 
+
                             int currentQuantity;
-                            // Se for edição, obtém a quantidade manipulada.
-                            // Caso contrário, se for padrão, começa com 1, senão com 0.
                             if (Model.QuantidadesManipuladas.TryGetValue(ing.Id, out int manipulatedQuantity))
                             {
                                 currentQuantity = manipulatedQuantity;
                             }
                             else
                             {
-                                currentQuantity = additional.IsDefault ? 1 : 0;
+                                currentQuantity = productStandardQuantity; 
                             }
 
                             <div class="size-option"
                                 data-ingredient-id="@ing.Id"
                                 data-ing-price="@ing.Price.ToString("F2").Replace(",", ".")"
                                 data-ing-limit="@ing.Limit"
-                                data-is-default="@additional.IsDefault.ToString().ToLower()"
-                                data-can-be-removed="@additional.CanBeRemoved.ToString().ToLower()"
-                                data-can-be-added="@additional.CanBeAdded.ToString().ToLower()">
+                                data-product-standard-quantity="@productStandardQuantity">
 
                                 <span>@ing.Name</span>
-
-                                @if (additional.CanBeAdded && ing.Price > 0)
-                                {
-                                    <p>+ R$ @ing.Price.ToString("F2")</p>
-                                }
-                                else if (additional.IsDefault && ing.Price == 0) // Para ingredientes padrão sem custo extra
-                                {
-                                    <p style="font-size: 0.8em; color: gray;">(Padrão)</p>
-                                }
-
+                                <p>R$ @ing.Price.ToString("F2")</p>
+                                
                                 <div class="quantity-control">
                                     <button type="button" class="btn-quantidade-sub">-</button>
                                     <span class="quantidade-ingrediente">@currentQuantity</span>
                                     <button type="button" class="btn-quantidade-add">+</button>
 
-                                    @if (currentQuantity > 0)
-                                    {
-                                        <input type="hidden" class="ingrediente-hidden" name="IngredientesManipuladosQuantidades[@ing.Id]" value="@currentQuantity" />
-                                    }
+                                    <input type="hidden" class="ingrediente-hidden" name="IngredientesManipuladosQuantidades[@ing.Id]" value="@currentQuantity" />
                                 </div>
                             </div>
                         }
@@ -96,36 +85,26 @@
     </form>
 </div>
 <script>
-    let currentTotal = parseFloat(document.getElementById("precoBase").innerText.replace(",", "."));
+    let initialBasePrice = parseFloat(document.getElementById("precoBase").innerText.replace(",", "."));
 
     function atualizarPrecoTotal() {
-        let precoBaseInicial = parseFloat(document.getElementById("precoBase").innerText.replace(",", "."));
-        let precoAdicionais = 0;
+        let currentCalculatedPrice = initialBasePrice;
 
         document.querySelectorAll('.size-option').forEach(function (div) {
-            const isDefault = div.getAttribute('data-is-default') === 'true';
+            const ingredientId = parseInt(div.getAttribute('data-ingredient-id'));
             const precoUnitarioIngrediente = parseFloat(div.getAttribute('data-ing-price'));
             const quantidadeAtualNoUI = parseInt(div.querySelector('.quantidade-ingrediente').innerText);
+            const productStandardQuantity = parseInt(div.getAttribute('data-product-standard-quantity'));
 
-            // A lógica de precificação continua a mesma:
-            // Se é um ingrediente padrão, a primeira unidade não é cobrada extra.
-            // Cobramos apenas as unidades adicionais (quantidadeAtualNoUI - 1), se houver.
-            // Se não é padrão, todas as unidades são consideradas adicionais e cobradas.
-            if (isDefault) {
-                if (quantidadeAtualNoUI > 1) {
-                    precoAdicionais += precoUnitarioIngrediente * (quantidadeAtualNoUI - 1);
-                }
-            } else {
-                precoAdicionais += precoUnitarioIngrediente * quantidadeAtualNoUI;
+            if (quantidadeAtualNoUI > productStandardQuantity) {
+                currentCalculatedPrice += precoUnitarioIngrediente * (quantidadeAtualNoUI - productStandardQuantity);
             }
         });
 
-        currentTotal = precoBaseInicial + precoAdicionais;
-        document.getElementById("precoTotal").innerText = "R$ " + currentTotal.toFixed(2).replace(".", ",");
+        document.getElementById("precoTotal").innerText = "R$ " + currentCalculatedPrice.toFixed(2).replace(".", ",");
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        // --- Lógica para adicionar (+) ingredientes ---
         document.querySelectorAll('.btn-quantidade-add').forEach(button => {
             button.addEventListener('click', function () {
                 const sizeOptionDiv = this.closest('.size-option');
@@ -138,13 +117,12 @@
                     quantidade++;
                     quantidadeSpan.innerText = quantidade;
 
-                    // Atualiza ou cria o input hidden para a quantidade final
-                    let hiddenInput = sizeOptionDiv.querySelector('.ingrediente-hidden');
+                    let hiddenInput = sizeOptionDiv.querySelector(`.ingrediente-hidden[name='IngredientesManipuladosQuantidades[${ingredientId}]']`);
                     if (!hiddenInput) {
                         hiddenInput = document.createElement('input');
                         hiddenInput.type = 'hidden';
                         hiddenInput.classList.add('ingrediente-hidden');
-                        hiddenInput.name = `IngredientesManipuladosQuantidades[${ingredientId}]`;
+                        hiddenInput.name = `IngredientesManipuladasQuantidades[${ingredientId}]`;
                         sizeOptionDiv.appendChild(hiddenInput);
                     }
                     hiddenInput.value = quantidade.toString();
@@ -156,96 +134,52 @@
             });
         });
 
-        // --- Lógica para subtrair (-) ingredientes ---
         document.querySelectorAll('.btn-quantidade-sub').forEach(button => {
             button.addEventListener('click', function () {
                 const sizeOptionDiv = this.closest('.size-option');
                 const quantidadeSpan = sizeOptionDiv.querySelector('.quantidade-ingrediente');
                 let quantidade = parseInt(quantidadeSpan.innerText);
                 const ingredientId = parseInt(sizeOptionDiv.getAttribute('data-ingredient-id'));
-                const isDefault = sizeOptionDiv.getAttribute('data-is-default') === 'true'; // Ainda necessário para a lógica de envio
 
                 if (quantidade > 0) {
                     quantidade--;
                     quantidadeSpan.innerText = quantidade;
 
-                    let hiddenInput = sizeOptionDiv.querySelector('.ingrediente-hidden');
-
-                    if (quantidade > 0) {
-                        // Atualiza o input hidden se a quantidade ainda for maior que 0
-                        if (!hiddenInput) {
-                            hiddenInput = document.createElement('input');
-                            hiddenInput.type = 'hidden';
-                            hiddenInput.classList.add('ingrediente-hidden');
-                            hiddenInput.name = `IngredientesManipuladosQuantidades[${ingredientId}]`;
-                            sizeOptionDiv.appendChild(hiddenInput);
-                        }
-                        hiddenInput.value = quantidade.toString();
-                    } else {
-                        // Se a quantidade for 0, remove o input hidden existente
-                        if (hiddenInput) {
-                            hiddenInput.remove();
-                        }
-                        // E, se for um ingrediente padrão, cria um input hidden com valor 0
-                        // para indicar explicitamente a remoção ao backend.
-                        if (isDefault) {
-                            const removedHiddenInput = document.createElement('input');
-                            removedHiddenInput.type = 'hidden';
-                            removedHiddenInput.classList.add('ingrediente-hidden'); // Adiciona a classe para ser encontrado no submit
-                            removedHiddenInput.name = `IngredientesManipuladosQuantidades[${ingredientId}]`;
-                            removedHiddenInput.value = "0";
-                            sizeOptionDiv.appendChild(removedHiddenInput);
-                        }
+                    let hiddenInput = sizeOptionDiv.querySelector(`.ingrediente-hidden[name='IngredientesManipuladasQuantidades[${ingredientId}]']`);
+                    if (!hiddenInput) {
+                         hiddenInput = document.createElement('input');
+                         hiddenInput.type = 'hidden';
+                         hiddenInput.classList.add('ingrediente-hidden');
+                         hiddenInput.name = `IngredientesManipuladasQuantidades[${ingredientId}]`;
+                         sizeOptionDiv.appendChild(hiddenInput);
                     }
+                    hiddenInput.value = quantidade.toString();
+                    
                     atualizarPrecoTotal();
+                } else {
+                    alert(`Não é possível ter menos de 0 unidades.`);
                 }
             });
         });
 
-        // --- Listener para o formulário no momento do submit ---
-        // Garante que apenas as quantidades finais corretas (e 0 para itens padrão removidos)
-        // sejam enviadas ao backend.
         document.getElementById('personalizacaoForm').addEventListener('submit', function(event) {
             document.querySelectorAll('.size-option').forEach(function(div) {
                 const quantidadeSpan = div.querySelector('.quantidade-ingrediente');
                 const quantidade = parseInt(quantidadeSpan.innerText);
-                let hiddenInput = div.querySelector('.ingrediente-hidden');
                 const ingredientId = parseInt(div.getAttribute('data-ingredient-id'));
-                const isDefault = div.getAttribute('data-is-default') === 'true';
-
-                // Se a quantidade na UI é 0
-                if (quantidade === 0) {
-                    // Remove qualquer input hidden que possa existir para este ingrediente
-                    if (hiddenInput) {
-                        hiddenInput.remove();
-                    }
-                    // Se for um ingrediente padrão, precisamos enviar 0 para o backend
-                    // para indicar que ele foi removido.
-                    if (isDefault) {
-                        const removedHiddenInput = document.createElement('input');
-                        removedHiddenInput.type = 'hidden';
-                        removedHiddenInput.name = `IngredientesManipuladosQuantidades[${ingredientId}]`;
-                        removedHiddenInput.value = "0"; // Envia 0 para indicar remoção do padrão
-                        this.appendChild(removedHiddenInput);
-                    }
-                } else {
-                    // Se a quantidade na UI não é 0, garante que um input hidden com a quantidade
-                    // correta exista. Isso cobre o caso de ingredientes adicionais que podem
-                    // ter começado com 0 e foram adicionados, ou ingredientes padrão que foram
-                    // adicionados ou permaneceram.
-                    if (!hiddenInput) {
-                        hiddenInput = document.createElement('input');
-                        hiddenInput.type = 'hidden';
-                        hiddenInput.classList.add('ingrediente-hidden');
-                        hiddenInput.name = `IngredientesManipuladosQuantidades[${ingredientId}]`;
-                        div.appendChild(hiddenInput);
-                    }
-                    hiddenInput.value = quantidade.toString();
+                
+                let hiddenInput = div.querySelector(`.ingrediente-hidden[name='IngredientesManipuladasQuantidades[${ingredientId}]']`);
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.classList.add('ingrediente-hidden');
+                    hiddenInput.name = `IngredientesManipuladasQuantidades[${ingredientId}]`;
+                    div.appendChild(hiddenInput);
                 }
+                hiddenInput.value = quantidade.toString();
             });
         });
 
-        // Inicializa o preço total quando a página carrega
         atualizarPrecoTotal();
     });
 </script>

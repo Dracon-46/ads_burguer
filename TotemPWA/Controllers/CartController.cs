@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; // Adicionar para usar .Include
+using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
-using TotemPWA.Utilities;
+using TotemPWA.Utilities; // Certifique-se de que esta classe de extensão para Session está disponível
 using TotemPWA.Models.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
@@ -20,19 +20,14 @@ namespace TotemPWA.Controllers
             _context = context;
         }
 
-               [HttpGet]
-        public async Task<IActionResult> Index() // Tornar a ação assíncrona
+        [HttpGet]
+        public async Task<IActionResult> Index() // Torna a ação assíncrona
         {
-            // Recupera o carrinho da sessão. Se não existir, cria uma nova lista vazia.
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
-
-            // Lista para armazenar itens que precisam ser removidos se o produto base não for encontrado
             var itemsToRemove = new List<CartItemViewModel>();
 
-            // Recalcular o preço e o resumo para cada item no carrinho
             foreach (var item in cart)
             {
-                // Inclui as propriedades necessárias para o cálculo do preço e resumo
                 var product = await _context.Products
                                     .Include(p => p.Additionals!) // Inclui os 'Additionals' do produto
                                         .ThenInclude(pa => pa.Ingredient) // Em seguida, inclui o 'Ingredient' de cada 'Additional'
@@ -40,124 +35,125 @@ namespace TotemPWA.Controllers
 
                 if (product == null)
                 {
-                    // Se o produto base não for encontrado no banco de dados, marca para remoção
                     itemsToRemove.Add(item);
-                    continue; // Pula para o próximo item do carrinho
+                    continue;
                 }
 
-                // Inicia o preço recalculado com o preço base do produto
+                // Começa o preço recalculado com o preço base do produto.
                 decimal recalculatedPrice = product.Price;
                 var tempPersonalizationSummary = new List<string>();
 
-                foreach (var entry in item.ManipulatedIngredientsWithQuantity)
+                // Obtém as adições padrão do produto configuradas pelo administrador
+                var productStandardAdditions = product.Additionals?.ToDictionary(a => a.IngredientId) ?? new Dictionary<int, Additional>();
+
+                // Itera sobre os ingredientes manipulados que estão no item do carrinho
+                if (item.ManipulatedIngredientsWithQuantity != null) // Garante que o dicionário não seja nulo
                 {
-                    var ingredientId = entry.Key;
-                    var finalQuantity = entry.Value;
-
-                    // Tenta encontrar o 'Additional' correspondente no produto carregado.
-                    // Isso é crucial para acessar as propriedades IsDefault e o preço do Ingredient.
-                    var productAdditional = product.Additionals?.FirstOrDefault(a => a.IngredientId == ingredientId);
-
-                    // Verifica se o ingrediente existe no produto ou se foi um erro de dado.
-                    if (productAdditional == null || productAdditional.Ingredient == null)
+                    foreach (var entry in item.ManipulatedIngredientsWithQuantity)
                     {
-                        // Se o ingrediente não faz parte do produto ou não tem dados, ignora ou loga.
-                        if (finalQuantity > 0)
-                        {
-                            tempPersonalizationSummary.Add($"Erro: Ingrediente ID {ingredientId} inválido");
-                        }
-                        continue;
-                    }
+                        var ingredientId = entry.Key;
+                        var finalQuantity = entry.Value; // Quantidade final que o cliente escolheu
 
-                    if (productAdditional.IsDefault)
-                    {
-                        // Adiciona ao resumo se a quantidade for > 0
-                        if (finalQuantity > 0)
+                        if (productStandardAdditions.TryGetValue(ingredientId, out var additional) && additional.Ingredient != null)
                         {
-                            tempPersonalizationSummary.Add($"{finalQuantity}x {productAdditional.Ingredient.Name}");
-                        } else {
-                            // Se a quantidade final for 0 para um ingrediente padrão, significa que ele foi removido.
-                            tempPersonalizationSummary.Add($"sem {productAdditional.Ingredient.Name}");
-                        }
+                            var standardQuantity = additional.Quantity; // Quantidade padrão do ingrediente no produto
+                            var ingredientPrice = additional.Ingredient.Price; // Preço do ingrediente
 
-                        // Se a quantidade final é maior que 1, cobre as unidades adicionais
-                        if (finalQuantity > 1)
-                        {
-                            recalculatedPrice += productAdditional.Ingredient.Price * (finalQuantity - 1);
+                            // Lógica para recalcular o preço baseado na diferença de quantidade
+                            if (finalQuantity > standardQuantity)
+                            {
+                                recalculatedPrice += ingredientPrice * (finalQuantity - standardQuantity);
+                                tempPersonalizationSummary.Add($"{finalQuantity}x {additional.Ingredient.Name}");
+                            }
+                            else if (finalQuantity < standardQuantity)
+                            {
+                                // Reflete a remoção no resumo
+                                tempPersonalizationSummary.Add($"removido {standardQuantity - finalQuantity}x de {additional.Ingredient.Name}");
+                                // O preço NÃO é reduzido aqui, mantendo a consistência com a lógica de SalvarPersonalizacao.
+                            }
+                            else if (finalQuantity == standardQuantity && finalQuantity > 0)
+                            {
+                                tempPersonalizationSummary.Add($"{finalQuantity}x {additional.Ingredient.Name}");
+                            }
+                            else if (finalQuantity == 0 && standardQuantity > 0)
+                            {
+                                tempPersonalizationSummary.Add($"sem {additional.Ingredient.Name}"); // Removeu completamente um ingrediente padrão
+                            }
                         }
-                    }
-                    else // Se o ingrediente NÃO é padrão (é um "extra" adicionado pelo usuário)
-                    {
-                        // Todas as unidades são cobradas.
-                        if (finalQuantity > 0)
+                        else
                         {
-                            recalculatedPrice += productAdditional.Ingredient.Price * finalQuantity;
-                            tempPersonalizationSummary.Add($"{finalQuantity}x {productAdditional.Ingredient.Name}");
+                            // Ingrediente no carrinho que não é mais um Adicional do produto ou é um "extra" não padrão.
+                            if (finalQuantity > 0)
+                            {
+                                var unknownIngredient = await _context.Ingredients.FindAsync(ingredientId);
+                                if (unknownIngredient != null)
+                                {
+                                    recalculatedPrice += unknownIngredient.Price * finalQuantity;
+                                    tempPersonalizationSummary.Add($"extra {finalQuantity}x {unknownIngredient.Name}");
+                                }
+                                else
+                                {
+                                    // Registra ou lida com ingrediente desconhecido (ex: se foi excluído do DB)
+                                    tempPersonalizationSummary.Add($"Ingrediente desconhecido (ID: {ingredientId}) ignorado.");
+                                }
+                            }
                         }
-                        // Se finalQuantity for 0 para um não-padrão, ele simplesmente não é adicionado ao preço nem ao resumo.
                     }
                 }
-                
+
                 // Atualiza o preço e o resumo do item no carrinho
                 item.Price = recalculatedPrice;
                 item.PersonalizationSummary = tempPersonalizationSummary.Any() ?
                                               "(" + string.Join(", ", tempPersonalizationSummary) + ")" : "";
             }
 
-            // Remove quaisquer itens de carrinho para os quais o produto base não foi encontrado
             cart.RemoveAll(item => itemsToRemove.Contains(item));
-
-            // Salva o carrinho atualizado de volta na sessão
             HttpContext.Session.SetObject("Cart", cart);
 
             return View("Cart", cart);
         }
 
         [HttpPost]
-        public IActionResult AddItem(Guid cartItemId) // Recebe o GUID agora
+        public IActionResult AddItem(Guid cartItemId)
         {
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
-            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId); // Busca pelo CartItemId
+            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId);
 
             if (item != null)
             {
                 item.Quantity++;
                 HttpContext.Session.SetObject("Cart", cart);
             }
-            // Se o item não for encontrado, ele não deve ser adicionado aqui, mas sim pela Personalização
             return RedirectToAction("Index");
         }
 
-        // MODIFICADO: DecreaseItem agora recebe um GUID
         [HttpPost]
-        public IActionResult DecreaseItem(Guid cartItemId) // Recebe o GUID agora
+        public IActionResult DecreaseItem(Guid cartItemId)
         {
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
-            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId); // Busca pelo CartItemId
+            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId);
 
             if (item != null)
             {
                 if (item.Quantity > 1)
                 {
-                    item.Quantity--; // Decrementa a quantidade em 1
+                    item.Quantity--;
                 }
                 else
                 {
-                    // Se a quantidade for 1, remove o item completamente do carrinho
                     cart.Remove(item);
                 }
-                HttpContext.Session.SetObject("Cart", cart); // Salva o carrinho atualizado na sessão
+                HttpContext.Session.SetObject("Cart", cart);
             }
 
-            return RedirectToAction("Index"); // Redireciona de volta para a tela do carrinho
+            return RedirectToAction("Index");
         }
 
-        // MODIFICADO: RemoveItem agora recebe um GUID para remover a instância COMPLETA de um item personalizado
         [HttpPost]
-        public IActionResult RemoveItem(Guid cartItemId) // Recebe o GUID agora
+        public IActionResult RemoveItem(Guid cartItemId)
         {
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new();
-            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId); // Busca pelo CartItemId
+            var item = cart.FirstOrDefault(x => x.CartItemId == cartItemId);
             if (item != null)
             {
                 cart.Remove(item);

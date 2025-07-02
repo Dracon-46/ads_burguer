@@ -1,28 +1,92 @@
 @model TotemPWA.ViewModels.ProductViewModel
 
 <div class="form-group">
-    <label  class="control-label">Nome do Produto:</label>
+    <label asp-for="Product.Name" class="control-label">Nome:</label>
     <input asp-for="Product.Name" class="form-control" />
     <span asp-validation-for="Product.Name" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label  class="control-label">Descrição:</label>
+    <label asp-for="Product.Description" class="control-label">Descrição:</label>
     <textarea asp-for="Product.Description" class="form-control"></textarea>
     <span asp-validation-for="Product.Description" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label class="control-label">Preço:</label>
+    <label asp-for="Product.Price" class="control-label">Preço:</label>
     <input asp-for="Product.Price" class="form-control" />
     <span asp-validation-for="Product.Price" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label class="control-label">Categoria:</label>
-    <select asp-for="Product.CategoryId" class="form-control" asp-items="Model.Categories">
-        <option value="">Categoria Principal</option>
+    <label asp-for="Product.CategoryId" class="control-label">Categoria:</label>
+    <select asp-for="Product.CategoryId" asp-items="Model.Categories" class="form-control">
+        <option value="">-- Selecione uma Categoria --</option>
     </select>
     <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
 </div>
+<div class="form-group">
+    <label asp-for="ImageFile" class="control-label">Imagem do Produto:</label>
+    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+    <span asp-validation-for="ImageFile" class="text-danger"></span>
+</div>
+@if (!string.IsNullOrEmpty(Model.Product.ImageUrl) && Model.Product.Id != 0)
+{
+    <div class="form-group">
+        <label class="control-label">Imagem Atual</label>
+        <br />
+        <img src="@Model.Product.ImageUrl" alt="Imagem do Produto" style="max-width: 200px; height: auto;" />
+    </div>
+}
 <div class="form-group form-check">
-    <input class="form-check-input" asp-for="Product.Active" />
-    <label class="form-check-label" asp-for="Product.Active"></label>
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Product.Active" /> @Html.DisplayNameFor(model => model.Product.Active)
+    </label>
+</div>
+
+<hr class="mt-4 mb-4" /> <div class="form-group">
+    <label class="control-label">Ingredientes Contidos (Quantidade Padrão):</label>
+    <div class="ingredient-selection-container border p-3 rounded bg-light">
+        @if (Model.SelectedIngredients != null && Model.SelectedIngredients.Any())
+        {
+            <small class="text-muted mb-2 d-block">Marque os ingredientes que fazem parte deste produto e defina a quantidade que vem por padrão.</small>
+            foreach (var ingredientEntry in Model.SelectedIngredients.OrderBy(i => i.Value.IngredientName))
+            {
+                var ingredient = ingredientEntry.Value;
+                <div class="form-check ingredient-item border p-2 mb-2 rounded shadow-sm">
+                    <input type="checkbox"
+                           name="SelectedIngredients[@ingredient.IngredientId].IsSelected"
+                           value="true"
+                           class="form-check-input ingredient-checkbox"
+                           @(ingredient.IsSelected ? "checked" : "")
+                           id="ingredient_@ingredient.IngredientId" />
+                    <label class="form-check-label fw-bold d-inline" for="ingredient_@ingredient.IngredientId">
+                        @ingredient.IngredientName
+                    </label>
+
+                    <input type="hidden" name="SelectedIngredients[@ingredient.IngredientId].IsSelected" value="false" />
+                    <input type="hidden" name="SelectedIngredients[@ingredient.IngredientId].IngredientId" value="@ingredient.IngredientId" />
+                    <input type="hidden" name="SelectedIngredients[@ingredient.IngredientId].IngredientName" value="@ingredient.IngredientName" />
+                    <input type="hidden" name="SelectedIngredients[@ingredient.IngredientId].Price" value="@ingredient.Price" />
+                    <input type="hidden" name="SelectedIngredients[@ingredient.IngredientId].Limit" value="@ingredient.Limit" />
+
+
+                    <div class="ingredient-options ms-4 mt-2" style="@(ingredient.IsSelected ? "" : "display: none;")">
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="quantity_@ingredient.IngredientId" class="me-2 text-muted">Quantidade:</label>
+                            <input type="number"
+                                   name="SelectedIngredients[@ingredient.IngredientId].Quantity"
+                                   id="quantity_@ingredient.IngredientId"
+                                   value="@ingredient.Quantity"
+                                   min="0"
+                                   class="form-control w-auto"
+                                   style="max-width: 80px;" />
+                        </div>
+                        <small class="text-muted">Este ingrediente pode ser adicionado/removido livremente pelo cliente.</small>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">Nenhum ingrediente disponível. <a asp-controller="Ingredient" asp-action="Create" class="text-decoration-none">Crie um agora.</a></p>
+        }
+    </div>
 </div>
