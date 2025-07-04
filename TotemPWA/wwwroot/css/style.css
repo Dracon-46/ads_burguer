@@ -5,7 +5,7 @@
     body { margin: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: #e3e3e3; font-family: 'Poppins', sans-serif; width: 100vw; height: 100vh; padding: 0px !important;}
     .voltar{ background-color: var(--primary-color); color: white; font-weight: bold; font-size: 16px; padding: 12px 40px; border: none; border-radius: var(--border-radius); cursor: pointer; transition: 0.3s; width: 160px; text-decoration: none; }
     .cont{ background-color: var(--btn-sim-color); color: var(--text-color); font-weight: bold; font-size: 16px; padding: 12px 40px; border: none; border-radius: var(--border-radius);  cursor: pointer; transition: 0.3s; width: 160px; text-decoration: none; }
-/* --------------------------- END ---------------------------- */
+
 
 /* --------------------------- INDEX ----------------------- */
     .container { background-image: url('/images/hamburguer.png'); background-repeat: no-repeat; background-position: 10vw 40vh; background-size: 30%; background-color: var(--bg-color); width: 100vw; height: 100vh; }
@@ -18,23 +18,22 @@
     .container .btnStart { display: flex; justify-content: center; align-items: center; position: relative; top: 150px; height: auto; width: 100%; }
     .container .btn-inicial { background-color: #ff6700; color: white;  font-weight: bold; font-size: 16px; display: flex; align-items: center ; justify-content: center; text-decoration: none; padding: 12px 40px; border: none; border-radius: var(--border-radius); cursor: pointer; transition: 0.3s; width: 40%; margin: 0 auto;  }
     .container .btn-inicial:hover { background-color: #e55c00; }
-/* --------------------------- END --------------------------- */
 
-/* --------------------------- CPF ----------------------- */
-    .bodyNocenter {display: flex; justify-content: flex-start; align-items: flex-start;}
-    .containerNoBG { text-align: center;  }
-    .containerNoBG .navbar { background-color: var(--primary-color);  height: 5vh; padding: 50px; }
-    .containerNoBG .img { width: 800px; height: 400px; background-image: url('../images/lanche_cpf.png'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 50px; }
-    .containerNoBG .text { margin-bottom: 50px; }
-    .containerNoBG .text h1:nth-child(1) { font-weight: bold; text-align: center; font-size: 25px; color: var(--text-color); }
-    .containerNoBG .text h1:nth-child(2) { font-weight: bold; text-align: center; font-size: 25px; color: var(--text-color); filter: opacity(0.8); }
+
+/* --------------------------- CPF --------------------------- */
+    .containerNoBG { display: flex; flex-direction: column; align-items: center;}
+    .containerNoBG .navbar { background-color: var(--primary-color);  height: 12vh; width: 100VW; position: relative; bottom: 22px; }
+    .containerNoBG .img { width: 800px; height: 400px; background-image: url('../images/lanche_cpf.png'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; bottom: 55px;}
+    .containerNoBG .text { height: auto; }
+    .containerNoBG .text h1:nth-child(1) { font-weight: bold; text-align: center; font-size: 25px; color: var(--text-color); margin: 0px !important; }
+    .containerNoBG .text h1:nth-child(2) { font-weight: bold; text-align: center; font-size: 25px; color: var(--text-color); filter: opacity(0.8); margin: 0px !important; }
     .containerNoBG input{ width: 350px; height: 60px; border: 2px solid #969696; border-radius: var(--border-radius); padding: 0 10px; font-size: 16px; outline: none;}
     .containerNoBG .btns { display: flex; align-items: center; justify-content: space-around; gap: 20px; }
     .containerNoBG .btns a { color: var(--text-color);}
     .containerNoBG .simple-keyboard { max-width: 600px; margin: 20px auto; }
     .hg-button .hg-functionBtn .hg-button-bksp { background-color: red !important; color: white; }
     .simple-keyboard {display: block !important;}
-/* --------------------------- END --------------------------- */
+
 
 /* --------------------------- NOTA FISCAL --------------------------- */
     .nota-container { background-color: white; width: 100%; max-width: 600px; height: 50vh; display: flex; flex-direction: column; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); overflow: hidden; }        
@@ -47,7 +46,6 @@
     .produtos li { margin-bottom: 5px; }
     .nota-footer { background-color: #ffffff; padding: 20px; border-top: 1px solid #ddd; position: sticky; bottom: 0; z-index: 2; }
     .totais div { font-weight: bold;}
-    .btn-voltar{color: white; background-color: var(--primary-color); text-decoration: none;  border-radius: var(--border-radius); display: inline-block; transition: background-color 0.3s; }
+    .btn-voltar{color: white; background-color: var(--primary-color); text-decoration: none;  border-radius: var(--border-radius); display: inline-block; transition: background-color 0.3s; display: flex; justify-content: center; align-items: center; }
     .btn-voltar:hover { background-color: var(--hover-color); }
 
-/* --------------------------- END ----------------------------------- */
