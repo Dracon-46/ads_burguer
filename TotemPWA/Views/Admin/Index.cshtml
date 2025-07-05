@@ -33,6 +33,12 @@
                 <a asp-controller="Promotion" asp-action="List">
                     <li><i class="fa-solid fa-tags"></i> Promoções</li>
                 </a>
+                <a asp-controller="Ingredient" asp-action="List">
+                    <li><i class="fa-solid fa-tags"></i> Ingredientes</li>
+                </a>
+                <a asp-controller="Combo" asp-action="List">
+                    <li><i class="fa-solid fa-tags"></i> Combos</li>
+                </a>
             </ul>
       </nav>
     </aside>
@@ -72,6 +78,11 @@
             <h3><i class="fa-solid fa-percent"></i> Promoções</h3>
             <p>Gerencie as promoções dos produtos.</p>
             <a href="@Url.Action("List", "Promotion")"><button class="btn-gradient">Adicionar Promoção</button></a>
+          </div>
+          <div class="card blue">
+            <h3><i class="fa-solid fa-percent"></i> Combos</h3>
+            <p>Gerencie os Combos.</p>
+            <a href="@Url.Action("List", "Combo")"><button class="btn-gradient">Adicionar Combo</button></a>
           </div>
         </div>
       </div>

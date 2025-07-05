@@ -1,0 +1,572 @@
+@model TotemPWA.ViewModels.PersonalizarComboViewModel
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalizar Combo - ADS Burguer</title>
+    <link rel="stylesheet" href="/css/persopedido.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+        <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Estilos do cabeçalho do combo */
+        .combo-header {
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .combo-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .combo-price {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .combo-savings {
+            font-size: 14px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        /* Estilos dos itens do combo */
+        .combo-items-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .combo-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        .combo-item:hover {
+            border-color: #ff6b35;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .combo-item-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .combo-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+        
+        .combo-item-info {
+            flex: 1;
+        }
+        
+        .combo-item-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .combo-item-price {
+            font-size: 16px;
+            color: #ff6b35;
+            font-weight: 500;
+        }
+        
+        /* Botões */
+        .customize-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .customize-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-1px);
+        }
+        
+        .customize-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Seção de adicionais */
+        .additionals-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .additionals-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Ingredientes */
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .ingredient-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ingredient-info {
+            flex: 1;
+        }
+        
+        .ingredient-name {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 2px;
+            font-weight: 500;
+        }
+        
+        .ingredient-price {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Controles de quantidade */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: #e55a2b;
+            transform: scale(1.1);
+        }
+        
+        .quantity-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .quantity-display {
+            font-size: 16px;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        /* Seção total */
+        .total-section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .total-row:last-child {
+            margin-bottom: 0;
+            padding-top: 10px;
+            border-top: 2px solid #ddd;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        /* Botões de ação */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Classes utilitárias */
+        .collapsed {
+            display: none;
+        }
+        
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+    </style>
+    <div class="container">
+        <div class="combo-header">
+            <div class="combo-title">
+                <i class="fas fa-utensils"></i> @Model.ComboProduct.Name
+            </div>
+            <div class="combo-price">
+                @Model.TotalPrice.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+            </div>
+            <div class="combo-savings">
+                <i class="fas fa-tag"></i> Economize comprando o combo!
+            </div>
+        </div>
+
+        <form asp-controller="Customer" asp-action="SalvarPersonalizacao" method="post" id="SalvarPersonalizacaoCombo">
+            <input type="hidden" name="ComboProductId" value="@Model.ComboProduct.Id" />
+            <input type="hidden" name="CartItemId" value="@Model.CartItemId" />
+        
+            <div class="combo-items-container">
+                @for (int i = 0; i < Model.ComboItems.Count; i++)
+                {
+                    var item = Model.ComboItems[i];
+                    <div class="combo-item">
+                        <div class="combo-item-header">
+                            <img src="@(item.ProductImageUrl ?? "/images/products/default_product.png")" 
+                                 alt="@item.ProductName" 
+                                 class="combo-item-image">
+                            <div class="combo-item-info">
+                                <div class="combo-item-name">@item.ProductName</div>
+                                <div class="combo-item-price">
+                                    @item.ProductPrice.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+                                </div>
+                            </div>
+                            <input type="hidden" name="ItemPersonalizations[@i].ProductId" value="@item.ProductId" />
+                            @if (item.CanCustomize && item.ProductAdditionals?.Any() == true)
+                            {
+                                <button type="button" class="customize-btn" onclick="toggleCustomization('@item.ProductId')">
+                                    <i class="fas fa-cog"></i> Personalizar
+                                    <i class="fas fa-chevron-down expand-icon" id="icon-@item.ProductId"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="customize-btn" disabled>
+                                    <i class="fas fa-lock"></i> Sem customização
+                                </button>
+                            }
+                        </div>
+                        
+                        @if (item.CanCustomize && item.ProductAdditionals?.Any() == true)
+                        {
+                            <div class="additionals-section collapsed" id="additionals-@item.ProductId">
+                                <div class="additionals-title">
+                                    <i class="fas fa-plus-circle"></i> Personalize o @item.ProductName:
+                                </div>
+                                
+                                @{
+                                    var additionalIndex = 0;
+                                }
+                                @foreach (var additional in item.ProductAdditionals)
+                                {
+                                    if (additional.Ingredient != null)
+                                    {
+                                        var currentQuantity = Model.QuantidadesManipuladas.ContainsKey(additional.Ingredient.Id) ? Model.QuantidadesManipuladas[additional.Ingredient.Id] : additional.Quantity;
+                                        
+                                        <div class="ingredient-item">
+                                            <div class="ingredient-info">
+                                                <div class="ingredient-name">@additional.Ingredient.Name</div>
+                                                <div class="ingredient-price">
+                                                    @if (additional.Ingredient.Price > 0)
+                                                    {
+                                                        <span>+ @additional.Ingredient.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Incluído</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="quantity-controls">
+                                                <button type="button" class="quantity-btn" onclick="updateQuantity(@additional.Ingredient.Id, -1, @item.ProductId, @i)">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <span class="quantity-display" id="qty-@item.ProductId-@additional.Ingredient.Id">
+                                                    @currentQuantity
+                                                </span>
+                                                <button type="button" class="quantity-btn" onclick="updateQuantity(@additional.Ingredient.Id, 1, @item.ProductId, @i)">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                                
+                                                <!-- Inputs corretos para o model binding -->
+                                                <input type="hidden" 
+                                                       name="ItemPersonalizations[@i].IngredientesManipuladasQuantidades[@additional.Ingredient.Id]"
+                                                       value="@currentQuantity"
+                                                       id="input-@item.ProductId-@additional.Ingredient.Id"
+                                                       data-standard-qty="@additional.Quantity"
+                                                       data-additional-price="@additional.Ingredient.Price.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                                                       data-limit="@additional.Ingredient.Limit" />
+                                            </div>
+                                        </div>
+                                        additionalIndex++;
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            
+            <div class="total-section">
+                <div class="total-row">
+                    <span>Subtotal do Combo:</span>
+                    <span id="subtotal">@Model.TotalPrice.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
+                </div>
+                <div class="total-row">
+                    <span>Adicionais:</span>
+                    <span id="additionals-total">R$ 0,00</span>
+                </div>
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span id="total-price">@Model.TotalPrice.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</span>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button type="button" class="btn btn-secondary" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let basePrice = parseFloat(@Model.TotalPrice.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        let comboItemIngredientData = {}; 
+        
+        // Inicializar dados dos ingredientes
+        @foreach (var item in Model.ComboItems)
+        {
+            if (item.ProductAdditionals != null)
+            {
+                <text>comboItemIngredientData[@item.ProductId] = {};</text>
+                foreach (var additional in item.ProductAdditionals)
+                {
+                    if (additional.Ingredient != null) {
+                        <text>
+                            comboItemIngredientData[@item.ProductId][@additional.Ingredient.Id] = {
+                                price: parseFloat(@additional.Ingredient.Price.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                standardQuantity: @additional.Quantity,
+                                limit: @(additional.Ingredient.Limit)
+                            };
+                        </text>
+                    }
+                }
+            }
+        }
+        
+        function toggleCustomization(productId) {
+            const section = document.getElementById('additionals-' + productId);
+            const icon = document.getElementById('icon-' + productId);
+            
+            if (section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                icon.classList.add('rotated');
+            } else {
+                section.classList.add('collapsed');
+                icon.classList.remove('rotated');
+            }
+        }
+        
+        function updateQuantity(ingredientId, change, itemProductId, itemIndex) {
+            const qtyDisplay = document.getElementById(`qty-${itemProductId}-${ingredientId}`);
+            const qtyInput = document.getElementById(`input-${itemProductId}-${ingredientId}`);
+            
+            if (!qtyDisplay || !qtyInput) {
+                console.error(`Elementos não encontrados para ItemId: ${itemProductId}, IngredientId: ${ingredientId}`);
+                return;
+            }
+            
+            const ingredientInfo = comboItemIngredientData[itemProductId]?.[ingredientId];
+            if (!ingredientInfo) {
+                console.error(`Dados do ingrediente não encontrados para ItemId: ${itemProductId}, IngredientId: ${ingredientId}`);
+                return;
+            }
+
+            let currentQty = parseInt(qtyDisplay.textContent);
+            let newQty = currentQty + change;
+            
+            // Aplicar limites
+            if (newQty < 0) newQty = 0;
+            if (newQty > ingredientInfo.limit) newQty = ingredientInfo.limit;
+            
+            // Atualizar display e input
+            qtyDisplay.textContent = newQty;
+            qtyInput.value = newQty;
+            
+            updateTotalPrice();
+        }
+        
+        function updateTotalPrice() {
+            let additionalsCost = 0;
+            
+            // Buscar todos os inputs de quantidade
+            const allQtyInputs = document.querySelectorAll('input[id^="input-"]');
+            
+            allQtyInputs.forEach(function(input) {
+                const idParts = input.id.split('-');
+                if (idParts.length >= 3) {
+                    const itemProductId = parseInt(idParts[1]);
+                    const ingredientId = parseInt(idParts[2]);
+                    
+                    const currentQty = parseInt(input.value || '0');
+                    const standardQty = parseInt(input.dataset.standardQty || '0');
+                    const additionalPrice = parseFloat(input.dataset.additionalPrice || '0');
+                    
+                    // Calcular custo adicional apenas se a quantidade atual for maior que a padrão
+                    if (currentQty > standardQty) {
+                        additionalsCost += additionalPrice * (currentQty - standardQty);
+                    }
+                }
+            });
+            
+            const totalPrice = basePrice + additionalsCost;
+            
+            // Atualizar os displays
+            document.getElementById('additionals-total').textContent = 
+                additionalsCost.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById('total-price').textContent = 
+                totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+        
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTotalPrice();
+        });
+        
+        // Debug do envio do formulário
+        document.getElementById('combo-form').addEventListener('submit', function(e) {
+            console.log('Enviando combo para o carrinho...');
+            
+            // Debug: mostrar todos os dados que serão enviados
+            const formData = new FormData(this);
+            console.log('Dados do formulário:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+        });
+    </script>
+</body>
+</html>

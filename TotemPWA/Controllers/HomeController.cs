@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
-using TotemPWA.Models.ViewModels;
-using TotemPWA.ViewModels;
+using TotemPWA.Models.ViewModels; // Garanta que este namespace contém ProductDisplayViewModel e IncludedProductViewModel
+using TotemPWA.ViewModels; // Garanta que este namespace contém os ViewModels corretos, se forem usados
 using TotemPWA.Utilities;
 using System.Linq;
 using System.Collections.Generic;
@@ -102,7 +102,7 @@ namespace TotemPWA.Controllers
 
         public class CupomValidationRequest
         {
-            public string CodigoCupom { get; set; }
+            public string CodigoCupom { get; set; } = string.Empty; // Resolvendo warning CS8618
         }
 
         public IActionResult TelaFinal()
@@ -110,7 +110,7 @@ namespace TotemPWA.Controllers
             return View();
         }
 
-     [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
+        [HttpGet("TelaProduto/{categorySlug?}/{subcategorySlug?}")]
         public async Task<IActionResult> TelaProduto(string categorySlug, string subcategorySlug = null)
         {
             // 1. Encontrar a categoria ativa usando o SLUG
@@ -118,8 +118,7 @@ namespace TotemPWA.Controllers
                 .Where(c => c.ParentCategoryId == null)
                 .ToListAsync();
 
-            Category activeCategory;
-
+            Category? activeCategory = null; // Torne anulável para evitar CS8600
             if (!string.IsNullOrEmpty(categorySlug))
             {
                 activeCategory = rootCategoriesRaw.FirstOrDefault(c => c.Slug == categorySlug);
@@ -148,7 +147,7 @@ namespace TotemPWA.Controllers
                 .Where(c => c.ParentCategoryId == activeCategoryId)
                 .ToListAsync();
 
-            Category activeSubcategory;
+            Category? activeSubcategory = null; // Torne anulável para evitar CS8600
 
             if (!string.IsNullOrEmpty(subcategorySlug))
             {
@@ -159,7 +158,7 @@ namespace TotemPWA.Controllers
                 activeSubcategory = subcategoriesRaw.FirstOrDefault();
             }
 
-            var activeSubcategoryId = activeSubcategory?.Id;
+            var activeSubcategoryId = activeSubcategory?.Id; // Use ?. para acesso seguro
 
             var subcategories = subcategoriesRaw
                 .Select(c => new
@@ -172,21 +171,68 @@ namespace TotemPWA.Controllers
                 .ToList();
 
             // 3. Buscar produtos com base no ID da subcategoria ativa
-            var products = new List<object>();
+            var products = new List<ProductDisplayViewModel>(); // Tipo correto
             if (activeSubcategoryId != null)
             {
-                products = await _context.Products
-                    .Where(p => p.CategoryId == activeSubcategoryId)
-                    .Select(p => new
+                // Verificar se a subcategoria é "Combos" (assumindo que você tem uma categoria com esse nome)
+                var isComboCategory = activeSubcategory?.Name?.ToLower().Contains("combos") == true;
+
+                if (isComboCategory)
+                {
+                    // Se for categoria de combos, buscar produtos que são combos
+                    var combosData = await _context.Combos
+                        .Include(c => c.ProductCombo)
+                        .Include(c => c.Product)
+                        .Where(c => c.ProductCombo != null && c.ProductCombo.Active) // Só combos de produtos ativos
+                        .GroupBy(c => c.ProductComboId)
+                        .Select(g => new
+                        {
+                            ProductComboId = g.Key,
+                            ComboProduct = g.First().ProductCombo,
+                            IncludedProducts = g.Select(c => new // Os produtos incluídos no combo (do modelo Combo)
+                            {
+                                Id = c.Product!.Id,
+                                Name = c.Product.Name,
+                                Price = c.Product.Price,
+                                ImageUrl = c.Product.ImageUrl
+                            }).ToList()
+                        })
+                        .ToListAsync();
+
+                    products = combosData.Select(combo => new ProductDisplayViewModel
                     {
-                        id = p.Id,
-                        name = p.Name,
-                        price = p.Price,
-                        image = p.Image,
-                        imageUrl = p.ImageUrl,
-                        description = p.Description
-                    })
-                    .ToListAsync<object>();
+                        Id = combo.ProductComboId, // ProductComboId é int, não precisa de ?? 0
+                        Name = combo.ComboProduct?.Name ?? "Combo",
+                        Price = combo.IncludedProducts.Sum(p => p.Price), // Preço total do combo
+                        ImageUrl = combo.ComboProduct?.ImageUrl,
+                        Description = $"Combo contendo: {string.Join(", ", combo.IncludedProducts.Select(p => p.Name))}",
+                        IsCombo = true,
+                        // ATENÇÃO: Mapeie para IncludedProductViewModel aqui!
+                        ComboItems = combo.IncludedProducts.Select(p => new IncludedProductViewModel
+                        {
+                            ProductId = p.Id,
+                            ProductName = p.Name,
+                            ProductPrice = p.Price
+                            // Inclua outras propriedades de IncludedProductViewModel se houver
+                        }).ToList()
+                    }).ToList(); 
+                }
+                else
+                {
+                    // Se não for categoria de combos, buscar produtos normais
+                    products = await _context.Products
+                        .Where(p => p.CategoryId == activeSubcategoryId && p.Active)
+                        .Select(p => new ProductDisplayViewModel
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            Price = p.Price,
+                            ImageUrl = p.ImageUrl,
+                            Description = p.Description,
+                            IsCombo = false
+                        })
+                        .ToListAsync();
+                }
             }
 
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
@@ -199,7 +245,7 @@ namespace TotemPWA.Controllers
             return View(cart);
         }
     
-    // CRUD
+        // CRUD
         public IActionResult CardapioCrud()
         {
             return View();
