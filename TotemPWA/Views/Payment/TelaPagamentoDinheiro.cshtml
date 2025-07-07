@@ -4,13 +4,12 @@
     var sucesso = TempData["Sucesso"] as string;
 }
 
-<link rel="stylesheet" href="~/css/pagamento-burguer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/pagamento-burguer.css" />
 
 <div class="payment-fullscreen">
-    <div class="payment-header-burguer">
-    </div>
+    <div class="payment-header-burguer"></div>
 
     <div class="payment-content">
         <div class="payment-method">
@@ -19,6 +18,23 @@
                 <h2>Pagamento em Dinheiro</h2>
                 <i class="fas fa-money-bill-wave payment-icon-burguer"></i>
                 <p>Termine o pagamento no caixa</p>
+            </div>
+
+            <div class="resumo-pagamento" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <h3>Resumo do Pedido</h3>
+                <div class="totais-pagamento">
+                    <p>Total de itens: <strong id="totalItens">0</strong></p>
+
+                    <div id="cupom-info" style="display: none; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">
+                        <p>Cupom aplicado: <strong id="cupomCodigo">-</strong></p>
+                        <p>Desconto: <strong id="cupomDesconto" style="color: #28a745;">R$ 0,00</strong></p>
+                        <p>Subtotal: <strong id="subtotal">R$ 0,00</strong></p>
+                    </div>
+
+                    <p style="font-size: 1.2em; font-weight: bold; color: #007bff;">
+                        Total a pagar: <strong id="valorTotalPedido">R$ 0,00</strong>
+                    </p>
+                </div>
             </div>
 
             @if (!string.IsNullOrEmpty(erro))
@@ -33,6 +49,12 @@
 
             <form method="post" asp-action="ValidarPagamento" class="payment-form-burguer">
                 <input type="hidden" name="metodo" value="Dinheiro" />
+                <input type="hidden" id="cupomCodigoInput" name="cupomCodigo" />
+                <input type="hidden" id="cupomDescontoInput" name="cupomDesconto" />
+                <input type="hidden" id="cupomTipoDescontoInput" name="cupomTipoDesconto" />
+                <input type="hidden" id="subtotalInput" name="subtotal" />
+                <input type="hidden" id="valorTotalInput" name="valorTotal" />
+
                 <button type="submit" class="btn-burguer btn-confirm-burguer">
                     <i class="fas fa-check-circle"></i> Confirmar Pagamento
                 </button>
@@ -49,3 +71,48 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Carregar dados do carrinho
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const valorTotal = parseFloat(localStorage.getItem("valorTotal")) || 0;
+        const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+
+        // Carregar dados do cupom
+        const dadosCupom = JSON.parse(localStorage.getItem("dadosCupom")) || {};
+        const cupomCodigo = dadosCupom.codigo || "";
+        const cupomDesconto = dadosCupom.desconto || 0;
+        const cupomValorParaExibicao = dadosCupom.valorParaExibicao || "";
+        const subtotal = dadosCupom.subtotal || 0;
+
+        // Atualizar interface
+        document.getElementById("totalItens").textContent = totalItens;
+        document.getElementById("valorTotalPedido").textContent = valorTotal.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+
+        // Mostrar informações do cupom se aplicado
+        if (cupomCodigo && cupomDesconto > 0) {
+            document.getElementById("cupom-info").style.display = "block";
+            document.getElementById("cupomCodigo").textContent = cupomCodigo;
+            document.getElementById("cupomDesconto").textContent =
+                cupomValorParaExibicao || cupomDesconto.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+            document.getElementById("subtotal").textContent = subtotal.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+        }
+
+        // Preencher campos hidden para envio do formulário
+        document.getElementById("cupomCodigoInput").value = cupomCodigo;
+        document.getElementById("cupomDescontoInput").value = cupomDesconto;
+        document.getElementById("cupomTipoDescontoInput").value = dadosCupom.tipoDesconto || "";
+        document.getElementById("subtotalInput").value = subtotal;
+        document.getElementById("valorTotalInput").value = valorTotal;
+    });
+</script>
