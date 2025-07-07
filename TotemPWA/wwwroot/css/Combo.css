@@ -1,0 +1,299 @@
+/* Variáveis de cores */
+:root {
+    --primary-color: #ff6b00;
+    --secondary-color: #ff9500;
+    --danger-color: #e63946;
+    --success-color: #2a9d8f;
+    --info-color: #457b9d;
+    --dark-color: #1d3557;
+    --light-color: #f1faee;
+    --text-color: #333;
+    --text-light: #777;
+    --bg-color: #f8f9fa;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset e estilos base */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.combo-main-container {
+    flex: 1;
+    padding: 20px 0;
+}
+
+/* Cabeçalho */
+.combo-header {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Cards */
+.combo-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    margin-bottom: 2rem;
+}
+
+.combo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow);
+}
+
+.combo-header {
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.bg-warning {
+    background: linear-gradient(135deg, #f4a261, #e76f51);
+}
+
+.bg-danger {
+    background: linear-gradient(135deg, var(--danger-color), #d62828);
+}
+
+/* Formulários */
+.combo-form-container {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.25);
+}
+
+.combo-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: var(--dark-color);
+}
+
+.combo-validation {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Selects */
+.combo-select, .combo-multi-select {
+    width: 100%;
+}
+
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-selection--single {
+    min-height: 45px;
+    border-radius: 8px !important;
+    border: 1px solid #ddd !important;
+    padding: 8px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: var(--primary-color) !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 6px !important;
+}
+
+/* Botões */
+.btn {
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+}
+
+.btn i {
+    font-size: 1rem;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color), #1d7874);
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f4a261, #e76f51);
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger-color), #d62828);
+    color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabela */
+.combo-table-container {
+    margin-top: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+.combo-table {
+    margin-bottom: 0;
+}
+
+.combo-table thead th {
+    background: linear-gradient(135deg, var(--dark-color), #457b9d);
+    color: white;
+    font-weight: 500;
+    padding: 15px;
+    border: none;
+}
+
+.combo-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.combo-table tbody tr:hover {
+    background-color: rgba(255, 107, 0, 0.05);
+}
+
+.combo-table td, .combo-table th {
+    vertical-align: middle;
+    padding: 12px 15px;
+}
+
+/* Alertas */
+.alert {
+    border-radius: 8px;
+    padding: 15px 20px;
+    border: none;
+    box-shadow: var(--card-shadow);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #a5d6a7, #81c784);
+    color: #1b5e20;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #81d4fa, #4fc3f7);
+    color: #01579b;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #ffb3ba, #ff8a8a);
+    color: #c62828;
+}
+
+/* Página de Delete */
+.combo-delete-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.combo-confirm-message {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.combo-details {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.combo-detail-label {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.combo-detail-value {
+    font-weight: 500;
+}
+
+.combo-form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .combo-form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .combo-table {
+        font-size: 0.9rem;
+    }
+}
+
+/* Efeitos de foco para acessibilidade */
+a:focus, button:focus, input:focus, select:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Rodapé */
+.combo-footer {
+    padding: 1rem 0;
+    background: linear-gradient(135deg, var(--dark-color), #1a2a3a);
+}
+
+.combo-footer h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.combo-footer p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0;
+}

@@ -23,6 +23,173 @@ namespace TotemPWA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SalvarPersonalizacaoCombo(PersonalizarComboInputModel model)
+        {
+            
+            // 1. Encontre o produto combo principal (apenas para obter o nome e preço base do combo)
+            var comboProduct = await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == model.ComboProductId);
+
+            if (comboProduct == null) return NotFound("Combo não encontrado.");
+
+            decimal totalPersonalizedPrice = comboProduct.Price; // Preço inicial do combo
+            var overallPersonalizationSummary = new List<string>();
+            
+            // Para armazenar as personalizações de cada item do combo no CartItemViewModel
+            var comboItemsManipulatedIngredients = new Dictionary<int, Dictionary<int, int>>(); 
+
+            // Itera sobre cada item do combo que foi personalizado no formulário
+            foreach (var itemPersonalization in model.ItemPersonalizations)
+            {
+                var itemProductId = itemPersonalization.ProductId;
+                var itemProduct = await _context.Products
+                    .Include(p => p.Additionals!)
+                        .ThenInclude(pa => pa.Ingredient)
+                    .FirstOrDefaultAsync(p => p.Id == itemProductId);
+
+                if (itemProduct == null)
+                {
+                    overallPersonalizationSummary.Add($"Item '{itemProductId}' do combo não encontrado. Personalização ignorada.");
+                    continue; // Pule para o próximo item
+                }
+
+                // Obtém as adições padrão do item do combo
+                var itemStandardAdditions = itemProduct.Additionals?.ToDictionary(a => a.IngredientId) ?? new Dictionary<int, Additional>();
+                var itemManipulatedIngredients = new Dictionary<int, int>(); // Para este item específico do combo
+                var itemSummary = new List<string>();
+
+                // Itera sobre os ingredientes manipulados para ESTE ITEM DO COMBO
+                foreach (var entry in itemPersonalization.IngredientesManipuladasQuantidades)
+                {
+                    var ingredientId = entry.Key;
+                    var finalQuantity = entry.Value;
+
+                    if (itemStandardAdditions.TryGetValue(ingredientId, out var additional) && additional.Ingredient != null)
+                    {
+                        var standardQuantity = additional.Quantity;
+                        var ingredientPrice = additional.Ingredient.Price;
+
+                        // Aplica limites e garante não-negativo
+                        if (finalQuantity > additional.Ingredient.Limit) finalQuantity = additional.Ingredient.Limit;
+                        if (finalQuantity < 0) finalQuantity = 0;
+
+                        // Calcula o custo extra apenas se a quantidade final for MAIOR que a quantidade padrão
+                        if (finalQuantity > standardQuantity)
+                        {
+                            totalPersonalizedPrice += ingredientPrice * (finalQuantity - standardQuantity);
+                            itemSummary.Add($"{finalQuantity}x {additional.Ingredient.Name}");
+                        }
+                        else if (finalQuantity < standardQuantity)
+                        {
+                            itemSummary.Add($"removido {standardQuantity - finalQuantity}x de {additional.Ingredient.Name}");
+                            // Não reduz o preço aqui, como na lógica de produtos individuais.
+                        }
+                        else if (finalQuantity == standardQuantity && finalQuantity > 0)
+                        {
+                            itemSummary.Add($"{finalQuantity}x {additional.Ingredient.Name}");
+                        }
+                        
+                        itemManipulatedIngredients[ingredientId] = finalQuantity; // Armazena a quantidade final manipulada para este item
+                    }
+                    else // Ingrediente não padrão para este item do combo
+                    {
+                        if (finalQuantity > 0)
+                        {
+                            var unknownIngredient = await _context.Ingredients.FindAsync(ingredientId);
+                            if (unknownIngredient != null)
+                            {
+                                totalPersonalizedPrice += unknownIngredient.Price * finalQuantity;
+                                itemSummary.Add($"extra {finalQuantity}x {unknownIngredient.Name}");
+                                itemManipulatedIngredients[ingredientId] = finalQuantity;
+                            }
+                            else
+                            {
+                                itemSummary.Add($"Ingrediente desconhecido (ID: {ingredientId}) ignorado no item {itemProduct.Name}.");
+                            }
+                        }
+                    }
+                }
+                // Adicione o resumo da personalização deste item ao resumo geral do combo
+                if (itemSummary.Any())
+                {
+                    overallPersonalizationSummary.Add($"{itemProduct.Name}: ({string.Join(", ", itemSummary)})");
+                    comboItemsManipulatedIngredients[itemProductId] = itemManipulatedIngredients; // Salva o dicionário por item
+                }
+            }
+
+            var finalSummaryText = overallPersonalizationSummary.Any()
+                ? "Combo " + comboProduct.Name + ": " + string.Join("; ", overallPersonalizationSummary)
+                : "Combo " + comboProduct.Name + " (sem personalização)";
+
+
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+
+            CartItemViewModel? cartItemToModify = null;
+            if (model.CartItemId != Guid.Empty)
+            {
+                cartItemToModify = cart.FirstOrDefault(ci => ci.CartItemId == model.CartItemId);
+            }
+
+            if (cartItemToModify == null) // Novo item de combo personalizado
+            {
+                cart.Add(new CartItemViewModel
+                {
+                    ProductId = comboProduct.Id, // ID do combo principal
+                    Name = comboProduct.Name,
+                    Price = totalPersonalizedPrice, // Preço total personalizado do combo
+                    Image = comboProduct.Image ?? comboProduct.ImageUrl ?? "/images/products/default_product.png",
+                    Quantity = 1,
+                    CartItemId = Guid.NewGuid(),
+                    // NOVO: ManipulatedIngredientsWithQuantity para combos precisa armazenar por ITEM DO COMBO
+                    // Isso exigiria uma mudança na estrutura do CartItemViewModel se você precisa detalhar por item.
+                    // Para simplificar, vou manter a estrutura plana do dicionário, mas você pode querer mudar isso.
+                    // Se você realmente precisa de personalizações por sub-item no carrinho,
+                    // o CartItemViewModel precisaria de List<SubItemPersonalization> com cada sub-item tendo seu Dictionary<int,int>.
+                    // Por enquanto, vamos manter um dicionário global de todas as manipulações de todos os ingredientes,
+                    // mas isso pode não ser ideal para relatórios detalhados ou reedição.
+                    // Pelo que vejo no seu CartItemViewModel, você só tem um Dictionary<int, int> para todo o item do carrinho.
+                    // Então, vamos consolidar todas as manipulações em um único dicionário para o CartItemViewModel.
+                    // Isso significa que o dicionário de cada 'itemPersonalization' deve ser MERGULHADO em um dicionário global.
+                    ManipulatedIngredientsWithQuantity = ConsolidateComboManipulations(comboItemsManipulatedIngredients),
+                    PersonalizationSummary = finalSummaryText,
+                });
+            }
+            else // Editando item de combo existente no carrinho
+            {
+                cartItemToModify.Price = totalPersonalizedPrice;
+                cartItemToModify.ManipulatedIngredientsWithQuantity = ConsolidateComboManipulations(comboItemsManipulatedIngredients);
+                cartItemToModify.PersonalizationSummary = finalSummaryText;
+            }
+
+            HttpContext.Session.SetObject("Cart", cart);
+            TempData["Message"] = "Combo personalizado e adicionado/atualizado no carrinho!";
+            return RedirectToAction("Index", "Cart");
+        }
+
+        // Helper method to consolidate all manipulated ingredients from combo items into a single dictionary
+        private Dictionary<int, int> ConsolidateComboManipulations(Dictionary<int, Dictionary<int, int>> comboItemsManipulations)
+        {
+            var consolidated = new Dictionary<int, int>();
+            foreach (var itemEntry in comboItemsManipulations)
+            {
+                foreach (var ingredientEntry in itemEntry.Value)
+                {
+                    // Se o ingrediente já existe, some as quantidades.
+                    // Caso contrário, adicione-o.
+                    if (consolidated.ContainsKey(ingredientEntry.Key))
+                    {
+                        consolidated[ingredientEntry.Key] += ingredientEntry.Value;
+                    }
+                    else
+                    {
+                        consolidated[ingredientEntry.Key] = ingredientEntry.Value;
+                    }
+                }
+            }
+            return consolidated;
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SalvarPersonalizacao(PersonalizarProdutoInputModel model)
         {
             var product = await _context.Products
@@ -88,8 +255,8 @@ namespace TotemPWA.Controllers
                     // Caso finalQuantity seja 0 e standardQuantity seja 0, nada acontece ou adiciona "sem X"
                     else if (finalQuantity == 0 && standardQuantity == 0)
                     {
-                         // Não faz nada ou adiciona se for o caso de um ingrediente que existia mas foi zerado.
-                         // personalizationSummary.Add($"sem {additional.Ingredient.Name}");
+                        // Não faz nada ou adiciona se for o caso de um ingrediente que existia mas foi zerado.
+                        // personalizationSummary.Add($"sem {additional.Ingredient.Name}");
                     }
 
                     // Armazena a quantidade final manipulada.
@@ -160,41 +327,97 @@ namespace TotemPWA.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-
         [HttpGet]
         public async Task<IActionResult> PersonalizarProdutos(int productId, Guid? cartItemId)
         {
-            var product = await _context.Products
-                                .Include(p => p.Additionals!) // Inclua todos os Additionals
-                                .ThenInclude(pa => pa.Ingredient) // E os Ingredientes relacionados
-                                .FirstOrDefaultAsync(p => p.Id == productId);
-            if (product == null)
-               return NotFound("Produto não encontrado.");
-
-            var viewModel = new PersonalizarProdutoViewModel
+            // Primeiro, verificar se é um combo
+            var isCombo = await _context.Combos.AnyAsync(c => c.ProductComboId == productId);
+            
+            if (isCombo)
             {
-                Produto = product,
-                CartItemId = cartItemId ?? Guid.Empty,
-                ProdutoAdditionals = product.Additionals // Passa todos os additionals do produto para a view
-            };
+                // Se for um combo, buscar o produto combo e seus itens
+                var comboProduct = await _context.Products
+                    .FirstOrDefaultAsync(p => p.Id == productId);
+                    
+                if (comboProduct == null)
+                    return NotFound("Produto combo não encontrado.");
 
-            // Se for edição, pré-preenche o ViewModel com as quantidades manipuladas do carrinho
-            if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
-            {
-                var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
-                var existingCartItem = cart.FirstOrDefault(ci => ci.CartItemId == cartItemId.Value);
-                if (existingCartItem != null)
+                // Buscar todos os itens do combo, incluindo seus produtos e adicionais
+                var comboItemsRaw = await _context.Combos
+                    .Include(c => c.Product) // O produto real que é um item do combo
+                        .ThenInclude(p => p.Additionals!) // Adicionais do item do combo
+                            .ThenInclude(pa => pa.Ingredient) // Detalhes do ingrediente
+                    .Where(c => c.ProductComboId == productId)
+                    .ToListAsync();
+                    
+                // Mapear para PersonalizarComboViewModel e seus ComboItemViewModel
+                var comboViewModel = new PersonalizarComboViewModel
                 {
-                    // Copia as quantidades manipuladas existentes para pré-preencher a interface
-                    viewModel.QuantidadesManipuladas = existingCartItem.ManipulatedIngredientsWithQuantity ?? new Dictionary<int, int>();
-                }
-            }
+                    ComboProduct = comboProduct,
+                    CartItemId = cartItemId ?? Guid.Empty,
+                    TotalPrice = comboProduct.Price, // Preço base do combo (será ajustado pelo JS/backend)
+                    ComboItems = comboItemsRaw.Select(ci => new ComboItemViewModel
+                    {
+                        ProductId = ci.Product!.Id,
+                        ProductName = ci.Product.Name,
+                        ProductPrice = ci.Product.Price,
+                        ProductImageUrl = ci.Product.ImageUrl,
+                        ProductAdditionals = ci.Product.Additionals, // Passa os adicionais do item
+                        CanCustomize = true // Ou baseie isso em alguma propriedade do produto/additional
+                    }).ToList()
+                };
 
-           return View("~/Views/Home/PersonalizarProdutos.cshtml", viewModel);
+                // Se for edição, pré-preenche o ViewModel com as quantidades manipuladas do carrinho
+                // Para combos, isso é mais complexo, pois ManipulatedIngredientsWithQuantity é plano.
+                // Você precisará de uma estrutura mais complexa para armazenar as manipulações por PRODUTO DENTRO DO COMBO.
+                // Por enquanto, vamos manter a estrutura plana para simplificar, mas saiba que pode ter limitações.
+                if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
+                {
+                    var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+                    var existingCartItem = cart.FirstOrDefault(ci => ci.CartItemId == cartItemId.Value);
+                    if (existingCartItem != null)
+                    {
+                        // ATENÇÃO: Se as manipulações forem globais para o combo, isso funciona.
+                        // Se forem por item dentro do combo, o CartItemViewModel precisaria de uma estrutura mais complexa.
+                        comboViewModel.QuantidadesManipuladas = existingCartItem.ManipulatedIngredientsWithQuantity ?? new Dictionary<int, int>();
+                    }
+                }
+                
+                return View("~/Views/Home/PersonalizarCombo.cshtml", comboViewModel);
+            }
+            else
+            {
+                // Se não for combo, continuar com o fluxo normal para produtos individuais
+                var product = await _context.Products
+                                    .Include(p => p.Additionals!)
+                                    .ThenInclude(pa => pa.Ingredient)
+                                    .FirstOrDefaultAsync(p => p.Id == productId);
+                                    
+                if (product == null)
+                    return NotFound("Produto não encontrado.");
+
+                var viewModel = new PersonalizarProdutoViewModel
+                {
+                    Produto = product,
+                    CartItemId = cartItemId ?? Guid.Empty,
+                    ProdutoAdditionals = product.Additionals
+                };
+
+                // Se for edição, pré-preenche o ViewModel com as quantidades manipuladas do carrinho
+                if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
+                {
+                    var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+                    var existingCartItem = cart.FirstOrDefault(ci => ci.CartItemId == cartItemId.Value);
+                    if (existingCartItem != null)
+                    {
+                        viewModel.QuantidadesManipuladas = existingCartItem.ManipulatedIngredientsWithQuantity ?? new Dictionary<int, int>();
+                    }
+                }
+
+                return View("~/Views/Home/PersonalizarProdutos.cshtml", viewModel);
+            }
         }
 
-        // --- Ações abaixo são do CustomerController para TelaProduto ---
-
-       
+        
     }
 }
