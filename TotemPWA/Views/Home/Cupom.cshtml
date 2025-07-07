@@ -16,6 +16,7 @@
         <div class="keyboard" id="teclado"></div>
     </div>
 
+    <!-- Modais -->
     <div class="modal" id="modalValido">
         <div class="modal-content">
             <span class="close" onclick="fecharModal('modalValido')">&times;</span>
@@ -30,7 +31,7 @@
         <div class="modal-content">
             <span class="close" onclick="fecharModal('modalInvalido')">&times;</span>
             <i class="fa-solid fa-circle-exclamation icon" style="color: #f44336;"></i>
-            <p style="color: #f44336; font-weight: bold; font-family:poppins;">Cupom inválido</p>
+            <p style="color: #f44336; font-weight: bold;">Cupom inválido</p>
             <p id="mensagemCupomInvalido"></p>
             <p>Verifique o código e tente novamente.</p>
         </div>
@@ -45,6 +46,7 @@
         </div>
     </div>
 
+    <!-- Resumo -->
     <div class="resumo-pedido">
         <div class="totais">
             <p>Total de itens: <strong id="totalItensDisplay">0</strong></p>
@@ -53,8 +55,8 @@
             <p id="totalPedidoFinalDiv" style="display: none;">Total com desconto: <strong id="totalPedidoFinalDisplay">R$ 0,00</strong></p>
         </div>
         <div class="botoes">
-            <a href="@Url.Action("TelaProduto", "Home")" ><button class="cancelar">Voltar</button></a>
-            <a href="@Url.Action("SelecionarPagamento", "Payment")" ><button class="adicionar">Confirmar Pedido</button></a>
+            <a href="@Url.Action("TelaProduto", "Home")"><button class="cancelar">Voltar</button></a>
+            <a href="@Url.Action("SelecionarPagamento", "Payment")"><button class="adicionar">Confirmar Pedido</button></a>
         </div>
     </div>
 
@@ -62,7 +64,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         let totalPedidoOriginal = parseFloat(urlParams.get('totalPedido')) || 0;
         let totalItens = parseInt(urlParams.get('totalItens')) || 0;
-        
+
         document.getElementById('totalItensDisplay').textContent = totalItens;
         document.getElementById('totalPedidoOriginalDisplay').textContent = totalPedidoOriginal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -70,14 +72,12 @@
         const teclado = document.getElementById("teclado");
         const campo = document.getElementById("campoCupom");
 
-        window.onload = function() {
+        window.onload = function () {
             teclas.forEach(t => {
                 const tecla = document.createElement("div");
                 tecla.className = "key";
                 tecla.textContent = t;
-                tecla.onclick = () => {
-                    campo.value += t;
-                };
+                tecla.onclick = () => campo.value += t;
                 teclado.appendChild(tecla);
             });
 
@@ -85,12 +85,20 @@
             apagar.className = "key";
             apagar.style.background = "#f88";
             apagar.innerHTML = '<i class="fa-solid fa-delete-left" style="color: #FFF;"></i>';
-            apagar.onclick = () => {
-                campo.value = campo.value.slice(0, -1);
-            };
+            apagar.onclick = () => campo.value = campo.value.slice(0, -1);
             teclado.appendChild(apagar);
+
+            const dadosCupomSalvo = JSON.parse(localStorage.getItem("dadosCupom")) || {};
+            if (dadosCupomSalvo.codigo && dadosCupomSalvo.desconto > 0) {
+                totalPedidoOriginal = dadosCupomSalvo.subtotal;
+                document.getElementById('valorDescontoDisplay').textContent = dadosCupomSalvo.valorParaExibicao;
+                document.getElementById('descontoAplicado').style.display = 'block';
+                document.getElementById('totalPedidoFinalDisplay').textContent = dadosCupomSalvo.valorFinalComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('totalPedidoFinalDiv').style.display = 'block';
+                campo.value = dadosCupomSalvo.codigo;
+            }
         };
-        
+
         async function confirmarCupom() {
             const valorCupom = campo.value.trim().toUpperCase();
 
@@ -103,57 +111,45 @@
             try {
                 const response = await fetch('/Home/ValidarCupom', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ codigoCupom: valorCupom })
                 });
 
                 const data = await response.json();
-                
-                // --- LOGS CRÍTICOS PARA DEPURAR ---
-                // MANTENHA ESTES LOGS ATIVOS PARA VERIFICAR OS VALORES NO CONSOLE DO NAVEGADOR!
-                console.log("Resposta completa do backend:", data);
-                console.log("isValid:", data.isValid);
-                console.log("mensagem:", data.message);
-                console.log("desconto (valor vindo do backend):", data.desconto);
-                console.log("tipoDesconto:", data.tipoDesconto);
-                console.log("valorParaExibicao (vindo do backend):", data.valorParaExibicao); // Este é o valor formatado para exibição
-                console.log("Total Pedido Original (no frontend):", totalPedidoOriginal);
-                // --- FIM DOS LOGS CRÍTICOS ---
 
                 if (data.isValid) {
                     abrirModal("modalValido");
-                    // O data.message (se for "Cupom válido!") pode ir aqui ou ser deixado fixo no HTML
-                    // document.getElementById('mensagemCupomValido').textContent = data.message; 
-                    
-                    // Preenche o strong com o valor formatado para exibição (ex: "50%" ou "R$ 10,00")
                     document.getElementById('cupomValorExibicao').textContent = data.valorParaExibicao;
-                    
                     campo.style.borderColor = "green";
 
-                    let valorDesconto = 0;
+                    let valorDescontoCalculado = 0;
                     let totalComDesconto = totalPedidoOriginal;
-
-                    // O 'data.desconto' é o valor usado para o CÁLCULO (ex: 0.5 para 50%)
-                    const descontoValue = parseFloat(data.desconto); 
-                    
-                    const tipoDescontoLower = data.tipoDesconto.toLowerCase(); 
+                    const descontoValue = parseFloat(data.desconto);
+                    const tipoDescontoLower = data.tipoDesconto.toLowerCase();
 
                     if (tipoDescontoLower === "percentual") {
-                        valorDesconto = totalPedidoOriginal * descontoValue; // Ex: 19.90 * 0.5 = 9.95
-                        totalComDesconto = totalPedidoOriginal - valorDesconto;
+                        valorDescontoCalculado = totalPedidoOriginal * descontoValue;
                     } else if (tipoDescontoLower === "fixo") {
-                        valorDesconto = descontoValue;
-                        totalComDesconto = totalPedidoOriginal - valorDesconto;
+                        valorDescontoCalculado = descontoValue;
                     }
 
-                    if (totalComDesconto < 0) totalComDesconto = 0;
+                    totalComDesconto = Math.max(0, totalPedidoOriginal - valorDescontoCalculado);
 
-                    document.getElementById('valorDescontoDisplay').textContent = valorDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    document.getElementById('valorDescontoDisplay').textContent = valorDescontoCalculado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                     document.getElementById('descontoAplicado').style.display = 'block';
                     document.getElementById('totalPedidoFinalDisplay').textContent = totalComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                     document.getElementById('totalPedidoFinalDiv').style.display = 'block';
+
+                    const dadosCupomParaSalvar = {
+                        codigo: valorCupom,
+                        desconto: valorDescontoCalculado,
+                        tipoDesconto: data.tipoDesconto,
+                        valorParaExibicao: data.valorParaExibicao,
+                        subtotal: totalPedidoOriginal,
+                        valorFinalComDesconto: totalComDesconto
+                    };
+                    localStorage.setItem("dadosCupom", JSON.stringify(dadosCupomParaSalvar));
+                    localStorage.setItem("valorTotal", totalComDesconto.toFixed(2));
 
                 } else {
                     abrirModal("modalInvalido");
@@ -161,6 +157,8 @@
                     campo.style.borderColor = "red";
                     document.getElementById('descontoAplicado').style.display = 'none';
                     document.getElementById('totalPedidoFinalDiv').style.display = 'none';
+                    localStorage.removeItem("dadosCupom");
+                    localStorage.setItem("valorTotal", totalPedidoOriginal.toFixed(2));
                 }
 
             } catch (error) {
@@ -168,6 +166,8 @@
                 abrirModal("modalInvalido");
                 document.getElementById('mensagemCupomInvalido').textContent = "Erro na comunicação com o servidor.";
                 campo.style.borderColor = "red";
+                localStorage.removeItem("dadosCupom");
+                localStorage.setItem("valorTotal", totalPedidoOriginal.toFixed(2));
             }
         }
 
@@ -179,7 +179,7 @@
             document.getElementById(id).style.display = "none";
         }
 
-        window.onclick = function(evento) {
+        window.onclick = function (evento) {
             if (evento.target.className === "modal") {
                 evento.target.style.display = "none";
             }

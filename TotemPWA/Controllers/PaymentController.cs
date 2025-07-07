@@ -43,7 +43,7 @@ namespace TotemPWA.Controllers
         }
 
         [HttpPost]
-        public IActionResult ValidarPagamento(string metodo)
+        public IActionResult ValidarPagamento(string metodo, string? cupomCodigo, decimal? cupomDesconto, string? cupomTipoDesconto, decimal? subtotal, decimal? valorTotal)
         {
             try
             {
@@ -54,12 +54,24 @@ namespace TotemPWA.Controllers
                     return RedirectToAction("SelecionarPagamento");
                 }
 
+                // Logar as informações recebidas, incluindo as do cupom
+                _logger.LogInformation($"ValidarPagamento: Método recebido: {metodo}");
+                if (!string.IsNullOrEmpty(cupomCodigo))
+                {
+                    _logger.LogInformation($"ValidarPagamento: Cupom Código: {cupomCodigo}, Desconto: {cupomDesconto}, Tipo: {cupomTipoDesconto}, Subtotal: {subtotal}, Valor Total: {valorTotal}");
+                }
+                else
+                {
+                    _logger.LogInformation("ValidarPagamento: Nenhum cupom aplicado.");
+                }
+
                 // Simulate random failures for demo purposes (10% chance)
                 var random = new Random();
                 if (random.Next(0, 10) == 0) // 10% chance of failure
                 {
                     TempData["Erro"] = $"Pagamento com {metodo} não autorizado. Por favor, tente novamente ou use outro método.";
                     _logger.LogWarning($"Pagamento com {metodo} falhou (simulação)");
+                    // Redireciona de volta para a tela de pagamento específica com erro
                     return RedirectToAction($"TelaPagamento{metodo}");
                 }
 

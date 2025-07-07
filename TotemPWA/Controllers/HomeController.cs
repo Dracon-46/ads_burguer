@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
-using TotemPWA.Models.ViewModels; // Garanta que este namespace contém ProductDisplayViewModel e IncludedProductViewModel
-using TotemPWA.ViewModels; // Garanta que este namespace contém os ViewModels corretos, se forem usados
+using TotemPWA.Models.ViewModels;
+using TotemPWA.ViewModels;
 using TotemPWA.Utilities;
 using System.Linq;
 using System.Collections.Generic;
@@ -81,7 +81,7 @@ namespace TotemPWA.Controllers
                 _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' encontrado. ID: {cupom.Id}, Valor LIDO DO DB: {cupom.Value}, Tipo: {cupom.Type}.");
 
                 decimal calculatedDesconto;
-                string valorParaExibicao = ""; // Variável para o texto de exibição no frontend
+                string valorParaExibicao = "";
 
                 if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
                 {
@@ -89,7 +89,7 @@ namespace TotemPWA.Controllers
                     valorParaExibicao = (cupom.Value * 100).ToString("N0") + "%";
                     _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
                 }
-                else // Para cupons fixos (ex: R$ 10,00)
+                else
                 {
                     calculatedDesconto = cupom.Value;
                     valorParaExibicao = cupom.Value.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
@@ -102,7 +102,7 @@ namespace TotemPWA.Controllers
 
         public class CupomValidationRequest
         {
-            public string CodigoCupom { get; set; } = string.Empty; // Resolvendo warning CS8618
+            public string CodigoCupom { get; set; } = string.Empty;
         }
 
         public IActionResult TelaFinal()
@@ -118,7 +118,7 @@ namespace TotemPWA.Controllers
                 .Where(c => c.ParentCategoryId == null)
                 .ToListAsync();
 
-            Category? activeCategory = null; // Torne anulável para evitar CS8600
+            Category? activeCategory = null;
             if (!string.IsNullOrEmpty(categorySlug))
             {
                 activeCategory = rootCategoriesRaw.FirstOrDefault(c => c.Slug == categorySlug);
@@ -147,7 +147,7 @@ namespace TotemPWA.Controllers
                 .Where(c => c.ParentCategoryId == activeCategoryId)
                 .ToListAsync();
 
-            Category? activeSubcategory = null; // Torne anulável para evitar CS8600
+            Category? activeSubcategory = null;
 
             if (!string.IsNullOrEmpty(subcategorySlug))
             {
@@ -158,7 +158,7 @@ namespace TotemPWA.Controllers
                 activeSubcategory = subcategoriesRaw.FirstOrDefault();
             }
 
-            var activeSubcategoryId = activeSubcategory?.Id; // Use ?. para acesso seguro
+            var activeSubcategoryId = activeSubcategory?.Id;
 
             var subcategories = subcategoriesRaw
                 .Select(c => new
@@ -171,25 +171,24 @@ namespace TotemPWA.Controllers
                 .ToList();
 
             // 3. Buscar produtos com base no ID da subcategoria ativa
-            var products = new List<ProductDisplayViewModel>(); // Tipo correto
+            var products = new List<ProductDisplayViewModel>();
             if (activeSubcategoryId != null)
             {
-                // Verificar se a subcategoria é "Combos" (assumindo que você tem uma categoria com esse nome)
                 var isComboCategory = activeSubcategory?.Name?.ToLower().Contains("combos") == true;
 
                 if (isComboCategory)
                 {
-                    // Se for categoria de combos, buscar produtos que são combos
                     var combosData = await _context.Combos
                         .Include(c => c.ProductCombo)
+                            .ThenInclude(pc => pc.Promotions) // ADICIONADO: Incluir promoções
                         .Include(c => c.Product)
-                        .Where(c => c.ProductCombo != null && c.ProductCombo.Active) // Só combos de produtos ativos
+                        .Where(c => c.ProductCombo != null && c.ProductCombo.Active)
                         .GroupBy(c => c.ProductComboId)
                         .Select(g => new
                         {
                             ProductComboId = g.Key,
                             ComboProduct = g.First().ProductCombo,
-                            IncludedProducts = g.Select(c => new // Os produtos incluídos no combo (do modelo Combo)
+                            IncludedProducts = g.Select(c => new
                             {
                                 Id = c.Product!.Id,
                                 Name = c.Product.Name,
@@ -199,39 +198,67 @@ namespace TotemPWA.Controllers
                         })
                         .ToListAsync();
 
-                    products = combosData.Select(combo => new ProductDisplayViewModel
-                    {
-                        Id = combo.ProductComboId, // ProductComboId é int, não precisa de ?? 0
-                        Name = combo.ComboProduct?.Name ?? "Combo",
-                        Price = combo.IncludedProducts.Sum(p => p.Price), // Preço total do combo
-                        ImageUrl = combo.ComboProduct?.ImageUrl,
-                        Description = $"Combo contendo: {string.Join(", ", combo.IncludedProducts.Select(p => p.Name))}",
-                        IsCombo = true,
-                        // ATENÇÃO: Mapeie para IncludedProductViewModel aqui!
-                        ComboItems = combo.IncludedProducts.Select(p => new IncludedProductViewModel
+                    products = combosData.Select(combo => {
+                        var originalPrice = combo.IncludedProducts.Sum(p => p.Price);
+                        var activePromotion = combo.ComboProduct?.Promotions?
+                            .FirstOrDefault(p => p.ValidUntil >= DateTime.Today);
+                        
+                        var finalPrice = originalPrice;
+                        if (activePromotion != null)
                         {
-                            ProductId = p.Id,
-                            ProductName = p.Name,
-                            ProductPrice = p.Price
-                            // Inclua outras propriedades de IncludedProductViewModel se houver
-                        }).ToList()
-                    }).ToList(); 
+                            finalPrice = originalPrice - (originalPrice * activePromotion.Percent / 100);
+                        }
+
+                        return new ProductDisplayViewModel
+                        {
+                            Id = combo.ProductComboId,
+                            Name = combo.ComboProduct?.Name ?? "Combo",
+                            Price = finalPrice,
+                            OriginalPrice = activePromotion != null ? originalPrice : (decimal?)null,
+                            ImageUrl = combo.ComboProduct?.ImageUrl,
+                            Description = $"Combo contendo: {string.Join(", ", combo.IncludedProducts.Select(p => p.Name))}",
+                            IsCombo = true,
+                            HasPromotion = activePromotion != null,
+                            PromotionPercent = activePromotion?.Percent,
+                            ComboItems = combo.IncludedProducts.Select(p => new IncludedProductViewModel
+                            {
+                                ProductId = p.Id,
+                                ProductName = p.Name,
+                                ProductPrice = p.Price
+                            }).ToList()
+                        };
+                    }).ToList();
                 }
                 else
                 {
-                    // Se não for categoria de combos, buscar produtos normais
-                    products = await _context.Products
+                    var productsWithPromotions = await _context.Products
+                        .Include(p => p.Promotions) // ADICIONADO: Incluir promoções
                         .Where(p => p.CategoryId == activeSubcategoryId && p.Active)
-                        .Select(p => new ProductDisplayViewModel
+                        .ToListAsync();
+
+                    products = productsWithPromotions.Select(p => {
+                        var activePromotion = p.Promotions?
+                            .FirstOrDefault(pr => pr.ValidUntil >= DateTime.Today);
+                        
+                        var finalPrice = p.Price;
+                        if (activePromotion != null)
+                        {
+                            finalPrice = p.Price - (p.Price * activePromotion.Percent / 100);
+                        }
+
+                        return new ProductDisplayViewModel
                         {
                             Id = p.Id,
                             Name = p.Name,
-                            Price = p.Price,
+                            Price = finalPrice,
+                            OriginalPrice = activePromotion != null ? p.Price : (decimal?)null,
                             ImageUrl = p.ImageUrl,
                             Description = p.Description,
-                            IsCombo = false
-                        })
-                        .ToListAsync();
+                            IsCombo = false,
+                            HasPromotion = activePromotion != null,
+                            PromotionPercent = activePromotion?.Percent
+                        };
+                    }).ToList();
                 }
             }
 
@@ -245,7 +272,6 @@ namespace TotemPWA.Controllers
             return View(cart);
         }
     
-        // CRUD
         public IActionResult CardapioCrud()
         {
             return View();

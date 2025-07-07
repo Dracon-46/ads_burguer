@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Selecionar Forma de Pagamento";
 }
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,8 +20,7 @@
             <span class="subtitulo">Como deseja pagar?</span>
         </div>
 
-        <!-- MENSAGEM DE ERRO -->
-        <div id="erro-pagamento" class="payment-alert-burguer"></div>
+        <div id="erro-pagamento" class="payment-alert-burguer" style="display:none;"></div>
 
         <div class="selecao-pagamento">
             <button class="btn-pagamento" onclick="validarPagamento('@Url.Action("TelaPagamentoCartao", "Payment")')">
@@ -62,51 +62,62 @@
                 <p>Total do pedido: <strong id="valorTotalPedido">R$ 0,00</strong></p>
             </div>
             <div class="botoes">
-                <a href="@Url.Action("Cupom", "Home")"><button class="cancelar">Voltar</button></a>
+                <a href="@Url.Action("Cupom", "Home")">
+                    <button class="cancelar">Voltar</button>
+                </a>
             </div>
         </div>
     </div>
 
     <script>
-    function validarPagamento(destino) {
-        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-        const valorTotal = parseFloat(localStorage.getItem("valorTotal")) || 0;
+        function validarPagamento(destino) {
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            const dadosCupom = JSON.parse(localStorage.getItem("dadosCupom")) || {};
+            const valorTotalFinal = (typeof dadosCupom.valorFinalComDesconto === 'number' && dadosCupom.valorFinalComDesconto >= 0)
+                ? dadosCupom.valorFinalComDesconto
+                : (parseFloat(localStorage.getItem("valorTotal")) || 0);
 
-        const divErro = document.getElementById("erro-pagamento");
-        divErro.style.display = "none";
-        divErro.innerText = "";
+            const divErro = document.getElementById("erro-pagamento");
+            divErro.style.display = "none";
+            divErro.innerText = "";
 
-        if (carrinho.length === 0) {
-            mostrarErro("Seu carrinho está vazio. Adicione itens antes de continuar.");
-            return;
+            if (carrinho.length === 0) {
+                mostrarErro("Seu carrinho está vazio. Adicione itens antes de continuar.");
+                return;
+            }
+
+            if (valorTotalFinal <= 0) {
+                mostrarErro("O valor total do pedido não pode ser zero.");
+                return;
+            }
+
+            // Redireciona para a tela de pagamento
+            window.location.href = destino;
         }
 
-        if (valorTotal <= 0) {
-            mostrarErro("O valor total do pedido não pode ser zero.");
-            return;
+        function mostrarErro(msg) {
+            const divErro = document.getElementById("erro-pagamento");
+            divErro.innerText = msg;
+            divErro.style.display = "block";
         }
 
-        // Se passou nas validações, vai para a próxima página
-        window.location.href = destino;
-    }
+        document.addEventListener("DOMContentLoaded", function () {
+            const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            const dadosCupom = JSON.parse(localStorage.getItem("dadosCupom")) || {};
+            const valorTotalOriginal = parseFloat(localStorage.getItem("valorTotal")) || 0;
 
-    function mostrarErro(msg) {
-        const divErro = document.getElementById("erro-pagamento");
-        divErro.innerText = msg;
-        divErro.style.display = "block";
-    }
+            const valorTotalParaExibir = (typeof dadosCupom.valorFinalComDesconto === 'number' && dadosCupom.valorFinalComDesconto >= 0)
+                ? dadosCupom.valorFinalComDesconto
+                : valorTotalOriginal;
 
-    // Atualiza os dados no resumo
-    document.addEventListener("DOMContentLoaded", function () {
-        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-        const valorTotal = parseFloat(localStorage.getItem("valorTotal")) || 0;
+            const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
 
-        const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
-
-        document.getElementById("totalItens").textContent = totalItens;
-        document.getElementById("valorTotalPedido").textContent = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    });
-</script>
-
+            document.getElementById("totalItens").textContent = totalItens;
+            document.getElementById("valorTotalPedido").textContent = valorTotalParaExibir.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+        });
+    </script>
 </body>
 </html>
