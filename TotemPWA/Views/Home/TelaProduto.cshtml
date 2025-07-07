@@ -6,154 +6,154 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADS - Burguer</title>
-    <link rel="stylesheet" href="/css/telaproduto.css">
-    <link rel="stylesheet" href="/css/telacarrinho.css">
-    <link rel="stylesheet" href="/css/persopedido.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Configuração de exibição das seções */
-        #secaoPromocao { display: flex; }
-        #secaoCombo,
-        #secaoBebidas,
-        #secaoLanches,
-        #secaoSobremesa,
-        #secaoUnitarios { display: none; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADS - Burguer</title>
+    <link rel="stylesheet" href="/css/telaproduto.css">
+    <link rel="stylesheet" href="/css/telacarrinho.css">
+    <link rel="stylesheet" href="/css/persopedido.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Configuração de exibição das seções */
+        #secaoPromocao { display: flex; }
+        #secaoCombo,
+        #secaoBebidas,
+        #secaoLanches,
+        #secaoSobremesa,
+        #secaoUnitarios { display: none; }
 
-        /* Estilos para combos */
-        .combo-badge {
-            background-color: #ff6b35;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1;
-        }
+        /* Estilos para combos */
+        .combo-badge {
+            background-color: #ff6b35;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+        }
 
-        .combo-items {
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 5px;
-            font-style: italic;
-        }
+        .combo-items {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
 
-        .btn-produto {
-            position: relative;
-        }
-    </style>
+        .btn-produto {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="banner"></div>
+    <div class="container">
+        <div class="banner"></div>
 
-        <div class="content">
-            <div class="left">
-                <div class="selection">
-                    @foreach (var category in ViewBag.Categories)
-                    {
-                        string activeClass = category.active ? "active" : "";
-                        <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.slug'">
-                            <span>@category.name</span>
-                        </button>
-                    }
-                </div>
-            </div>
+        <div class="content">
+            <div class="left">
+                <div class="selection">
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        string activeClass = category.active ? "active" : "";
+                        <button class="link-button @activeClass" onclick="location.href='/TelaProduto/@category.slug'">
+                            <span class="@activeClass">@category.name</span>
+                        </button>
+                    }
+                </div>
+            </div>
 
-            <div class="right">
-                <div class="filtro">
-                    @foreach (var subcategory in ViewBag.SubCategories)
-                    {
-                        string activeClass = subcategory.active ? "active" : "";
-                        <button class="@activeClass" onclick="location.href='/TelaProduto/@ViewBag.CategorySlug/@subcategory.slug'">
-                            @subcategory.name
-                        </button>
-                    }
-                </div>
-            <div class="produto-lista">
-                    @foreach (ProductDisplayViewModel product in (List<ProductDisplayViewModel>)ViewBag.Products)
-                    {
-                        <div class="btn-produto" onclick="location.href='@Url.Action("PersonalizarProdutos", "Customer", new { productId = product.Id })'">
-                            @if (product.IsCombo)
-                            {
-                                <span class="combo-badge">COMBO</span>
-                            }
+            <div class="right">
+                <div class="filtro">
+                    @foreach (var subcategory in ViewBag.SubCategories)
+                    {
+                        string activeClass = subcategory.active ? "active" : "";
+                        <button class="@activeClass" onclick="location.href='/TelaProduto/@ViewBag.CategorySlug/@subcategory.slug'">
+                            @subcategory.name
+                        </button>
+                    }
+                </div>
+                <div class="produto-lista">
+                    @foreach (ProductDisplayViewModel product in (List<ProductDisplayViewModel>)ViewBag.Products)
+                    {
+                        <div class="btn-produto" onclick="location.href='@Url.Action("PersonalizarProdutos", "Customer", new { productId = product.Id })'">
+                            @if (product.IsCombo)
+                            {
+                                <span class="combo-badge">COMBO</span>
+                            }
 
-                            <img src="@(product.ImageUrl ?? "/images/products/default_product.png")" alt="@product.Name">
-                            <span class="nome">@product.Name</span>
-                            <span class="valor">
-                                @product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
-                            </span>
+                            <img src="@(product.ImageUrl ?? "/images/products/default_product.png")" alt="@product.Name">
+                            <span class="nome">@product.Name</span>
+                            <span class="valor">
+                                @product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+                            </span>
 
-                            @if (product.IsCombo)
-                            {
-                                <p class="descricao">@product.Description</p>
-                                @if (product.ComboItems != null && product.ComboItems.Any())
-                                {
-                                    <div class="combo-items">
-                                        <strong>Inclui:</strong>
-                                        @foreach (var item in product.ComboItems)
-                                        {
-                                            <span>@item.ProductName</span>
-                                            @if (item != product.ComboItems.Last())
-                                            {
-                                                <span>, </span>
-                                            }
-                                        }
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                <p class="descricao">@product.Description</p>
-                            }
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
+                            @if (product.IsCombo)
+                            {
+                                <p class="descricao">@product.Description</p>
+                                @if (product.ComboItems != null && product.ComboItems.Any())
+                                {
+                                    <div class="combo-items">
+                                        <strong>Inclui:</strong>
+                                        @foreach (var item in product.ComboItems)
+                                        {
+                                            <span>@item.ProductName</span>
+                                            @if (item != product.ComboItems.Last())
+                                            {
+                                                <span>, </span>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p class="descricao">@product.Description</p>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
 
-        <div class="carrinho">
-            <div class="car-left">
-                <div>
-                    <span class="total-itens">
-                        Total de itens:
-                        <span id="footer-total-items">@(Model?.Sum(item => item.Quantity) ?? 0)</span>
-                    </span>
-                    <span class="total-pedidos">
-                        Total do Pedido:
-                        <span id="footer-total-price" style="color: #426b1f;">
-                            R$ @((Model?.Sum(item => item.Price * item.Quantity) ?? 0).ToString("F2"))
-                        </span>
-                    </span>
-                </div>
-            </div>
+        <div class="carrinho">
+            <div class="car-left">
+                <div>
+                    <span class="total-itens">
+                        Total de itens:
+                        <span id="footer-total-items">@(Model?.Sum(item => item.Quantity) ?? 0)</span>
+                    </span>
+                    <span class="total-pedidos">
+                        Total do Pedido:
+                        <span id="footer-total-price" style="color: #426b1f;">
+                            R$ @((Model?.Sum(item => item.Price * item.Quantity) ?? 0).ToString("F2"))
+                        </span>
+                    </span>
+                </div>
+            </div>
 
-            <div class="car-center">
-                <span class="view">VER CARRINHO</span>
-                <a href="@Url.Action("Index", "Cart")" class="btn-car">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-            </div>
+            <div class="car-center">
+                <span class="view">VER CARRINHO</span>
+                <a href="@Url.Action("Index", "Cart")" class="btn-car">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
 
-            <div class="car-right">
-                <div>
-                    <a href="@Url.Action("Cupom", "Home")" class="btn">Próximo</a>
-                </div>
-                <div>
-                    <a href="@Url.Action("Index", "Home")" class="btn">Voltar ao Início</a>
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="car-right">
+                <div>
+                    <a href="@Url.Action("Cupom", "Home")" class="btn">Próximo</a>
+                </div>
+                <div>
+                    <a href="@Url.Action("Index", "Home")" class="btn">Voltar ao Início</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="/js/telaproduto.js"></script>
+    <script src="/js/telaproduto.js"></script>
 </body>
 </html>
