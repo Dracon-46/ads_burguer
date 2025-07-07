@@ -204,6 +204,156 @@
     .btn-secondary:hover {
         background-color: #e05c00; /* Laranja mais escuro ao passar o mouse */
     }
+    /* Estilos para a seção de ingredientes */
+.ingredient-selection-container {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    border: 1px solid #eaeaea;
+    padding: 20px;
+    margin-top: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.ingredient-selection-container small.text-muted {
+    display: block;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 0.9em;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo para cada item de ingrediente */
+.ingredient-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ingredient-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 101, 1, 0.1);
+    border-color: #FF6501;
+}
+
+/* Checkbox personalizado */
+.ingredient-checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all 0.2s;
+}
+
+.ingredient-checkbox:checked {
+    background-color: #FF6501;
+    border-color: #FF6501;
+}
+
+.ingredient-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Label do ingrediente */
+.ingredient-item .form-check-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.05em;
+    cursor: pointer;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* Opções do ingrediente (quantidade) */
+.ingredient-options {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 12px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+
+.ingredient-options .d-flex {
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ingredient-options label {
+    color: #666;
+    font-size: 0.95em;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.ingredient-options input[type="number"] {
+    width: 80px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95em;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.ingredient-options input[type="number"]:focus {
+    border-color: #FF6501;
+    box-shadow: 0 0 0 2px rgba(255, 101, 1, 0.2);
+    outline: none;
+}
+
+.ingredient-options small.text-muted {
+    display: block;
+    font-size: 0.85em;
+    color: #888;
+    line-height: 1.4;
+}
+
+/* Efeito visual para ingredientes selecionados */
+.ingredient-item.checked {
+    border-left: 4px solid #FF6501;
+    background-color: #fff9f5;
+}
+
+/* Mensagem quando não há ingredientes */
+.ingredient-selection-container p.text-muted {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+.ingredient-selection-container p.text-muted a {
+    color: #FF6501;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.ingredient-selection-container p.text-muted a:hover {
+    color: #e05c00;
+    text-decoration: underline;
+}
+
 </style>
 <div class="row">
     <div class="col-md-6">
