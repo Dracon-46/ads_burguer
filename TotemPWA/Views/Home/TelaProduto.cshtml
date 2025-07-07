@@ -38,6 +38,40 @@
             z-index: 1;
         }
 
+        /* Estilos para promoções */
+        .promotion-badge {
+            background-color: #e74c3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .original-price {
+            font-size: 0.85em;
+            color: #666;
+            text-decoration: line-through;
+        }
+
+        .promotion-price {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+
         .combo-items {
             font-size: 0.85em;
             color: #666;
@@ -47,6 +81,11 @@
 
         .btn-produto {
             position: relative;
+        }
+
+        .promotion-highlight {
+            border: 2px solid #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
         }
     </style>
 </head>
@@ -80,7 +119,16 @@
                 <div class="produto-lista">
                     @foreach (ProductDisplayViewModel product in (List<ProductDisplayViewModel>)ViewBag.Products)
                     {
-                        <div class="btn-produto" onclick="location.href='@Url.Action("PersonalizarProdutos", "Customer", new { productId = product.Id })'">
+                        string promotionClass = product.HasPromotion ? "promotion-highlight" : "";
+                        <div class="btn-produto @promotionClass" onclick="location.href='@Url.Action("PersonalizarProdutos", "Customer", new { productId = product.Id })'">
+                            
+                            @* Badge de promoção *@
+                            @if (product.HasPromotion)
+                            {
+                                <span class="promotion-badge">-@(product.PromotionPercent?.ToString("0"))%</span>
+                            }
+
+                            @* Badge de combo *@
                             @if (product.IsCombo)
                             {
                                 <span class="combo-badge">COMBO</span>
@@ -88,9 +136,25 @@
 
                             <img src="@(product.ImageUrl ?? "/images/products/default_product.png")" alt="@product.Name">
                             <span class="nome">@product.Name</span>
-                            <span class="valor">
-                                @product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
-                            </span>
+                            
+                            @* Preços com tratamento de promoção *@
+                            <div class="price-container">
+                                @if (product.HasPromotion && product.OriginalPrice.HasValue)
+                                {
+                                    <span class="original-price">
+                                        @product.OriginalPrice.Value.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+                                    </span>
+                                    <span class="valor promotion-price">
+                                        @product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="valor">
+                                        @product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+                                    </span>
+                                }
+                            </div>
 
                             @if (product.IsCombo)
                             {
