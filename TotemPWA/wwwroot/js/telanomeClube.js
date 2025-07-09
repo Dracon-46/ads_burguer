@@ -1,117 +1,150 @@
+
+// ===========================
+// telanomeClube.js - Versão melhorada
+// ===========================
+
 const nomeInput = document.querySelector('.nome');
 const continueButton = document.querySelector('.btn-fim');
 const nameError = document.getElementById('nameError');
+const isEmployeeCheckbox = document.getElementById('isEmployee');
+const employeeTypeSelect = document.getElementById('employeeType');
 
-const keyboard = new SimpleKeyboard.default({
-  onChange: input => onChange(input),
-  onKeyPress: button => onKeyPress(button),
+// Configuração do teclado virtual para nome
+const nameKeyboard = new SimpleKeyboard.default({
+  onChange: input => onNameChange(input),
+  onKeyPress: button => onNameKeyPress(button),
   theme: "hg-theme-default myTheme1",
   layout: {
     default: [
       "q w e r t y u i o p",
       "a s d f g h j k l",
-      "{shift} z x c v b n m {bksp}", // Adicionado {shift} aqui
+      "{shift} z x c v b n m {bksp}",
       "{space}"
     ],
     shift: [
       "Q W E R T Y U I O P",
       "A S D F G H J K L",
-      "{shift} Z X C V B N M {bksp}", // Adicionado {shift} aqui
+      "{shift} Z X C V B N M {bksp}",
       "{space}"
     ]
   },
   display: {
     "{bksp}": "⌫",
     "{space}": "Espaço",
-    "{shift}": "⇧" // Ícone para shift
+    "{shift}": "⇧"
   }
 });
 
+// Validação do nome
 function validateName(name) {
-  // Permite apenas letras (maiúsculas e minúsculas) e espaços
   const regex = /^[A-Za-z\s]*$/;
   if (!regex.test(name)) {
     nameError.textContent = "Nome não pode conter números ou símbolos.";
     return false;
   }
-  // Nome não pode ser vazio ou apenas espaços
   if (name.trim().length === 0) {
     nameError.textContent = "Nome não pode ser vazio.";
     return false;
   }
-  nameError.textContent = ""; // Limpa o erro
+  nameError.textContent = "";
   return true;
 }
 
-function onChange(input) {
-  // Filtra a entrada para permitir apenas letras e espaços
+// Handlers do teclado virtual para nome
+function onNameChange(input) {
   const filteredInput = input.replace(/[^A-Za-z\s]/g, '');
   nomeInput.value = filteredInput;
-  keyboard.setInput(filteredInput);
-
-  // Valida e habilita/desabilita o botão
-  if (validateName(filteredInput)) {
-    continueButton.disabled = false;
-  } else {
-    continueButton.disabled = true;
-  }
+  nameKeyboard.setInput(filteredInput);
+  updateContinueButton();
 }
 
-function onKeyPress(button) {
+function onNameKeyPress(button) {
   if (button === "{shift}" || button === "{lock}") handleShift();
 }
 
 function handleShift() {
-  const currentLayout = keyboard.options.layoutName;
+  const currentLayout = nameKeyboard.options.layoutName;
   const shiftToggle = currentLayout === "default" ? "shift" : "default";
-  keyboard.setOptions({ layoutName: shiftToggle });
+  nameKeyboard.setOptions({ layoutName: shiftToggle });
 }
 
-keyboard.setInput(nomeInput.value); // Apenas sincroniza, sem alterar display
+// Atualizar estado do botão continuar
+function updateContinueButton() {
+  const isValidName = validateName(nomeInput.value);
+  continueButton.disabled = !isValidName;
+}
 
-
+// Event listeners para nome
 nomeInput.addEventListener("input", function() {
-  onChange(this.value); // Garante que a validação ocorra ao digitar diretamente também
+  onNameChange(this.value);
 });
 
-// Event listener para o botão de continuar (agora sem o <a> direto)
+// Toggle para funcionário
+if (isEmployeeCheckbox) {
+  isEmployeeCheckbox.addEventListener("change", function() {
+    employeeTypeSelect.style.display = this.checked ? "block" : "none";
+    if (!this.checked) {
+      employeeTypeSelect.value = "";
+    }
+  });
+}
+
+// Event listener para o botão continuar
 continueButton.addEventListener("click", async function(event) {
-  event.preventDefault(); // Previne o envio padrão do formulário inicialmente
+  event.preventDefault();
 
-  if (!this.disabled) { // Se o botão não estiver desabilitado
-    const clientName = nomeInput.value.trim(); // Obtém o nome digitado
-    // Aqui, você enviaria o nome do cliente (e o CPF inserido anteriormente, talvez armazenado em localStorage ou sessão)
-    // para um endpoint de backend para registro.
+  if (!this.disabled) {
+    const clientName = nomeInput.value.trim();
+    const storedCpf = sessionStorage.getItem('newClientCpf');
+    const isEmployee = isEmployeeCheckbox ? isEmployeeCheckbox.checked : false;
+    const employeeType = isEmployee ? employeeTypeSelect.value : null;
 
-    // Exemplo de chamada de backend para registrar um novo cliente
+    if (!storedCpf) {
+      nameError.textContent = "Erro: CPF não encontrado para registro.";
+      return;
+    }
+
     try {
-      // Você precisará passar o CPF que foi inserido na tela anterior.
-      // Para este exemplo, vamos assumir que você o armazena em localStorage após a verificação do CPF.
-      const storedCpf = localStorage.getItem('newClientCpf'); // Recupera o CPF
-      if (!storedCpf) {
-        nameError.textContent = "Erro: CPF não encontrado para registro.";
-        return;
-      }
-
-      const response = await fetch('/Admin/Client/RegisterNewClient', { // Novo endpoint para registro
+      // Registrar cliente
+      const clientResponse = await fetch('/Admin/Client/RegisterNewClient', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: clientName, cpf: storedCpf })
+        body: JSON.stringify({ 
+          name: clientName, 
+          cpf: storedCpf,
+          isEmployee: isEmployee,
+          employeeType: employeeType
+        })
       });
 
-      const data = await response.json();
+      const clientData = await clientResponse.json();
 
-      if (data.success) { // Se o cadastro for bem-sucedido
-        window.location.href = 'SelecionarPedido'; // Redireciona para a próxima página
+      if (clientData.success) {
+        // Armazenar informações do usuário
+        sessionStorage.setItem('currentUser', JSON.stringify({
+          clientId: clientData.clientId,
+          name: clientName,
+          cpf: storedCpf,
+          isEmployee: isEmployee,
+          employeeType: employeeType
+        }));
+
+        // Limpar CPF temporário
+        sessionStorage.removeItem('newClientCpf');
+
+        // Redirecionar para próxima tela
+        window.location.href = 'SelecionarPedido';
       } else {
-        nameError.textContent = data.message || "Erro ao cadastrar cliente."; // Exibe mensagem de erro
+        nameError.textContent = clientData.message || "Erro ao cadastrar cliente.";
       }
     } catch (error) {
       console.error("Erro ao cadastrar cliente:", error);
-      nameError.textContent = "Ocorreu um erro inesperado ao cadastrar."; // Exibe erro inesperado
+      nameError.textContent = "Ocorreu um erro inesperado ao cadastrar.";
     }
   }
 });
+
 // Estado inicial
 continueButton.disabled = true;
 nameError.textContent = "";
+nameKeyboard.setInput(nomeInput.value);
