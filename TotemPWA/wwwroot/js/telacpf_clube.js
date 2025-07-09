@@ -65,56 +65,60 @@ function validateCPFAlgorithm(cpf) {
 
 // Simula a validação de existência do CPF no backend
 async function isValidCPFBackend(cpf) {
-  // Em uma aplicação real, você faria uma chamada AJAX/fetch para o seu backend
-  // que por sua vez consultaria um serviço externo ou banco de dados.
-  // Exemplo:
-  /*
   try {
-    const response = await fetch('/api/check-cpf-existence', { // Seu endpoint no backend
+    // Faz uma requisição fetch real para o seu backend para verificar a existência do CPF
+    const response = await fetch('/Admin/Client/CheckCpfExistence', { // Assumindo que este é o seu endpoint
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cpf: cpf })
+      body: JSON.stringify({ cpf: cpf.replace(/\D/g, '') }) // Envia o CPF limpo
     });
     const data = await response.json();
-    return data.exists; // Seu backend retornaria { exists: true/false }
+    return data.exists; // Seu backend deve retornar { exists: true/false, clientName: "..." }
   } catch (error) {
     console.error("Erro ao verificar CPF no backend:", error);
-    return false;
+    return false; // Assume que não foi encontrado em caso de erro
   }
-  */
-
-  // Por enquanto, usamos a lista simulada
-  return new Promise(resolve => {
-    setTimeout(() => { // Simula um atraso de rede
-      resolve(validCPFs.includes(cpf));
-    }, 300);
-  });
 }
 
 async function validateAndSetButtonState(formattedCpf) {
-  confirmButton.disabled = true; // Desabilita por padrão
-  cpfError.textContent = ""; // Limpa erros anteriores
+  confirmButton.disabled = true; // Desabilita o botão por padrão 
+  cpfError.textContent = ""; // Limpa erros anteriores 
 
-  if (formattedCpf.length === 14) {
-    const cleanCPF = formattedCpf.replace(/\D/g, '');
+  if (formattedCpf.length === 14) { // Verifica se o CPF está completo 
+    const cleanCPF = formattedCpf.replace(/\D/g, ''); // Remove caracteres não numéricos 
 
-    if (validateCPFAlgorithm(cleanCPF)) {
-      cpfError.textContent = "Verificando CPF...";
-      const cpfExists = await isValidCPFBackend(formattedCpf);
+    if (validateCPFAlgorithm(cleanCPF)) { // Valida o algoritmo do CPF 
+      cpfError.textContent = "Verificando CPF..."; // Exibe mensagem de verificação 
+      // Busca a existência e, potencialmente, o nome do cliente
+      const response = await fetch('/Admin/Client/CheckCpfExistence', { // Requisição para o backend
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cpf: cleanCPF })
+      });
+      const data = await response.json();
+      const cpfExists = data.exists; // Obtém o status de existência do CPF
+      const clientName = data.clientName; // Obtém o nome do cliente, se existir
 
-      if (cpfExists) {
-        cpfError.textContent = ""; // Limpa mensagem de verificação
-        confirmButton.disabled = false; // Habilita o botão se tudo estiver ok
-      } else {
-        cpfError.textContent = "CPF não encontrado no clube.";
+      if (cpfExists) { // Se o CPF existir
+        cpfError.textContent = `Bem-vindo(a), ${clientName}!`; // Exibe mensagem de boas-vindas
+        confirmButton.disabled = false; // Habilita o botão
+        // Armazenar clientName ou realizar qualquer ação com base no cliente existente
+        // Por exemplo, redirecionar diretamente para 'SelecionarPedido' ou uma saudação personalizada
+      } else { // Se o CPF não existir
+        cpfError.textContent = "CPF não encontrado no clube. Por favor, cadastre-se."; // Mensagem de erro
+        // Redireciona para a tela de registro de nome se o CPF não existir
+        setTimeout(() => {
+          window.location.href = 'TelaNomeClube'; // Redireciona para a entrada de nome 
+        }, 1500); // Pequeno atraso antes de redirecionar
       }
     } else {
-      cpfError.textContent = "CPF inválido.";
+      cpfError.textContent = "CPF inválido."; // Mensagem de CPF inválido 
     }
   } else if (formattedCpf.length > 0) {
-    cpfError.textContent = "CPF deve ter 11 dígitos.";
+    cpfError.textContent = "CPF deve ter 11 dígitos."; // Mensagem de CPF incompleto 
   }
 }
+
 
 function onChange(input) {
   const formatted = formatCPF(input);
