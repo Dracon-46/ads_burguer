@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/telanome.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+  <title>Insira seu Nome</title>
+</head>
+<body>
+  <div class="container">
+      <h1>Digite seu nome</h1>
+
+      <input type="text" class="nome" placeholder="Seu nome" autocomplete="off" />
+      <div id="nameError" class="error-message"></div>
+
+      <!-- Container do teclado virtual -->
+      <div class="simple-keyboard"></div>
+
+      <!-- Grupo de botões -->
+      <div class="button-group">
+          <a href="@Url.Action("Index", "Home")" class="btn-voltar" style="background-color: #d40000; text-decoration: none;">Voltar</a>
+          <button class="btn-fim" disabled>Continuar</button>
+      </div>
+  </div>
+ <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
+ <script src="/js/telanomeClube.js"></script>
+</body>
+</html>

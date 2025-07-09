@@ -39,7 +39,10 @@ namespace TotemPWA.Controllers
         {
             return View();
         }
-
+        public IActionResult TelaNomeClube()
+        {
+            return View();
+        }
         public IActionResult TelaHome_Crud()
         {
             return View();

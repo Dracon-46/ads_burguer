@@ -45,25 +45,25 @@ namespace TotemPWA.Controllers.Admin
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeViewModel viewModel)
         {
-            ModelState.Remove("Employee.Client");
+            ModelState.Remove("Employee.Client"); // Remove a validação do objeto de navegação
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Verifica a validade do modelo
             {
-                var clientExists = await _context.Clients.AnyAsync(c => c.Id == viewModel.Employee.ClientId);
+                var clientExists = await _context.Clients.AnyAsync(c => c.Id == viewModel.Employee.ClientId); // Verifica se o cliente existe
                 if (!clientExists)
                 {
-                    ModelState.AddModelError("Employee.ClientId", "Cliente selecionado não existe.");
-                    viewModel.Clients = await GetClientSelectListAsync();
-                    return View(viewModel);
+                    ModelState.AddModelError("Employee.ClientId", "Cliente selecionado não existe."); // Adiciona erro se o cliente não existe
+                    viewModel.Clients = await GetClientSelectListAsync(); // Recarrega a lista de clientes
+                    return View(viewModel); // Retorna a view com o erro
                 }
 
-                _context.Employees.Add(viewModel.Employee);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(List));
+                _context.Employees.Add(viewModel.Employee); // Adiciona o funcionário
+                await _context.SaveChangesAsync(); // Salva as mudanças
+                return RedirectToAction(nameof(List)); // Redireciona para a lista
             }
 
-            viewModel.Clients = await GetClientSelectListAsync();
-            return View(viewModel);
+            viewModel.Clients = await GetClientSelectListAsync(); // Recarrega a lista de clientes se o modelo for inválido
+            return View(viewModel); // Retorna a view com erros de validação
         }
 
         // GET: Admin/Employee/Edit/5
