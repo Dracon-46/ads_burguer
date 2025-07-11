@@ -39,6 +39,15 @@
                 <a asp-controller="Combo" asp-action="List">
                     <li><i class="fa-solid fa-tags"></i> Combos</li>
                 </a>
+                @if (User.IsInRole("Administrador")) 
+                {
+                    <a asp-controller="Employee" asp-action="List">
+                        <li><i class="fa-solid fa-tags"></i> Funcionarios</li>
+                    </a>
+                }
+              <form asp-controller="Employee" asp-action="Logout" method="post">
+                  <button type="submit" class="btn btn-link">Sair</button>
+              </form>
             </ul>
       </nav>
     </aside>
@@ -84,6 +93,14 @@
             <p>Gerencie os Combos.</p>
             <a href="@Url.Action("List", "Combo")"><button class="btn-gradient">Adicionar Combo</button></a>
           </div>
+          @if (User.IsInRole("Administrador")) 
+          {
+            <div class="card blue">
+              <h3><i class="fa-solid fa-percent"></i> Funcionarios</h3>
+              <p>Gerencie os Funcionarios.</p>
+              <a href="@Url.Action("List", "Employee")"><button class="btn-gradient">gerenciar Funcionarios</button></a>
+            </div>
+          }
         </div>
       </div>
     </main>

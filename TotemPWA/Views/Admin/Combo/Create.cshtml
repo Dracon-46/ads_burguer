@@ -9,302 +9,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+        <link rel="stylesheet" href="~/css/Combo.css" />
+
 </head>
 <body>
-<style>
-    /* Base Styles */
-    .combo-container {
-        font-family: 'Roboto', sans-serif;
-        max-width: 1200px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-    }
+<div class="combo-container">
+    <div class="combo-header">
+        <h2><i class="fas fa-plus-circle"></i> @ViewData["Title"]</h2>
+    </div>
 
-    .combo-card {
-        border-radius: 0.5rem;
-        overflow: hidden;
-        border: none;
-    }
+    <div class="combo-form">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-    .combo-header {
-        padding: 1.25rem 1.5rem;
-        border-bottom: none;
-    }
-
-    .combo-body {
-        padding: 2rem;
-    }
-
-    /* Form Elements */
-    .combo-form .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .combo-label {
-        font-weight: 500;
-        color: #495057;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-
-    .combo-select, 
-    .combo-multi-select,
-    .combo-price-input {
-        border: 1px solid #ced4da;
-        border-radius: 0.375rem;
-        padding: 0.5rem 0.75rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    .combo-select:focus, 
-    .combo-multi-select:focus,
-    .combo-price-input:focus {
-        border-color: #86b7fe;
-        outline: 0;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    }
-
-    /* Select2 Customization */
-    .select2-container--default .select2-selection--multiple,
-    .select2-container--default .select2-selection--single {
-        border: 1px solid #ced4da;
-        border-radius: 0.375rem;
-        min-height: 38px;
-    }
-
-    .select2-container--default .select2-selection--multiple {
-        min-height: 100px;
-    }
-
-    .select2-container--default.select2-container--focus .select2-selection--multiple,
-    .select2-container--default.select2-container--focus .select2-selection--single {
-        border-color: #86b7fe;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    }
-
-    /* Validation Styles */
-    .combo-validation-summary {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .combo-validation {
-        font-size: 0.875rem;
-        margin-top: 0.25rem;
-    }
-
-    /* Buttons */
-    .combo-form-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-
-    .combo-create-btn,
-    .combo-save-btn,
-    .combo-delete-btn,
-    .combo-back-btn,
-    .combo-cancel-btn,
-    .combo-action-btn {
-        padding: 0.5rem 1.25rem;
-        font-weight: 500;
-        border-radius: 0.375rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .combo-create-btn { background-color: #198754; border-color: #198754; }
-    .combo-save-btn { background-color: #ffc107; border-color: #ffc107; color: #212529; }
-    .combo-delete-btn { background-color: #dc3545; border-color: #dc3545; }
-    .combo-back-btn,
-    .combo-cancel-btn { background-color: #6c757d; border-color: #6c757d; }
-    .combo-action-btn { background-color: #0d6efd; border-color: #0d6efd; }
-
-    /* Details Page Styles */
-    .combo-confirm-message {
-        margin-bottom: 1.5rem;
-    }
-
-    .combo-divider {
-        margin: 1.5rem 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-    }
-
-    .combo-details-container {
-        background-color: #f8f9fa;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .combo-detail-item {
-        margin-bottom: 1rem;
-    }
-
-    .combo-detail-label {
-        font-weight: 500;
-        color: #495057;
-        display: block;
-        margin-bottom: 0.25rem;
-    }
-
-    .combo-detail-value {
-        color: #212529;
-        display: block;
-        margin-left: 1.5rem;
-    }
-
-    .combo-products-list {
-        margin-left: 1.5rem;
-    }
-
-    .product-item {
-        display: block;
-        padding: 0.25rem 0;
-        color: #212529;
-    }
-
-    .combo-empty-warning {
-        color: #6c757d;
-        font-style: italic;
-    }
-
-    /* List Page Styles */
-    .combo-page-title {
-        color: #212529;
-        font-weight: 600;
-    }
-
-    .combo-table-container {
-        margin-top: 1.5rem;
-        border-radius: 0.5rem;
-        overflow: hidden;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    }
-
-    .combo-table {
-        margin-bottom: 0;
-    }
-
-    .combo-table-header {
-        background-color: #f8f9fa;
-        color: #495057;
-        font-weight: 600;
-        padding: 1rem;
-    }
-
-    .combo-item td {
-        padding: 1rem;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
-    }
-
-    .combo-name {
-        font-weight: 500;
-        color: #212529;
-    }
-
-    .combo-price {
-        font-weight: 500;
-        color: #198754;
-    }
-
-    .combo-actions {
-        white-space: nowrap;
-    }
-
-    .combo-actions .btn {
-        width: 2.5rem;
-        height: 2.5rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-    }
-
-    .combo-empty-message {
-        margin-top: 2rem;
-        padding: 1.5rem;
-    }
-
-    .combo-create-link {
-        color: #0d6efd;
-        text-decoration: underline;
-        font-weight: 500;
-    }
-
-    .combo-alert {
-        margin-bottom: 1.5rem;
-        border-radius: 0.5rem;
-    }
-</style>
-    
-
-    <div class="combo-container combo-create-container">
-    <div class="card shadow-sm combo-card">
-        <div class="card-header bg-primary text-white combo-header">
-            <h4 class="mb-0">
-                <i class="fas fa-plus-circle me-2"></i>@ViewData["Title"]
-            </h4>
-        </div>
-        <div class="card-body combo-body">
-            <form asp-action="Create" class="combo-form">
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger combo-validation-summary"></div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group mb-4">
-                            <label asp-for="ProductComboId" class="combo-label">
-                                <i class="fas fa-tag me-2"></i>Produto Principal
-                            </label>
-                            <select asp-for="ProductComboId" asp-items="@Model.AvailableProducts" class="form-control combo-select combo-single-select">
-                                <option value="">-- Selecione o Produto --</option>
-                            </select>
-                            <span asp-validation-for="ProductComboId" class="text-danger combo-validation"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group mb-4">
-                            <label asp-for="ComboPrice" class="combo-label">
-                                <i class="fas fa-dollar-sign me-2"></i>Preço do Combo
-                            </label>
-                            <input asp-for="ComboPrice" class="form-control combo-price-input" />
-                            <span asp-validation-for="ComboPrice" class="text-danger combo-validation"></span>
-                        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ProductComboId" class="combo-label">
+                            <i class="fas fa-tag"></i> Produto Principal
+                        </label>
+                        <select asp-for="ProductComboId" asp-items="@Model.AvailableProducts" class="form-control combo-select">
+                            <option value="">-- Selecione o Produto --</option>
+                        </select>
+                        <span asp-validation-for="ProductComboId" class="text-danger"></span>
                     </div>
                 </div>
-
-                <div class="form-group mb-4">
-                    <label asp-for="SelectedProductIds" class="combo-label">
-                        <i class="fas fa-list-ol me-2"></i>Itens do Combo
-                    </label>
-                    <select asp-for="SelectedProductIds" asp-items="@Model.AvailableProducts" class="form-control combo-multi-select" multiple>
-                    </select>
-                    <span asp-validation-for="SelectedProductIds" class="text-danger combo-validation"></span>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ComboPrice" class="combo-label">
+                            <i class="fas fa-dollar-sign"></i> Preço do Combo
+                        </label>
+                        <input asp-for="ComboPrice" class="form-control" />
+                        <span asp-validation-for="ComboPrice" class="text-danger"></span>
+                    </div>
                 </div>
+            </div>
 
-                <div class="form-group mt-4 combo-form-actions">
-                    <button type="submit" class="btn btn-success combo-create-btn">
-                        <i class="fas fa-save me-2"></i>Criar Combo
-                    </button>
-                    <a asp-action="List" class="btn btn-secondary combo-back-btn">
-                        <i class="fas fa-arrow-left me-2"></i>Voltar para Lista
-                    </a>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label asp-for="SelectedProductIds" class="combo-label">
+                    <i class="fas fa-list-ol"></i> Itens do Combo
+                </label>
+                <select asp-for="SelectedProductIds" asp-items="@Model.AvailableProducts" class="form-control combo-multi-select" multiple>
+                </select>
+                <span asp-validation-for="SelectedProductIds" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Criar Combo
+                </button>
+                <a asp-action="List" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 
 @section Scripts {
-    
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
         $(document).ready(function() {
-            $('.combo-single-select').select2({
+            $('.combo-select').select2({
                 placeholder: "Selecione o produto principal",
                 width: '100%'
             });

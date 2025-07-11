@@ -3,50 +3,72 @@
 @{
     ViewData["Title"] = "Criar Funcionário";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/css/employee.css" />
+</head>
+<body>
+    <div class="totem-container">
+        <div class="totem-header">
+            <h1>Editar Funcionário</h1>
+        </div>
 
-<h1>Criar Funcionário</h1>
+        <div class="totem-form">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Employee.ClientId" />
 
-<h4>Funcionário</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
-                <label asp-for="Employee.ClientId" class="control-label"></label>
-                <select asp-for="Employee.ClientId" class="form-control" asp-items="@Model.Clients">
-                    <option value="">-- Selecione um Cliente --</option>
-                </select>
-                <span asp-validation-for="Employee.ClientId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.Type" class="control-label"></label>
-                <input asp-for="Employee.Type" class="form-control" />
-                <span asp-validation-for="Employee.Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.User" class="control-label"></label>
-                <input asp-for="Employee.User" class="form-control" />
-                <span asp-validation-for="Employee.User" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Employee.Password" class="control-label"></label>
-                <input asp-for="Employee.Password" type="password" class="form-control" />
-                <span asp-validation-for="Employee.Password" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="Employee.ClientId" class="control-label">Cliente</label>
+                    <select asp-for="Employee.ClientId" class="form-control" asp-items="@Model.Clients" disabled>
+                        <option value="">-- Cliente selecionado --</option>
+                    </select>
+                    <span asp-validation-for="Employee.ClientId" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Employee.Type" class="control-label">Tipo de Funcionário</label>
+                    <input asp-for="Employee.Type" class="form-control" placeholder="Digite o tipo de funcionário" />
+                    <span asp-validation-for="Employee.Type" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Employee.User" class="control-label">Nome de Usuário</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input asp-for="Employee.User" class="form-control" placeholder="Digite o nome de usuário" />
+                    </div>
+                    <span asp-validation-for="Employee.User" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Employee.Password" class="control-label">Senha</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input asp-for="Employee.Password" type="password" class="form-control" placeholder="Digite a senha" />
+                    </div>
+                    <span asp-validation-for="Employee.Password" class="text-danger"></span>
+                    <small class="form-text text-muted">Deixe em branco para manter a senha atual</small>
+                </div>
+                
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Salvar Alterações
+                    </button>
+                    <a asp-action="List" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="List">Voltar para a Lista</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>
