@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using TotemPWA.Data;
 using TotemPWA.Models;
-using TotemPWA.Models.ViewModels; // Certifique-se de que o namespace do ViewModel está correto
+using TotemPWA.Models.ViewModels;
 
 namespace TotemPWA.Controllers.Admin
 {
@@ -14,268 +11,348 @@ namespace TotemPWA.Controllers.Admin
     public class ComboController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ComboController(ApplicationDbContext context)
+        public ComboController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: Admin/Combo/List
+        [HttpGet]
         public async Task<IActionResult> List()
         {
-            // Agrupamos por ProductComboId para ter uma entrada por "combo principal"
-            var comboProducts = await _context.Combos
-                .Include(c => c.ProductCombo) // O produto que é o combo
-                .Include(c => c.Product)      // Os produtos que compõem o combo
-                .GroupBy(c => c.ProductComboId)
-                .Select(g => new ComboViewModel
+            var combos = await _context.Products
+                .Where(p => p.ProductCombos != null && p.ProductCombos.Any())
+                .Include(p => p.ProductCombos!)
+                    .ThenInclude(pc => pc.Product)
+                .Select(p => new ComboViewModel
                 {
-                    ProductComboId = g.Key,
-                    ComboProductName = g.First().ProductCombo != null ? g.First().ProductCombo.Name : "N/A",
-                    IncludedProducts = g.Select(c => new IncludedProductViewModel
+                    ProductComboId = p.Id,
+                    ComboProductName = p.Name,
+                    ComboPrice = p.Price,
+                    ComboDescription = p.Description,
+                    ImageUrl = p.ImageUrl,
+                    IncludedProducts = p.ProductCombos!.Select(pc => new IncludedProductViewModel
                     {
-                        ProductId = c.ProductId,
-                        ProductName = c.Product != null ? c.Product.Name : "N/A",
-                        ProductPrice = c.Product != null ? c.Product.Price : 0M
+                        ProductId = pc.Product!.Id,
+                        ProductName = pc.Product.Name,
+                        ProductPrice = pc.Product.Price
                     }).ToList()
                 })
                 .ToListAsync();
 
-            // Calcula o preço total do combo (soma dos preços dos produtos incluídos)
-            foreach (var comboVm in comboProducts)
-            {
-                comboVm.ComboPrice = comboVm.IncludedProducts.Sum(ip => ip.ProductPrice);
-            }
-
-            return View(comboProducts);
+            return View(combos);
         }
 
-        // GET: Admin/Combo/Create
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var products = await _context.Products
-                                         .OrderBy(p => p.Name)
-                                         .Select(p => new SelectListItem
-                                         {
-                                             Value = p.Id.ToString(),
-                                             Text = $"{p.Name} (R$ {p.Price:F2})" // Exibe nome e preço
-                                         })
-                                         .ToListAsync();
+            var availableProducts = await _context.Products
+                .Where(p => p.Active)
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = $"{p.Name} - R$ {p.Price:F2}"
+                })
+                .ToListAsync();
 
             var viewModel = new ComboViewModel
             {
-                AvailableProducts = products
+                AvailableProducts = availableProducts,
+                IsEdit = false
             };
+
             return View(viewModel);
         }
 
-        // POST: Admin/Combo/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ComboViewModel viewModel)
         {
-            // Remove a validação para o nome e preço do combo, pois eles são apenas para exibição na lista.
-            ModelState.Remove(nameof(viewModel.ComboProductName));
-            ModelState.Remove(nameof(viewModel.ComboPrice));
-            ModelState.Remove(nameof(viewModel.IncludedProducts));
-
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                // Se o modelo for inválido, repopule os produtos disponíveis e retorne a view
-                viewModel.AvailableProducts = await GetProductSelectListAsync();
-                return View(viewModel);
-            }
-
-            if (viewModel.SelectedProductIds == null || !viewModel.SelectedProductIds.Any())
-            {
-                ModelState.AddModelError("SelectedProductIds", "Você deve selecionar pelo menos um produto para o combo.");
-                viewModel.AvailableProducts = await GetProductSelectListAsync();
-                return View(viewModel);
-            }
-
-            foreach (var productId in viewModel.SelectedProductIds)
-            {
-                if (viewModel.ProductComboId == productId)
+                using var transaction = await _context.Database.BeginTransactionAsync();
+                try
                 {
-                    ModelState.AddModelError("SelectedProductIds", "Um produto não pode ser um combo de si mesmo.");
-                    viewModel.AvailableProducts = await GetProductSelectListAsync();
-                    return View(viewModel);
+                    // Criar o produto principal do combo
+                    var comboProduct = new Product
+                    {
+                        Name = viewModel.ComboProductName,
+                        Description = viewModel.ComboDescription,
+                        Price = viewModel.ComboPrice, // Usar o preço definido pelo usuário
+                        Active = true,
+                        CategoryId = 1 // Você pode criar uma categoria específica para combos
+                    };
+
+                    // Upload da imagem se fornecida
+                    if (viewModel.ImageFile != null)
+                    {
+                        var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products");
+                        Directory.CreateDirectory(uploadsFolder);
+                        
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.ImageFile.FileName;
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await viewModel.ImageFile.CopyToAsync(fileStream);
+                        }
+                        
+                        comboProduct.ImageUrl = "/images/products/" + uniqueFileName;
+                    }
+
+                    _context.Products.Add(comboProduct);
+                    await _context.SaveChangesAsync();
+
+                    // Criar os relacionamentos do combo
+                    foreach (var productId in viewModel.SelectedProductIds)
+                    {
+                        var combo = new Combo
+                        {
+                            ProductComboId = comboProduct.Id,
+                            ProductId = productId
+                        };
+                        _context.Combos.Add(combo);
+                    }
+
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    TempData["Message"] = "Combo criado com sucesso!";
+                    return RedirectToAction(nameof(List));
                 }
-
-                var comboEntry = new Combo
+                catch (Exception)
                 {
-                    ProductComboId = viewModel.ProductComboId,
-                    ProductId = productId
-                };
-                _context.Combos.Add(comboEntry);
+                    await transaction.RollbackAsync();
+                    ModelState.AddModelError("", "Erro ao criar o combo. Tente novamente.");
+                }
             }
 
-            await _context.SaveChangesAsync();
-            TempData["Message"] = "Combo criado com sucesso!";
-            return RedirectToAction(nameof(List));
+            // Recarregar produtos disponíveis em caso de erro
+            viewModel.AvailableProducts = await _context.Products
+                .Where(p => p.Active)
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = $"{p.Name} - R$ {p.Price:F2}"
+                })
+                .ToListAsync();
+
+            return View(viewModel);
         }
 
-        // GET: Admin/Combo/Edit/{id} (id aqui é o ProductComboId)
         [HttpGet("{id}")]
         public async Task<IActionResult> Edit(int id)
         {
-            var existingCombos = await _context.Combos
-                                               .Where(c => c.ProductComboId == id)
-                                               .ToListAsync();
+            var comboProduct = await _context.Products
+                .Include(p => p.ProductCombos!)
+                    .ThenInclude(pc => pc.Product)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (!existingCombos.Any())
-            {
-                return NotFound();
-            }
-
-            var comboProduct = await _context.Products.FindAsync(id);
             if (comboProduct == null)
-            {
-                return NotFound(); // O produto principal do combo não existe
-            }
+                return NotFound();
+
+            var availableProducts = await _context.Products
+                .Where(p => p.Active && p.Id != id) // Excluir o próprio combo dos produtos disponíveis
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = $"{p.Name} - R$ {p.Price:F2}"
+                })
+                .ToListAsync();
 
             var viewModel = new ComboViewModel
             {
-                ProductComboId = id,
+                ProductComboId = comboProduct.Id,
                 ComboProductName = comboProduct.Name,
-                SelectedProductIds = existingCombos.Select(c => c.ProductId).ToList(),
-                AvailableProducts = await GetProductSelectListAsync()
+                ComboPrice = comboProduct.Price,
+                ComboDescription = comboProduct.Description,
+                ImageUrl = comboProduct.ImageUrl,
+                SelectedProductIds = comboProduct.ProductCombos?.Select(pc => pc.ProductId).ToList() ?? new List<int>(),
+                AvailableProducts = availableProducts,
+                IsEdit = true,
+                IncludedProducts = comboProduct.ProductCombos?.Select(pc => new IncludedProductViewModel
+                {
+                    ProductId = pc.Product!.Id,
+                    ProductName = pc.Product.Name,
+                    ProductPrice = pc.Product.Price
+                }).ToList() ?? new List<IncludedProductViewModel>()
             };
 
             return View(viewModel);
         }
 
-        // POST: Admin/Combo/Edit/{id}
         [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ComboViewModel viewModel)
         {
             if (id != viewModel.ProductComboId)
+                return BadRequest();
+
+            if (ModelState.IsValid)
             {
-                return BadRequest("ID do combo inválido.");
-            }
-
-            // Remove a validação para o nome e preço do combo, pois eles são apenas para exibição na lista.
-            ModelState.Remove(nameof(viewModel.ComboProductName));
-            ModelState.Remove(nameof(viewModel.ComboPrice));
-            ModelState.Remove(nameof(viewModel.IncludedProducts));
-
-            if (!ModelState.IsValid)
-            {
-                viewModel.AvailableProducts = await GetProductSelectListAsync();
-                return View(viewModel);
-            }
-
-            if (viewModel.SelectedProductIds == null || !viewModel.SelectedProductIds.Any())
-            {
-                ModelState.AddModelError("SelectedProductIds", "Você deve selecionar pelo menos um produto para o combo.");
-                viewModel.AvailableProducts = await GetProductSelectListAsync();
-                return View(viewModel);
-            }
-
-            // Remover combos existentes para este ProductComboId
-            var existingCombos = await _context.Combos
-                                                .Where(c => c.ProductComboId == id)
-                                                .ToListAsync();
-            _context.Combos.RemoveRange(existingCombos);
-            await _context.SaveChangesAsync(); // Salvar para garantir a remoção antes de adicionar novos
-
-            // Adicionar novos combos com base nas seleções
-            foreach (var productId in viewModel.SelectedProductIds)
-            {
-                if (viewModel.ProductComboId == productId)
+                using var transaction = await _context.Database.BeginTransactionAsync();
+                try
                 {
-                    ModelState.AddModelError("SelectedProductIds", "Um produto não pode ser um combo de si mesmo.");
-                    viewModel.AvailableProducts = await GetProductSelectListAsync();
-                    return View(viewModel);
+                    var comboProduct = await _context.Products
+                        .Include(p => p.ProductCombos)
+                        .FirstOrDefaultAsync(p => p.Id == id);
+
+                    if (comboProduct == null)
+                        return NotFound();
+
+                    // Atualizar as propriedades do produto combo
+                    comboProduct.Name = viewModel.ComboProductName;
+                    comboProduct.Description = viewModel.ComboDescription;
+                    comboProduct.Price = viewModel.ComboPrice; // Usar o preço definido pelo usuário
+
+                    // Upload da nova imagem se fornecida
+                    if (viewModel.ImageFile != null)
+                    {
+                        // Remover imagem anterior se existir
+                        if (!string.IsNullOrEmpty(comboProduct.ImageUrl))
+                        {
+                            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, comboProduct.ImageUrl.TrimStart('/'));
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+
+                        var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products");
+                        Directory.CreateDirectory(uploadsFolder);
+                        
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.ImageFile.FileName;
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await viewModel.ImageFile.CopyToAsync(fileStream);
+                        }
+                        
+                        comboProduct.ImageUrl = "/images/products/" + uniqueFileName;
+                    }
+
+                    // Remover todos os relacionamentos antigos do combo
+                    var existingCombos = await _context.Combos
+                        .Where(c => c.ProductComboId == id)
+                        .ToListAsync();
+                    
+                    _context.Combos.RemoveRange(existingCombos);
+
+                    // Adicionar os novos relacionamentos
+                    foreach (var productId in viewModel.SelectedProductIds)
+                    {
+                        var combo = new Combo
+                        {
+                            ProductComboId = id,
+                            ProductId = productId
+                        };
+                        _context.Combos.Add(combo);
+                    }
+
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    TempData["Message"] = "Combo atualizado com sucesso!";
+                    return RedirectToAction(nameof(List));
                 }
-
-                var comboEntry = new Combo
+                catch (Exception)
                 {
-                    ProductComboId = viewModel.ProductComboId,
-                    ProductId = productId
-                };
-                _context.Combos.Add(comboEntry);
+                    await transaction.RollbackAsync();
+                    ModelState.AddModelError("", "Erro ao atualizar o combo. Tente novamente.");
+                }
             }
 
-            await _context.SaveChangesAsync();
-            TempData["Message"] = "Combo atualizado com sucesso!";
-            return RedirectToAction(nameof(List));
+            // Recarregar produtos disponíveis em caso de erro
+            viewModel.AvailableProducts = await _context.Products
+                .Where(p => p.Active && p.Id != id)
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = $"{p.Name} - R$ {p.Price:F2}"
+                })
+                .ToListAsync();
+
+            return View(viewModel);
         }
 
-        // GET: Admin/Combo/Delete/{id} (id aqui é o ProductComboId)
         [HttpGet("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var comboProduct = await _context.Products.FindAsync(id);
+            var comboProduct = await _context.Products
+                .Include(p => p.ProductCombos!)
+                    .ThenInclude(pc => pc.Product)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
             if (comboProduct == null)
-            {
                 return NotFound();
-            }
-
-            var existingCombos = await _context.Combos
-                                               .Include(c => c.Product)
-                                               .Where(c => c.ProductComboId == id)
-                                               .ToListAsync();
-
-            if (!existingCombos.Any())
-            {
-                // Se não há combos, ainda podemos mostrar a tela de confirmação para o produto principal
-                var emptyComboVm = new ComboViewModel
-                {
-                    ProductComboId = id,
-                    ComboProductName = comboProduct.Name
-                };
-                return View(emptyComboVm);
-            }
 
             var viewModel = new ComboViewModel
             {
-                ProductComboId = id,
+                ProductComboId = comboProduct.Id,
                 ComboProductName = comboProduct.Name,
-                IncludedProducts = existingCombos.Select(c => new IncludedProductViewModel
+                ComboPrice = comboProduct.Price,
+                ComboDescription = comboProduct.Description,
+                ImageUrl = comboProduct.ImageUrl,
+                IncludedProducts = comboProduct.ProductCombos?.Select(pc => new IncludedProductViewModel
                 {
-                    ProductId = c.ProductId,
-                    ProductName = c.Product != null ? c.Product.Name : "N/A",
-                    ProductPrice = c.Product != null ? c.Product.Price : 0M
-                }).ToList()
+                    ProductId = pc.Product!.Id,
+                    ProductName = pc.Product.Name,
+                    ProductPrice = pc.Product.Price
+                }).ToList() ?? new List<IncludedProductViewModel>()
             };
 
             return View(viewModel);
         }
 
-        // POST: Admin/Combo/Delete/{id}
         [HttpPost("{id}")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var combosToRemove = await _context.Combos
-                                                .Where(c => c.ProductComboId == id)
-                                                .ToListAsync();
-
-            if (combosToRemove.Any())
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                _context.Combos.RemoveRange(combosToRemove);
-                await _context.SaveChangesAsync();
-                TempData["Message"] = "Combo excluído com sucesso!";
-            }
-            else
-            {
-                TempData["Message"] = "Nenhum combo encontrado para exclusão.";
-            }
-            return RedirectToAction(nameof(List));
-        }
+                var comboProduct = await _context.Products
+                    .Include(p => p.ProductCombos)
+                    .FirstOrDefaultAsync(p => p.Id == id);
 
-        private async Task<List<SelectListItem>> GetProductSelectListAsync()
-        {
-            return await _context.Products
-                .OrderBy(p => p.Name)
-                .Select(p => new SelectListItem
+                if (comboProduct == null)
+                    return NotFound();
+
+                // Remover todos os relacionamentos do combo
+                if (comboProduct.ProductCombos != null)
                 {
-                    Value = p.Id.ToString(),
-                    Text = $"{p.Name} (R$ {p.Price:F2})"
-                }).ToListAsync();
+                    _context.Combos.RemoveRange(comboProduct.ProductCombos);
+                }
+
+                // Remover imagem se existir
+                if (!string.IsNullOrEmpty(comboProduct.ImageUrl))
+                {
+                    var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, comboProduct.ImageUrl.TrimStart('/'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
+
+                // Remover o produto combo
+                _context.Products.Remove(comboProduct);
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                TempData["Message"] = "Combo excluído com sucesso!";
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                TempData["ErrorMessage"] = "Erro ao excluir o combo. Tente novamente.";
+                return RedirectToAction(nameof(List));
+            }
         }
     }
 }

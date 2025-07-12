@@ -19,7 +19,7 @@
             <div class="item-info">
                 <h3>@Model.Produto.Name</h3>
                 <p>@Model.Produto.Description</p>
-                <p class="price">Preço base: R$ <span id="precoBase">@Model.Produto.Price.ToString("F2")</span></p>
+                <p class="price">Preço base: R$ <span id="precoBase">@Model.BasePriceWithPromotion.ToString("F2")</span></p>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
 
         <div class="card">
             <h4>Preço Estimado:</h4>
-            <p id="precoTotal">R$ @Model.Produto.Price.ToString("F2")</p>
+            <p id="precoTotal">R$ @Model.BasePriceWithPromotion.ToString("F2")</p>
         </div>
 
         <div class="footer">

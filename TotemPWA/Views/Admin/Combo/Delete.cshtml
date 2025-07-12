@@ -3,76 +3,106 @@
 @{
     ViewData["Title"] = "Excluir Combo";
 }
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-            <link rel="stylesheet" href="~/css/Combo.css" />
-
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Combo.css" />
 </head>
 <body>
-<div class="combo-container">
-    <div class="combo-header bg-danger">
-        <h2><i class="fas fa-trash-alt"></i> @ViewData["Title"]</h2>
-    </div>
-
-    <div class="alert alert-warning">
-        <h4><i class="fas fa-exclamation-triangle"></i> Tem certeza que deseja excluir este combo?</h4>
-        <p>Esta ação não pode ser desfeita.</p>
-    </div>
-
-    <div class="combo-details-container">
-        <div class="combo-detail-item">
-            <span class="combo-detail-label">
-                <i class="fas fa-tag"></i> Produto Principal:
-            </span>
-            <span class="combo-detail-value">@Html.DisplayFor(model => model.ComboProductName)</span>
+    <div class="combo-container">
+        <div class="combo-header bg-danger">
+            <h2><i class="fas fa-trash-alt"></i> @ViewData["Title"]</h2>
         </div>
-        
-        @if (Model.IncludedProducts != null && Model.IncludedProducts.Any())
-        {
-            <div class="combo-detail-item">
-                <span class="combo-detail-label">
-                    <i class="fas fa-list-ol"></i> Itens no Combo:
-                </span>
-                <div class="combo-products-list">
-                    @foreach (var includedProduct in Model.IncludedProducts)
+
+        <div class="alert alert-warning">
+            <h4><i class="fas fa-exclamation-triangle"></i> Tem certeza que deseja excluir este combo?</h4>
+            <p>Esta ação não pode ser desfeita.</p>
+        </div>
+
+        <div class="combo-details-container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="combo-detail-item">
+                        <span class="combo-detail-label">
+                            <i class="fas fa-tag"></i> Nome do Combo:
+                        </span>
+                        <span class="combo-detail-value">@Html.DisplayFor(model => model.ComboProductName)</span>
+                    </div>
+                    
+                    @if (!string.IsNullOrEmpty(Model.ComboDescription))
                     {
-                        <div class="product-item">
-                            <i class="fas fa-utensils"></i> @includedProduct.ProductName (R$ @includedProduct.ProductPrice.ToString("F2"))
+                        <div class="combo-detail-item">
+                            <span class="combo-detail-label">
+                                <i class="fas fa-file-alt"></i> Descrição:
+                            </span>
+                            <span class="combo-detail-value">@Html.DisplayFor(model => model.ComboDescription)</span>
+                        </div>
+                    }
+                    
+                    @if (Model.IncludedProducts != null && Model.IncludedProducts.Any())
+                    {
+                        <div class="combo-detail-item">
+                            <span class="combo-detail-label">
+                                <i class="fas fa-list-ol"></i> Itens no Combo:
+                            </span>
+                            <div class="combo-products-list">
+                                @foreach (var includedProduct in Model.IncludedProducts)
+                                {
+                                    <div class="product-item">
+                                        <i class="fas fa-utensils"></i> @includedProduct.ProductName (R$ @includedProduct.ProductPrice.ToString("F2"))
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Este combo não possui itens associados.
+                        </div>
+                    }
+                    
+                    <div class="combo-detail-item">
+                        <span class="combo-detail-label">
+                            <i class="fas fa-dollar-sign"></i> Preço do Combo:
+                        </span>
+                        <span class="combo-detail-value">R$ @Html.DisplayFor(model => model.ComboPrice)</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <div class="combo-detail-item">
+                            <span class="combo-detail-label">
+                                <i class="fas fa-image"></i> Imagem do Combo:
+                            </span>
+                            <div class="mt-2">
+                                <img src="@Model.ImageUrl" class="img-thumbnail" style="max-width: 100%; height: auto;" alt="@Model.ComboProductName">
+                            </div>
                         </div>
                     }
                 </div>
             </div>
-            
-            <div class="combo-detail-item">
-                <span class="combo-detail-label">
-                    <i class="fas fa-dollar-sign"></i> Preço do Combo:
-                </span>
-                <span class="combo-detail-value">R$ @Html.DisplayFor(model => model.ComboPrice)</span>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> Este combo não possui itens associados.
-            </div>
-        }
-    </div>
-
-    <form asp-action="Delete" asp-route-id="@Model.ProductComboId">
-        <input type="hidden" asp-for="ProductComboId" />
-        <div class="text-right">
-            <button type="submit" class="btn btn-danger">
-                <i class="fas fa-trash-alt"></i> Confirmar Exclusão
-            </button>
-            <a asp-action="List" class="btn btn-secondary">
-                <i class="fas fa-times"></i> Cancelar
-            </a>
         </div>
-    </form>
-</div>
+
+        <form asp-action="Delete" asp-route-id="@Model.ProductComboId" method="post">
+            <input type="hidden" asp-for="ProductComboId" />
+            <div class="form-group text-end">
+                <button type="submit" class="btn btn-danger me-2">
+                    <i class="fas fa-trash-alt"></i> Confirmar Exclusão
+                </button>
+                <a asp-action="List" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

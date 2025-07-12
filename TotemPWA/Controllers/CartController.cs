@@ -26,11 +26,16 @@ namespace TotemPWA.Controllers
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
             var itemsToRemove = new List<CartItemViewModel>();
 
+            // Pré-carrega as promoções ativas para otimização, se necessário.
+            var activePromotions = await _context.Promotions
+                .Where(p => p.ValidUntil >= DateTime.Today)
+                .ToListAsync();
+
             foreach (var item in cart)
             {
                 var product = await _context.Products
-                                    .Include(p => p.Additionals!) // Inclui os 'Additionals' do produto
-                                        .ThenInclude(pa => pa.Ingredient) // Em seguida, inclui o 'Ingredient' de cada 'Additional'
+                                    .Include(p => p.Additionals!)
+                                        .ThenInclude(pa => pa.Ingredient)
                                     .FirstOrDefaultAsync(p => p.Id == item.ProductId);
 
                 if (product == null)
@@ -39,8 +44,32 @@ namespace TotemPWA.Controllers
                     continue;
                 }
 
-                // Começa o preço recalculado com o preço base do produto.
+                // *** NOVA LÓGICA: Verificar se é um combo ***
+                var isCombo = await _context.Combos.AnyAsync(c => c.ProductComboId == item.ProductId);
+
+                if (isCombo)
+                {
+                    // *** PARA COMBOS: Não recalcular o preço, apenas atualizar o resumo se necessário ***
+                    // O preço do combo já foi calculado corretamente no SalvarPersonalizacaoCombo
+                    // Apenas garantir que o resumo está correto (opcional)
+                    
+                    // Se você quiser revalidar o resumo do combo, pode fazer aqui
+                    // Por enquanto, vamos manter o preço e resumo que já estão salvos
+                    continue; // Pula para o próximo item
+                }
+
+                // *** LÓGICA ORIGINAL PARA PRODUTOS INDIVIDUAIS ***
+                // 1. Começa o preço recalculado com o preço base do produto.
                 decimal recalculatedPrice = product.Price;
+
+                // 2. Aplica a promoção ao preço base, se houver uma promoção ativa.
+                var promotion = activePromotions.FirstOrDefault(p => p.ProductId == product.Id);
+                if (promotion != null)
+                {
+                    // Calcula o preço com desconto (Ex: Price * (1 - Percent/100))
+                    recalculatedPrice = recalculatedPrice * (1 - promotion.Percent / 100);
+                }
+
                 var tempPersonalizationSummary = new List<string>();
 
                 // Obtém as adições padrão do produto configuradas pelo administrador
@@ -101,7 +130,7 @@ namespace TotemPWA.Controllers
                     }
                 }
 
-                // Atualiza o preço e o resumo do item no carrinho
+                // Atualiza o preço e o resumo do item no carrinho (APENAS PARA PRODUTOS INDIVIDUAIS)
                 item.Price = recalculatedPrice;
                 item.PersonalizationSummary = tempPersonalizationSummary.Any() ?
                                               "(" + string.Join(", ", tempPersonalizationSummary) + ")" : "";

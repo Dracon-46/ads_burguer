@@ -199,9 +199,20 @@ namespace TotemPWA.Controllers
 
             if (product == null) return NotFound("Produto não encontrado.");
 
-            // Inicializamos com o preço base do produto.
-            // A ideia é que o preço base já contemple a "quantidade padrão" dos ingredientes.
+            // 1. Inicializa o preço base com o preço do produto.
             decimal personalizedPrice = product.Price;
+
+            // 2. Verifica e aplica promoções ativas.
+            var activePromotion = await _context.Promotions
+                .Where(p => p.ProductId == product.Id && p.ValidUntil >= DateTime.Today)
+                .FirstOrDefaultAsync();
+
+            if (activePromotion != null)
+            {
+                // Aplica o desconto ao preço base
+                personalizedPrice = personalizedPrice * (1 - activePromotion.Percent / 100);
+            }
+            
             var personalizationSummary = new List<string>();
             var manipulatedIngredientsWithQuantity = new Dictionary<int, int>();
 
@@ -392,19 +403,32 @@ namespace TotemPWA.Controllers
                                     .Include(p => p.Additionals!)
                                     .ThenInclude(pa => pa.Ingredient)
                                     .FirstOrDefaultAsync(p => p.Id == productId);
-                                    
+
                 if (product == null)
                     return NotFound("Produto não encontrado.");
+
+                // >>> Adicionar lógica de Promoção aqui <<<
+                decimal basePrice = product.Price;
+
+                var activePromotion = await _context.Promotions
+                    .Where(p => p.ProductId == productId && p.ValidUntil >= DateTime.Today)
+                    .FirstOrDefaultAsync();
+
+                if (activePromotion != null)
+                {
+                    // Calcula o preço com desconto (Ex: Price * (1 - Percent/100))
+                    basePrice = basePrice * (1 - activePromotion.Percent / 100);
+                }
 
                 var viewModel = new PersonalizarProdutoViewModel
                 {
                     Produto = product,
                     CartItemId = cartItemId ?? Guid.Empty,
-                    ProdutoAdditionals = product.Additionals
+                    ProdutoAdditionals = product.Additionals,
+                    BasePriceWithPromotion = basePrice // Adicione esta linha
                 };
-
                 // Se for edição, pré-preenche o ViewModel com as quantidades manipuladas do carrinho
-                if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
+               if (cartItemId.HasValue && cartItemId.Value != Guid.Empty)
                 {
                     var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
                     var existingCartItem = cart.FirstOrDefault(ci => ci.CartItemId == cartItemId.Value);

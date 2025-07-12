@@ -1,5 +1,6 @@
+// TotemPWA/ViewModels/PersonalizarProdutoViewModel.cs
 using TotemPWA.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace TotemPWA.ViewModels
 {
@@ -9,5 +10,8 @@ namespace TotemPWA.ViewModels
         public Guid CartItemId { get; set; } 
         public ICollection<Additional>? ProdutoAdditionals { get; set; }
         public Dictionary<int, int> QuantidadesManipuladas { get; set; } = new Dictionary<int, int>();
+
+        // NOVO: Adicionar o preço base calculado (considerando promoções)
+        public decimal BasePriceWithPromotion { get; set; }
     }
 }

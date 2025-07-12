@@ -53,6 +53,21 @@ namespace TotemPWA.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ResetSessionAndRedirect()
+        {
+            // Limpa o carrinho (assumindo que a chave da sessão para o carrinho é "Cart")
+            HttpContext.Session.Remove("Cart");
+
+            // Limpa os dados de cupom (assumindo que a chave da sessão para cupons é "Coupon" ou similar)
+            // Se você tiver outras chaves de sessão que precisam ser limpas, adicione-as aqui.
+            HttpContext.Session.Remove("Cupom"); 
+            // HttpContext.Session.Clear(); // Alternativa: Limpa toda a sessão, se for o objetivo.
+
+            // Redireciona para a página inicial
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult Cupom(decimal totalPedido, int totalItens)
         {
             ViewBag.TotalPedido = totalPedido;
@@ -201,36 +216,37 @@ namespace TotemPWA.Controllers
                         })
                         .ToListAsync();
 
-                    products = combosData.Select(combo => {
-                        var originalPrice = combo.IncludedProducts.Sum(p => p.Price);
-                        var activePromotion = combo.ComboProduct?.Promotions?
-                            .FirstOrDefault(p => p.ValidUntil >= DateTime.Today);
-                        
-                        var finalPrice = originalPrice;
-                        if (activePromotion != null)
-                        {
-                            finalPrice = originalPrice - (originalPrice * activePromotion.Percent / 100);
-                        }
-
-                        return new ProductDisplayViewModel
-                        {
-                            Id = combo.ProductComboId,
-                            Name = combo.ComboProduct?.Name ?? "Combo",
-                            Price = finalPrice,
-                            OriginalPrice = activePromotion != null ? originalPrice : (decimal?)null,
-                            ImageUrl = combo.ComboProduct?.ImageUrl,
-                            Description = $"Combo contendo: {string.Join(", ", combo.IncludedProducts.Select(p => p.Name))}",
-                            IsCombo = true,
-                            HasPromotion = activePromotion != null,
-                            PromotionPercent = activePromotion?.Percent,
-                            ComboItems = combo.IncludedProducts.Select(p => new IncludedProductViewModel
+                        products = combosData.Select(combo => {
+                            // Use o preço definido no próprio ProductCombo em vez de somar os preços dos produtos inclusos.
+                            var originalPrice = combo.ComboProduct?.Price ?? 0;
+                            var activePromotion = combo.ComboProduct?.Promotions?
+                                .FirstOrDefault(p => p.ValidUntil >= DateTime.Today);
+                            
+                            var finalPrice = originalPrice;
+                            if (activePromotion != null)
                             {
-                                ProductId = p.Id,
-                                ProductName = p.Name,
-                                ProductPrice = p.Price
-                            }).ToList()
-                        };
-                    }).ToList();
+                                finalPrice = originalPrice - (originalPrice * activePromotion.Percent / 100);
+                            }
+
+                            return new ProductDisplayViewModel
+                            {
+                                Id = combo.ProductComboId,
+                                Name = combo.ComboProduct?.Name ?? "Combo",
+                                Price = finalPrice,
+                                OriginalPrice = activePromotion != null ? originalPrice : (decimal?)null,
+                                ImageUrl = combo.ComboProduct?.ImageUrl,
+                                Description = $"Combo contendo: {string.Join(", ", combo.IncludedProducts.Select(p => p.Name))}",
+                                IsCombo = true,
+                                HasPromotion = activePromotion != null,
+                                PromotionPercent = activePromotion?.Percent,
+                                ComboItems = combo.IncludedProducts.Select(p => new IncludedProductViewModel
+                                {
+                                    ProductId = p.Id,
+                                    ProductName = p.Name,
+                                    ProductPrice = p.Price
+                                }).ToList()
+                            };
+                        }).ToList();
                 }
                 else
                 {
