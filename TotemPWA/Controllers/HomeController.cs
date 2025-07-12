@@ -56,71 +56,121 @@ namespace TotemPWA.Controllers
         [HttpGet]
         public IActionResult ResetSessionAndRedirect()
         {
-            // Limpa o carrinho (assumindo que a chave da sessão para o carrinho é "Cart")
-            HttpContext.Session.Remove("Cart");
-
-            // Limpa os dados de cupom (assumindo que a chave da sessão para cupons é "Coupon" ou similar)
-            // Se você tiver outras chaves de sessão que precisam ser limpas, adicione-as aqui.
-            HttpContext.Session.Remove("Cupom"); 
-            // HttpContext.Session.Clear(); // Alternativa: Limpa toda a sessão, se for o objetivo.
-
+            // Limpa toda a sessão
+            HttpContext.Session.Clear();
+            
             // Redireciona para a página inicial
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Cupom(decimal totalPedido, int totalItens)
+        [HttpGet]
+        public IActionResult Cupom()
         {
-            ViewBag.TotalPedido = totalPedido;
-            ViewBag.TotalItens = totalItens;
-            return View();
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+            var cupomData = HttpContext.Session.GetObject<CupomSessionData>("CupomData");
+            
+            var viewModel = new CupomViewModel
+            {
+                Cart = cart,
+                CupomData = cupomData,
+                TotalItens = cart.Sum(x => x.Quantity),
+                TotalPedido = cart.Sum(x => x.Price)
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ValidarCupom([FromBody] CupomValidationRequest request)
+        public async Task<IActionResult> ValidarCupom(string codigoCupom)
         {
-            _logger.LogInformation($"ValidarCupom: Requisição recebida para o cupom '{request.CodigoCupom}'.");
+            _logger.LogInformation($"ValidarCupom: Requisição recebida para o cupom '{codigoCupom}'.");
 
-            if (string.IsNullOrWhiteSpace(request.CodigoCupom))
+            if (string.IsNullOrWhiteSpace(codigoCupom))
             {
                 _logger.LogWarning("ValidarCupom: Código do cupom não pode ser vazio.");
-                return Json(new { isValid = false, message = "Código do cupom não pode ser vazio." });
+                TempData["CupomErro"] = "Código do cupom não pode ser vazio.";
+                return RedirectToAction("Cupom");
             }
 
             var cupom = await _context.Cupons
-                                    .FirstOrDefaultAsync(c => c.Code.ToUpper() == request.CodigoCupom.ToUpper());
+                                    .FirstOrDefaultAsync(c => c.Code.ToUpper() == codigoCupom.ToUpper());
 
             if (cupom == null)
             {
-                _logger.LogWarning($"ValidarCupom: Cupom com código '{request.CodigoCupom}' NÃO encontrado no banco de dados.");
-                return Json(new { isValid = false, message = "Cupom não encontrado." });
+                _logger.LogWarning($"ValidarCupom: Cupom com código '{codigoCupom}' NÃO encontrado no banco de dados.");
+                TempData["CupomErro"] = "Cupom não encontrado.";
+                return RedirectToAction("Cupom");
+            }
+
+            // Calcular desconto
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+            var subtotal = cart.Sum(x => x.Price);
+            
+            decimal valorDesconto = 0;
+            string valorParaExibicao = "";
+
+            if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
+            {
+                valorDesconto = subtotal * cupom.Value;
+                valorParaExibicao = (cupom.Value * 100).ToString("N0") + "%";
             }
             else
             {
-                _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' encontrado. ID: {cupom.Id}, Valor LIDO DO DB: {cupom.Value}, Tipo: {cupom.Type}.");
-
-                decimal calculatedDesconto;
-                string valorParaExibicao = "";
-
-                if (cupom.Type.Equals("percentual", StringComparison.OrdinalIgnoreCase))
-                {
-                    calculatedDesconto = cupom.Value;
-                    valorParaExibicao = (cupom.Value * 100).ToString("N0") + "%";
-                    _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é percentual. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
-                }
-                else
-                {
-                    calculatedDesconto = cupom.Value;
-                    valorParaExibicao = cupom.Value.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
-                    _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' é do tipo '{cupom.Type}'. Valor FINAL enviado para cálculo: {calculatedDesconto}. Valor para exibição: {valorParaExibicao}.");
-                }
-
-                return Json(new { isValid = true, message = "Cupom válido!", desconto = calculatedDesconto, tipoDesconto = cupom.Type, valorParaExibicao = valorParaExibicao });
+                valorDesconto = cupom.Value;
+                valorParaExibicao = cupom.Value.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
             }
+
+            // Garantir que o desconto não seja maior que o total
+            valorDesconto = Math.Min(valorDesconto, subtotal);
+            var totalComDesconto = subtotal - valorDesconto;
+
+            // Salvar dados do cupom na sessão
+            var cupomData = new CupomSessionData
+            {
+                Codigo = cupom.Code,
+                Desconto = valorDesconto,
+                TipoDesconto = cupom.Type,
+                ValorParaExibicao = valorParaExibicao,
+                Subtotal = subtotal,
+                TotalComDesconto = totalComDesconto,
+                IsValid = true
+            };
+
+            HttpContext.Session.SetObject("CupomData", cupomData);
+            
+            _logger.LogInformation($"ValidarCupom: Cupom '{cupom.Code}' aplicado com sucesso. Desconto: {valorDesconto:C2}");
+            TempData["CupomSucesso"] = $"Cupom aplicado com sucesso! Desconto de {valorParaExibicao}.";
+
+            return RedirectToAction("Cupom");
         }
 
-        public class CupomValidationRequest
+        [HttpPost]
+        public IActionResult RemoverCupom()
         {
-            public string CodigoCupom { get; set; } = string.Empty;
+            HttpContext.Session.Remove("CupomData");
+            TempData["CupomInfo"] = "Cupom removido com sucesso.";
+            return RedirectToAction("Cupom");
+        }
+
+        // Método para obter dados do pedido (usado em outras views)
+        public IActionResult GetPedidoInfo()
+        {
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+            var cupomData = HttpContext.Session.GetObject<CupomSessionData>("CupomData");
+            
+            var totalItens = cart.Sum(x => x.Quantity);
+            var subtotal = cart.Sum(x => x.Price);
+            var totalFinal = cupomData?.TotalComDesconto ?? subtotal;
+
+            return Json(new
+            {
+                totalItens = totalItens,
+                subtotal = subtotal,
+                totalFinal = totalFinal,
+                temCupom = cupomData?.IsValid == true,
+                cupomDesconto = cupomData?.Desconto ?? 0,
+                cupomValor = cupomData?.ValorParaExibicao ?? ""
+            });
         }
 
         public IActionResult TelaFinal()
@@ -198,7 +248,7 @@ namespace TotemPWA.Controllers
                 {
                     var combosData = await _context.Combos
                         .Include(c => c.ProductCombo)
-                            .ThenInclude(pc => pc.Promotions) // ADICIONADO: Incluir promoções
+                            .ThenInclude(pc => pc.Promotions)
                         .Include(c => c.Product)
                         .Where(c => c.ProductCombo != null && c.ProductCombo.Active)
                         .GroupBy(c => c.ProductComboId)
@@ -217,7 +267,6 @@ namespace TotemPWA.Controllers
                         .ToListAsync();
 
                         products = combosData.Select(combo => {
-                            // Use o preço definido no próprio ProductCombo em vez de somar os preços dos produtos inclusos.
                             var originalPrice = combo.ComboProduct?.Price ?? 0;
                             var activePromotion = combo.ComboProduct?.Promotions?
                                 .FirstOrDefault(p => p.ValidUntil >= DateTime.Today);
@@ -251,7 +300,7 @@ namespace TotemPWA.Controllers
                 else
                 {
                     var productsWithPromotions = await _context.Products
-                        .Include(p => p.Promotions) // ADICIONADO: Incluir promoções
+                        .Include(p => p.Promotions)
                         .Where(p => p.CategoryId == activeSubcategoryId && p.Active)
                         .ToListAsync();
 
@@ -300,5 +349,26 @@ namespace TotemPWA.Controllers
         {
             return View();
         }
+    }
+
+    // Classe para dados do cupom na sessão
+    public class CupomSessionData
+    {
+        public string Codigo { get; set; } = string.Empty;
+        public decimal Desconto { get; set; }
+        public string TipoDesconto { get; set; } = string.Empty;
+        public string ValorParaExibicao { get; set; } = string.Empty;
+        public decimal Subtotal { get; set; }
+        public decimal TotalComDesconto { get; set; }
+        public bool IsValid { get; set; }
+    }
+
+    // ViewModel para a view de cupom
+    public class CupomViewModel
+    {
+        public List<CartItemViewModel> Cart { get; set; } = new List<CartItemViewModel>();
+        public CupomSessionData? CupomData { get; set; }
+        public int TotalItens { get; set; }
+        public decimal TotalPedido { get; set; }
     }
 }

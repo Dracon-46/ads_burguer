@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Selecionar Forma de Pagamento";
 }
-
+@model TotemPWA.Controllers.PagamentoViewModel 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -58,8 +58,8 @@
 
         <div class="resumo-pedido">
             <div class="totais">
-                <p>Total de itens: <strong id="totalItens">0</strong></p>
-                <p>Total do pedido: <strong id="valorTotalPedido">R$ 0,00</strong></p>
+                <p>Total de itens: <strong>@Model.TotalItens</strong></p>
+                <p>Total do pedido: <strong>@Model.TotalFinal.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</strong></p>
             </div>
             <div class="botoes">
                 <a href="@Url.Action("Cupom", "Home")">
