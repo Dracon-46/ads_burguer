@@ -1,3 +1,5 @@
+@using TotemPWA.Models.ViewModels
+@model TotemPWA.Models.ViewModels.NotaFiscalViewModel 
 @{
     ViewData["Title"] = "Nota Fiscal";
     Layout = null;
@@ -20,6 +22,9 @@
             <div class="info">
                 <div><strong>Nome: </strong> @Model?.NomeComprador</div>
                 <div><strong>CPF: </strong> @Model?.CPFComprador</div>
+                <div><strong>Método de Pagamento: </strong> @Model?.MetodoPagamento</div>
+                <div><strong>Transação: </strong> @Model?.NumeroTransacao</div>
+                <div><strong>Data: </strong> @Model?.DataPagamento.ToString("dd/MM/yyyy HH:mm")</div>
             </div>
 
             <div class="produtos">
@@ -27,9 +32,9 @@
                 <ul>
                     @if (Model?.Produtos != null)
                     {
-                        foreach (var produto in Model.Produtos)
+                        @foreach (var item in Model.Produtos)
                         {
-                            <li>@produto</li>
+                            <li>@item.Quantity x @item.Name (@item.Price.ToString("C2"))</li>
                         }
                     }
                     else
@@ -42,8 +47,9 @@
 
         <div class="nota-footer">
             <div class="totais">
-                <div>Desconto aplicado: R$ @Model?.Desconto.ToString("F2")</div>
-                <div>Subtotal: R$ @Model?.Subtotal.ToString("F2")</div>
+                <div>Subtotal: @Model?.Subtotal.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</div>
+                <div>Desconto aplicado: @Model?.DescontoAplicado.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</div>
+                <div>Total Final: @Model?.TotalFinal.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</div>
             </div>
             <div class="voltar">
                 <a href="@Url.Action("TelaFinal", "Home")" class="btn-voltar">Finalizar</a>

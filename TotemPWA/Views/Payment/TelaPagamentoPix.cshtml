@@ -1,3 +1,7 @@
+@using TotemPWA.Controllers
+@using System.Globalization
+@model TotemPWA.Controllers.PagamentoViewModel
+
 @{
     ViewData["Title"] = "Pagamento - Pix";
     var erro = TempData["Erro"] as string;
@@ -23,16 +27,25 @@
             <div class="resumo-pagamento" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <h3>Resumo do Pedido</h3>
                 <div class="totais-pagamento">
-                    <p>Total de itens: <strong id="totalItens">0</strong></p>
+                    <p>Total de itens: <strong>@Model.TotalItens</strong></p>
 
-                    <div id="cupom-info" style="display: none; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">
-                        <p>Cupom aplicado: <strong id="cupomCodigo">-</strong></p>
-                        <p>Desconto: <strong id="cupomDesconto" style="color: #28a745;">R$ 0,00</strong></p>
-                        <p>Subtotal: <strong id="subtotal">R$ 0,00</strong></p>
-                    </div>
+                    @if (Model.CupomData != null && Model.CupomData.IsValid)
+                    {
+                        <div id="cupom-info" style="border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">
+                            <p>Cupom aplicado: <strong>@Model.CupomData.Codigo</strong></p>
+                            <p>Desconto: 
+                                <strong style="color: #28a745;">
+                                    @(Model.CupomData.ValorParaExibicao ?? Model.CupomData.Desconto.ToString("C2", new CultureInfo("pt-BR")))
+                                </strong>
+                            </p>
+                            <p>Subtotal: 
+                                <strong>@Model.Subtotal.ToString("C2", new CultureInfo("pt-BR"))</strong>
+                            </p>
+                        </div>
+                    }
 
                     <p style="font-size: 1.2em; font-weight: bold; color: #007bff;">
-                        Total a pagar: <strong id="valorTotalPedido">R$ 0,00</strong>
+                        Total a pagar: <strong>@Model.TotalFinal.ToString("C2", new CultureInfo("pt-BR"))</strong>
                     </p>
                 </div>
             </div>
@@ -49,11 +62,11 @@
 
             <form method="post" asp-action="ValidarPagamento" class="payment-form-burguer">
                 <input type="hidden" name="metodo" value="Pix" />
-                <input type="hidden" id="cupomCodigoInput" name="cupomCodigo" />
-                <input type="hidden" id="cupomDescontoInput" name="cupomDesconto" />
-                <input type="hidden" id="cupomTipoDescontoInput" name="cupomTipoDesconto" />
-                <input type="hidden" id="subtotalInput" name="subtotal" />
-                <input type="hidden" id="valorTotalInput" name="valorTotal" />
+                <input type="hidden" name="cupomCodigo" value="@Model.CupomData?.Codigo" />
+                <input type="hidden" name="cupomDesconto" value="@Model.CupomData?.Desconto" />
+                <input type="hidden" name="cupomTipoDesconto" value="@Model.CupomData?.TipoDesconto" />
+                <input type="hidden" name="subtotal" value="@Model.Subtotal" />
+                <input type="hidden" name="valorTotal" value="@Model.TotalFinal" />
 
                 <button type="submit" class="btn-burguer btn-confirm-burguer">
                     <i class="fas fa-check-circle"></i> Confirmar Pagamento
@@ -71,48 +84,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Carregar dados do carrinho
-        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-        const valorTotal = parseFloat(localStorage.getItem("valorTotal")) || 0;
-        const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
-
-        // Carregar dados do cupom
-        const dadosCupom = JSON.parse(localStorage.getItem("dadosCupom")) || {};
-        const cupomCodigo = dadosCupom.codigo || "";
-        const cupomDesconto = dadosCupom.desconto || 0;
-        const cupomValorParaExibicao = dadosCupom.valorParaExibicao || "";
-        const subtotal = dadosCupom.subtotal || 0;
-
-        // Atualizar interface
-        document.getElementById("totalItens").textContent = totalItens;
-        document.getElementById("valorTotalPedido").textContent = valorTotal.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        });
-
-        // Mostrar informações do cupom se aplicado
-        if (cupomCodigo && cupomDesconto > 0) {
-            document.getElementById("cupom-info").style.display = "block";
-            document.getElementById("cupomCodigo").textContent = cupomCodigo;
-            document.getElementById("cupomDesconto").textContent =
-                cupomValorParaExibicao || cupomDesconto.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                });
-            document.getElementById("subtotal").textContent = subtotal.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            });
-        }
-
-        // Preencher campos hidden para envio do formulário
-        document.getElementById("cupomCodigoInput").value = cupomCodigo;
-        document.getElementById("cupomDescontoInput").value = cupomDesconto;
-        document.getElementById("cupomTipoDescontoInput").value = dadosCupom.tipoDesconto || "";
-        document.getElementById("subtotalInput").value = subtotal;
-        document.getElementById("valorTotalInput").value = valorTotal;
-    });
-</script>

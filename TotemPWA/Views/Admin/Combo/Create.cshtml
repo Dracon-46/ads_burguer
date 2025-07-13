@@ -3,86 +3,162 @@
 @{
     ViewData["Title"] = "Criar Novo Combo";
 }
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-        <link rel="stylesheet" href="~/css/Combo.css" />
-
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Combo.css">
 </head>
 <body>
-<div class="combo-container">
-    <div class="combo-header">
-        <h2><i class="fas fa-plus-circle"></i> @ViewData["Title"]</h2>
-    </div>
+    <div class="combo-container">
+        <div class="combo-header">
+            <h2><i class="fas fa-plus-circle"></i> @ViewData["Title"]</h2>
+        </div>
 
-    <div class="combo-form">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <div class="combo-form">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="ProductComboId" class="combo-label">
-                            <i class="fas fa-tag"></i> Produto Principal
-                        </label>
-                        <select asp-for="ProductComboId" asp-items="@Model.AvailableProducts" class="form-control combo-select">
-                            <option value="">-- Selecione o Produto --</option>
-                        </select>
-                        <span asp-validation-for="ProductComboId" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="ComboProductName" class="combo-label form-label">
+                                <i class="fas fa-tag"></i> Nome do Combo
+                            </label>
+                            <input asp-for="ComboProductName" class="form-control" placeholder="Digite o nome do combo" />
+                            <span asp-validation-for="ComboProductName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="ComboPrice" class="combo-label form-label">
+                                <i class="fas fa-dollar-sign"></i> Preço do Combo
+                            </label>
+                            <input asp-for="ComboPrice" class="form-control" type="number" step="0.01" min="0.01" placeholder="0,00" />
+                            <span asp-validation-for="ComboPrice" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="ComboPrice" class="combo-label">
-                            <i class="fas fa-dollar-sign"></i> Preço do Combo
-                        </label>
-                        <input asp-for="ComboPrice" class="form-control" />
-                        <span asp-validation-for="ComboPrice" class="text-danger"></span>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group mb-3">
+                            <label asp-for="ComboDescription" class="combo-label form-label">
+                                <i class="fas fa-file-alt"></i> Descrição do Combo
+                            </label>
+                            <textarea asp-for="ComboDescription" class="form-control" rows="3" placeholder="Descreva o combo (opcional)"></textarea>
+                            <span asp-validation-for="ComboDescription" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="SelectedProductIds" class="combo-label">
-                    <i class="fas fa-list-ol"></i> Itens do Combo
-                </label>
-                <select asp-for="SelectedProductIds" asp-items="@Model.AvailableProducts" class="form-control combo-multi-select" multiple>
-                </select>
-                <span asp-validation-for="SelectedProductIds" class="text-danger"></span>
-            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="ImageFile" class="combo-label form-label">
+                                <i class="fas fa-image"></i> Imagem do Combo
+                            </label>
+                            <input asp-for="ImageFile" class="form-control" type="file" accept="image/*" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="combo-label form-label">
+                                <i class="fas fa-calculator"></i> Preço Calculado (Referência)
+                            </label>
+                            <input id="calculatedPrice" class="form-control" readonly placeholder="R$ 0,00" />
+                            <small class="form-text text-muted">Soma dos preços dos produtos selecionados</small>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group text-right">
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Criar Combo
-                </button>
-                <a asp-action="List" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Voltar
-                </a>
-            </div>
-        </form>
+                <div class="form-group mb-4">
+                    <label asp-for="SelectedProductIds" class="combo-label form-label">
+                        <i class="fas fa-list-ol"></i> Produtos do Combo
+                    </label>
+                    <select asp-for="SelectedProductIds" asp-items="@Model.AvailableProducts" class="form-control combo-multi-select" multiple>
+                    </select>
+                    <span asp-validation-for="SelectedProductIds" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-end">
+                    <button type="submit" class="btn btn-success me-2">
+                        <i class="fas fa-save"></i> Criar Combo
+                    </button>
+                    <a asp-action="List" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/pt-BR.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('.combo-select').select2({
-                placeholder: "Selecione o produto principal",
-                width: '100%'
-            });
-            
+            // Inicializar Select2
             $('.combo-multi-select').select2({
-                placeholder: "Selecione os itens do combo",
-                width: '100%'
+                placeholder: "Selecione os produtos do combo",
+                width: '100%',
+                language: 'pt-BR'
+            });
+
+            // Função para calcular preço total
+            function calculateTotalPrice() {
+                var selectedValues = $('.combo-multi-select').val();
+                var totalPrice = 0;
+                
+                if (selectedValues && selectedValues.length > 0) {
+                    selectedValues.forEach(function(value) {
+                        var option = $('.combo-multi-select option[value="' + value + '"]');
+                        var text = option.text();
+                        var priceMatch = text.match(/R\$ ([\d,]+\.?\d*)/);
+                        if (priceMatch) {
+                            var price = parseFloat(priceMatch[1].replace(',', '.'));
+                            totalPrice += price;
+                        }
+                    });
+                }
+                
+                $('#calculatedPrice').val('R$ ' + totalPrice.toFixed(2).replace('.', ','));
+            }
+
+            // Calcular preço quando a seleção mudar
+            $('.combo-multi-select').on('change', function() {
+                calculateTotalPrice();
+            });
+
+            // Calcular preço inicial
+            calculateTotalPrice();
+
+            // Preview da imagem
+            $('#ImageFile').on('change', function(e) {
+                var file = e.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Remover preview anterior se existir
+                        $('#imagePreview').remove();
+                        
+                        // Criar preview
+                        var preview = $('<div id="imagePreview" class="mt-2"><img src="' + e.target.result + '" class="img-thumbnail" style="max-width: 200px; max-height: 200px;"><p class="text-muted mt-1">Preview da imagem</p></div>');
+                        $('#ImageFile').parent().append(preview);
+                    };
+                    reader.readAsDataURL(file);
+                }
             });
         });
     </script>
-}
 </body>
 </html>

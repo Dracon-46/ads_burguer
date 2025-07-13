@@ -1,3 +1,5 @@
+@model TotemPWA.Controllers.CupomViewModel
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,179 +13,210 @@
     <div class="banner"></div>
     <div class="container">
         <h2>Digite abaixo o código do seu cupom:</h2>
-        <input type="text" id="campoCupom" readonly><br>
-        <button onclick="confirmarCupom()">Confirmar</button>
+        
+        <form method="post" action="@Url.Action("ValidarCupom", "Home")">
+            <input type="text" id="campoCupom" name="codigoCupom" readonly value="@(Model.CupomData?.Codigo ?? "")" required>
+            <br>
+            <div class="cupom-actions">
+                <button type="submit" class="btn-confirmar">Confirmar</button>
+                @if (Model.CupomData?.IsValid == true)
+                {
+                    <button type="submit" formaction="@Url.Action("RemoverCupom", "Home")" class="btn-remover">Remover Cupom</button>
+                }
+            </div>
+        </form>
+        
         <div class="keyboard" id="teclado"></div>
     </div>
 
-    <!-- Modais -->
-    <div class="modal" id="modalValido">
-        <div class="modal-content">
-            <span class="close" onclick="fecharModal('modalValido')">&times;</span>
-            <i class="fa-solid fa-circle-check icon" style="color: #4CAF50;"></i>
-            <p style="color: #4CAF50; font-weight: bold;">Cupom válido!</p> 
-            <p id="mensagemCupomValido"></p> 
-            <p>Aproveite seu desconto de <strong id="cupomValorExibicao"></strong>.</p>
+    <!-- Alertas -->
+    @if (TempData["CupomSucesso"] != null)
+    {
+        <div class="alert alert-success">
+            <i class="fa-solid fa-circle-check"></i>
+            @TempData["CupomSucesso"]
         </div>
-    </div>
+    }
 
-    <div class="modal" id="modalInvalido">
-        <div class="modal-content">
-            <span class="close" onclick="fecharModal('modalInvalido')">&times;</span>
-            <i class="fa-solid fa-circle-exclamation icon" style="color: #f44336;"></i>
-            <p style="color: #f44336; font-weight: bold;">Cupom inválido</p>
-            <p id="mensagemCupomInvalido"></p>
-            <p>Verifique o código e tente novamente.</p>
+    @if (TempData["CupomErro"] != null)
+    {
+        <div class="alert alert-error">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            @TempData["CupomErro"]
         </div>
-    </div>
+    }
 
-    <div class="modal" id="modalVazio">
-        <div class="modal-content">
-            <span class="close" onclick="fecharModal('modalVazio')">&times;</span>
-            <i class="fa-solid fa-triangle-exclamation icon" style="color: #FF9800;"></i>
-            <p style="color: #FF9800; font-weight: bold;">Atenção</p>
-            <p>Por favor, digite um código de cupom.</p>
+    @if (TempData["CupomInfo"] != null)
+    {
+        <div class="alert alert-info">
+            <i class="fa-solid fa-info-circle"></i>
+            @TempData["CupomInfo"]
         </div>
-    </div>
+    }
 
     <!-- Resumo -->
     <div class="resumo-pedido">
         <div class="totais">
-            <p>Total de itens: <strong id="totalItensDisplay">0</strong></p>
-            <p>Total do pedido: <strong id="totalPedidoOriginalDisplay">R$ 0,00</strong></p>
-            <p id="descontoAplicado" style="display: none;">Desconto: <strong id="valorDescontoDisplay">R$ 0,00</strong></p>
-            <p id="totalPedidoFinalDiv" style="display: none;">Total com desconto: <strong id="totalPedidoFinalDisplay">R$ 0,00</strong></p>
+            <p>Total de itens: <strong>@Model.TotalItens</strong></p>
+            <p>Subtotal: <strong>@Model.TotalPedido.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</strong></p>
+            
+            @if (Model.CupomData?.IsValid == true)
+            {
+                <p class="desconto-aplicado">
+                    Desconto aplicado (@Model.CupomData.Codigo): 
+                    <strong>-@Model.CupomData.Desconto.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</strong>
+                </p>
+                <p class="total-final">
+                    Total final: 
+                    <strong>@Model.CupomData.TotalComDesconto.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</strong>
+                </p>
+            }
+            else
+            {
+                <p class="total-final">
+                    Total do pedido: 
+                    <strong>@Model.TotalPedido.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))</strong>
+                </p>
+            }
         </div>
         <div class="botoes">
-            <a href="@Url.Action("TelaProduto", "Home")"><button class="cancelar">Voltar</button></a>
-            <a href="@Url.Action("SelecionarPagamento", "Payment")"><button class="adicionar">Confirmar Pedido</button></a>
+            <a href="@Url.Action("TelaProduto", "Home")">
+                <button class="cancelar">Voltar</button>
+            </a>
+            <a href="@Url.Action("SelecionarPagamento", "Payment")">
+                <button class="adicionar">Confirmar Pedido</button>
+            </a>
         </div>
     </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        let totalPedidoOriginal = parseFloat(urlParams.get('totalPedido')) || 0;
-        let totalItens = parseInt(urlParams.get('totalItens')) || 0;
-
-        document.getElementById('totalItensDisplay').textContent = totalItens;
-        document.getElementById('totalPedidoOriginalDisplay').textContent = totalPedidoOriginal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
         const teclas = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890".split("");
         const teclado = document.getElementById("teclado");
         const campo = document.getElementById("campoCupom");
 
         window.onload = function () {
+            // Criar teclas do teclado virtual
             teclas.forEach(t => {
                 const tecla = document.createElement("div");
                 tecla.className = "key";
                 tecla.textContent = t;
-                tecla.onclick = () => campo.value += t;
+                tecla.onclick = () => {
+                    campo.value += t;
+                };
                 teclado.appendChild(tecla);
             });
 
+            // Botão apagar
             const apagar = document.createElement("div");
             apagar.className = "key";
             apagar.style.background = "#f88";
             apagar.innerHTML = '<i class="fa-solid fa-delete-left" style="color: #FFF;"></i>';
-            apagar.onclick = () => campo.value = campo.value.slice(0, -1);
+            apagar.onclick = () => {
+                campo.value = campo.value.slice(0, -1);
+            };
             teclado.appendChild(apagar);
 
-            const dadosCupomSalvo = JSON.parse(localStorage.getItem("dadosCupom")) || {};
-            if (dadosCupomSalvo.codigo && dadosCupomSalvo.desconto > 0) {
-                totalPedidoOriginal = dadosCupomSalvo.subtotal;
-                document.getElementById('valorDescontoDisplay').textContent = dadosCupomSalvo.valorParaExibicao;
-                document.getElementById('descontoAplicado').style.display = 'block';
-                document.getElementById('totalPedidoFinalDisplay').textContent = dadosCupomSalvo.valorFinalComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                document.getElementById('totalPedidoFinalDiv').style.display = 'block';
-                campo.value = dadosCupomSalvo.codigo;
-            }
+            // Botão limpar
+            const limpar = document.createElement("div");
+            limpar.className = "key";
+            limpar.style.background = "#ff6b6b";
+            limpar.innerHTML = '<i class="fa-solid fa-trash" style="color: #FFF;"></i>';
+            limpar.onclick = () => {
+                campo.value = "";
+            };
+            teclado.appendChild(limpar);
         };
 
-        async function confirmarCupom() {
-            const valorCupom = campo.value.trim().toUpperCase();
-
-            if (valorCupom === "") {
-                abrirModal("modalVazio");
-                campo.style.borderColor = "";
-                return;
-            }
-
-            try {
-                const response = await fetch('/Home/ValidarCupom', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ codigoCupom: valorCupom })
-                });
-
-                const data = await response.json();
-
-                if (data.isValid) {
-                    abrirModal("modalValido");
-                    document.getElementById('cupomValorExibicao').textContent = data.valorParaExibicao;
-                    campo.style.borderColor = "green";
-
-                    let valorDescontoCalculado = 0;
-                    let totalComDesconto = totalPedidoOriginal;
-                    const descontoValue = parseFloat(data.desconto);
-                    const tipoDescontoLower = data.tipoDesconto.toLowerCase();
-
-                    if (tipoDescontoLower === "percentual") {
-                        valorDescontoCalculado = totalPedidoOriginal * descontoValue;
-                    } else if (tipoDescontoLower === "fixo") {
-                        valorDescontoCalculado = descontoValue;
-                    }
-
-                    totalComDesconto = Math.max(0, totalPedidoOriginal - valorDescontoCalculado);
-
-                    document.getElementById('valorDescontoDisplay').textContent = valorDescontoCalculado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                    document.getElementById('descontoAplicado').style.display = 'block';
-                    document.getElementById('totalPedidoFinalDisplay').textContent = totalComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                    document.getElementById('totalPedidoFinalDiv').style.display = 'block';
-
-                    const dadosCupomParaSalvar = {
-                        codigo: valorCupom,
-                        desconto: valorDescontoCalculado,
-                        tipoDesconto: data.tipoDesconto,
-                        valorParaExibicao: data.valorParaExibicao,
-                        subtotal: totalPedidoOriginal,
-                        valorFinalComDesconto: totalComDesconto
-                    };
-                    localStorage.setItem("dadosCupom", JSON.stringify(dadosCupomParaSalvar));
-                    localStorage.setItem("valorTotal", totalComDesconto.toFixed(2));
-
-                } else {
-                    abrirModal("modalInvalido");
-                    document.getElementById('mensagemCupomInvalido').textContent = data.message;
-                    campo.style.borderColor = "red";
-                    document.getElementById('descontoAplicado').style.display = 'none';
-                    document.getElementById('totalPedidoFinalDiv').style.display = 'none';
-                    localStorage.removeItem("dadosCupom");
-                    localStorage.setItem("valorTotal", totalPedidoOriginal.toFixed(2));
-                }
-
-            } catch (error) {
-                console.error('Erro ao validar cupom:', error);
-                abrirModal("modalInvalido");
-                document.getElementById('mensagemCupomInvalido').textContent = "Erro na comunicação com o servidor.";
-                campo.style.borderColor = "red";
-                localStorage.removeItem("dadosCupom");
-                localStorage.setItem("valorTotal", totalPedidoOriginal.toFixed(2));
-            }
-        }
-
-        function abrirModal(id) {
-            document.getElementById(id).style.display = "block";
-        }
-
-        function fecharModal(id) {
-            document.getElementById(id).style.display = "none";
-        }
-
-        window.onclick = function (evento) {
-            if (evento.target.className === "modal") {
-                evento.target.style.display = "none";
-            }
-        }
+        // Auto-hide alerts after 5 seconds
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
     </script>
+
+    <style>
+        .cupom-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-confirmar {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .btn-remover {
+            background: #f44336;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .btn-confirmar:hover {
+            background: #45a049;
+        }
+
+        .btn-remover:hover {
+            background: #da190b;
+        }
+
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
+            max-width: 400px;
+        }
+
+        .alert-success {
+            background: #4CAF50;
+        }
+
+        .alert-error {
+            background: #f44336;
+        }
+
+        .alert-info {
+            background: #2196F3;
+        }
+
+        .alert i {
+            margin-right: 10px;
+        }
+
+        .desconto-aplicado {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .total-final {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            border-top: 2px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+    </style>
 </body>
 </html>

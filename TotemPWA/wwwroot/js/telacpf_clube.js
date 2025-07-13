@@ -96,7 +96,15 @@ async function validateAndSetButtonState(formattedCpf) {
               isEmployee: true,
               employeeType: data.employeeType
             }));
+
+            // Adicionado: Salvar dados na sessão C# via HomeController
+            await fetch('/Home/SalvarDadosCliente', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome: data.clientName, cpf: cleanCPF })
+            });
           } else {
+            // Cliente normal existe
             cpfError.textContent = `Bem-vindo(a), ${data.clientName}! (Cliente)`;
             cpfError.style.color = "green";
             confirmButton.disabled = false;
@@ -108,6 +116,13 @@ async function validateAndSetButtonState(formattedCpf) {
               cpf: cleanCPF,
               isEmployee: false
             }));
+
+            // Adicionado: Salvar dados na sessão C# via HomeController
+            await fetch('/Home/SalvarDadosCliente', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome: data.clientName, cpf: cleanCPF })
+            });
           }
         } else {
           // Cliente não existe - precisa cadastrar
@@ -159,6 +174,7 @@ cpfInput.addEventListener("input", function() {
 confirmButton.addEventListener("click", function(event) {
   event.preventDefault();
   if (!this.disabled) {
+    // Redireciona para SelecionarPedido
     window.location.href = 'SelecionarPedido';
   }
 });
