@@ -129,6 +129,13 @@ continueButton.addEventListener("click", async function(event) {
           employeeType: employeeType
         }));
 
+        // Novo: Transferir dados para a sessão C#
+        await fetch('/Home/SalvarDadosCliente', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome: clientName, cpf: storedCpf })
+        });
+
         // Limpar CPF temporário
         sessionStorage.removeItem('newClientCpf');
 

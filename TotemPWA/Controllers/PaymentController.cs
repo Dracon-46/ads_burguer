@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TotemPWA.Models.ViewModels;
+using TotemPWA.ViewModels;
 using TotemPWA.Utilities;
 using TotemPWA.Controllers;
 
@@ -32,8 +33,8 @@ namespace TotemPWA.Controllers
                 Cart = cart,
                 CupomData = cupomData,
                 TotalItens = cart.Sum(x => x.Quantity),
-                Subtotal = cart.Sum(x => x.Price),
-                TotalFinal = cupomData?.TotalComDesconto ?? cart.Sum(x => x.Price)
+                Subtotal = cart.Sum(x => x.Price * x.Quantity),
+                TotalFinal = cupomData?.TotalComDesconto ?? cart.Sum(x => x.Price * x.Quantity)
             };
 
             return View(viewModel);
@@ -65,8 +66,33 @@ namespace TotemPWA.Controllers
 
         public IActionResult TelaNotaFiscal()
         {
-            var dados = GetDadosPagamento();
-            return View(dados);
+            var pagamentoData = HttpContext.Session.GetObject<PagamentoSessionData>("PagamentoData");
+            var cpfData = HttpContext.Session.GetObject<CPFSessionData>("CPFData");
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+
+            if (pagamentoData == null)
+            {
+                TempData["Erro"] = "Nenhum dado de pagamento encontrado.";
+                return RedirectToAction("SelecionarPagamento");
+            }
+
+            var notaFiscalViewModel = new NotaFiscalViewModel
+            {
+                NomeComprador = cpfData?.Nome ?? "Não informado",
+                CPFComprador = cpfData?.CPF ?? "Não informado",
+                Subtotal = pagamentoData.Subtotal,
+                TotalFinal = pagamentoData.TotalFinal,
+                DescontoAplicado = pagamentoData.CupomAplicado?.Desconto ?? 0,
+                MetodoPagamento = pagamentoData.Metodo,
+                NumeroTransacao = pagamentoData.NumeroTransacao,
+                DataPagamento = pagamentoData.DataPagamento,
+                Produtos = cart
+            };
+
+            // Opcional: Limpar a sessão após a finalização (comentado se você quiser manter os dados temporariamente)
+            HttpContext.Session.Clear(); 
+
+            return View(notaFiscalViewModel);
         }
 
         [HttpPost]
@@ -89,7 +115,7 @@ namespace TotemPWA.Controllers
                     return RedirectToAction("SelecionarPagamento");
                 }
 
-                var subtotal = cart.Sum(x => x.Price);
+                var subtotal = cart.Sum(x => x.Price * x.Quantity);
                 var totalFinal = cupomData?.TotalComDesconto ?? subtotal;
 
                 if (totalFinal <= 0)
@@ -153,8 +179,8 @@ namespace TotemPWA.Controllers
                 Cart = cart,
                 CupomData = cupomData,
                 TotalItens = cart.Sum(x => x.Quantity),
-                Subtotal = cart.Sum(x => x.Price),
-                TotalFinal = cupomData?.TotalComDesconto ?? cart.Sum(x => x.Price)
+                Subtotal = cart.Sum(x => x.Price * x.Quantity),
+                TotalFinal = cupomData?.TotalComDesconto ?? cart.Sum(x => x.Price * x.Quantity)
             };
         }
     }

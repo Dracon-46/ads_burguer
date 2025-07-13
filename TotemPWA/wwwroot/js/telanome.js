@@ -77,10 +77,17 @@ nomeInput.addEventListener("input", function() {
 // Event listener para o botão de continuar (agora sem o <a> direto)
 continueButton.addEventListener("click", function(event) {
   if (!this.disabled) {
-    // Se o botão não estiver desabilitado, navega para a próxima página
-    window.location.href = 'SelecionarPedido';
+    const clientName = nomeInput.value.trim();
+
+    // Salvar o nome no sessionStorage para uso na próxima tela (TelaCPFNaNota)
+    sessionStorage.setItem('currentUser', JSON.stringify({
+      name: clientName,
+      // Não temos CPF aqui, apenas o nome
+    }));
+
+    // Redireciona para a tela de CPF na Nota Fiscal
+    window.location.href = 'TelaCPFNaNota'; 
   } else {
-    // Impede a navegação se o botão estiver desabilitado
     event.preventDefault(); 
   }
 });

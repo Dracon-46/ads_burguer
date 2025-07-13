@@ -1,0 +1,116 @@
+@{
+    ViewData["Title"] = "CPF na Nota";
+}
+
+<link rel="stylesheet" href="~/css/style.css"> 
+<link rel="stylesheet" href="https://unpkg.com/simple-keyboard/build/css/index.css">
+
+<div class="containerNoBG">
+    <div class="text">
+        <h1>Deseja CPF na nota?</h1>
+        <p>Informe seu CPF para incluir na Nota Fiscal.</p>
+    </div>
+    
+    <form id="cpfNaNotaForm" method="post" asp-action="SalvarCPFNota" asp-controller="Home">
+        <input type="text" id="inputCPFNF" name="cpf" placeholder="xxx.xxx.xxx-xx" class="inputCPF" maxlength="14" autocomplete="off">
+        <input type="hidden" id="inputNomeNF" name="nome" value="">
+        <span id="cpfErrorNF" style="color: red; font-size: 0.9em; margin-top: 5px; display: block;"></span>
+        
+        <div class="simple-keyboard"></div>
+
+        <div class="btns">
+            <button type="button" id="naoQueroCPFNF" class="voltar">Não quero</button>
+            <button type="submit" id="queroCPFNF" class="cont" disabled>Confirmar</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://unpkg.com/simple-keyboard/build/index.js"></script>
+<script>
+    // Lógica JavaScript para teclado e validação de CPF na nota
+    // (Similar a telacpf_clube.js, mas sem validação de existência de cliente)
+
+    const cpfInputNF = document.getElementById('inputCPFNF');
+    const nomeInputNF = document.getElementById('inputNomeNF');
+    const confirmButtonNF = document.getElementById('queroCPFNF');
+    const naoQueroButtonNF = document.getElementById('naoQueroCPFNF');
+    const cpfErrorNF = document.getElementById('cpfErrorNF');
+
+    // Inicialização do teclado virtual (usando a mesma configuração de telacpf_clube.js)
+    const keyboardNF = new SimpleKeyboard.default({
+        onChange: input => onChangeNF(input),
+        theme: "hg-theme-default myTheme1",
+        layout: {
+            default: ["1 2 3", "4 5 6", "7 8 9", "0 {bksp}"]
+        },
+        display: { "{bksp}": "⌫" }
+    });
+
+    // Funções de formatação e validação (iguais às de telacpf_clube.js)
+    function formatCPF(value) {
+      let cpf = value.replace(/\D/g, '');
+      if (cpf.length > 11) cpf = cpf.slice(0, 11);
+      cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      return cpf;
+    }
+
+    function validateCPFAlgorithm(cpf) {
+      cpf = cpf.replace(/\D/g, '');
+      if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+      // ... (restante do algoritmo de validação) ...
+      let sum = 0; let remainder; for (let i = 1; i <= 9; i++) sum = sum + parseInt(cpf.substring(i-1, i)) * (11 - i); remainder = (sum * 10) % 11; if ((remainder == 10) || (remainder == 11)) remainder = 0; if (remainder != parseInt(cpf.substring(9, 10))) return false; sum = 0; for (let i = 1; i <= 10; i++) sum = sum + parseInt(cpf.substring(i-1, i)) * (12 - i); remainder = (sum * 10) % 11; if ((remainder == 10) || (remainder == 11)) remainder = 0; if (remainder != parseInt(cpf.substring(10, 11))) return false; return true;
+    }
+
+    // Lógica de validação e estado do botão para CPF na Nota
+    function validateAndSetButtonStateNF(formattedCpf) {
+        confirmButtonNF.disabled = true;
+        cpfErrorNF.textContent = "";
+
+        if (formattedCpf.length === 14) {
+            const cleanCPF = formattedCpf.replace(/\D/g, '');
+
+            if (validateCPFAlgorithm(cleanCPF)) {
+                cpfErrorNF.textContent = "CPF Válido.";
+                cpfErrorNF.style.color = "green";
+                confirmButtonNF.disabled = false;
+            } else {
+                cpfErrorNF.textContent = "CPF inválido.";
+                cpfErrorNF.style.color = "red";
+            }
+        } else if (formattedCpf.length > 0) {
+            cpfErrorNF.textContent = "CPF deve ter 11 dígitos.";
+            cpfErrorNF.style.color = "red";
+        }
+    }
+
+    function onChangeNF(input) {
+        const formatted = formatCPF(input);
+        cpfInputNF.value = formatted;
+        keyboardNF.setInput(formatted);
+        validateAndSetButtonStateNF(formatted);
+    }
+
+    // Carregar nome do sessionStorage e preencher o campo hidden
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    if (currentUser && currentUser.name) {
+        nomeInputNF.value = currentUser.name;
+    }
+
+    // Event listeners
+    cpfInputNF.addEventListener("input", function() {
+        onChangeNF(this.value);
+    });
+
+    // Lógica do botão "Não quero"
+    naoQueroButtonNF.addEventListener("click", function() {
+        // Salvar dados do usuário sem CPF e redirecionar
+        const nome = nomeInputNF.value || "Não informado";
+        // Limpar o sessionStorage de usuário temporário se necessário, ou usar os dados já salvos
+        
+        // Redireciona para o carrinho/seleção de pedido
+        window.location.href = '@Url.Action("SelecionarPedido", "Home")';
+    });
+
+    // Lógica do botão "Confirmar" (submit do formulário)
+    // O formulário será submetido e processado pelo método SalvarCPFNota no HomeController
+</script>

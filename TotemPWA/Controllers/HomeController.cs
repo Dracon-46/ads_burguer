@@ -29,10 +29,72 @@ namespace TotemPWA.Controllers
         {
             return View();
         }
+        public IActionResult TelaCPFNaNota()
+        {
+            return View();
+        }
 
         public IActionResult TelaCPF()
         {
-            return View();
+            // Opcionalmente, pode passar o CPF salvo na sessão para preenchimento prévio
+            var cpfData = HttpContext.Session.GetObject<CPFSessionData>("CPFData");
+            return View(cpfData);
+        }
+
+        // Ação para processar o formulário de CPF e salvar na sessão
+        [HttpPost]
+        public IActionResult ProcessarCPF(string cpf, string nome)
+        {
+            if (string.IsNullOrWhiteSpace(cpf) || string.IsNullOrWhiteSpace(nome))
+            {
+                // Tratar erro se os campos estiverem vazios
+                TempData["ErroCPF"] = "Nome e CPF são obrigatórios.";
+                return RedirectToAction("TelaCPF");
+            }
+
+            var cpfData = new CPFSessionData
+            {
+                Nome = nome,
+                CPF = cpf
+            };
+
+            // Salva os dados do CPF na sessão
+            HttpContext.Session.SetObject("CPFData", cpfData);
+            
+            // Redireciona para a próxima tela (por exemplo, SelecionarPedido ou TelaProduto)
+            // Ajuste o redirecionamento conforme seu fluxo de aplicação
+            return RedirectToAction("SelecionarPedido"); 
+        }
+
+        [HttpPost]
+        public IActionResult SalvarCPFNota(string cpf, string nome)
+        {
+            var cpfData = new CPFSessionData
+            {
+                Nome = nome,
+                CPF = cpf
+            };
+
+            // Salva os dados do CPF na sessão C#
+            // Importante: Isso sobrescreve qualquer CPFData anterior se o usuário mudar de ideia.
+            HttpContext.Session.SetObject("CPFData", cpfData);
+            
+            // Redireciona para o carrinho/seleção de pedido
+            return RedirectToAction("SelecionarPedido");
+        }
+
+         [HttpPost]
+        public IActionResult SalvarDadosCliente([FromBody] CPFSessionData dadosCliente)
+        {
+            if (dadosCliente == null || string.IsNullOrWhiteSpace(dadosCliente.Nome))
+            {
+                return BadRequest(new { success = false, message = "Dados do cliente inválidos." });
+            }
+
+            // Salva os dados na sessão C#
+            HttpContext.Session.SetObject("CPFData", dadosCliente);
+
+            return Json(new { success = true });
         }
 
         public IActionResult TelaNome()
@@ -74,7 +136,7 @@ namespace TotemPWA.Controllers
                 Cart = cart,
                 CupomData = cupomData,
                 TotalItens = cart.Sum(x => x.Quantity),
-                TotalPedido = cart.Sum(x => x.Price)
+                TotalPedido = cart.Sum(x => x.Price * x.Quantity)
             };
 
             return View(viewModel);
@@ -104,7 +166,7 @@ namespace TotemPWA.Controllers
 
             // Calcular desconto
             var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
-            var subtotal = cart.Sum(x => x.Price);
+            var subtotal = cart.Sum(x => x.Price * x.Quantity);
             
             decimal valorDesconto = 0;
             string valorParaExibicao = "";
@@ -159,7 +221,7 @@ namespace TotemPWA.Controllers
             var cupomData = HttpContext.Session.GetObject<CupomSessionData>("CupomData");
             
             var totalItens = cart.Sum(x => x.Quantity);
-            var subtotal = cart.Sum(x => x.Price);
+            var subtotal = cart.Sum(x => x.Price * x.Quantity);
             var totalFinal = cupomData?.TotalComDesconto ?? subtotal;
 
             return Json(new
