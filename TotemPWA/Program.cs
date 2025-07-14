@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        // Define o caminho para a página de login. 
+        // Define o caminho para a página de login.  
         options.LoginPath = "/Admin/Employee/Login";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         options.Cookie.HttpOnly = true;
